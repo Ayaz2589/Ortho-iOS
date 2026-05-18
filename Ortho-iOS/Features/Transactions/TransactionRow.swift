@@ -32,6 +32,8 @@ struct TransactionRow: View {
                     .font(.system(size: density.amountSize, weight: .semibold))
                     .monospacedDigit()
                     .foregroundStyle(tx.isIncome ? AppTheme.positive : AppTheme.text)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
             }
             .padding(.horizontal, density.pad)
             .padding(.vertical, density.pad - 4)

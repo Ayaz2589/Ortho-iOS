@@ -105,6 +105,9 @@ struct TransactionDetailSheet: View {
                 .tracking(-0.6)
                 .monospacedDigit()
                 .foregroundStyle(tx.isIncome ? AppTheme.positive : AppTheme.text)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .padding(.horizontal, 16)
             Spacer()
         }
         .padding(.vertical, 8)

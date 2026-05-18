@@ -380,6 +380,8 @@ struct AddTransactionSheet: View {
                                  ? AppTheme.text.opacity(0.36)
                                  : (kind == .income ? AppTheme.positive : AppTheme.text))
                 .tracking(-0.4)
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
 
             TextField(appState.currency.fractionDigits == 0 ? "0" : "0.00", text: $amountText)
                 .font(.system(size: 40, weight: .semibold))
@@ -388,10 +390,12 @@ struct AddTransactionSheet: View {
                 .foregroundStyle(kind == .income ? AppTheme.positive : AppTheme.text)
                 .keyboardType(.decimalPad)
                 .multilineTextAlignment(.leading)
-                .fixedSize()
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
                 .focused($amountFocused)
             Spacer()
         }
+        .padding(.horizontal, 16)
         .padding(.vertical, 8)
         .animation(.easeOut(duration: 0.12), value: kind)
     }

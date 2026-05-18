@@ -23,6 +23,8 @@ struct DayHeader: View {
                 .font(.system(size: 12))
                 .monospacedDigit()
                 .foregroundStyle(AppTheme.text3)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
         }
         .padding(.horizontal, 24)
         .padding(.top, 14)
