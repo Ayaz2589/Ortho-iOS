@@ -8,17 +8,29 @@ struct TransactionsView: View {
     @Environment(AppState.self) private var appState
     @State private var query: String = ""
     @State private var showingAddTransaction = false
+    @State private var selectedTransaction: Transaction?
 
-    /// Lazily filters each group's items by merchant; drops empty groups so
-    /// you never see a header with no rows.
+    /// Lazily filters each group's items; drops empty groups so headers never
+    /// appear orphaned. Matches against the four fields visible on a row:
+    /// merchant, source, category name, and any owner's name.
     private var filteredGroups: [TransactionGroup] {
         let groups = appState.groups
         guard !query.isEmpty else { return groups }
         let q = query.lowercased()
         return groups.compactMap { g in
-            let hits = g.items.filter { $0.merchant.lowercased().contains(q) }
+            let hits = g.items.filter { tx in matches(tx, query: q) }
             return hits.isEmpty ? nil : TransactionGroup(day: g.day, items: hits)
         }
+    }
+
+    private func matches(_ tx: Transaction, query q: String) -> Bool {
+        if tx.merchant.lowercased().contains(q) { return true }
+        if tx.source.lowercased().contains(q) { return true }
+        if tx.category.rawValue.lowercased().contains(q) { return true }
+        for owner in appState.resolveOwners(of: tx) {
+            if owner.name.lowercased().contains(q) { return true }
+        }
+        return false
     }
 
     var body: some View {
@@ -43,6 +55,12 @@ struct TransactionsView: View {
             .presentationDetents([.large])
             .presentationBackground(AppTheme.bg)
         }
+        .sheet(item: $selectedTransaction) { tx in
+            TransactionDetailSheet(txID: tx.id)
+                .environment(appState)
+                .presentationDetents([.large])
+                .presentationBackground(AppTheme.bg)
+        }
     }
 
     @ViewBuilder
@@ -52,7 +70,8 @@ struct TransactionsView: View {
                 TransactionRow(
                     tx: tx,
                     display: appState.ownersDisplay(of: tx),
-                    density: density
+                    density: density,
+                    onTap: { selectedTransaction = tx }
                 )
                 if idx < group.items.count - 1 {
                     RowSeparator(density: density)

@@ -28,6 +28,16 @@ final class AppState {
         transactions.append(tx)
     }
 
+    /// Replace an existing transaction by id. No-op if the id isn't present.
+    func updateTransaction(_ tx: Transaction) {
+        guard let idx = transactions.firstIndex(where: { $0.id == tx.id }) else { return }
+        transactions[idx] = tx
+    }
+
+    func deleteTransaction(_ tx: Transaction) {
+        transactions.removeAll { $0.id == tx.id }
+    }
+
     func resolveOwners(of tx: Transaction) -> [User] {
         tx.ownerIDs.map { user($0) }
     }

@@ -9,30 +9,35 @@ struct TransactionRow: View {
     /// `(avatarUser, label)` from `AppState.ownersDisplay(of:)`.
     let display: (avatarUser: User, label: String)
     let density: Density
+    var onTap: (() -> Void)? = nil
 
     var body: some View {
-        HStack(spacing: 12) {
-            categoryTile
+        Button(action: { onTap?() }) {
+            HStack(spacing: 12) {
+                categoryTile
 
-            VStack(alignment: .leading, spacing: 3) {
-                Text(tx.merchant)
-                    .font(.system(size: density.titleSize, weight: .medium))
-                    .foregroundStyle(AppTheme.text)
-                    .lineLimit(1)
-                meta
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(tx.merchant)
+                        .font(.system(size: density.titleSize, weight: .medium))
+                        .foregroundStyle(AppTheme.text)
+                        .lineLimit(1)
+                    meta
+                }
+
+                Spacer(minLength: 8)
+
+                Text(Money.string(tx.signedAmount, signed: tx.isIncome))
+                    .font(.system(size: density.amountSize, weight: .semibold))
+                    .monospacedDigit()
+                    .foregroundStyle(tx.isIncome ? AppTheme.positive : AppTheme.text)
             }
-
-            Spacer(minLength: 8)
-
-            Text(Money.string(tx.signedAmount, signed: tx.isIncome))
-                .font(.system(size: density.amountSize, weight: .semibold))
-                .monospacedDigit()
-                .foregroundStyle(tx.isIncome ? AppTheme.positive : AppTheme.text)
+            .padding(.horizontal, density.pad)
+            .padding(.vertical, density.pad - 4)
+            .frame(minHeight: density.rowMinHeight)
+            .contentShape(Rectangle())
         }
-        .padding(.horizontal, density.pad)
-        .padding(.vertical, density.pad - 4)
-        .frame(minHeight: density.rowMinHeight)
-        .contentShape(Rectangle())
+        .buttonStyle(.plain)
+        .disabled(onTap == nil)
     }
 
     private var categoryTile: some View {

@@ -8,23 +8,62 @@ import SwiftUI
 /// control. Owner picker is multi-select — a joint transaction means selecting
 /// two (or more) household members, matching `Transaction.ownerIDs: Set<...>`.
 struct AddTransactionSheet: View {
-    let onAdd: (Transaction) -> Void
+    /// When non-nil, the sheet is in "edit" mode — fields pre-fill from this
+    /// transaction and submit replaces it (preserving the id). When nil, the
+    /// sheet creates a new transaction.
+    let editing: Transaction?
+    let onSubmit: (Transaction) -> Void
 
     @Environment(\.dismiss) private var dismiss
     @Environment(AppState.self) private var appState
 
-    @State private var kind: TransactionKind = .expense
-    @State private var amountText: String = ""
-    @State private var merchant: String = ""
-    @State private var category: TransactionCategory = .groceries
-    @State private var selectedOwners: Set<User.ID> = []
+    @State private var kind: TransactionKind
+    @State private var amountText: String
+    @State private var merchant: String
+    @State private var category: TransactionCategory
+    @State private var selectedOwners: Set<User.ID>
     /// Per-owner split percentage as user-typed strings. Parsed at submit time.
     /// Only meaningful when `showsSplit` is true.
-    @State private var splitPercents: [User.ID: String] = [:]
-    @State private var source: String = "Amex Gold"
-    @State private var date: Date = .now
+    @State private var splitPercents: [User.ID: String]
+    @State private var source: String
+    @State private var date: Date
 
     @FocusState private var amountFocused: Bool
+
+    init(editing: Transaction? = nil, onSubmit: @escaping (Transaction) -> Void) {
+        self.editing = editing
+        self.onSubmit = onSubmit
+
+        if let tx = editing {
+            _kind = State(initialValue: tx.kind)
+            _amountText = State(initialValue: Self.formatAmountForField(tx.amount))
+            _merchant = State(initialValue: tx.merchant)
+            _category = State(initialValue: tx.category == .income ? .groceries : tx.category)
+            _selectedOwners = State(initialValue: tx.ownerIDs)
+            _source = State(initialValue: tx.source)
+            _date = State(initialValue: tx.date)
+            // Pre-fill split strings from the resolved (effective) splits so
+            // they survive even when the stored `splits` is nil (even-split).
+            let resolved = tx.effectiveSplits
+            let mapped = Dictionary(uniqueKeysWithValues:
+                resolved.map { ($0.key, Self.formatPercentForField($0.value)) }
+            )
+            _splitPercents = State(initialValue: mapped)
+        } else {
+            _kind = State(initialValue: .expense)
+            _amountText = State(initialValue: "")
+            _merchant = State(initialValue: "")
+            _category = State(initialValue: .groceries)
+            _selectedOwners = State(initialValue: [])
+            _splitPercents = State(initialValue: [:])
+            _source = State(initialValue: "Amex Gold")
+            _date = State(initialValue: .now)
+        }
+    }
+
+    private var isEditing: Bool { editing != nil }
+    private var navTitle: String { isEditing ? "Edit transaction" : "New transaction" }
+    private var actionLabel: String { isEditing ? "Save" : "Add" }
 
     /// 0.5% tolerance so display rounding (e.g. 33.33 + 33.33 + 33.34 = 100)
     /// doesn't block submission.
@@ -134,19 +173,25 @@ struct AddTransactionSheet: View {
         }
         .background(AppTheme.bg)
         .onAppear {
-            // Default the owner to the first household member if nothing's set.
-            if selectedOwners.isEmpty, let first = appState.users.first {
-                selectedOwners = [first.id]
+            if !isEditing {
+                // Add mode: seed default owner + even split.
+                if selectedOwners.isEmpty, let first = appState.users.first {
+                    selectedOwners = [first.id]
+                }
+                resetSplitsToEven()
             }
-            resetSplitsToEven()
             // Delay focus so sheet finishes presenting before the keyboard rises.
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 amountFocused = true
             }
         }
-        .onChange(of: kind) { _, _ in
+        .onChange(of: kind) { _, newKind in
             // Keep the source valid when direction flips.
             if !sources.contains(source) { source = sources.first ?? "" }
+            // Income's category is locked; if the user came from expense, the
+            // stored category may already be valid — fall back to .groceries
+            // when flipping back to expense if it's somehow .income.
+            if newKind == .expense && category == .income { category = .groceries }
             resetSplitsToEven()
         }
         .onChange(of: selectedOwners) { _, _ in
@@ -158,7 +203,7 @@ struct AddTransactionSheet: View {
 
     private var sheetNav: some View {
         ZStack {
-            Text("New transaction")
+            Text(navTitle)
                 .font(.system(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
                 .tracking(-0.3)
@@ -169,9 +214,10 @@ struct AddTransactionSheet: View {
                     .foregroundStyle(AppTheme.accent)
                     .buttonStyle(.plain)
                 Spacer()
-                Button("Add") {
+                Button(actionLabel) {
                     guard let amount = parsedAmount else { return }
                     let tx = Transaction(
+                        id: editing?.id ?? UUID(),
                         merchant: merchant.trimmingCharacters(in: .whitespaces),
                         category: kind == .income ? .income : category,
                         kind: kind,
@@ -181,7 +227,7 @@ struct AddTransactionSheet: View {
                         source: source,
                         date: date
                     )
-                    onAdd(tx)
+                    onSubmit(tx)
                 }
                 .font(.system(size: 17, weight: .semibold))
                 .foregroundStyle(canAdd ? AppTheme.accent : AppTheme.text.opacity(0.36))
@@ -193,6 +239,16 @@ struct AddTransactionSheet: View {
         .padding(.horizontal, 20)
         .padding(.top, 16)
         .padding(.bottom, 8)
+    }
+
+    // MARK: - Static formatters (used by init to pre-fill from `editing`)
+
+    private static func formatAmountForField(_ d: Decimal) -> String {
+        String(format: "%.2f", NSDecimalNumber(decimal: d).doubleValue)
+    }
+
+    private static func formatPercentForField(_ d: Decimal) -> String {
+        String(format: "%.2f", NSDecimalNumber(decimal: d).doubleValue)
     }
 
     // MARK: - Amount hero

@@ -14,6 +14,10 @@ enum AppTheme {
                                 dark:  Color(red: 0.651, green: 0.769, blue: 0.643))
     static let accent   = Color(light: Color(red: 0.549, green: 0.478, blue: 0.361),
                                 dark:  Color(red: 0.788, green: 0.722, blue: 0.604))
+    /// Muted brick red for destructive actions (Delete). Avoids the loud
+    /// system red while still reading as a warning against the warm bg.
+    static let destructive = Color(light: Color(red: 0.682, green: 0.318, blue: 0.290),
+                                   dark:  Color(red: 0.855, green: 0.545, blue: 0.510))
 
     static var text2:    Color { text.opacity(0.58) }
     static var text3:    Color { text.opacity(0.36) }
