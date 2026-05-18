@@ -224,6 +224,25 @@ final class AppState {
         }
     }
 
+    /// Remove a member from the active household. The `User` record stays in
+    /// `users` so existing transactions they participate in continue to
+    /// resolve to a real name + palette. Caller is responsible for invariants
+    /// (e.g. don't remove the last member).
+    func removeMemberFromCurrentHousehold(_ userID: User.ID) {
+        guard let id = currentHouseholdID,
+              let idx = households.firstIndex(where: { $0.id == id })
+        else { return }
+        households[idx].memberIDs.removeAll { $0 == userID }
+    }
+
+    /// Members of the active household, resolved against `users` in the
+    /// household's `memberIDs` order. Falls back to all users when there's no
+    /// active household (defensive — shouldn't happen in MVP).
+    var householdMembers: [User] {
+        guard let h = currentHousehold else { return users }
+        return h.memberIDs.compactMap { id in users.first { $0.id == id } }
+    }
+
     // MARK: - FX rates
 
     /// Returns the cached/live rate when present, otherwise the hardcoded

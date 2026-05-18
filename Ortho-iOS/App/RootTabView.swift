@@ -42,8 +42,10 @@ struct OrthoTabBar: View {
                 .frame(height: 0.5)
                 .frame(maxHeight: .infinity, alignment: .top)
         }
+        // Frosted-glass blur — scrolling content shows through, faintly
+        // softened. `.ultraThinMaterial` adapts to light/dark on its own,
+        // so no warm-bg overlay is needed underneath.
         .background(.ultraThinMaterial)
-        .background(AppTheme.bg.opacity(0.86))
     }
 
     @ViewBuilder

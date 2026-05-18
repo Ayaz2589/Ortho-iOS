@@ -5,33 +5,74 @@ struct UserRowView: View {
     let user: User
     var detail: String? = nil
     var isCurrentUser: Bool = false
-    let onTap: () -> Void
+    /// Tap handler. `nil` (the default) renders the row as static info — no
+    /// button wrapper, no trailing chevron. Pass a closure when there's an
+    /// actual destination.
+    var onTap: (() -> Void)? = nil
+    /// Destructive remove handler. When set, the row shows a trailing
+    /// minus.circle.fill button that confirms via alert before calling.
+    /// Mutually exclusive with `onTap` (chevron wins if both are set).
+    var onRemove: (() -> Void)? = nil
+
+    @State private var showingRemoveConfirm = false
 
     var body: some View {
-        Button(action: onTap) {
-            HStack(spacing: 14) {
-                avatar
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(user.name)
-                        .font(.system(size: 17, weight: .medium))
-                        .foregroundStyle(AppTheme.text)
-                        .tracking(-0.2)
-                    if let displayDetail = composedDetail {
-                        Text(displayDetail)
-                            .font(.system(size: 13))
-                            .foregroundStyle(AppTheme.text.opacity(0.58))
-                            .tracking(-0.1)
-                    }
+        if let onTap {
+            Button(action: onTap) { rowContent(trailing: .chevron) }
+                .buttonStyle(.plain)
+        } else if onRemove != nil {
+            rowContent(trailing: .removeButton)
+                .alert("Remove \(user.name) from this household?",
+                       isPresented: $showingRemoveConfirm) {
+                    Button("Cancel", role: .cancel) { }
+                    Button("Remove", role: .destructive) { onRemove?() }
+                } message: {
+                    Text("Existing transactions keep \(user.name) as the owner.")
                 }
-                Spacer()
-                ChevronView()
-            }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
-            .frame(minHeight: 64)
-            .contentShape(Rectangle())
+        } else {
+            rowContent(trailing: .none)
         }
-        .buttonStyle(.plain)
+    }
+
+    private enum Trailing { case chevron, removeButton, none }
+
+    private func rowContent(trailing: Trailing) -> some View {
+        HStack(spacing: 14) {
+            avatar
+            VStack(alignment: .leading, spacing: 3) {
+                Text(user.name)
+                    .font(.system(size: 17, weight: .medium))
+                    .foregroundStyle(AppTheme.text)
+                    .tracking(-0.2)
+                if let displayDetail = composedDetail {
+                    Text(displayDetail)
+                        .font(.system(size: 13))
+                        .foregroundStyle(AppTheme.text.opacity(0.58))
+                        .tracking(-0.1)
+                }
+            }
+            Spacer()
+            switch trailing {
+            case .chevron:
+                ChevronView()
+            case .removeButton:
+                Button {
+                    showingRemoveConfirm = true
+                } label: {
+                    Image(systemName: "minus.circle.fill")
+                        .font(.system(size: 20, weight: .regular))
+                        .foregroundStyle(AppTheme.destructive)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Remove \(user.name)")
+            case .none:
+                EmptyView()
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .frame(minHeight: 64)
+        .contentShape(Rectangle())
     }
 
     /// Combines the optional `detail` string with a leading "(you) · " marker

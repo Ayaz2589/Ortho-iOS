@@ -216,7 +216,7 @@ struct AddTransactionSheet: View {
                 // Add mode: seed default owner(s) + even split + first card.
                 if scope == .personal {
                     selectedOwners = [appState.currentUserID]
-                } else if selectedOwners.isEmpty, let first = appState.users.first {
+                } else if selectedOwners.isEmpty, let first = appState.householdMembers.first {
                     selectedOwners = [first.id]
                 }
                 if source.isEmpty, let firstCard = sources.first {
@@ -248,7 +248,7 @@ struct AddTransactionSheet: View {
             case .personal:
                 selectedOwners = [appState.currentUserID]
             case .shared:
-                if selectedOwners.isEmpty, let first = appState.users.first {
+                if selectedOwners.isEmpty, let first = appState.householdMembers.first {
                     selectedOwners = [first.id]
                 }
             }
@@ -474,7 +474,7 @@ struct AddTransactionSheet: View {
                 .padding(.top, 8)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 6) {
-                    ForEach(appState.users) { u in
+                    ForEach(appState.householdMembers) { u in
                         OwnerChipView(
                             user: u,
                             selected: selectedOwners.contains(u.id),
