@@ -101,14 +101,22 @@ struct TransactionsView: View {
     private func groupCard(_ group: TransactionGroup) -> some View {
         VStack(spacing: 0) {
             ForEach(Array(group.items.enumerated()), id: \.element.id) { idx, tx in
-                TransactionRow(
-                    tx: tx,
-                    display: appState.ownersDisplay(of: tx),
-                    density: density,
-                    onTap: { selectedTransaction = tx }
-                )
-                if idx < group.items.count - 1 {
-                    RowSeparator(density: density)
+                SwipeActionRow(
+                    onDelete: { appState.deleteTransaction(tx) }
+                ) {
+                    // Include the separator inside the swipe container so
+                    // it slides with the row instead of staying behind.
+                    VStack(spacing: 0) {
+                        TransactionRow(
+                            tx: tx,
+                            display: appState.ownersDisplay(of: tx),
+                            density: density,
+                            onTap: { selectedTransaction = tx }
+                        )
+                        if idx < group.items.count - 1 {
+                            RowSeparator(density: density)
+                        }
+                    }
                 }
             }
         }
