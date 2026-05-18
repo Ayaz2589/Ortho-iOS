@@ -4,6 +4,7 @@ import SwiftUI
 struct UserRowView: View {
     let user: User
     var detail: String? = nil
+    var isCurrentUser: Bool = false
     let onTap: () -> Void
 
     var body: some View {
@@ -15,8 +16,8 @@ struct UserRowView: View {
                         .font(.system(size: 17, weight: .medium))
                         .foregroundStyle(AppTheme.text)
                         .tracking(-0.2)
-                    if let detail {
-                        Text(detail)
+                    if let displayDetail = composedDetail {
+                        Text(displayDetail)
                             .font(.system(size: 13))
                             .foregroundStyle(AppTheme.text.opacity(0.58))
                             .tracking(-0.1)
@@ -31,6 +32,16 @@ struct UserRowView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+    }
+
+    /// Combines the optional `detail` string with a leading "(you) · " marker
+    /// when this row is the current user.
+    private var composedDetail: String? {
+        switch (isCurrentUser, detail) {
+        case (true, let .some(d)) where !d.isEmpty: return "(you) · \(d)"
+        case (true, _):                              return "(you)"
+        case (false, let d):                         return d
+        }
     }
 
     private var avatar: some View {

@@ -75,6 +75,7 @@ struct OrthoTabBar: View {
 /// and Settings. Reserves room for the bar via `safeAreaInset(.bottom)`.
 struct RootTabView: View {
     @State private var selection: OrthoTab = .transactions
+    @Environment(AppState.self) private var appState
 
     var body: some View {
         ZStack {
@@ -91,6 +92,10 @@ struct RootTabView: View {
             OrthoTabBar(selection: $selection)
         }
         .background(AppTheme.bg.ignoresSafeArea())
+        .task {
+            // Fetch live FX rates once per app launch when cache is stale.
+            await appState.refreshRatesIfStale()
+        }
     }
 }
 

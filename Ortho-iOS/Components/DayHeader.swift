@@ -5,6 +5,8 @@ import SwiftUI
 struct DayHeader: View {
     let group: TransactionGroup
 
+    @Environment(AppState.self) private var appState
+
     var body: some View {
         HStack(alignment: .firstTextBaseline) {
             HStack(spacing: 8) {
@@ -17,7 +19,7 @@ struct DayHeader: View {
                     .foregroundStyle(AppTheme.text3)
             }
             Spacer()
-            Text(Money.string(group.outgoingTotal))
+            Text(appState.formatMoney(group.outgoingTotal))
                 .font(.system(size: 12))
                 .monospacedDigit()
                 .foregroundStyle(AppTheme.text3)

@@ -16,7 +16,8 @@ struct TransactionGroup: Identifiable, Hashable {
         self.items = items
     }
 
-    var outgoingTotal: Decimal {
+    /// Sum (USD cents) of all expense rows in this day's bucket.
+    var outgoingTotal: Int64 {
         items.filter { $0.kind == .expense }.reduce(0) { $0 + $1.amount }
     }
 

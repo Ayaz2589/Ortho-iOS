@@ -73,7 +73,7 @@ struct TransactionDetailSheet: View {
 
     private func sheetNav(for tx: Transaction) -> some View {
         ZStack {
-            Text(tx.kind == .income ? "Income" : "Expense")
+            Text(navTitle(for: tx))
                 .font(.system(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
                 .tracking(-0.3)
@@ -100,7 +100,7 @@ struct TransactionDetailSheet: View {
     private func amountHero(for tx: Transaction) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: 0) {
             Spacer()
-            Text(Money.string(tx.signedAmount, signed: tx.isIncome))
+            Text(appState.formatMoney(tx.amount, leadingPlus: tx.isIncome))
                 .font(.system(size: 40, weight: .semibold))
                 .tracking(-0.6)
                 .monospacedDigit()
@@ -240,6 +240,18 @@ struct TransactionDetailSheet: View {
         f.timeStyle = .none
         return f
     }()
+
+    /// Nav title that surfaces the scope ("Personal expense", "Expense · Home").
+    private func navTitle(for tx: Transaction) -> String {
+        let kindLabel = tx.kind == .income ? "Income" : "Expense"
+        if tx.householdID == nil {
+            return "Personal \(kindLabel.lowercased())"
+        }
+        if let h = appState.households.first(where: { $0.id == tx.householdID }) {
+            return "\(kindLabel) · \(h.name)"
+        }
+        return kindLabel
+    }
 }
 
 #Preview("Detail · Solo expense") {

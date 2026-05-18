@@ -11,6 +11,8 @@ struct TransactionRow: View {
     let density: Density
     var onTap: (() -> Void)? = nil
 
+    @Environment(AppState.self) private var appState
+
     var body: some View {
         Button(action: { onTap?() }) {
             HStack(spacing: 12) {
@@ -26,7 +28,7 @@ struct TransactionRow: View {
 
                 Spacer(minLength: 8)
 
-                Text(Money.string(tx.signedAmount, signed: tx.isIncome))
+                Text(appState.formatMoney(tx.amount, leadingPlus: tx.isIncome))
                     .font(.system(size: density.amountSize, weight: .semibold))
                     .monospacedDigit()
                     .foregroundStyle(tx.isIncome ? AppTheme.positive : AppTheme.text)

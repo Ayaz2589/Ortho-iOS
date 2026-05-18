@@ -1,5 +1,19 @@
 import SwiftUI
 
+/// Filter pill above the activity list. Composes (AND) with the merchant
+/// search filter.
+enum TransactionScopeFilter: String, CaseIterable, Hashable, Identifiable {
+    case all, shared, personal
+    var id: String { rawValue }
+    var label: String {
+        switch self {
+        case .all:      "All"
+        case .shared:   "Shared"
+        case .personal: "Personal"
+        }
+    }
+}
+
 /// Day-grouped transactions list — the activity tab. Reads users + transactions
 /// from `AppState` so adds/edits in other tabs reflect here.
 struct TransactionsView: View {
@@ -7,19 +21,39 @@ struct TransactionsView: View {
 
     @Environment(AppState.self) private var appState
     @State private var query: String = ""
+    @State private var scopeFilter: TransactionScopeFilter = .all
     @State private var showingAddTransaction = false
     @State private var selectedTransaction: Transaction?
 
-    /// Lazily filters each group's items; drops empty groups so headers never
-    /// appear orphaned. Matches against the four fields visible on a row:
-    /// merchant, source, category name, and any owner's name.
+    /// Lazily filters each group's items by both the scope filter and the
+    /// merchant search. Drops empty groups so headers never appear orphaned.
+    /// Scope-filtering rules (against `appState.currentUserID` and
+    /// `currentHouseholdID`):
+    ///   .all      — current household's shared rows + the current user's personal rows
+    ///   .shared   — only current household's shared rows
+    ///   .personal — only the current user's personal rows
     private var filteredGroups: [TransactionGroup] {
+        let q = query.trimmingCharacters(in: .whitespaces).lowercased()
         let groups = appState.groups
-        guard !query.isEmpty else { return groups }
-        let q = query.lowercased()
         return groups.compactMap { g in
-            let hits = g.items.filter { tx in matches(tx, query: q) }
+            let hits = g.items.filter { tx in
+                guard inScope(tx) else { return false }
+                guard !q.isEmpty else { return true }
+                return matches(tx, query: q)
+            }
             return hits.isEmpty ? nil : TransactionGroup(day: g.day, items: hits)
+        }
+    }
+
+    private func inScope(_ tx: Transaction) -> Bool {
+        let myID = appState.currentUserID
+        let householdID = appState.currentHouseholdID
+        let isShared = tx.householdID != nil && tx.householdID == householdID
+        let isMine = tx.householdID == nil && tx.ownerIDs == [myID]
+        switch scopeFilter {
+        case .all:      return isShared || isMine
+        case .shared:   return isShared
+        case .personal: return isMine
         }
     }
 
@@ -100,8 +134,43 @@ struct TransactionsView: View {
 
             SearchField(text: $query, placeholder: "Search transactions")
                 .padding(.vertical, 8)
+
+            scopeFilterPill
+                .padding(.horizontal, 16)
+                .padding(.bottom, 8)
         }
         .background(AppTheme.bg)
+    }
+
+    /// All | Shared | Personal segmented pill above the activity list.
+    private var scopeFilterPill: some View {
+        HStack(spacing: 4) {
+            ForEach(TransactionScopeFilter.allCases) { f in
+                Button {
+                    scopeFilter = f
+                } label: {
+                    Text(f.label)
+                        .font(.system(size: 13, weight: .semibold))
+                        .tracking(-0.1)
+                        .foregroundStyle(scopeFilter == f ? AppTheme.text : AppTheme.text.opacity(0.58))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 6)
+                        .background(
+                            RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                .fill(scopeFilter == f ? AppTheme.surface : .clear)
+                                .shadow(color: scopeFilter == f ? .black.opacity(0.06) : .clear,
+                                        radius: 2, y: 1)
+                        )
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(3)
+        .background(
+            RoundedRectangle(cornerRadius: 9, style: .continuous)
+                .fill(AppTheme.text.opacity(0.05))
+        )
+        .animation(.easeOut(duration: 0.15), value: scopeFilter)
     }
 
     /// Circular "+" button next to the Activity title. Same visual treatment

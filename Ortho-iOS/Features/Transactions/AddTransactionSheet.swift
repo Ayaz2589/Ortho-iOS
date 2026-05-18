@@ -1,5 +1,13 @@
 import SwiftUI
 
+/// Sheet-local toggle for Personal vs Shared. Mapped to
+/// `Transaction.householdID` (nil for personal, current household for
+/// shared) on submit.
+enum TransactionScopeMode: String, CaseIterable, Hashable, Identifiable {
+    case shared, personal
+    var id: String { rawValue }
+}
+
 /// Modal sheet for adding a transaction (expense or income).
 ///
 /// Design grammar matches AddUserSheet: Cancel · "New transaction" · Add,
@@ -17,8 +25,14 @@ struct AddTransactionSheet: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(AppState.self) private var appState
 
+    /// Personal vs Shared (household) scope of the transaction being edited.
+    @State private var scope: TransactionScopeMode
     @State private var kind: TransactionKind
     @State private var amountText: String
+    /// Snapshot of `amountText` when the sheet appeared / loaded. If the user
+    /// doesn't touch the amount field, we reuse `editing.amount` directly on
+    /// Save so FX round-trip rounding never silently shifts the stored cents.
+    @State private var originalAmountText: String = ""
     @State private var merchant: String
     @State private var category: TransactionCategory
     @State private var selectedOwners: Set<User.ID>
@@ -35,8 +49,12 @@ struct AddTransactionSheet: View {
         self.onSubmit = onSubmit
 
         if let tx = editing {
+            _scope = State(initialValue: tx.householdID == nil ? .personal : .shared)
             _kind = State(initialValue: tx.kind)
-            _amountText = State(initialValue: Self.formatAmountForField(tx.amount))
+            // Amount text is filled in on appear once we can read appState's
+            // currency + rate. Start blank so the first frame doesn't show a
+            // USD-formatted value when the user is on a different currency.
+            _amountText = State(initialValue: "")
             _merchant = State(initialValue: tx.merchant)
             _category = State(initialValue: tx.category == .income ? .groceries : tx.category)
             _selectedOwners = State(initialValue: tx.ownerIDs)
@@ -50,6 +68,7 @@ struct AddTransactionSheet: View {
             )
             _splitPercents = State(initialValue: mapped)
         } else {
+            _scope = State(initialValue: .shared)
             _kind = State(initialValue: .expense)
             _amountText = State(initialValue: "")
             _merchant = State(initialValue: "")
@@ -89,16 +108,19 @@ struct AddTransactionSheet: View {
     }
 
     private var canAdd: Bool {
-        parsedAmount != nil
-        && !merchant.trimmingCharacters(in: .whitespaces).isEmpty
-        && !selectedOwners.isEmpty
-        && (!showsSplit || splitIsValid)
+        guard parsedAmount != nil,
+              !merchant.trimmingCharacters(in: .whitespaces).isEmpty
+        else { return false }
+        if scope == .shared && selectedOwners.isEmpty { return false }
+        if showsSplit && !splitIsValid { return false }
+        return true
     }
 
-    /// Show split editor only on multi-owner expenses. Income with multiple
-    /// owners stays equal-split per the footer caption.
+    /// Split editor appears only for multi-owner *shared* expenses. Personal
+    /// transactions are always single-owner (the current user). Income with
+    /// multiple owners stays equal-split per the footer caption.
     private var showsSplit: Bool {
-        kind == .expense && selectedOwners.count >= 2
+        scope == .shared && kind == .expense && selectedOwners.count >= 2
     }
 
     /// Parsed [User.ID: Decimal] of the current splitPercents map, restricted
@@ -133,6 +155,7 @@ struct AddTransactionSheet: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     amountHero
+                    scopeToggle
                     directionToggle
 
                     formGroup {
@@ -148,8 +171,10 @@ struct AddTransactionSheet: View {
                     }
 
                     formGroup {
-                        ownerRow
-                        divider
+                        if scope == .shared {
+                            ownerRow
+                            divider
+                        }
                         sourceRow
                         divider
                         dateRow
@@ -159,9 +184,7 @@ struct AddTransactionSheet: View {
                         splitSection
                     }
 
-                    Text(kind == .income
-                         ? "Income shows in sage on the Activity list. Selecting multiple owners attributes shared income to all of them."
-                         : "Selecting multiple owners marks the transaction as shared.")
+                    Text(footerCaption)
                         .font(.system(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
@@ -176,9 +199,24 @@ struct AddTransactionSheet: View {
         }
         .background(AppTheme.bg)
         .onAppear {
-            if !isEditing {
-                // Add mode: seed default owner + even split + first card.
-                if selectedOwners.isEmpty, let first = appState.users.first {
+            if let tx = editing {
+                // Edit mode: pre-fill amount field in the user's currency.
+                let currency = appState.currency
+                let rate = appState.rate(for: currency)
+                let display = Money.toDisplayAmount(cents: tx.amount,
+                                                   in: currency,
+                                                   rate: rate)
+                let formatted = String(
+                    format: "%.\(currency.fractionDigits)f",
+                    NSDecimalNumber(decimal: display).doubleValue
+                )
+                amountText = formatted
+                originalAmountText = formatted
+            } else {
+                // Add mode: seed default owner(s) + even split + first card.
+                if scope == .personal {
+                    selectedOwners = [appState.currentUserID]
+                } else if selectedOwners.isEmpty, let first = appState.users.first {
                     selectedOwners = [first.id]
                 }
                 if source.isEmpty, let firstCard = sources.first {
@@ -203,6 +241,59 @@ struct AddTransactionSheet: View {
         .onChange(of: selectedOwners) { _, _ in
             resetSplitsToEven()
         }
+        .onChange(of: scope) { _, newScope in
+            // Personal collapses to a single owner (the current user); Shared
+            // expands back to a default if the user had previously been alone.
+            switch newScope {
+            case .personal:
+                selectedOwners = [appState.currentUserID]
+            case .shared:
+                if selectedOwners.isEmpty, let first = appState.users.first {
+                    selectedOwners = [first.id]
+                }
+            }
+            resetSplitsToEven()
+        }
+    }
+
+    private var footerCaption: String {
+        if scope == .personal {
+            return "Personal transactions are visible only to you. They don't appear in the household's shared list."
+        }
+        return kind == .income
+            ? "Income shows in sage on the Activity list. Selecting multiple owners attributes shared income to all of them."
+            : "Selecting multiple owners marks the transaction as shared."
+    }
+
+    private var scopeToggle: some View {
+        HStack(spacing: 4) {
+            ForEach(TransactionScopeMode.allCases, id: \.self) { s in
+                Button {
+                    scope = s
+                } label: {
+                    Text(s == .shared ? "Shared" : "Personal")
+                        .font(.system(size: 14, weight: .semibold))
+                        .tracking(-0.1)
+                        .foregroundStyle(scope == s ? AppTheme.text : AppTheme.text.opacity(0.58))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 8)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .fill(scope == s ? AppTheme.surface : .clear)
+                                .shadow(color: scope == s ? .black.opacity(0.06) : .clear,
+                                        radius: 2, y: 1)
+                        )
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(4)
+        .background(
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .fill(AppTheme.text.opacity(0.05))
+        )
+        .padding(.horizontal, 16)
+        .animation(.easeOut(duration: 0.15), value: scope)
     }
 
     // MARK: - Sheet nav
@@ -221,17 +312,38 @@ struct AddTransactionSheet: View {
                     .buttonStyle(.plain)
                 Spacer()
                 Button(actionLabel) {
-                    guard let amount = parsedAmount else { return }
+                    guard let parsed = parsedAmount else { return }
+                    let cents: Int64
+                    if let editing, amountText == originalAmountText {
+                        // User didn't touch the amount field — preserve the
+                        // stored cents exactly (no FX round-trip drift).
+                        cents = editing.amount
+                    } else {
+                        cents = Money.toUSDCents(parsed,
+                                                 from: appState.currency,
+                                                 rate: appState.rate(for: appState.currency))
+                    }
+                    // Personal scope forces a single owner (the current user)
+                    // and nil household + no splits.
+                    let resolvedOwners: Set<User.ID> = scope == .personal
+                        ? [appState.currentUserID]
+                        : selectedOwners
+                    let resolvedSplits: [User.ID: Decimal]? =
+                        (scope == .shared && showsSplit) ? parsedSplits : nil
+                    let resolvedHousehold: Household.ID? = scope == .personal
+                        ? nil
+                        : appState.currentHouseholdID
                     let tx = Transaction(
                         id: editing?.id ?? UUID(),
                         merchant: merchant.trimmingCharacters(in: .whitespaces),
                         category: kind == .income ? .income : category,
                         kind: kind,
-                        amount: amount,
-                        ownerIDs: selectedOwners,
-                        splits: showsSplit ? parsedSplits : nil,
+                        amount: cents,
+                        ownerIDs: resolvedOwners,
+                        splits: resolvedSplits,
                         source: source,
-                        date: date
+                        date: date,
+                        householdID: resolvedHousehold
                     )
                     onSubmit(tx)
                 }
@@ -262,14 +374,14 @@ struct AddTransactionSheet: View {
     private var amountHero: some View {
         HStack(alignment: .firstTextBaseline, spacing: 4) {
             Spacer()
-            Text("$")
+            Text(Money.symbol(for: appState.currency))
                 .font(.system(size: 32, weight: .semibold))
                 .foregroundStyle(amountText.isEmpty
                                  ? AppTheme.text.opacity(0.36)
                                  : (kind == .income ? AppTheme.positive : AppTheme.text))
                 .tracking(-0.4)
 
-            TextField("0.00", text: $amountText)
+            TextField(appState.currency.fractionDigits == 0 ? "0" : "0.00", text: $amountText)
                 .font(.system(size: 40, weight: .semibold))
                 .tracking(-0.6)
                 .monospacedDigit()
