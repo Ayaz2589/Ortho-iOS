@@ -56,7 +56,9 @@ struct AddTransactionSheet: View {
             _category = State(initialValue: .groceries)
             _selectedOwners = State(initialValue: [])
             _splitPercents = State(initialValue: [:])
-            _source = State(initialValue: "Amex Gold")
+            // Filled in from appState.cards.first on appear (AppState isn't
+            // available in init).
+            _source = State(initialValue: "")
             _date = State(initialValue: .now)
         }
     }
@@ -69,12 +71,13 @@ struct AddTransactionSheet: View {
     /// doesn't block submission.
     private static let splitTolerance: Decimal = 0.5
 
-    private static let expenseSources: [String] = [
-        "Amex Gold", "Chase Sapphire", "Apple Card", "ACH · Joint",
-    ]
+    /// Income sources stay hardcoded for now — cards are an expense concept.
     private static let incomeSources: [String] = [
         "ACH · Checking", "ACH · Joint", "Wire",
     ]
+
+    /// Expense sources come from the user-managed cards list in AppState.
+    private var expenseSources: [String] { appState.cards.map(\.name) }
 
     /// Non-negative amount parsed from the text field; `nil` if empty or 0.
     private var parsedAmount: Decimal? {
@@ -121,7 +124,7 @@ struct AddTransactionSheet: View {
 
     private var merchantLabel: String { kind == .income ? "Source" : "Merchant" }
     private var sourceLabel:   String { kind == .income ? "Deposit to" : "Paid with" }
-    private var sources:       [String] { kind == .income ? Self.incomeSources : Self.expenseSources }
+    private var sources:       [String] { kind == .income ? Self.incomeSources : expenseSources }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -174,9 +177,12 @@ struct AddTransactionSheet: View {
         .background(AppTheme.bg)
         .onAppear {
             if !isEditing {
-                // Add mode: seed default owner + even split.
+                // Add mode: seed default owner + even split + first card.
                 if selectedOwners.isEmpty, let first = appState.users.first {
                     selectedOwners = [first.id]
+                }
+                if source.isEmpty, let firstCard = sources.first {
+                    source = firstCard
                 }
                 resetSplitsToEven()
             }

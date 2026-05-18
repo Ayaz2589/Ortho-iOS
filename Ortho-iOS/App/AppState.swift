@@ -7,11 +7,14 @@ import Observation
 final class AppState {
     var users: [User]
     var transactions: [Transaction]
+    var cards: [Card]
 
     init(users: [User] = User.sample,
-         transactions: [Transaction] = Transaction.sample) {
+         transactions: [Transaction] = Transaction.sample,
+         cards: [Card] = Card.sample) {
         self.users = users
         self.transactions = transactions
+        self.cards = cards
     }
 
     /// Resolve a user id; returns `User.placeholder` when no longer present
@@ -36,6 +39,14 @@ final class AppState {
 
     func deleteTransaction(_ tx: Transaction) {
         transactions.removeAll { $0.id == tx.id }
+    }
+
+    func addCard(_ card: Card) {
+        cards.append(card)
+    }
+
+    func deleteCard(_ card: Card) {
+        cards.removeAll { $0.id == card.id }
     }
 
     func resolveOwners(of tx: Transaction) -> [User] {

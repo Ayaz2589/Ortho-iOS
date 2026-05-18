@@ -4,6 +4,7 @@ struct SettingsView: View {
     @Environment(AppState.self) private var appState
     @AppStorage("appearance") private var appearanceRaw: String = AppearanceMode.system.rawValue
     @State private var showingAddUser = false
+    @State private var showingAddCard = false
 
     private var appearance: AppearanceMode {
         AppearanceMode(rawValue: appearanceRaw) ?? .system
@@ -31,6 +32,29 @@ struct SettingsView: View {
                 .padding(.bottom, 12)
 
                 Text("Deleting a user removes them from this list. Existing transactions keep their original owner.")
+                    .font(.system(size: 13))
+                    .foregroundStyle(AppTheme.text.opacity(0.36))
+                    .lineSpacing(2)
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 24)
+
+                sectionLabel("Cards")
+
+                VStack(spacing: 0) {
+                    ForEach(appState.cards) { c in
+                        CardRowView(card: c) {
+                            appState.deleteCard(c)
+                        }
+                        RowSeparator(density: .comfortable)
+                    }
+                    AddCardRowView { showingAddCard = true }
+                }
+                .background(AppTheme.surface)
+                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                .padding(.horizontal, 16)
+                .padding(.bottom, 12)
+
+                Text("Cards appear in the Paid with menu when you log a new expense. Existing transactions keep their original card name.")
                     .font(.system(size: 13))
                     .foregroundStyle(AppTheme.text.opacity(0.36))
                     .lineSpacing(2)
@@ -75,6 +99,14 @@ struct SettingsView: View {
             AddUserSheet { newUser in
                 appState.addUser(newUser)
                 showingAddUser = false
+            }
+            .presentationDetents([.large])
+            .presentationBackground(AppTheme.bg)
+        }
+        .sheet(isPresented: $showingAddCard) {
+            AddCardSheet { newCard in
+                appState.addCard(newCard)
+                showingAddCard = false
             }
             .presentationDetents([.large])
             .presentationBackground(AppTheme.bg)
