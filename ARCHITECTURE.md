@@ -7,6 +7,11 @@ A transaction can also be **personal** — visible only to its single owner.
 Amounts are stored in USD cents internally and rendered in the user's
 selected currency, with live FX rates fetched on launch.
 
+A **Housing** tab tracks the household's properties — primary home,
+multifamily investment, or a place the household rents — with
+type-specific UI (amortization, equity, units + tenants, lease info,
+rent payment history) and computed-from-inputs financials.
+
 This document describes the codebase as it stands today: structure, models,
 state, design system, and the technical decisions behind them.
 
@@ -19,14 +24,16 @@ state, design system, and the technical decisions behind them.
 - **Xcode project layout:** `PBXFileSystemSynchronizedRootGroup` — any folder
   added under `Ortho-iOS/Ortho-iOS/` is automatically included in the target.
   No `project.pbxproj` edits are needed when adding files.
-- **No third-party packages.** Pure SwiftUI + Foundation.
+- **No third-party packages.** Pure SwiftUI + Foundation + Apple's `Charts`
+  framework (iOS 16+) for the amortization bar chart.
 - **Networking:** one outbound call — `URLSession.shared.data(from:)` to
   [`floatrates.com/daily/usd.json`](https://www.floatrates.com/daily/usd.json)
   for live FX rates. No auth, no backend of our own.
-- **No persistence for domain data yet.** Users, transactions, cards, and
-  households reset on every launch (sample data is seeded). What *does*
-  persist via `UserDefaults`: currency choice, appearance preference,
-  current-user id, current-household id, and the FX rate cache.
+- **No persistence for domain data yet.** Users, transactions, cards,
+  households, properties, and rental payments reset on every launch
+  (sample data is seeded). What *does* persist via `UserDefaults`: currency
+  choice, appearance preference, current-user id, current-household id,
+  and the FX rate cache.
 
 ---
 
@@ -38,6 +45,7 @@ Ortho-iOS/Ortho-iOS/
 ├── App/
 │   ├── AppState.swift          @Observable single-source-of-truth store
 │   └── RootTabView.swift       OrthoTab + OrthoTabBar + RootTabView shell
+│                               + HideTabBarPreferenceKey
 ├── Models/
 │   ├── User.swift              Household member; palette extension; sample
 │   ├── Transaction.swift       Expense or income; multi-owner; optional splits
@@ -45,7 +53,13 @@ Ortho-iOS/Ortho-iOS/
 │   ├── TransactionGroup.swift  Derived day buckets with Today/Yesterday labels
 │   ├── Card.swift              Payment source (name only); sample seed
 │   ├── Currency.swift          7-case enum + fallback rates + fraction digits
-│   └── Household.swift         Named group of members; sample
+│   ├── Household.swift         Named group of members; sample
+│   ├── Property.swift          Property + PropertyKind enum; sample seed
+│   ├── MortgageInfo.swift      Amortization math (payment, balance, equity)
+│   ├── LeaseInfo.swift         Rent, lease dates, renewal helpers
+│   ├── Unit.swift              Rental unit (multifamily); tenant fields
+│   ├── RentalPayment.swift     Logged rent payment for a rental property
+│   └── DummyData.swift         DEBUG-only — 6-month varied dataset
 ├── DesignSystem/
 │   ├── AppTheme.swift          Color tokens (bg, surface, text, accent, …)
 │   ├── Palette.swift           OrthoColorOption — household color palette
@@ -56,7 +70,8 @@ Ortho-iOS/Ortho-iOS/
 │   ├── UserAvatarView.swift    Initial-in-circle, palette-driven
 │   ├── DayHeader.swift         Sticky day section header
 │   ├── RowSeparator.swift      Inset hairline divider
-│   └── SearchField.swift       Focused TextField with Cancel
+│   ├── SearchField.swift       Focused TextField with Cancel
+│   └── SwipeActionRow.swift    iOS-style swipe-to-delete wrapper
 └── Features/
     ├── Dashboard/
     │   └── DashboardView.swift          Placeholder cards
@@ -65,8 +80,19 @@ Ortho-iOS/Ortho-iOS/
     │   ├── TransactionRow.swift         One row, tappable
     │   ├── AddTransactionSheet.swift    Dual-mode (add OR edit) form
     │   └── TransactionDetailSheet.swift Read-only view + edit/delete actions
+    ├── Housing/
+    │   ├── HousingView.swift            Count-aware tab (empty / single / list)
+    │   ├── PropertyCard.swift           List-row card for one property
+    │   ├── PropertyContentView.swift    Shared kind-specific card stack
+    │   ├── PropertyDetailView.swift     Push-mode chrome around PropertyContentView
+    │   ├── PropertyTypePickerSheet.swift Three-row kind picker
+    │   ├── AddPropertySheet.swift       Polymorphic add/edit form
+    │   ├── AddRentalPaymentSheet.swift  Quick rent-payment logger
+    │   ├── MortgageCards.swift          Monthly payment + details + equity + amortization
+    │   ├── MultifamilyCards.swift       Units list + net balance
+    │   └── RentalCards.swift            Rent hero + renewal banner + history
     └── Settings/
-        ├── SettingsView.swift           Household link, Cards, Currency, Appearance
+        ├── SettingsView.swift           Household link, Cards, Currency, Appearance, Developer (DEBUG)
         ├── HouseholdView.swift          Pushed screen — full household management
         ├── UserRowView.swift            User row + AddUserRowView + ChevronView
         ├── AddUserSheet.swift           New-user form
@@ -216,6 +242,115 @@ symbol + grouping + locale-aware formatting. `fallbackRateFromUSD` is a
 hardcoded approximate value used until the first successful fetch from
 floatrates.com, or when network is unavailable.
 
+### `Property` + `PropertyKind`
+
+```swift
+enum PropertyKind: String, CaseIterable, Codable {
+    case primaryHome, multifamily, rental
+    var hasMortgage: Bool { self != .rental }
+}
+
+struct Property: Identifiable, Hashable, Codable {
+    let id: UUID
+    var kind: PropertyKind
+    var address: String
+    var nickname: String?
+    var mortgage: MortgageInfo?    // populated for primaryHome + multifamily
+    var lease: LeaseInfo?          // populated for rental
+    var units: [Unit]              // populated for multifamily; empty otherwise
+}
+```
+
+The optional-field discriminator pattern keeps `Property` a single Codable
+struct. `kind` decides which optional fields are meaningful. Invariants:
+`primaryHome.mortgage != nil && units.isEmpty && lease == nil`;
+`multifamily.mortgage != nil && units.count >= 1 && lease == nil`;
+`rental.lease != nil && mortgage == nil && units.isEmpty`. The AddProperty
+sheet enforces these at construction time.
+
+`Property.sample` seeds 124 Oak Lane (a primary home with a mid-life
+mortgage). The dummy dataset extends to 3 properties — one of each kind.
+
+### `MortgageInfo`
+
+```swift
+struct MortgageInfo: Hashable, Codable {
+    var purchasePrice: Int64                       // USD cents
+    var originalLoan: Int64                        // USD cents
+    var annualInterestRatePercent: Decimal         // e.g. 6.85
+    var loanTermYears: Int                         // 15 / 20 / 30
+    var closingDate: Date
+    var autoPaySource: String?
+
+    // Derived
+    var monthlyPaymentCents: Int64                 // standard fixed-rate formula
+    func currentPrincipalBalanceCents(asOf:) -> Int64
+    func currentEquityCents(asOf:) -> Int64
+    func equityFraction(asOf:) -> Double
+    var maturityDate: Date
+    func yearsRemaining(asOf:) -> Int
+    func upcomingAmortization(months:) -> [MonthlyBreakdown]
+}
+```
+
+All the financial math lives here as pure functions of the stored inputs.
+The display layer (mortgage cards, amortization chart) reads these directly
+— there's no separate service. Standard fixed-rate amortization formula
+(`M = P · r(1+r)^n / ((1+r)^n − 1)`), uses Double internally for `pow()`
+then rounds back to `Int64` cents at the boundary.
+
+### `LeaseInfo`
+
+```swift
+struct LeaseInfo: Hashable, Codable {
+    var monthlyRent: Int64
+    var leaseStart: Date
+    var leaseEnd: Date
+    var securityDepositCents: Int64?
+    var paidWithSource: String?
+
+    func daysUntilEnd(asOf:) -> Int
+    func isRenewalSoon(asOf:) -> Bool          // ≤ 60 days
+    var rentDueDay: Int                         // derived from leaseStart
+    func daysUntilNextRent(asOf:) -> Int
+}
+```
+
+Powers the rental detail view's heading caption ("Due in X days"), the
+lease-renewal banner (60-day window), and the lease-info card.
+
+### `Unit`
+
+```swift
+struct Unit: Identifiable, Hashable, Codable {
+    let id: UUID
+    var name: String           // "Unit 1A"
+    var monthlyRent: Int64
+    var tenantName: String?
+    var tenantEmail: String?
+    var isVacant: Bool         // computed from tenantName
+}
+```
+
+Multifamily-only. Stored inline on `Property.units`. Vacancy is purely a
+display concern (`tenantName == nil || isEmpty`).
+
+### `RentalPayment`
+
+```swift
+struct RentalPayment: Identifiable, Hashable, Codable {
+    let id: UUID
+    let propertyID: Property.ID
+    var amount: Int64                  // USD cents
+    var date: Date
+    var note: String?
+}
+```
+
+Logged manually by the user via `AddRentalPaymentSheet` for `.rental`
+properties. Power the rental detail's Payment History list. Deleting the
+underlying property cascades these via `AppState.deleteProperty(_:)`.
+
 ---
 
 ## State management
@@ -231,6 +366,8 @@ final class AppState {
     var transactions: [Transaction]
     var cards: [Card]
     var households: [Household]
+    var properties: [Property]
+    var rentalPayments: [RentalPayment]
 
     // Identity + active household (persisted via UserDefaults)
     var currentUserID: User.ID
@@ -251,6 +388,11 @@ final class AppState {
     func addMemberToCurrentHousehold(_:)
     func removeMemberFromCurrentHousehold(_:)
     func updateHouseholdName(_:)
+    func addProperty(_:)          func updateProperty(_:)
+    func deleteProperty(_:)       // cascades rentalPayments by propertyID
+    func addRentalPayment(_:)
+    func deleteRentalPayment(_:)
+    func payments(for: Property.ID) -> [RentalPayment]    // newest-first
 
     // Lookups + derived
     func user(_ id: User.ID) -> User
@@ -266,6 +408,11 @@ final class AppState {
     func formatMoney(_ cents: Int64, leadingPlus: Bool = false) -> String
     func refreshRatesIfStale() async       // 24h cache window
     func refreshRates() async              // network → cache → state
+
+    // DEBUG-only
+    #if DEBUG
+    func loadDummyData()                   // replaces every domain collection
+    #endif
 }
 ```
 
@@ -297,12 +444,16 @@ only owns domain data, identity, currency, and the helpers needed to read it.
 | `text` | graphite | warm off-white | primary text |
 | `text2 / text3 / hairline` | `text * 0.58 / 0.36 / 0.07` | same | derived |
 | `accent` | muted sand | warm tan | active affordances, links |
-| `positive` | sage | lighter sage | income amounts, progress |
-| `destructive` | muted brick | softer salmon | Delete actions only |
+| `positive` | sage | lighter sage | income amounts, equity, progress |
+| `destructive` | muted brick | softer salmon | Delete actions, swipe-to-delete |
 
 Every token pairs a light and dark value via a `Color(light:dark:)` helper
 that wraps `UITraitCollection.userInterfaceStyle`. No `Color`-literal
 hardcoding outside of `AppTheme` and `Palette`.
+
+The custom `OrthoTabBar` uses `.ultraThinMaterial` for its background with
+no warm-color overlay underneath, so scrolling content shows through a
+soft frosted blur. The hairline sits at the top edge.
 
 ### Household palette (`OrthoColorOption`)
 
@@ -397,15 +548,76 @@ device. The field defaults to the first household member on first launch
 and survives via UserDefaults. When real auth lands, it'll be set from the
 session.
 
-### Why `HouseholdView` is its own pushable screen, not inline in Settings
+### Why `Property` uses optional fields, not an enum with associated values
 
-Settings was getting long (Cards + Currency + Appearance + a 4-row
-household section). The household has enough affordances (rename, member
-list, add, remove) that it deserves its own surface. `SettingsView` now
-keeps a single "Household — <name> ›" row that NavigationLinks into the
-full editor. Both screens hide the system nav bar via `.toolbar(.hidden,
-for: .navigationBar)` and use a custom large-title `safeAreaInset` header
-to match the rest of the app's chrome.
+`enum PropertyKind { case primary(MortgageInfo), multifamily(MortgageInfo, [Unit]), rental(LeaseInfo) }`
+is the more "type-safe" Swift idiom. We picked the flatter shape
+(`Property` with `kind: PropertyKind` + optional `mortgage` / `lease` /
+`units`) because:
+
+1. `Codable` synthesis is trivial — no per-case decoding to write.
+2. Field reuse — `mortgage` is identical for primary and multifamily; in
+   the enum form we'd duplicate or factor out, both noisier than just
+   sharing an optional.
+3. The Property model survives a `kind` change at edit time (a primary
+   becoming a rental) without throwing away data — `AddPropertySheet`
+   intentionally locks `kind` post-creation, but the option is open.
+
+Invariants are enforced at construction (the `AddPropertySheet` builder)
+rather than encoded in the type system.
+
+### Why `MortgageInfo` carries its own math (no separate service)
+
+The amortization formulas are pure functions of the stored mortgage
+inputs. Putting them on the struct lets every consumer (cards, chart,
+detail header) call `mortgage.monthlyPaymentCents` / `equityFraction()` /
+`upcomingAmortization(months:)` without any setup. No separate
+`AmortizationCalculator` class needed. When a real "what-if" simulator
+appears (extra-payment scenarios, refi modeling), it can layer on top of
+this without disturbing the core.
+
+### Why `HousingView` branches on property count
+
+With one property, drilling in for the detail wastes a tap and a screen —
+the user already knows which one it is. With multiple, the user needs to
+disambiguate, so the list-of-cards is right. The view checks
+`properties.count` and renders one of three branches: empty state, inline
+`PropertyContentView` with an extended header, or a list of
+`PropertyCard`s pushing to `PropertyDetailView`. The shared
+`PropertyContentView` keeps the actual card content identical between the
+inline and pushed modes.
+
+### Why `PropertyContentView` is extracted from `PropertyDetailView`
+
+`PropertyDetailView` and the single-property branch of `HousingView` both
+need to render the same kind-specific stack of cards (mortgage cards,
+multifamily units, rental history, etc.) plus a Delete button and
+confirmation alert. The chrome around them differs — `PropertyDetailView`
+has a back chevron + Edit button + `.hidesTabBar()`; the inline mode has
+a "Housing" title + Edit + Add buttons and keeps the tab bar visible.
+`PropertyContentView` is the shared body; the parents own the chrome.
+
+### Why `HideTabBarPreferenceKey` for the custom tab bar
+
+SwiftUI's `.toolbar(.hidden, for: .tabBar)` only works against the system
+`TabView`. The custom `OrthoTabBar` is rendered via `.safeAreaInset(.bottom)`
+on `RootTabView`, so we need our own mechanism for pushed detail screens
+to ask for it to slide away. `HideTabBarPreferenceKey` (a Bool `PreferenceKey`
+that OR-folds child values) lets any descendant declare `.hidesTabBar()`,
+and `RootTabView` consumes the aggregated value with a sliding
+`.transition(.move(edge: .bottom))`. Both `PropertyDetailView` and
+`HouseholdView` opt in.
+
+### Why a custom `SwipeActionRow` instead of SwiftUI `List` + `.swipeActions`
+
+`.swipeActions` only works on `List` rows. Migrating the activity tab to
+`List` would mean rebuilding the inset-card-per-day grouping, sticky day
+headers, and hairline separators inside cards — all of which our custom
+`LazyVStack` already does cleanly. `SwipeActionRow` is a small wrapper
+(`ZStack(alignment: .trailing)` with a destructive Delete button revealed
+by `.offset` on the foreground content) and preserves the existing
+visual. `DragGesture(minimumDistance: 8)` lets stationary taps pass
+through to the row's inner Button (drill-into-detail behavior survives).
 
 ### Why a custom `OrthoTabBar`, not SwiftUI's `TabView`
 
@@ -437,13 +649,21 @@ the detail sheet behind it re-renders with the new values). It also
 handles delete gracefully: `tx` becomes `nil`, `Color.clear` renders in
 its place, and the sheet's `.onAppear` calls `dismiss()`.
 
-### Why `AddTransactionSheet` is dual-mode (add or edit)
+`PropertyDetailView` and `PropertyContentView` use the same pattern with
+`propertyID: Property.ID`, which lets the inline single-property
+`HousingView` re-render when the user edits the property without any
+explicit refresh plumbing.
+
+### Why `AddTransactionSheet` / `AddPropertySheet` are dual-mode (add or edit)
 
 Edit forms always end up duplicating the add form. The two flows differ
 only in (a) initial values, (b) the nav title and action label, and (c)
-whether the resulting `Transaction` keeps the old id or gets a new one.
-Putting both in one struct with an `editing: Transaction?` parameter and
-an explicit `init` that pre-fills `@State` removes that duplication.
+whether the resulting record keeps the old id or gets a new one. Putting
+both in one struct with an `editing: Transaction?` / `editing: Property?`
+parameter and an explicit `init` that pre-fills `@State` removes that
+duplication. `AddPropertySheet` additionally takes a `creating: PropertyKind`
+init for the new-property flow because the kind is chosen separately (via
+`PropertyTypePickerSheet`) before the form opens.
 
 ### Why an `originalAmountText` round-trip mitigation in edit mode
 
@@ -475,6 +695,17 @@ cache) live on `AppState` because they're read by many call sites and
 participate in `@Observable` change tracking. `AppState.init` reads from
 `UserDefaults` once; `didSet` writes back on every change.
 
+### Why `DummyData` is `#if DEBUG`-gated
+
+The seeded sample data on `Property.sample` / `User.sample` / etc. is the
+right "first run" experience for real users — small, focused, comprehensible.
+The dummy dataset is bigger (~300 transactions, 3 properties, 3 users)
+specifically so the activity list and analytics views have something dense
+to chew on while iterating on UI. That's a developer convenience, not a
+product feature, so it ships only in DEBUG builds. The `loadDummyData()`
+method on `AppState` and the Developer section in `SettingsView` are both
+`#if DEBUG`-wrapped.
+
 ### Why no comments in most files
 
 Source code defaults to no comments. The exceptions are:
@@ -485,12 +716,15 @@ Source code defaults to no comments. The exceptions are:
 
 `AddTransactionSheet.rebalance(after:)`, `TransactionGroup.group(_:)`,
 `User.placeholder`, the deletion-resilience note in `Card.swift`, the
-`originalAmountText` rationale, and the FX `MainActor.run` blocks all
-qualify. The rest is named well enough to read on its own.
+`originalAmountText` rationale, the FX `MainActor.run` blocks, and the
+`SwipeActionRow` minimum-distance gesture comment all qualify. The rest
+is named well enough to read on its own.
 
 ---
 
 ## Features (current state)
+
+The bottom nav has **4 tabs**: Dashboard / Transactions / Housing / Settings.
 
 ### Transactions (activity tab)
 
@@ -502,6 +736,9 @@ qualify. The rest is named well enough to read on its own.
   - **Edit** opens `AddTransactionSheet` pre-filled, preserving id
   - **Delete transaction** confirms via alert, then removes
   - Nav title surfaces scope: "Expense · Home" or "Personal expense"
+- **Swipe-to-delete** on any row via `SwipeActionRow`. Drag horizontally
+  to reveal the red Delete button; tap to remove. Single-tap drill-in
+  behavior is preserved by the gesture's minimum-distance threshold.
 - Add sheet supports both expense and income via a segmented control,
   plus a **Shared | Personal** scope toggle above it:
   - **Amount** is the headline, currency symbol from `Money.symbol(for:)`
@@ -512,6 +749,45 @@ qualify. The rest is named well enough to read on its own.
     rebalances on edit; **Even** button for one-tap reset
   - **Paid with** menu (expense) reads from `appState.cards`
   - **Date** is a `displayedComponents: [.date]` picker
+
+### Housing tab
+
+Behavior varies with property count:
+
+- **0 properties** — empty-state CTA inviting the user to add their first.
+- **1 property** — the property's full detail (cards) rendered inline.
+  Header shows "Housing" + `<address> · <kind>` subtitle, with **Edit**
+  and **+** buttons on the right. The tab bar stays visible.
+- **≥ 2 properties** — list of `PropertyCard`s, each pushing to
+  `PropertyDetailView`. The detail view has its own back-chevron header
+  + Edit button and hides the tab bar via `.hidesTabBar()`.
+
+Across all modes, the **+** button opens `PropertyTypePickerSheet` (3-row
+picker: Primary home / Multifamily / Rental), which then presents
+`AddPropertySheet(creating: kind)` with kind-specific fields. Editing an
+existing property uses the same sheet with `editing:`.
+
+Per-kind detail content (all in `Features/Housing/`):
+
+- **Primary home / Multifamily**:
+  - `MortgageMonthlyPaymentCard` — big hero with auto-pay caption
+  - `MortgageDetailsCard` — principal balance / interest rate / maturity
+  - `EquityProgressCard` — sage progress bar showing equity built
+  - `AmortizationCard` — 12-month stacked bar chart (principal vs interest)
+    using Apple's `Charts` framework
+  - **Multifamily extras**: `MultifamilyUnitsCard` (rent + tenant per row,
+    "Vacant" in destructive when no tenant), `MultifamilyNetBalanceCard`
+    (income − mortgage, sage when cashflowing, destructive otherwise)
+- **Rental**:
+  - `RentalMonthlyRentCard` — big hero with "Due in X days" caption
+  - `LeaseRenewalBanner` — soft accent-tinted card when lease ends within
+    60 days
+  - `LeaseInfoCard` — start / end / deposit / paid-with
+  - `RentalPaymentsCard` — payment history list with "Log payment" action;
+    each row has a destructive minus to delete
+
+A "Delete property" button sits at the bottom of every detail view; it
+confirms via alert, then cascades to drop the property's rental payments.
 
 ### Settings tab
 
@@ -525,13 +801,20 @@ qualify. The rest is named well enough to read on its own.
   using approximate values").
 - **Appearance** section — system / light / dark rows; selection persists
   via `@AppStorage("appearance")`.
+- **Developer** section (`#if DEBUG`) — a single **Load demo data** row
+  with confirmation alert. Replaces every domain collection with the
+  6-month `DummyData.large` bundle (3 users, 3 properties, ~300 mixed
+  transactions, monthly rental payments). Currency and appearance
+  preferences are preserved. Relaunching the app reverts to the default
+  sample (no persistence on domain data).
 - Bottom: a 60pt `Color.clear` spacer because the NavigationStack +
   toolbar-hidden chrome interferes with the bottom tab bar's
   safe-area-inset propagation.
 
 ### Household screen (pushed from Settings)
 
-- Custom large-title header ("Household") with a circular back chevron
+- Custom large-title header ("Household") with a circular back chevron;
+  `.hidesTabBar()` so the tab bar slides away.
 - **Name** row → tap opens a SwiftUI `.alert` with a TextField for renaming
 - **Member list** — each row is `UserRowView` showing the member's avatar,
   name, monthly-spent total ("(you) · $X this month" on the current user),
@@ -547,16 +830,21 @@ qualify. The rest is named well enough to read on its own.
 
 Placeholder cards (May summary + joint balance) with hardcoded strings.
 Real data lookups exist (`AppState.monthlySpent(by:)`) but the Dashboard
-hasn't been redesigned around them.
+hasn't been redesigned around them. The Housing tab partially fills the
+"what does our household own?" question this tab was originally meant to
+answer.
 
 ---
 
 ## Known gaps and out-of-scope decisions
 
-- **No persistence for domain data.** Users, transactions, cards, households
-  reset on every launch. SwiftData / a backing store is the obvious next
-  step. (Preferences and FX cache *do* persist via UserDefaults.)
-- **No real Dashboard.** Placeholder cards with hardcoded strings.
+- **No persistence for domain data.** Users, transactions, cards, households,
+  properties, and rental payments reset on every launch. SwiftData / a
+  backing store is the obvious next step. (Preferences and FX cache *do*
+  persist via UserDefaults.)
+- **No real Dashboard.** Placeholder cards with hardcoded strings. Real
+  per-user / per-month aggregations exist in `AppState` already; they just
+  haven't been surfaced.
 - **Single household in the UI.** The data model supports many — `households:
   [Household]` and `currentHouseholdID: Household.ID?` — but there's no
   household switcher. Adding one is mostly UI: a picker in Settings or a
@@ -585,6 +873,21 @@ hasn't been redesigned around them.
   (CAD/EUR/GBP) the loss is sub-cent. The `originalAmountText` mitigation
   in `AddTransactionSheet` preserves stored cents when the user doesn't
   touch the amount field.
+- **No iOS local notifications.** The rental detail view's "Due in X days"
+  hero caption and the lease-renewal banner are in-app affordances only.
+  There's no `UNUserNotificationCenter` integration to push lock-screen
+  reminders.
+- **No auto-detection of rent payments from Transaction records.** Rent
+  appears in two places — as a household expense in `appState.transactions`
+  AND as a `RentalPayment` against the rental property — and the user
+  logs them separately. A future iteration could detect "rent paid"
+  transactions and offer to auto-log them as `RentalPayment`s.
+- **Multifamily tenant payments aren't tracked.** Configured `Unit.monthlyRent`
+  drives the displayed income on `MultifamilyNetBalanceCard`, but there's
+  no record of actual rent collected per month per tenant.
+- **Mortgage figures don't include taxes/insurance.** `monthlyPaymentCents`
+  is principal + interest only. Property tax, homeowner's insurance, HOA
+  fees, and PMI aren't modeled.
 
 ---
 
@@ -610,6 +913,10 @@ Preview blocks live on the screen-level views and the standalone sheets:
 - `Features/Transactions/TransactionsView.swift` — three density variants
 - `Features/Transactions/TransactionDetailSheet.swift` — solo / joint / income
 - `Features/Transactions/AddTransactionSheet.swift` — Light / Dark
+- `Features/Housing/HousingView.swift` — single property / multiple / empty
+- `Features/Housing/PropertyDetailView.swift` — Primary home detail
+- `Features/Housing/PropertyTypePickerSheet.swift` — Light / Dark
+- `Features/Housing/AddPropertySheet.swift` — primary / multifamily / rental
 - `Features/Settings/SettingsView.swift` — Light / Dark
 - `Features/Settings/HouseholdView.swift` — Light / Dark
 - `Features/Settings/AddUserSheet.swift` — Light / Dark
@@ -617,3 +924,8 @@ Preview blocks live on the screen-level views and the standalone sheets:
 
 `#Preview` blocks generally include `.environment(AppState())` so the
 canvas renders against fresh sample data.
+
+For a denser test experience, open the Simulator → Settings tab → scroll
+to **Developer → Load demo data** (DEBUG only). The activity list will
+populate with ~300 transactions across 6 months, three properties will
+appear in Housing, and the rental will have six monthly payment records.
