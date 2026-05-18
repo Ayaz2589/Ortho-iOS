@@ -12,6 +12,8 @@ final class AppState {
     var transactions: [Transaction]
     var cards: [Card]
     var households: [Household]
+    var properties: [Property]
+    var rentalPayments: [RentalPayment]
 
     // MARK: - Identity + active household
 
@@ -68,11 +70,15 @@ final class AppState {
     init(users: [User] = User.sample,
          transactions: [Transaction] = Transaction.sample,
          cards: [Card] = Card.sample,
-         households: [Household] = [.homeSample]) {
+         households: [Household] = [.homeSample],
+         properties: [Property] = Property.sample,
+         rentalPayments: [RentalPayment] = []) {
         self.users = users
         self.transactions = transactions
         self.cards = cards
         self.households = households
+        self.properties = properties
+        self.rentalPayments = rentalPayments
 
         // Restore persisted current user; fall back to first user.
         let savedUserID = UserDefaults.standard.string(forKey: Self.currentUserIDKey)
@@ -241,6 +247,40 @@ final class AppState {
     var householdMembers: [User] {
         guard let h = currentHousehold else { return users }
         return h.memberIDs.compactMap { id in users.first { $0.id == id } }
+    }
+
+    // MARK: - Properties
+
+    func addProperty(_ p: Property) {
+        properties.append(p)
+    }
+
+    func updateProperty(_ p: Property) {
+        guard let idx = properties.firstIndex(where: { $0.id == p.id }) else { return }
+        properties[idx] = p
+    }
+
+    func deleteProperty(_ p: Property) {
+        properties.removeAll { $0.id == p.id }
+        // Cascade: drop the property's rent-payment history too.
+        rentalPayments.removeAll { $0.propertyID == p.id }
+    }
+
+    // MARK: - Rental payments
+
+    func addRentalPayment(_ payment: RentalPayment) {
+        rentalPayments.append(payment)
+    }
+
+    func deleteRentalPayment(_ payment: RentalPayment) {
+        rentalPayments.removeAll { $0.id == payment.id }
+    }
+
+    /// Payments for a given property, newest first.
+    func payments(for propertyID: Property.ID) -> [RentalPayment] {
+        rentalPayments
+            .filter { $0.propertyID == propertyID }
+            .sorted { $0.date > $1.date }
     }
 
     // MARK: - FX rates

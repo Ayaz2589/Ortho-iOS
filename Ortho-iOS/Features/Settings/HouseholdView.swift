@@ -53,6 +53,7 @@ struct HouseholdView: View {
         }
         .background(AppTheme.bg)
         .toolbar(.hidden, for: .navigationBar)
+        .hidesTabBar()
         .safeAreaInset(edge: .top, spacing: 0) {
             HStack(spacing: 12) {
                 Button { dismiss() } label: {

@@ -1,7 +1,27 @@
 import SwiftUI
 
+/// Set by pushed detail views that want the custom `OrthoTabBar` to slide
+/// away (e.g. property detail, household editor). `RootTabView` reads the
+/// aggregated value via `.onPreferenceChange` and toggles the bar's
+/// `safeAreaInset` content.
+struct HideTabBarPreferenceKey: PreferenceKey {
+    static let defaultValue: Bool = false
+    static func reduce(value: inout Bool, nextValue: () -> Bool) {
+        // OR-fold: any child that requests hiding wins.
+        value = value || nextValue()
+    }
+}
+
+extension View {
+    /// Hide the global tab bar while this view is on-screen. Use on pushed
+    /// detail screens that want the full vertical canvas.
+    func hidesTabBar(_ hide: Bool = true) -> some View {
+        preference(key: HideTabBarPreferenceKey.self, value: hide)
+    }
+}
+
 enum OrthoTab: String, CaseIterable, Hashable, Identifiable {
-    case dashboard, transactions, settings
+    case dashboard, transactions, housing, settings
 
     var id: String { rawValue }
 
@@ -9,6 +29,7 @@ enum OrthoTab: String, CaseIterable, Hashable, Identifiable {
         switch self {
         case .dashboard:    "Dashboard"
         case .transactions: "Transactions"
+        case .housing:      "Housing"
         case .settings:     "Settings"
         }
     }
@@ -16,8 +37,9 @@ enum OrthoTab: String, CaseIterable, Hashable, Identifiable {
     /// SF Symbol for the tab. Outlined; selected state communicated by color.
     var symbol: String {
         switch self {
-        case .dashboard:    "house"
+        case .dashboard:    "chart.bar"
         case .transactions: "arrow.up.arrow.down"
+        case .housing:      "house"
         case .settings:     "gearshape"
         }
     }
@@ -77,6 +99,7 @@ struct OrthoTabBar: View {
 /// and Settings. Reserves room for the bar via `safeAreaInset(.bottom)`.
 struct RootTabView: View {
     @State private var selection: OrthoTab = .transactions
+    @State private var tabBarHidden: Bool = false
     @Environment(AppState.self) private var appState
 
     var body: some View {
@@ -86,14 +109,24 @@ struct RootTabView: View {
                 DashboardView()
             case .transactions:
                 TransactionsView()
+            case .housing:
+                HousingView()
             case .settings:
                 SettingsView()
             }
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            OrthoTabBar(selection: $selection)
+            if !tabBarHidden {
+                OrthoTabBar(selection: $selection)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
         }
         .background(AppTheme.bg.ignoresSafeArea())
+        .onPreferenceChange(HideTabBarPreferenceKey.self) { newValue in
+            withAnimation(.easeOut(duration: 0.22)) {
+                tabBarHidden = newValue
+            }
+        }
         .task {
             // Fetch live FX rates once per app launch when cache is stale.
             await appState.refreshRatesIfStale()
