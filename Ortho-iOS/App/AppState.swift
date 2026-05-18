@@ -283,6 +283,26 @@ final class AppState {
             .sorted { $0.date > $1.date }
     }
 
+    // MARK: - Dummy data (DEBUG)
+
+    #if DEBUG
+    /// Replace every domain collection with the large dummy dataset. User
+    /// preferences (currency, appearance, etc.) are preserved.
+    /// `currentUserID` / `currentHouseholdID` reset to the first member /
+    /// household of the dummy bundle so the UI lands somewhere sensible.
+    func loadDummyData() {
+        let bundle = DummyData.large
+        users = bundle.users
+        households = bundle.households
+        cards = bundle.cards
+        transactions = bundle.transactions
+        properties = bundle.properties
+        rentalPayments = bundle.rentalPayments
+        currentUserID = bundle.users.first?.id ?? currentUserID
+        currentHouseholdID = bundle.households.first?.id ?? currentHouseholdID
+    }
+    #endif
+
     // MARK: - FX rates
 
     /// Returns the cached/live rate when present, otherwise the hardcoded

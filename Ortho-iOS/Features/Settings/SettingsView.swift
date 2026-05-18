@@ -4,6 +4,9 @@ struct SettingsView: View {
     @Environment(AppState.self) private var appState
     @AppStorage("appearance") private var appearanceRaw: String = AppearanceMode.system.rawValue
     @State private var showingAddCard = false
+    #if DEBUG
+    @State private var showingLoadDummyConfirm = false
+    #endif
 
     private var appearance: AppearanceMode {
         AppearanceMode(rawValue: appearanceRaw) ?? .system
@@ -82,6 +85,25 @@ struct SettingsView: View {
                     .padding(.horizontal, 16)
                     .padding(.bottom, 24)
 
+                    #if DEBUG
+                    sectionLabel("Developer")
+
+                    VStack(spacing: 0) {
+                        loadDummyDataRow
+                    }
+                    .background(AppTheme.surface)
+                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 8)
+
+                    Text("Only visible in DEBUG builds. Replaces users, transactions, cards, and properties with a 6-month varied sample. Currency and appearance preferences are kept.")
+                        .font(.system(size: 13))
+                        .foregroundStyle(AppTheme.text.opacity(0.36))
+                        .lineSpacing(2)
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 24)
+                    #endif
+
                     // Bottom breathing room so the tab bar doesn't clip the
                     // last row. The NavigationStack toolbar-hidden chrome
                     // interferes with safe-area-inset propagation from
@@ -112,8 +134,55 @@ struct SettingsView: View {
                 .presentationDetents([.large])
                 .presentationBackground(AppTheme.bg)
             }
+            #if DEBUG
+            .alert("Replace current data with demo data?",
+                   isPresented: $showingLoadDummyConfirm) {
+                Button("Cancel", role: .cancel) { }
+                Button("Load demo") {
+                    appState.loadDummyData()
+                }
+            } message: {
+                Text("Your current users, transactions, cards, and properties will be replaced with a 6-month sample dataset. Currency and appearance are kept. Relaunch to revert.")
+            }
+            #endif
         }
     }
+
+    #if DEBUG
+    private var loadDummyDataRow: some View {
+        Button {
+            showingLoadDummyConfirm = true
+        } label: {
+            HStack(spacing: 14) {
+                ZStack {
+                    Circle().fill(AppTheme.text.opacity(0.05))
+                        .frame(width: 40, height: 40)
+                    Image(systemName: "tray.and.arrow.down")
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundStyle(AppTheme.accent)
+                }
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Load demo data")
+                        .font(.system(size: 17, weight: .medium))
+                        .tracking(-0.2)
+                        .foregroundStyle(AppTheme.text)
+                    Text("6 months · 3 users · 3 properties")
+                        .font(.system(size: 13))
+                        .foregroundStyle(AppTheme.text.opacity(0.58))
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(AppTheme.text.opacity(0.36))
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .frame(minHeight: 64)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+    #endif
 
     // MARK: - Rows
 
