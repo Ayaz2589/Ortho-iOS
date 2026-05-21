@@ -1,11 +1,40 @@
 import Foundation
 import Observation
+import Supabase
 
 /// Single source of truth for household users, transactions, cards, and
 /// currency preferences. Held at the app root and read by every screen via
 /// `@Environment(AppState.self)`.
 @Observable
 final class AppState {
+    // MARK: - Supabase
+
+    /// Shared Supabase client. Lifecycle matches `AppState` (created once
+    /// at app launch). The SDK handles session persistence in the iOS
+    /// Keychain on its own.
+    @ObservationIgnored
+    let supabase: SupabaseClient
+
+    /// Active auth session, or `nil` when signed out. Drives the auth gate
+    /// in `Ortho_iOSApp`. Kept in sync with the SDK's keychain-backed
+    /// session via `observeAuthChanges()`.
+    var session: Session?
+
+    /// Email the user typed during sign-in step 1, carried through to
+    /// step 2 (code verification).
+    var pendingSignInEmail: String?
+
+    var isAuthLoading: Bool = false
+    var authError: String?
+
+    /// Email of the currently-signed-in user, or `nil` when signed out.
+    /// Surfaced as a String here so view code doesn't have to import `Auth`
+    /// to read it (Swift 6 member-import-visibility — the `User.email`
+    /// property lives in the `Auth` module).
+    var currentUserEmail: String? {
+        session?.user.email
+    }
+
     // MARK: - Domain
 
     var users: [User]
@@ -73,6 +102,10 @@ final class AppState {
          households: [Household] = [.homeSample],
          properties: [Property] = Property.sample,
          rentalPayments: [RentalPayment] = []) {
+        self.supabase = SupabaseClient(
+            supabaseURL: SupabaseConfig.projectURL,
+            supabaseKey: SupabaseConfig.publishableKey
+        )
         self.users = users
         self.transactions = transactions
         self.cards = cards
@@ -192,6 +225,181 @@ final class AppState {
         var src = sum
         NSDecimalRound(&rounded, &src, 0, .plain)
         return NSDecimalNumber(decimal: rounded).int64Value
+    }
+
+    // MARK: - Dashboard aggregations
+
+    /// Sum of income transactions whose `date` falls inside the calendar
+    /// month containing `referenceDate`. USD cents.
+    func monthlyIncome(in calendar: Calendar = .current,
+                       on referenceDate: Date = .now) -> Int64 {
+        guard let interval = calendar.dateInterval(of: .month, for: referenceDate) else {
+            return 0
+        }
+        return incomeTotal(in: interval)
+    }
+
+    /// Sum of expense transactions in the same calendar month. USD cents.
+    func monthlyExpenses(in calendar: Calendar = .current,
+                         on referenceDate: Date = .now) -> Int64 {
+        guard let interval = calendar.dateInterval(of: .month, for: referenceDate) else {
+            return 0
+        }
+        return expenseTotal(in: interval)
+    }
+
+    /// Sum of income transactions whose `date` falls inside an arbitrary
+    /// interval. USD cents.
+    func incomeTotal(in interval: DateInterval) -> Int64 {
+        transactions.reduce(0) { acc, tx in
+            guard tx.kind == .income, interval.contains(tx.date) else { return acc }
+            return acc + tx.amount
+        }
+    }
+
+    /// Sum of expense transactions whose `date` falls inside an arbitrary
+    /// interval. USD cents.
+    func expenseTotal(in interval: DateInterval) -> Int64 {
+        transactions.reduce(0) { acc, tx in
+            guard tx.kind == .expense, interval.contains(tx.date) else { return acc }
+            return acc + tx.amount
+        }
+    }
+
+    /// Sum of a single user's share of expense transactions inside the
+    /// given interval. Uses `Transaction.effectiveSplits` like
+    /// `monthlySpent(by:)`.
+    func spent(by userID: User.ID, in interval: DateInterval) -> Int64 {
+        let sum: Decimal = transactions.reduce(Decimal(0)) { acc, tx in
+            guard tx.kind == .expense,
+                  tx.ownerIDs.contains(userID),
+                  interval.contains(tx.date)
+            else { return acc }
+            let pct = tx.effectiveSplits[userID] ?? 0
+            return acc + (Decimal(tx.amount) * pct / 100)
+        }
+        var rounded = sum
+        var src = sum
+        NSDecimalRound(&rounded, &src, 0, .plain)
+        return NSDecimalNumber(decimal: rounded).int64Value
+    }
+
+    /// Per-day expense totals (USD cents) for the trailing `days` days
+    /// ending on `referenceDate`. Index 0 is the oldest day, last is today.
+    /// Used by the daily-trend sparkline.
+    func dailyExpenseCents(days: Int,
+                           calendar: Calendar = .current,
+                           on referenceDate: Date = .now) -> [Int64] {
+        let today = calendar.startOfDay(for: referenceDate)
+        var buckets: [Date: Int64] = [:]
+        // Pre-seed every day so missing days render as 0.
+        for offset in 0..<days {
+            if let day = calendar.date(byAdding: .day, value: -(days - 1 - offset), to: today) {
+                buckets[day] = 0
+            }
+        }
+        for tx in transactions where tx.kind == .expense {
+            let day = calendar.startOfDay(for: tx.date)
+            if buckets[day] != nil {
+                buckets[day, default: 0] += tx.amount
+            }
+        }
+        return buckets.keys.sorted().map { buckets[$0] ?? 0 }
+    }
+
+    /// All expense transactions in a given category falling inside the
+    /// interval, sorted newest first. Powers the expanded list in the
+    /// Dashboard's Spend by Category card.
+    func categoryExpenses(_ category: TransactionCategory,
+                          in interval: DateInterval) -> [Transaction] {
+        transactions
+            .filter { $0.kind == .expense
+                      && $0.category == category
+                      && interval.contains($0.date) }
+            .sorted { $0.date > $1.date }
+    }
+
+    /// Each expense in the interval that `userID` participated in, paired
+    /// with their split-weighted share in USD cents. Sorted by date,
+    /// newest first. Powers the expanded transaction list in the
+    /// Dashboard's per-owner breakdown.
+    func expenseShares(by userID: User.ID,
+                       in interval: DateInterval)
+        -> [(transaction: Transaction, shareCents: Int64)]
+    {
+        transactions
+            .filter { $0.kind == .expense
+                      && $0.ownerIDs.contains(userID)
+                      && interval.contains($0.date) }
+            .map { tx in
+                let pct = tx.effectiveSplits[userID] ?? 0
+                let raw = Decimal(tx.amount) * pct / 100
+                var rounded = raw
+                var src = raw
+                NSDecimalRound(&rounded, &src, 0, .plain)
+                let share = NSDecimalNumber(decimal: rounded).int64Value
+                return (transaction: tx, shareCents: share)
+            }
+            .sorted { $0.transaction.date > $1.transaction.date }
+    }
+
+    /// Top N categories by total expense inside an arbitrary interval.
+    /// Each entry returns the category + summed cents; sorted descending.
+    func topCategoriesByExpense(in interval: DateInterval,
+                                limit: Int = 5)
+        -> [(category: TransactionCategory, cents: Int64)]
+    {
+        var totals: [TransactionCategory: Int64] = [:]
+        for tx in transactions where tx.kind == .expense {
+            guard interval.contains(tx.date) else { continue }
+            totals[tx.category, default: 0] += tx.amount
+        }
+        return totals
+            .sorted { $0.value > $1.value }
+            .prefix(limit)
+            .map { (category: $0.key, cents: $0.value) }
+    }
+
+    /// Top N merchants by total expense inside an arbitrary interval.
+    /// Each entry includes the merchant name, summed cents, and count of
+    /// visits.
+    func topMerchantsByExpense(in interval: DateInterval,
+                               limit: Int = 5)
+        -> [(merchant: String, cents: Int64, count: Int)]
+    {
+        var totals: [String: (cents: Int64, count: Int)] = [:]
+        for tx in transactions where tx.kind == .expense {
+            guard interval.contains(tx.date) else { continue }
+            var entry = totals[tx.merchant] ?? (cents: 0, count: 0)
+            entry.cents += tx.amount
+            entry.count += 1
+            totals[tx.merchant] = entry
+        }
+        return totals
+            .sorted { $0.value.cents > $1.value.cents }
+            .prefix(limit)
+            .map { (merchant: $0.key, cents: $0.value.cents, count: $0.value.count) }
+    }
+
+    /// Date of the oldest transaction in the store, or `nil` if none.
+    /// Drives `availableRanges` so the Dashboard only offers ranges the
+    /// data fully covers.
+    var earliestTransactionDate: Date? {
+        transactions.map(\.date).min()
+    }
+
+    /// Which `DashboardRange`s the current dataset can populate. A range
+    /// is "available" when there's at least one transaction from
+    /// `monthCount - 1` calendar months ago or earlier — i.e. the data
+    /// spans the full window. `.thisMonth` is always available.
+    var availableRanges: [DashboardRange] {
+        let cal = Calendar.current
+        guard let earliest = earliestTransactionDate else {
+            return [.thisMonth]
+        }
+        let earliestStart = cal.startOfDay(for: earliest)
+        let monthsBack = cal.dateComponents([.month], from: earliestStart, to: .now).month ?? 0
+        return DashboardRange.allCases.filter { monthsBack >= $0.monthCount - 1 }
     }
 
     // MARK: - Cards
@@ -327,6 +535,122 @@ final class AppState {
             return
         }
         await refreshRates()
+    }
+
+    // MARK: - Auth
+
+    /// Step 1 of magic-link sign-in: ask Supabase to email the user a
+    /// one-time code. UI advances to the code-entry state on success.
+    func requestSignInCode(email: String) async {
+        let trimmed = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        isAuthLoading = true
+        authError = nil
+        do {
+            try await supabase.auth.signInWithOTP(email: trimmed)
+            pendingSignInEmail = trimmed
+            isAuthLoading = false
+        } catch {
+            authError = error.localizedDescription
+            isAuthLoading = false
+        }
+    }
+
+    /// Step 2: verify the 6-digit code from the email. On success the
+    /// SDK persists the session in the keychain and our
+    /// `observeAuthChanges()` listener updates `self.session`.
+    func verifyCode(email: String, code: String) async {
+        let trimmedCode = code.trimmingCharacters(in: .whitespacesAndNewlines)
+        isAuthLoading = true
+        authError = nil
+        do {
+            try await supabase.auth.verifyOTP(
+                email: email,
+                token: trimmedCode,
+                type: .email
+            )
+            pendingSignInEmail = nil
+            isAuthLoading = false
+        } catch {
+            authError = error.localizedDescription
+            isAuthLoading = false
+        }
+    }
+
+    /// Cancel the in-flight sign-in attempt and let the user enter a
+    /// different email. Called from the "Use a different email" affordance
+    /// in step 2.
+    func resetSignInFlow() {
+        pendingSignInEmail = nil
+        authError = nil
+    }
+
+    func signOut() async {
+        do {
+            try await supabase.auth.signOut()
+            // session will be cleared by the auth-state listener
+        } catch {
+            authError = error.localizedDescription
+        }
+    }
+
+    /// Subscribe to auth state changes from the SDK. Call once from the
+    /// app root's `.task`. The first event on subscription is the
+    /// restored session (or `nil`), so this doubles as launch-time
+    /// session restore.
+    ///
+    /// We drop expired sessions because supabase-swift's `INITIAL_SESSION`
+    /// event currently fires with the locally stored session regardless
+    /// of expiration. Treating an expired session as signed-in would let
+    /// the user into the app but every server call would 401. See
+    /// supabase-swift PR #822.
+    func observeAuthChanges() async {
+        for await (_, session) in supabase.auth.authStateChanges {
+            if let session, session.isExpired {
+                self.session = nil
+            } else {
+                if let session {
+                    // Sync local user state first so RootTabView's first
+                    // render after the auth gate flips sees a valid
+                    // `currentUserID`.
+                    ensureCurrentUser(authID: session.user.id,
+                                      email: session.user.email)
+                }
+                self.session = session
+            }
+        }
+    }
+
+    /// Make sure the in-memory `users` array contains a row keyed by the
+    /// signed-in user's `auth.uid()`, add them to the active household,
+    /// and point `currentUserID` at them. Idempotent — safe to call on
+    /// every auth-state emission.
+    ///
+    /// Today the `users` array is in-memory only; this seeds a placeholder
+    /// User from the email's local part. Once we wire the server-backed
+    /// `users` table, this becomes a fetch-or-create against Supabase.
+    private func ensureCurrentUser(authID: UUID, email: String?) {
+        if !users.contains(where: { $0.id == authID }) {
+            let displayName = email?
+                .components(separatedBy: "@").first?
+                .capitalized ?? "Me"
+            let initial = String(displayName.prefix(1)).uppercased()
+            let newUser = User(
+                id: authID,
+                name: displayName,
+                initial: initial,
+                colorKey: "sage"
+            )
+            users.append(newUser)
+
+            // Add to the active household so existing UI (avatars,
+            // member list, owner chips) picks them up.
+            if let hid = currentHouseholdID,
+               let idx = households.firstIndex(where: { $0.id == hid }),
+               !households[idx].memberIDs.contains(authID) {
+                households[idx].memberIDs.append(authID)
+            }
+        }
+        currentUserID = authID
     }
 
     /// One-shot fetch from floatrates.com + decode + cache. On failure, sets

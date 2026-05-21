@@ -4,6 +4,7 @@ struct SettingsView: View {
     @Environment(AppState.self) private var appState
     @AppStorage("appearance") private var appearanceRaw: String = AppearanceMode.system.rawValue
     @State private var showingAddCard = false
+    @State private var showingSignOutConfirm = false
     #if DEBUG
     @State private var showingLoadDummyConfirm = false
     #endif
@@ -85,6 +86,16 @@ struct SettingsView: View {
                     .padding(.horizontal, 16)
                     .padding(.bottom, 24)
 
+                    sectionLabel("Account")
+
+                    VStack(spacing: 0) {
+                        signOutRow
+                    }
+                    .background(AppTheme.surface)
+                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 24)
+
                     #if DEBUG
                     sectionLabel("Developer")
 
@@ -133,6 +144,14 @@ struct SettingsView: View {
                 }
                 .presentationDetents([.large])
                 .presentationBackground(AppTheme.bg)
+            }
+            .alert("Sign out?", isPresented: $showingSignOutConfirm) {
+                Button("Cancel", role: .cancel) { }
+                Button("Sign out", role: .destructive) {
+                    Task { await appState.signOut() }
+                }
+            } message: {
+                Text("You'll need to sign in again next time you open Ortho.")
             }
             #if DEBUG
             .alert("Replace current data with demo data?",
@@ -185,6 +204,41 @@ struct SettingsView: View {
     #endif
 
     // MARK: - Rows
+
+    private var signOutRow: some View {
+        Button {
+            showingSignOutConfirm = true
+        } label: {
+            HStack(spacing: 14) {
+                ZStack {
+                    Circle().fill(AppTheme.text.opacity(0.05))
+                        .frame(width: 40, height: 40)
+                    Image(systemName: "rectangle.portrait.and.arrow.right")
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundStyle(AppTheme.destructive)
+                }
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Sign out")
+                        .font(.system(size: 17, weight: .medium))
+                        .tracking(-0.2)
+                        .foregroundStyle(AppTheme.text)
+                    if let email = appState.currentUserEmail {
+                        Text(email)
+                            .font(.system(size: 13))
+                            .foregroundStyle(AppTheme.text.opacity(0.58))
+                            .lineLimit(1)
+                            .truncationMode(.middle)
+                    }
+                }
+                Spacer()
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .frame(minHeight: 64)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
 
     /// Single tappable row that pushes `HouseholdView` for full management.
     /// The right side shows the active household's name as a peek.

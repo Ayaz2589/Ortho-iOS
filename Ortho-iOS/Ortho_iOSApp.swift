@@ -18,9 +18,20 @@ struct Ortho_iOSApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootTabView()
-                .environment(appState)
-                .preferredColorScheme(appearance.colorScheme)
+            Group {
+                if appState.session != nil {
+                    RootTabView()
+                } else {
+                    SignInView()
+                }
+            }
+            .environment(appState)
+            .preferredColorScheme(appearance.colorScheme)
+            .task {
+                // First emission carries the SDK's restored session (or
+                // nil), so this doubles as launch-time session restore.
+                await appState.observeAuthChanges()
+            }
         }
     }
 }

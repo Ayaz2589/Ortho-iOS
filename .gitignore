@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# Xcode — per-user state
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad/
+
+# Xcode — build artifacts
+DerivedData/
+build/
+*.dSYM
+*.dSYM.zip
+*.ipa
+
+# Swift Package Manager
+.swiftpm/
+.build/
+
+# Secrets — gitignored config; copy SupabaseConfig.swift.template to fill in
+Ortho-iOS/App/SupabaseConfig.swift
+
+# Environment files (general — never commit)
+.env
+.env.local
+*.pem
+*.p8
+*.p12

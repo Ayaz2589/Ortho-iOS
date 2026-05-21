@@ -1,13 +1,38 @@
 import SwiftUI
 
-/// Quiet placeholder so the tab has plausible content. Replace with real
-/// dashboard view when wired to live data.
+/// Dashboard tab — a scrollable column of widgets summarizing the
+/// household's finances. A segmented picker at the top selects the time
+/// range; range-aware widgets recompute against it. Two widgets ignore
+/// the range:
+///   • HousingSnapshotCard renders a current snapshot (monthly cost,
+///     equity) — not period-dependent.
+///   • DailySpendTrendCard is always a trailing 30-day trend by design.
+///
+/// The picker only offers ranges that the existing data fully spans
+/// (`appState.availableRanges`), so a fresh install with one day of
+/// data sees just "This month" and nothing else.
 struct DashboardView: View {
+    @Environment(AppState.self) private var appState
+
+    @State private var range: DashboardRange = .thisMonth
+
+    private var availableRanges: [DashboardRange] {
+        appState.availableRanges
+    }
+
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 12) {
-                monthSummaryCard
-                jointBalanceCard
+            VStack(spacing: 16) {
+                if availableRanges.count > 1 {
+                    rangePicker
+                }
+                MonthSummaryCard(range: range)
+                SpendByCategoryCard(range: range)
+                PerOwnerBreakdownCard(range: range)
+                TopMerchantsCard(range: range)
+                HousingSnapshotCard()
+                DailySpendTrendCard()
+                Color.clear.frame(height: 60)
             }
             .padding(.horizontal, 16)
         }
@@ -25,70 +50,60 @@ struct DashboardView: View {
             .padding(.bottom, 24)
             .background(AppTheme.bg)
         }
+        .onChange(of: availableRanges) { _, newValue in
+            // If the active range goes away (e.g. all transactions deleted
+            // so only `.thisMonth` is left), fall back to a valid one.
+            if !newValue.contains(range), let fallback = newValue.first {
+                range = fallback
+            }
+        }
     }
 
-    private var monthSummaryCard: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("May · so far")
-                .font(.system(size: 13, weight: .semibold))
-                .kerning(0.6)
-                .textCase(.uppercase)
-                .foregroundStyle(AppTheme.text.opacity(0.58))
-
-            Text("$2,847.13")
-                .font(.system(size: 36, weight: .bold))
-                .tracking(-0.6)
-                .monospacedDigit()
-                .foregroundStyle(AppTheme.text)
-
-            Text("of $4,200 planned · 14 days left")
-                .font(.system(size: 13))
-                .foregroundStyle(AppTheme.text.opacity(0.58))
-
-            GeometryReader { geo in
-                ZStack(alignment: .leading) {
-                    Capsule().fill(AppTheme.text.opacity(0.05))
-                    Capsule().fill(AppTheme.positive)
-                        .frame(width: geo.size.width * 0.68)
+    /// Custom segmented control — matches the Personal | Shared toggle
+    /// pattern used in AddTransactionSheet. Only renders the ranges that
+    /// `availableRanges` includes.
+    private var rangePicker: some View {
+        HStack(spacing: 4) {
+            ForEach(availableRanges) { option in
+                Button {
+                    range = option
+                } label: {
+                    Text(option.shortLabel)
+                        .font(.system(size: 14, weight: .semibold))
+                        .tracking(-0.1)
+                        .foregroundStyle(range == option
+                                         ? AppTheme.text
+                                         : AppTheme.text.opacity(0.58))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 8)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .fill(range == option ? AppTheme.surface : .clear)
+                                .shadow(color: range == option
+                                        ? .black.opacity(0.06) : .clear,
+                                        radius: 2, y: 1)
+                        )
                 }
+                .buttonStyle(.plain)
             }
-            .frame(height: 6)
-            .padding(.top, 6)
         }
-        .padding(20)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppTheme.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .padding(4)
+        .background(
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .fill(AppTheme.text.opacity(0.05))
+        )
+        .animation(.easeOut(duration: 0.15), value: range)
     }
+}
 
-    private var jointBalanceCard: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Joint balance")
-                .font(.system(size: 13, weight: .semibold))
-                .kerning(0.6)
-                .textCase(.uppercase)
-                .foregroundStyle(AppTheme.text.opacity(0.58))
+#Preview("Dashboard · Light") {
+    DashboardView()
+        .environment(AppState())
+        .preferredColorScheme(.light)
+}
 
-            HStack(alignment: .firstTextBaseline) {
-                Text("$11,402.88")
-                    .font(.system(size: 22, weight: .semibold))
-                    .tracking(-0.4)
-                    .monospacedDigit()
-                    .foregroundStyle(AppTheme.text)
-                Spacer()
-                Text("+$320.00")
-                    .font(.system(size: 14, weight: .semibold))
-                    .monospacedDigit()
-                    .foregroundStyle(AppTheme.positive)
-            }
-
-            Text("Chase Sapphire · Joint checking")
-                .font(.system(size: 13))
-                .foregroundStyle(AppTheme.text.opacity(0.58))
-        }
-        .padding(20)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppTheme.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-    }
+#Preview("Dashboard · Dark") {
+    DashboardView()
+        .environment(AppState())
+        .preferredColorScheme(.dark)
 }
