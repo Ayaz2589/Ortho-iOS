@@ -1,8 +1,10 @@
 import SwiftUI
 
-enum TransactionCategory: String, CaseIterable, Hashable, Codable {
+enum TransactionCategory: String, CaseIterable, Hashable, Codable, Identifiable {
     case coffee, groceries, dining, subs, fuel
     case rent, health, income, transit, utilities
+
+    var id: String { rawValue }
 
     /// SF Symbol used in the category tile.
     var symbol: String {

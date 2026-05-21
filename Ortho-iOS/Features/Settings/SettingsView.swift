@@ -27,6 +27,16 @@ struct SettingsView: View {
                     .padding(.horizontal, 16)
                     .padding(.bottom, 24)
 
+                    sectionLabel("Budgets")
+
+                    VStack(spacing: 0) {
+                        budgetsLinkRow
+                    }
+                    .background(AppTheme.surface)
+                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 24)
+
                     sectionLabel("Cards")
 
                     VStack(spacing: 0) {
@@ -267,6 +277,39 @@ struct SettingsView: View {
                     }
                 }
                 Spacer()
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .frame(minHeight: 64)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+
+    /// Push row that opens `BudgetsView`. Right side shows the count of
+    /// budgets currently set as a peek (e.g. "3 set" or "None set").
+    private var budgetsLinkRow: some View {
+        NavigationLink {
+            BudgetsView()
+                .environment(appState)
+        } label: {
+            HStack(spacing: 12) {
+                Text("Budgets")
+                    .font(.system(size: 17, weight: .medium))
+                    .tracking(-0.2)
+                    .foregroundStyle(AppTheme.text)
+                Spacer()
+                HStack(spacing: 6) {
+                    Text(appState.budgets.isEmpty
+                         ? "None set"
+                         : "\(appState.budgets.count) set")
+                        .font(.system(size: 17, weight: .medium))
+                        .tracking(-0.2)
+                        .foregroundStyle(AppTheme.text2)
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(AppTheme.text.opacity(0.36))
+                }
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
