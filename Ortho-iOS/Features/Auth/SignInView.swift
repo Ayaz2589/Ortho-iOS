@@ -27,6 +27,21 @@ struct SignInView: View {
         ZStack {
             AppTheme.bg.ignoresSafeArea()
 
+            // Ambient concentric rings + warm lens-flare halo. Both layers
+            // use `AppTheme.accent` so the rings carry a hint of warm
+            // color and read as light radiating from the same source as
+            // the flare. The offset `(-50, 0)` puts the origin inside
+            // the first O of "ORTHO" — at 28pt size with 8pt tracking,
+            // the leading O's center is ~50pt left of the wordmark
+            // center, and absolute points keeps that anchor stable
+            // across screen widths.
+            AmbientRippleBackground(
+                originOffset: CGSize(width: -50, height: 0),
+                rippleColor:  AppTheme.accent,
+                flareColor:   AppTheme.accent
+            )
+            .ignoresSafeArea()
+
             // ORTHO floats in the upper portion of the screen, explicitly
             // centered horizontally. Two weighted spacers below push it
             // above the vertical midpoint (target: ~40% from top) so the
@@ -90,8 +105,8 @@ struct SignInView: View {
     private var emailStep: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Sign in")
-                .font(.system(size: 28, weight: .bold))
-                .tracking(-0.4)
+                .font(.system(size: 24, weight: .bold))
+                .tracking(-0.3)
                 .foregroundStyle(AppTheme.text)
             Text("We'll email you a 6-digit code. No password, no fuss.")
                 .font(.system(size: 14))
@@ -101,7 +116,12 @@ struct SignInView: View {
         }
         .padding(.bottom, 4)
 
-        TextField("you@example.com", text: $email)
+        TextField(
+            "",
+            text: $email,
+            prompt: Text("you@example.com")
+                .foregroundStyle(AppTheme.text.opacity(0.36))
+        )
             .keyboardType(.emailAddress)
             .textContentType(.emailAddress)
             .textInputAutocapitalization(.never)
@@ -128,8 +148,8 @@ struct SignInView: View {
     private var codeStep: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Enter your code")
-                .font(.system(size: 28, weight: .bold))
-                .tracking(-0.4)
+                .font(.system(size: 24, weight: .bold))
+                .tracking(-0.3)
                 .foregroundStyle(AppTheme.text)
             Text("Sent to **\(appState.pendingSignInEmail ?? "")**.")
                 .font(.system(size: 14))
@@ -137,7 +157,12 @@ struct SignInView: View {
         }
         .padding(.bottom, 4)
 
-        TextField("• • • • • • • •", text: $code)
+        TextField(
+            "",
+            text: $code,
+            prompt: Text("• • • • • • • •")
+                .foregroundStyle(AppTheme.text.opacity(0.36))
+        )
             .keyboardType(.numberPad)
             .textContentType(.oneTimeCode)
             .font(.system(size: 22, weight: .semibold, design: .monospaced))
