@@ -38,6 +38,14 @@ final class AppState {
     /// Stays `false` for incremental syncs after the first bootstrap.
     var isLoadingInitialData: Bool = false
 
+    /// True after `loadDummyData()` runs, until `exitDemoMode()` restores
+    /// the real session. While set, every CRUD method skips its server-
+    /// sync Task — local mutations still happen, but nothing is pushed
+    /// because the in-memory UUIDs (Maya / Jordan / Alex / sample household)
+    /// don't exist server-side and would FK-violate immediately. Bootstrap
+    /// resets the flag to false defensively.
+    var isInDemoMode: Bool = false
+
     /// Email of the currently-signed-in user, or `nil` when signed out.
     /// Surfaced as a String here so view code doesn't have to import `Auth`
     /// to read it (Swift 6 member-import-visibility — the `User.email`
@@ -207,9 +215,11 @@ final class AppState {
     }
 
     /// Optimistic insert: append locally first, sync to server in a Task.
-    /// On failure we remove the local row and surface `dataError`.
+    /// On failure we remove the local row and surface `dataError`. In
+    /// demo mode the server hop is skipped — local-only by design.
     func addTransaction(_ tx: Transaction) {
         transactions.append(tx)
+        guard !isInDemoMode else { return }
         Task {
             do {
                 try await transactionsAPI.create(tx)
@@ -228,6 +238,7 @@ final class AppState {
         guard let idx = transactions.firstIndex(where: { $0.id == tx.id }) else { return }
         let previous = transactions[idx]
         transactions[idx] = tx
+        guard !isInDemoMode else { return }
         Task {
             do {
                 try await transactionsAPI.update(tx)
@@ -246,6 +257,7 @@ final class AppState {
     /// the row at the end (loses original position — acceptable for v1).
     func deleteTransaction(_ tx: Transaction) {
         transactions.removeAll { $0.id == tx.id }
+        guard !isInDemoMode else { return }
         Task {
             do {
                 try await transactionsAPI.delete(id: tx.id)
@@ -509,6 +521,7 @@ final class AppState {
 
     func addCard(_ card: Card) {
         cards.append(card)
+        guard !isInDemoMode else { return }
         Task {
             do {
                 try await cardsAPI.create(card)
@@ -523,6 +536,7 @@ final class AppState {
 
     func deleteCard(_ card: Card) {
         cards.removeAll { $0.id == card.id }
+        guard !isInDemoMode else { return }
         Task {
             do {
                 try await cardsAPI.delete(id: card.id)
@@ -560,6 +574,7 @@ final class AppState {
         else { return }
         let previous = households[idx].name
         households[idx].name = name
+        guard !isInDemoMode else { return }
         Task {
             do {
                 try await householdsAPI.updateName(name, householdID: id)
@@ -597,6 +612,7 @@ final class AppState {
         else { return }
         let previousMembers = households[idx].memberIDs
         households[idx].memberIDs.removeAll { $0 == userID }
+        guard !isInDemoMode else { return }
         Task {
             do {
                 try await householdsAPI.removeMember(userID: userID, from: id)
@@ -627,6 +643,7 @@ final class AppState {
 
     func addProperty(_ p: Property) {
         properties.append(p)
+        guard !isInDemoMode else { return }
         Task {
             do {
                 try await propertiesAPI.create(p)
@@ -643,6 +660,7 @@ final class AppState {
         guard let idx = properties.firstIndex(where: { $0.id == p.id }) else { return }
         let previous = properties[idx]
         properties[idx] = p
+        guard !isInDemoMode else { return }
         Task {
             do {
                 try await propertiesAPI.update(p)
@@ -663,6 +681,7 @@ final class AppState {
         let cascadedPayments = rentalPayments.filter { $0.propertyID == p.id }
         properties.removeAll { $0.id == p.id }
         rentalPayments.removeAll { $0.propertyID == p.id }
+        guard !isInDemoMode else { return }
         Task {
             do {
                 try await propertiesAPI.delete(id: p.id)
@@ -693,6 +712,7 @@ final class AppState {
 
     func addRentalPayment(_ payment: RentalPayment) {
         rentalPayments.append(payment)
+        guard !isInDemoMode else { return }
         Task {
             do {
                 try await rentalPaymentsAPI.create(payment)
@@ -707,6 +727,7 @@ final class AppState {
 
     func deleteRentalPayment(_ payment: RentalPayment) {
         rentalPayments.removeAll { $0.id == payment.id }
+        guard !isInDemoMode else { return }
         Task {
             do {
                 try await rentalPaymentsAPI.delete(id: payment.id)
@@ -746,6 +767,7 @@ final class AppState {
         } else {
             budgets.append(budget)
         }
+        guard !isInDemoMode else { return }
         Task {
             do {
                 try await budgetsAPI.upsert(budget)
@@ -766,6 +788,7 @@ final class AppState {
 
     func deleteBudget(_ budget: Budget) {
         budgets.removeAll { $0.id == budget.id }
+        guard !isInDemoMode else { return }
         Task {
             do {
                 try await budgetsAPI.delete(id: budget.id)
@@ -802,10 +825,12 @@ final class AppState {
     // MARK: - Dummy data (DEBUG)
 
     #if DEBUG
-    /// Replace every domain collection with the large dummy dataset. User
-    /// preferences (currency, appearance, etc.) are preserved.
-    /// `currentUserID` / `currentHouseholdID` reset to the first member /
-    /// household of the dummy bundle so the UI lands somewhere sensible.
+    /// Replace every domain collection with the large dummy dataset and
+    /// enter **demo mode** — every CRUD method now skips its server-sync
+    /// Task, so the dummy UUIDs (Maya / Jordan / Alex / sample household)
+    /// can't FK-violate against the real Supabase schema. User preferences
+    /// (currency, appearance) are preserved. Call `exitDemoMode()` to
+    /// restore real data from the server.
     func loadDummyData() {
         let bundle = DummyData.large
         users = bundle.users
@@ -814,8 +839,34 @@ final class AppState {
         transactions = bundle.transactions
         properties = bundle.properties
         rentalPayments = bundle.rentalPayments
+        budgets = []  // No demo budgets — exercises the empty-state path.
         currentUserID = bundle.users.first?.id ?? currentUserID
         currentHouseholdID = bundle.households.first?.id ?? currentHouseholdID
+        isInDemoMode = true
+    }
+
+    /// Leave demo mode. Re-runs `bootstrapUserSession` against the current
+    /// auth session so `currentUserID` snaps back to `auth.uid()`, the
+    /// in-memory dummy data is wiped, and every server-backed collection
+    /// is fetched fresh.
+    func exitDemoMode() async {
+        guard let session else {
+            // No session means there's nothing to restore — just flip the
+            // flag and clear the dummy data manually.
+            await MainActor.run {
+                isInDemoMode = false
+                transactions = []
+                cards = []
+                properties = []
+                rentalPayments = []
+                budgets = []
+            }
+            return
+        }
+        // Force the bootstrap to re-run by clearing the auth-id guard.
+        bootstrappedAuthID = nil
+        await MainActor.run { isInDemoMode = false }
+        await bootstrapUserSession(authID: session.user.id, email: session.user.email)
     }
     #endif
 
@@ -969,7 +1020,13 @@ final class AppState {
             colorKey: "sage"
         )
 
-        await MainActor.run { isLoadingInitialData = true }
+        await MainActor.run {
+            isLoadingInitialData = true
+            // Defensive: any prior demo-mode state must clear before real
+            // server data lands, otherwise the new transactions would be
+            // gated from server sync as if they were demo.
+            isInDemoMode = false
+        }
 
         do {
             // 1. Upsert public.users — `transactions.created_by` FK needs this.

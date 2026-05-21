@@ -119,7 +119,7 @@ struct SettingsView: View {
                     .padding(.horizontal, 16)
                     .padding(.bottom, 8)
 
-                    Text("Only visible in DEBUG builds. \"Load demo data\" replaces local users, transactions, cards, and properties with a 6-month sample. \"Sync all from server\" replaces local data (transactions, cards, properties, rental payments) with what Supabase returns for the signed-in user.")
+                    Text("Only visible in DEBUG builds. \"Load demo data\" enters demo mode — the app shows a 6-month sample dataset, and every change you make stays local (nothing syncs to Supabase). A banner appears at the top with an Exit button that restores your real data. \"Sync all from server\" replaces local transactions, cards, properties, and rental payments with what Supabase returns.")
                         .font(.system(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
@@ -166,14 +166,14 @@ struct SettingsView: View {
                 Text("You'll need to sign in again next time you open Ortho.")
             }
             #if DEBUG
-            .alert("Replace current data with demo data?",
+            .alert("Enter demo mode?",
                    isPresented: $showingLoadDummyConfirm) {
                 Button("Cancel", role: .cancel) { }
                 Button("Load demo") {
                     appState.loadDummyData()
                 }
             } message: {
-                Text("Your current users, transactions, cards, and properties will be replaced with a 6-month sample dataset. Currency and appearance are kept. Relaunch to revert.")
+                Text("The app will show a 6-month sample dataset (3 users · 3 properties · ~300 transactions). Your real data on Supabase isn't touched, and changes you make in demo mode stay local. Tap Exit in the banner at the top to restore your live data.")
             }
             #endif
         }

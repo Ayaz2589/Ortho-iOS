@@ -103,25 +103,43 @@ struct RootTabView: View {
     @Environment(AppState.self) private var appState
 
     var body: some View {
-        ZStack {
-            switch selection {
-            case .dashboard:
-                DashboardView()
-            case .transactions:
-                TransactionsView()
-            case .housing:
-                HousingView()
-            case .settings:
-                SettingsView()
+        // Use an explicit VStack to place the demo banner above the tab
+        // body. Tried `.safeAreaInset(.top)` here originally, but the
+        // child tabs (Housing / Settings) each have their own
+        // `.safeAreaInset(.top)` for custom title bars — SwiftUI didn't
+        // stack the nested insets cleanly and the banner ended up
+        // overlapping the inner titles.
+        VStack(spacing: 0) {
+            #if DEBUG
+            if appState.isInDemoMode {
+                DemoModeBanner {
+                    Task { await appState.exitDemoMode() }
+                }
+                .transition(.move(edge: .top).combined(with: .opacity))
             }
-        }
-        .safeAreaInset(edge: .bottom, spacing: 0) {
-            if !tabBarHidden {
-                OrthoTabBar(selection: $selection)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            #endif
+
+            ZStack {
+                switch selection {
+                case .dashboard:
+                    DashboardView()
+                case .transactions:
+                    TransactionsView()
+                case .housing:
+                    HousingView()
+                case .settings:
+                    SettingsView()
+                }
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                if !tabBarHidden {
+                    OrthoTabBar(selection: $selection)
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
             }
         }
         .background(AppTheme.bg.ignoresSafeArea())
+        .animation(.easeOut(duration: 0.22), value: appStateIsInDemoMode)
         .onPreferenceChange(HideTabBarPreferenceKey.self) { newValue in
             withAnimation(.easeOut(duration: 0.22)) {
                 tabBarHidden = newValue
@@ -131,6 +149,15 @@ struct RootTabView: View {
             // Fetch live FX rates once per app launch when cache is stale.
             await appState.refreshRatesIfStale()
         }
+    }
+
+    /// Tracked so the VStack animates the banner in/out smoothly.
+    private var appStateIsInDemoMode: Bool {
+        #if DEBUG
+        return appState.isInDemoMode
+        #else
+        return false
+        #endif
     }
 }
 
