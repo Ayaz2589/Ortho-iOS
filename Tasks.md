@@ -8,7 +8,7 @@ finish so the history is preserved.
 
 ## In progress
 
-_(none — Budgets + rule-based Insights shipped on `feature/recommendations-and-budgets` branch, awaiting simulator exercise before merge)_
+_(none)_
 
 ---
 
@@ -84,6 +84,15 @@ _(none — Budgets + rule-based Insights shipped on `feature/recommendations-and
 - [ ] Optional LLM narrative layer over the same `[Insight]` output (later, when there's a clear win over templates)
 - [ ] Insight dismissal / snooze persistence (IDs already period-scoped to support this)
 
+### Transactions UX
+
+- [x] Empty state on the Transactions tab when there are no rows yet (icon + "No transactions yet" + "Add transaction" CTA, mirrors Housing's grammar)
+- [x] Loading skeleton on the Transactions tab during initial bootstrap fetch (`isLoadingInitialData` flag on AppState, `TransactionSkeletonList` with subtle opacity pulse)
+- [x] Multi-add — "Save and add another" capsule below the form preserves scope/kind/source/date/owners and resets merchant/amount/category/splits
+- [x] Copy from recent — picker sheet inside `AddTransactionSheet` (40 most-recent transactions grouped by day) pre-fills every field with a fresh id + today's date
+- [x] Swipe-copy on transaction rows — `SwipeActionRow` reveals a `[Copy] [Delete]` tray; Copy opens AddTransactionSheet via the same `copying:` init path
+- [ ] Same skeleton + empty-state treatment on Dashboard widgets and Housing (currently flicker the empty state during bootstrap; reuse `isLoadingInitialData`)
+
 ### Later / nice-to-have
 
 - [ ] In-app invitation banner via Realtime subscription (for users already signed in)
@@ -130,7 +139,12 @@ _(none — Budgets + rule-based Insights shipped on `feature/recommendations-and
 - [x] **2026-05-21** — **Transaction round-trip verified end-to-end.** Added a shared transaction in the app → `transactions` + `transaction_shares` row counts went 0 → 1 on the server → `loadTransactionsFromServer()` returned it intact, identical in the UI. Encode / RLS / decode all green.
 - [x] **2026-05-21** — Full data-layer migration shipped: `CardsAPI` + `PropertiesAPI` (coordinates 4 tables — properties / mortgage_info / lease_info / units, dates as `yyyy-MM-dd` strings) + `RentalPaymentsAPI` + `HouseholdsAPI` (extracts the inline bootstrap DTOs and adds rename + remove-member). Every `AppState` CRUD method now optimistic + server-synced with rollback. New `loadAllFromServer()` parallel-fetcher used by both bootstrap and the renamed "Sync all from server" Developer affordance. Add-member is disabled in `HouseholdView` pending the Invitations flow.
 - [x] **2026-05-21** — Audit + fix of mortgage / multifamily financials: amortization formula verified end-to-end against canonical $530k/6.85%/30yr example. Two correctness bugs fixed: zero-interest mortgages now use flat amortization (was returning 0 monthly payment); `MultifamilyNetBalanceCard` no longer counts vacant units as collected rent (math moved onto `Property` as `occupiedMonthlyRentCents` / `netMonthlyBalanceCents`).
-- [x] **2026-05-21** — **Budgets + rule-based recommendation engine** (on `feature/recommendations-and-budgets`). New `public.budgets` table + `BudgetsAPI`; per-category monthly limits set/edited in `Features/Budgets/BudgetsView`. `Services/InsightEngine.swift` is a pure-functions namespace with 8 rules (top category, MoM category delta, budget status, cashflow/savings rate, recurring subscription detection, outlier transactions, daily trend, mortgage affordability) returning prioritized `Insight` values. Dashboard gets `InsightsCardStack` at the top and `BudgetProgressCard` under the month summary; both hide themselves on empty. Build verified clean; awaiting simulator exercise before merge to `main`.
+- [x] **2026-05-21** — **Budgets + rule-based recommendation engine** (merged via PR #1). New `public.budgets` table + `BudgetsAPI`; per-category monthly limits set/edited in `Features/Budgets/BudgetsView`. `Services/InsightEngine.swift` is a pure-functions namespace with 8 rules (top category, MoM category delta, budget status, cashflow/savings rate, recurring subscription detection, outlier transactions, daily trend, mortgage affordability) returning prioritized `Insight` values. Dashboard gets `InsightsCardStack` at the top and `BudgetProgressCard` under the month summary; both hide themselves on empty.
+- [x] **2026-05-21** — Transactions tab: renamed header "Activity" → "Transactions" and added a Housing-style empty state when the array is empty.
+- [x] **2026-05-21** — Multi-add + Copy-from-recent in `AddTransactionSheet`. "Save and add another" capsule below the form resets the transaction-specific fields and keeps the contextual ones. "Copy from recent" pill at the top opens `CopyTransactionPickerSheet` (40 most-recent txs grouped by day) and pre-fills every field via the same `copying:` init path the swipe-copy gesture uses. Closure signature is `(Transaction, keepOpen: Bool) -> Void`.
+- [x] **2026-05-21** — `CopyTransactionPickerSheet` rows were unresponsive — `TransactionRow` is itself a Button and nested-Button hit testing in SwiftUI was eating taps. Fixed by passing the pick callback as `TransactionRow.onTap` directly (matches the main TransactionsView pattern); no more wrapper Button or `.allowsHitTesting` hack.
+- [x] **2026-05-21** — Loading skeleton on the Transactions tab during initial bootstrap. New `isLoadingInitialData` flag on AppState (set/cleared inside `bootstrapUserSession`); `TransactionsView` switches on a `LoadState` enum (`.loading` → `TransactionSkeletonList`, `.empty` → existing empty state, `.populated` → real list). Prevents the misleading "No transactions yet" flash during sign-in.
+- [x] **2026-05-21** — Swipe-copy on transaction rows. `SwipeActionRow` gains an optional `onCopy` closure — when set, the revealed tray doubles in width and shows `[Copy] [Delete]` (Copy accent, Delete destructive, Delete remains rightmost per iOS Mail convention). Add-sheet presentation in `TransactionsView` unified behind an `AddSheetMode` enum (`.fresh` / `.copying(Transaction)`) driving a single `.sheet(item:)` modifier.
 
 ---
 
