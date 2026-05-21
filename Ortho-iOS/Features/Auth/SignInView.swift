@@ -3,6 +3,12 @@ import SwiftUI
 /// Two-step magic-link sign-in: email entry → 6-digit code from the email.
 /// Success drives `AppState.session` non-nil; the auth gate in
 /// `Ortho_iOSApp` then swaps in `RootTabView`.
+///
+/// Layout: large `ORTHO` wordmark sits in the upper third on the bare
+/// screen (no card), with the form anchored to the bottom — title +
+/// subtitle + input + primary button + per-step fine-print footer.
+/// Mirrors the polished onboarding mock and keeps the visual rhythm
+/// close to other muted-fill capsule affordances throughout the app.
 struct SignInView: View {
     @Environment(AppState.self) private var appState
 
@@ -21,36 +27,46 @@ struct SignInView: View {
         ZStack {
             AppTheme.bg.ignoresSafeArea()
 
-            VStack(spacing: 20) {
+            // ORTHO floats in the upper portion of the screen, explicitly
+            // centered horizontally. Two weighted spacers below push it
+            // above the vertical midpoint (target: ~40% from top) so the
+            // form has natural room to sit at the bottom without crowding
+            // the wordmark.
+            VStack(spacing: 0) {
+                Spacer()
                 Text("ORTHO")
-                    .font(.system(size: 13, weight: .semibold))
-                    .tracking(2)
-                    .foregroundStyle(AppTheme.text3)
-
-                VStack(alignment: .leading, spacing: 20) {
-                    switch step {
-                    case .email: emailStep
-                    case .code:  codeStep
-                    }
-                }
-                .padding(28)
-                .frame(maxWidth: 400)
-                .background(AppTheme.surface)
-                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    .font(.system(size: 28, weight: .regular))
+                    .tracking(8)
+                    .foregroundStyle(AppTheme.text)
+                Spacer()
+                Spacer()
+            }
+            .frame(maxWidth: .infinity)
+        }
+        // Pinning the form to the bottom safe area decouples it from the
+        // ORTHO spacer layout — when the keyboard appears, iOS adjusts the
+        // inset cleanly and the wordmark above stays in its column rather
+        // than colliding with the form.
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            VStack(spacing: 0) {
+                form
+                    .padding(.horizontal, 24)
 
                 if let error = appState.authError {
                     Text(error)
                         .font(.system(size: 13))
                         .foregroundStyle(AppTheme.destructive)
                         .multilineTextAlignment(.center)
-                        .frame(maxWidth: 360)
-                        .padding(.horizontal, 16)
+                        .padding(.horizontal, 24)
+                        .padding(.top, 10)
                 }
 
-                Spacer()
+                footer
+                    .padding(.horizontal, 24)
+                    .padding(.top, 14)
+                    .padding(.bottom, 8)
             }
-            .padding(.top, 80)
-            .padding(.horizontal, 24)
+            .background(AppTheme.bg)
         }
         .onAppear { focused = step == .email ? .email : .code }
         .onChange(of: step) { _, newValue in
@@ -58,16 +74,32 @@ struct SignInView: View {
         }
     }
 
+    // MARK: - Form
+
+    @ViewBuilder
+    private var form: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            switch step {
+            case .email: emailStep
+            case .code:  codeStep
+            }
+        }
+    }
+
     @ViewBuilder
     private var emailStep: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("Sign in to Ortho")
-                .font(.system(size: 22, weight: .semibold))
+            Text("Sign in")
+                .font(.system(size: 28, weight: .bold))
+                .tracking(-0.4)
                 .foregroundStyle(AppTheme.text)
-            Text("We'll email you a 6-digit code.")
+            Text("We'll email you a 6-digit code. No password, no fuss.")
                 .font(.system(size: 14))
                 .foregroundStyle(AppTheme.text2)
+                .lineSpacing(2)
+                .fixedSize(horizontal: false, vertical: true)
         }
+        .padding(.bottom, 4)
 
         TextField("you@example.com", text: $email)
             .keyboardType(.emailAddress)
@@ -75,11 +107,12 @@ struct SignInView: View {
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
             .font(.system(size: 16))
+            .multilineTextAlignment(.center)
             .foregroundStyle(AppTheme.text)
-            .padding(.vertical, 12)
-            .padding(.horizontal, 14)
-            .background(AppTheme.bg)
-            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .padding(.vertical, 16)
+            .padding(.horizontal, 16)
+            .background(fieldFill)
+            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
             .focused($focused, equals: .email)
             .submitLabel(.send)
             .onSubmit(sendCode)
@@ -95,23 +128,26 @@ struct SignInView: View {
     private var codeStep: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Enter your code")
-                .font(.system(size: 22, weight: .semibold))
+                .font(.system(size: 28, weight: .bold))
+                .tracking(-0.4)
                 .foregroundStyle(AppTheme.text)
             Text("Sent to **\(appState.pendingSignInEmail ?? "")**.")
                 .font(.system(size: 14))
                 .foregroundStyle(AppTheme.text2)
         }
+        .padding(.bottom, 4)
 
-        TextField("12345678", text: $code)
+        TextField("• • • • • • • •", text: $code)
             .keyboardType(.numberPad)
             .textContentType(.oneTimeCode)
             .font(.system(size: 22, weight: .semibold, design: .monospaced))
-            .tracking(4)
+            .tracking(6)
+            .multilineTextAlignment(.center)
             .foregroundStyle(AppTheme.text)
-            .padding(.vertical, 12)
-            .padding(.horizontal, 14)
-            .background(AppTheme.bg)
-            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .padding(.vertical, 16)
+            .padding(.horizontal, 16)
+            .background(fieldFill)
+            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
             .focused($focused, equals: .code)
             .onChange(of: code) { _, newValue in
                 code = String(newValue.filter(\.isNumber).prefix(8))
@@ -119,7 +155,7 @@ struct SignInView: View {
 
         primaryButton(
             title: "Verify",
-            disabled: code.count < 6 || appState.isAuthLoading,
+            disabled: code.count < 8 || appState.isAuthLoading,
             action: verifyCode
         )
 
@@ -127,10 +163,51 @@ struct SignInView: View {
             appState.resetSignInFlow()
             code = ""
         }
-        .font(.system(size: 13, weight: .medium))
-        .foregroundStyle(AppTheme.text2)
+        .font(.system(size: 14, weight: .medium))
+        .foregroundStyle(AppTheme.text)
         .frame(maxWidth: .infinity)
         .padding(.top, 4)
+    }
+
+    // MARK: - Footer (per-step fine print)
+
+    @ViewBuilder
+    private var footer: some View {
+        switch step {
+        case .email:
+            // Terms / Privacy aren't real URLs yet — render as bolded
+            // inline copy via Markdown. Swap to `Link`s when the
+            // marketing pages exist.
+            Text("By continuing you agree to our **Terms** and **Privacy**.")
+                .font(.system(size: 12))
+                .foregroundStyle(AppTheme.text3)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity)
+        case .code:
+            HStack(spacing: 4) {
+                Text("Didn't receive it?")
+                    .font(.system(size: 12))
+                    .foregroundStyle(AppTheme.text3)
+                Button("Send again") {
+                    if let pending = appState.pendingSignInEmail {
+                        Task { await appState.requestSignInCode(email: pending) }
+                    }
+                }
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(AppTheme.text)
+                .disabled(appState.isAuthLoading)
+            }
+            .frame(maxWidth: .infinity)
+        }
+    }
+
+    // MARK: - Field + button styling
+
+    /// Muted fill used by both the input field and the primary button so
+    /// they read as paired siblings without competing with the empty
+    /// screen background.
+    private var fieldFill: Color {
+        AppTheme.text.opacity(0.05)
     }
 
     @ViewBuilder
@@ -141,21 +218,25 @@ struct SignInView: View {
             HStack {
                 if appState.isAuthLoading {
                     ProgressView()
-                        .tint(AppTheme.bg)
+                        .tint(AppTheme.text)
                 } else {
                     Text(title)
-                        .font(.system(size: 15, weight: .semibold))
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundStyle(disabled
+                                         ? AppTheme.text.opacity(0.36)
+                                         : AppTheme.text)
                 }
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 14)
-            .background(disabled ? AppTheme.text.opacity(0.3) : AppTheme.text)
-            .foregroundStyle(AppTheme.bg)
-            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .padding(.vertical, 16)
+            .background(fieldFill)
+            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
         }
         .buttonStyle(.plain)
         .disabled(disabled)
     }
+
+    // MARK: - Actions
 
     private func sendCode() {
         Task { await appState.requestSignInCode(email: email) }
