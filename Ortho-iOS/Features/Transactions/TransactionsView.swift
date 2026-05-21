@@ -92,9 +92,11 @@ struct TransactionsView: View {
         .background(AppTheme.bg)
         .safeAreaInset(edge: .top, spacing: 0) { titleAndSearch }
         .sheet(isPresented: $showingAddTransaction) {
-            AddTransactionSheet { tx in
+            AddTransactionSheet { tx, keepOpen in
                 appState.addTransaction(tx)
-                showingAddTransaction = false
+                if !keepOpen {
+                    showingAddTransaction = false
+                }
             }
             .environment(appState)
             .presentationDetents([.large])

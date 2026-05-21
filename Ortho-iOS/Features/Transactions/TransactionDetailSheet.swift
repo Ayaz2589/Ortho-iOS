@@ -30,7 +30,8 @@ struct TransactionDetailSheet: View {
             }
         }
         .sheet(item: $editing) { tx in
-            AddTransactionSheet(editing: tx) { updated in
+            AddTransactionSheet(editing: tx) { updated, _ in
+                // Edit mode ignores keepOpen — it's a single-tx flow.
                 appState.updateTransaction(updated)
                 editing = nil
             }
