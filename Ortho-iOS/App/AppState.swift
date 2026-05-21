@@ -31,6 +31,13 @@ final class AppState {
     /// an optimistic write rolled back. UI banner / toast reads this.
     var dataError: String?
 
+    /// True between sign-in and the completion of the bootstrap server
+    /// fetch. Views that show an "empty state" should distinguish
+    /// `transactions.isEmpty && isLoadingInitialData` (skeleton) from
+    /// `transactions.isEmpty && !isLoadingInitialData` (real empty state).
+    /// Stays `false` for incremental syncs after the first bootstrap.
+    var isLoadingInitialData: Bool = false
+
     /// Email of the currently-signed-in user, or `nil` when signed out.
     /// Surfaced as a String here so view code doesn't have to import `Auth`
     /// to read it (Swift 6 member-import-visibility — the `User.email`
@@ -962,6 +969,8 @@ final class AppState {
             colorKey: "sage"
         )
 
+        await MainActor.run { isLoadingInitialData = true }
+
         do {
             // 1. Upsert public.users — `transactions.created_by` FK needs this.
             try await supabase
@@ -995,9 +1004,11 @@ final class AppState {
 
             // 4. Load live data from the server.
             await loadAllFromServer()
+            await MainActor.run { isLoadingInitialData = false }
         } catch {
             await MainActor.run {
                 dataError = "Bootstrap failed: \(error.localizedDescription)"
+                isLoadingInitialData = false
                 // Allow a retry on the next auth event (e.g. relaunch).
                 bootstrappedAuthID = nil
             }

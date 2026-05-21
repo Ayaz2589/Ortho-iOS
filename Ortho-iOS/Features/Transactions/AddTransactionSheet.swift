@@ -12,7 +12,10 @@ struct AddTransactionSheet: View {
     /// transaction and submit replaces it (preserving the id). When nil, the
     /// sheet creates a new transaction.
     let editing: Transaction?
-    let onSubmit: (Transaction) -> Void
+    /// `keepOpen == true` when the user chose "Save and add another" so the
+    /// parent should NOT dismiss the sheet — we'll reset the form internally
+    /// for the next entry. Edit mode ignores the flag (single-tx by nature).
+    let onSubmit: (Transaction, _ keepOpen: Bool) -> Void
 
     @Environment(\.dismiss) private var dismiss
     @Environment(AppState.self) private var appState
@@ -34,9 +37,13 @@ struct AddTransactionSheet: View {
     @State private var source: String
     @State private var date: Date
 
+    /// Drives the "Copy from recent" picker sheet. Add-mode only.
+    @State private var showingCopyPicker: Bool = false
+
     @FocusState private var amountFocused: Bool
 
-    init(editing: Transaction? = nil, onSubmit: @escaping (Transaction) -> Void) {
+    init(editing: Transaction? = nil,
+         onSubmit: @escaping (Transaction, _ keepOpen: Bool) -> Void) {
         self.editing = editing
         self.onSubmit = onSubmit
 
@@ -146,6 +153,12 @@ struct AddTransactionSheet: View {
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
+                    // Add-mode only: quick-pick from a recent transaction
+                    // to pre-fill every field. Speeds up "the usual" entries
+                    // (subscriptions, regular merchants).
+                    if !isEditing && !appState.transactions.isEmpty {
+                        copyFromRecentButton
+                    }
                     amountHero
                     scopeToggle
                     directionToggle
@@ -182,8 +195,16 @@ struct AddTransactionSheet: View {
                         .lineSpacing(2)
                         .padding(.horizontal, 24)
                         .padding(.top, 4)
-                        .padding(.bottom, 24)
+                        .padding(.bottom, isEditing ? 24 : 12)
                         .frame(maxWidth: 360, alignment: .leading)
+
+                    // Add-mode only: secondary affordance for batch entry.
+                    // Submits the current form and resets it for another
+                    // transaction without dismissing the sheet.
+                    if !isEditing {
+                        saveAndAddAnotherButton
+                            .padding(.bottom, 24)
+                    }
                 }
                 .padding(.top, 8)
             }
@@ -246,6 +267,72 @@ struct AddTransactionSheet: View {
             }
             resetSplitsToEven()
         }
+        .sheet(isPresented: $showingCopyPicker) {
+            CopyTransactionPickerSheet { source in
+                prefill(from: source)
+            }
+            .environment(appState)
+            .presentationDetents([.large])
+            .presentationBackground(AppTheme.bg)
+        }
+    }
+
+    /// "Copy from recent" capsule shown at the top of the form in add mode.
+    /// Tapping opens `CopyTransactionPickerSheet`; pick a row to pre-fill
+    /// every field on this form (with a fresh id + today's date).
+    private var copyFromRecentButton: some View {
+        HStack {
+            Spacer()
+            Button {
+                showingCopyPicker = true
+            } label: {
+                HStack(spacing: 8) {
+                    Image(systemName: "doc.on.doc")
+                        .font(.system(size: 13, weight: .semibold))
+                    Text("Copy from recent")
+                        .font(.system(size: 14, weight: .semibold))
+                }
+                .foregroundStyle(AppTheme.accent)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(
+                    Capsule().fill(AppTheme.text.opacity(0.05))
+                )
+            }
+            .buttonStyle(.plain)
+            Spacer()
+        }
+    }
+
+    /// Secondary "Save and add another" capsule rendered below the form.
+    /// Hidden when the form isn't valid yet so the user can't tap a
+    /// no-op. Visual treatment matches the empty-state CTAs (capsule with
+    /// accent text + muted fill) so it feels like a clear power-user
+    /// affordance rather than a primary action.
+    private var saveAndAddAnotherButton: some View {
+        HStack {
+            Spacer()
+            Button {
+                submit(keepOpen: true)
+            } label: {
+                HStack(spacing: 8) {
+                    Image(systemName: "plus")
+                        .font(.system(size: 13, weight: .semibold))
+                    Text("Save and add another")
+                        .font(.system(size: 15, weight: .semibold))
+                }
+                .foregroundStyle(canAdd ? AppTheme.accent : AppTheme.text.opacity(0.36))
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+                .background(
+                    Capsule().fill(AppTheme.text.opacity(0.05))
+                )
+            }
+            .buttonStyle(.plain)
+            .disabled(!canAdd)
+            .animation(.easeOut(duration: 0.12), value: canAdd)
+            Spacer()
+        }
     }
 
     private var footerCaption: String {
@@ -304,42 +391,7 @@ struct AddTransactionSheet: View {
                     .buttonStyle(.plain)
                 Spacer()
                 Button(actionLabel) {
-                    guard let parsed = parsedAmount else { return }
-                    let cents: Int64
-                    if let editing, amountText == originalAmountText {
-                        // User didn't touch the amount field — preserve the
-                        // stored cents exactly (no FX round-trip drift).
-                        cents = editing.amount
-                    } else {
-                        cents = Money.toUSDCents(parsed,
-                                                 from: appState.currency,
-                                                 rate: appState.rate(for: appState.currency))
-                    }
-                    // Personal scope forces a single owner (the current user)
-                    // and nil household + no splits.
-                    let resolvedOwners: Set<User.ID> = scope == .personal
-                        ? [appState.currentUserID]
-                        : selectedOwners
-                    let resolvedSplits: [User.ID: Decimal]? =
-                        (scope == .shared && showsSplit) ? parsedSplits : nil
-                    let resolvedHousehold: Household.ID? = scope == .personal
-                        ? nil
-                        : appState.currentHouseholdID
-                    let tx = Transaction(
-                        id: editing?.id ?? UUID(),
-                        merchant: merchant.trimmingCharacters(in: .whitespaces),
-                        category: kind == .income ? .income : category,
-                        kind: kind,
-                        amount: cents,
-                        scope: scope,
-                        ownerIDs: resolvedOwners,
-                        splits: resolvedSplits,
-                        source: source,
-                        date: date,
-                        householdID: resolvedHousehold,
-                        createdBy: editing?.createdBy ?? appState.currentUserID
-                    )
-                    onSubmit(tx)
+                    submit(keepOpen: false)
                 }
                 .font(.system(size: 17, weight: .semibold))
                 .foregroundStyle(canAdd ? AppTheme.accent : AppTheme.text.opacity(0.36))
@@ -351,6 +403,124 @@ struct AddTransactionSheet: View {
         .padding(.horizontal, 20)
         .padding(.top, 16)
         .padding(.bottom, 8)
+    }
+
+    /// Build a Transaction from the current form state, hand it to the
+    /// parent, and either dismiss or reset for another entry. Returns
+    /// nothing — both paths run side effects.
+    private func submit(keepOpen: Bool) {
+        guard let parsed = parsedAmount else { return }
+        let cents: Int64
+        if let editing, amountText == originalAmountText {
+            // User didn't touch the amount field — preserve the stored cents
+            // exactly (no FX round-trip drift).
+            cents = editing.amount
+        } else {
+            cents = Money.toUSDCents(parsed,
+                                     from: appState.currency,
+                                     rate: appState.rate(for: appState.currency))
+        }
+        // Personal scope forces a single owner (the current user) and nil
+        // household + no splits.
+        let resolvedOwners: Set<User.ID> = scope == .personal
+            ? [appState.currentUserID]
+            : selectedOwners
+        let resolvedSplits: [User.ID: Decimal]? =
+            (scope == .shared && showsSplit) ? parsedSplits : nil
+        let resolvedHousehold: Household.ID? = scope == .personal
+            ? nil
+            : appState.currentHouseholdID
+        let tx = Transaction(
+            id: editing?.id ?? UUID(),
+            merchant: merchant.trimmingCharacters(in: .whitespaces),
+            category: kind == .income ? .income : category,
+            kind: kind,
+            amount: cents,
+            scope: scope,
+            ownerIDs: resolvedOwners,
+            splits: resolvedSplits,
+            source: source,
+            date: date,
+            householdID: resolvedHousehold,
+            createdBy: editing?.createdBy ?? appState.currentUserID
+        )
+        onSubmit(tx, keepOpen)
+        if keepOpen {
+            resetFormForAnotherEntry()
+        }
+    }
+
+    /// Pre-fill every field from an existing transaction (the "copy from
+    /// recent" gesture). Always uses today's date — the intent is "make a
+    /// similar transaction now," not "duplicate the same one at the same
+    /// historical moment." Owner set is intersected with current household
+    /// membership so a removed member doesn't get re-added as an owner.
+    private func prefill(from source: Transaction) {
+        merchant = source.merchant
+        kind = source.kind
+        if source.kind == .expense {
+            category = source.category
+        }
+        scope = source.householdID == nil ? .personal : .shared
+        self.source = source.source
+        date = .now
+
+        // Amount: convert stored USD cents into the user's current display
+        // currency so the field reads in the same units the rest of the
+        // sheet uses.
+        let currency = appState.currency
+        let rate = appState.rate(for: currency)
+        let display = Money.toDisplayAmount(cents: source.amount,
+                                            in: currency,
+                                            rate: rate)
+        let formatted = String(
+            format: "%.\(currency.fractionDigits)f",
+            NSDecimalNumber(decimal: display).doubleValue
+        )
+        amountText = formatted
+        originalAmountText = ""
+
+        // Owners: only meaningful for shared; intersect with current
+        // household membership so a removed member doesn't pollute the
+        // selection.
+        if scope == .shared {
+            let memberIDs = Set(appState.householdMembers.map(\.id))
+            let validOwners = source.ownerIDs.intersection(memberIDs)
+            selectedOwners = validOwners.isEmpty
+                ? Set(appState.householdMembers.first.map { [$0.id] } ?? [])
+                : validOwners
+            // Split percentages — only meaningful when source had explicit
+            // ones AND the resulting owner set is multi-member.
+            if let sourceSplits = source.splits,
+               validOwners.count >= 2 {
+                splitPercents = Dictionary(uniqueKeysWithValues:
+                    sourceSplits
+                        .filter { validOwners.contains($0.key) }
+                        .map { ($0.key, Self.formatPercentForField($0.value)) }
+                )
+            } else {
+                resetSplitsToEven()
+            }
+        } else {
+            selectedOwners = [appState.currentUserID]
+            splitPercents = [:]
+        }
+    }
+
+    /// After "Save and add another", clear the transaction-specific fields
+    /// (merchant, amount, category, splits) and keep the contextual ones
+    /// (scope, kind, source, date, owners) — the user is likely batch-entering
+    /// related transactions and changing source/date for every one is hostile.
+    private func resetFormForAnotherEntry() {
+        merchant = ""
+        amountText = ""
+        originalAmountText = ""
+        // Keep income's locked category; reset expense to a neutral default.
+        if kind == .expense { category = .groceries }
+        // Splits get re-derived from the current owner set on next render via
+        // resetSplitsToEven (called from onChange / explicitly here).
+        resetSplitsToEven()
+        amountFocused = true
     }
 
     // MARK: - Static formatters (used by init to pre-fill from `editing`)
@@ -786,7 +956,7 @@ private struct OwnerChipView: View {
     Color.gray.opacity(0.2)
         .ignoresSafeArea()
         .sheet(isPresented: .constant(true)) {
-            AddTransactionSheet { _ in }
+            AddTransactionSheet { _, _ in }
                 .environment(AppState())
                 .presentationBackground(AppTheme.bg)
         }
@@ -796,7 +966,7 @@ private struct OwnerChipView: View {
     Color.gray.opacity(0.2)
         .ignoresSafeArea()
         .sheet(isPresented: .constant(true)) {
-            AddTransactionSheet { _ in }
+            AddTransactionSheet { _, _ in }
                 .environment(AppState())
                 .presentationBackground(AppTheme.bg)
         }

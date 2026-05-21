@@ -74,9 +74,21 @@ struct TransactionsView: View {
         !appState.transactions.isEmpty
     }
 
+    /// Three-way render state for the body. `loading` only fires when we
+    /// have nothing yet AND the initial bootstrap is still in flight —
+    /// it prevents the misleading "No transactions yet" empty state from
+    /// flashing during sign-in. Once the fetch lands, we transition to
+    /// either `empty` (real first-run UX) or `populated`.
+    private enum LoadState { case loading, empty, populated }
+    private var loadState: LoadState {
+        if hasAnyTransactions { return .populated }
+        return appState.isLoadingInitialData ? .loading : .empty
+    }
+
     var body: some View {
         ScrollView {
-            if hasAnyTransactions {
+            switch loadState {
+            case .populated:
                 LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
                     ForEach(filteredGroups) { group in
                         Section(header: DayHeader(group: group)) {
@@ -85,16 +97,20 @@ struct TransactionsView: View {
                     }
                     Color.clear.frame(height: 60)
                 }
-            } else {
+            case .loading:
+                TransactionSkeletonList()
+            case .empty:
                 emptyState
             }
         }
         .background(AppTheme.bg)
         .safeAreaInset(edge: .top, spacing: 0) { titleAndSearch }
         .sheet(isPresented: $showingAddTransaction) {
-            AddTransactionSheet { tx in
+            AddTransactionSheet { tx, keepOpen in
                 appState.addTransaction(tx)
-                showingAddTransaction = false
+                if !keepOpen {
+                    showingAddTransaction = false
+                }
             }
             .environment(appState)
             .presentationDetents([.large])
