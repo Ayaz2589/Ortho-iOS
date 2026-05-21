@@ -47,11 +47,21 @@ struct MortgageInfo: Hashable, Codable {
     ///   M = P · r(1+r)^n / ((1+r)^n − 1)
     /// where P is principal in dollars, r is monthly rate, n is total months.
     /// Returns the payment in USD cents.
+    ///
+    /// Zero-interest case (`r == 0`) falls back to flat amortization
+    /// (`principal / months`) — the standard formula divides by zero. Rare in
+    /// practice (family loans, employer assistance) but covered so the
+    /// downstream balance / amortization math stays consistent.
     var monthlyPaymentCents: Int64 {
-        let p = Double(originalLoan) / 100.0
+        guard totalMonths > 0 else { return 0 }
         let r = monthlyRate
+        guard r > 0 else {
+            return Int64(
+                (Double(originalLoan) / Double(totalMonths)).rounded()
+            )
+        }
+        let p = Double(originalLoan) / 100.0
         let n = Double(totalMonths)
-        guard r > 0, n > 0 else { return 0 }
         let factor = pow(1 + r, n)
         let dollarsPerMonth = p * (r * factor) / (factor - 1)
         return Int64((dollarsPerMonth * 100).rounded())

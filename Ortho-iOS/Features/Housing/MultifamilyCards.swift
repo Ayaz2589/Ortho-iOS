@@ -75,22 +75,17 @@ struct MultifamilyUnitsCard: View {
 
 // MARK: - Net balance card
 
-/// Compares total rental income (sum of unit rents) against the mortgage
-/// monthly payment. Positive = property generates cashflow; negative =
-/// landlord is subsidizing it.
+/// Compares **collected** rental income (occupied units only) against the
+/// mortgage's principal + interest payment. Positive = property generates
+/// cashflow; negative = landlord is subsidizing it. Math lives on
+/// `Property` so this view stays a pure renderer.
 struct MultifamilyNetBalanceCard: View {
     let property: Property
     @Environment(AppState.self) private var appState
 
-    private var totalIncomeCents: Int64 {
-        property.units.reduce(0) { $0 + $1.monthlyRent }
-    }
-    private var mortgageCents: Int64 {
-        property.mortgage?.monthlyPaymentCents ?? 0
-    }
-    private var netCents: Int64 {
-        totalIncomeCents - mortgageCents
-    }
+    private var totalIncomeCents: Int64 { property.occupiedMonthlyRentCents }
+    private var mortgageCents: Int64 { property.mortgage?.monthlyPaymentCents ?? 0 }
+    private var netCents: Int64 { property.netMonthlyBalanceCents }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {

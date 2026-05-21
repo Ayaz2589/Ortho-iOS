@@ -99,6 +99,29 @@ struct Property: Identifiable, Hashable, Codable {
     }
 }
 
+// MARK: - Multifamily derived financials
+
+extension Property {
+    /// Sum of configured rents for **occupied** units only. Vacant units
+    /// contribute zero — their `monthlyRent` is the asking number, not
+    /// money you're collecting. Returns 0 for non-multifamily properties.
+    var occupiedMonthlyRentCents: Int64 {
+        units
+            .filter { !$0.isVacant }
+            .reduce(0) { $0 + $1.monthlyRent }
+    }
+
+    /// Multifamily net monthly cashflow — occupied rent minus the
+    /// mortgage's principal + interest payment. P&I only; taxes, insurance,
+    /// HOA, PMI, and maintenance reserves aren't modeled. Returns 0 for
+    /// non-multifamily properties (no rental-income side).
+    var netMonthlyBalanceCents: Int64 {
+        guard kind == .multifamily else { return 0 }
+        let mortgagePayment = mortgage?.monthlyPaymentCents ?? 0
+        return occupiedMonthlyRentCents - mortgagePayment
+    }
+}
+
 extension Property {
     /// Seeded so the Housing tab isn't an empty state on first launch.
     /// Numbers picked to produce a realistic mid-life mortgage view (closed
