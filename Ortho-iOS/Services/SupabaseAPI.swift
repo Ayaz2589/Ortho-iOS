@@ -59,7 +59,15 @@ enum SupabaseCoding {
         return f
     }()
 
-    private static let dateOnly: DateFormatter = {
+    private static let dateOnly: DateFormatter = SupabaseDateFormatters.dateOnly
+}
+
+/// Formatters reused by API DTOs that surface Postgres `date` columns
+/// (lease dates, closing dates, rental-payment dates). Encoded as
+/// `"yyyy-MM-dd"` strings on the wire — converting to `Date` at the DTO
+/// boundary keeps the rest of the codebase using `Date` end-to-end.
+enum SupabaseDateFormatters {
+    static let dateOnly: DateFormatter = {
         let f = DateFormatter()
         f.dateFormat = "yyyy-MM-dd"
         f.calendar = Calendar(identifier: .iso8601)
@@ -67,4 +75,12 @@ enum SupabaseCoding {
         f.locale = Locale(identifier: "en_US_POSIX")
         return f
     }()
+
+    static func string(from date: Date) -> String {
+        dateOnly.string(from: date)
+    }
+
+    static func date(from string: String) -> Date? {
+        dateOnly.date(from: string)
+    }
 }

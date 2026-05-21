@@ -8,7 +8,7 @@ finish so the history is preserved.
 
 ## In progress
 
-_(none — initial schema drafted + Swift models updated to match; ready to apply SQL and start data-layer migration)_
+_(none — full data-layer migration done; Transactions / Housing / Settings now round-trip through Supabase)_
 
 ---
 
@@ -51,12 +51,12 @@ _(none — initial schema drafted + Swift models updated to match; ready to appl
 ### Data layer
 
 - [x] Thin API client wrapper around `supabase-swift` — new `Services/` folder with `SupabaseAPI.swift` (error types + date strategies) and per-resource API structs
-- [x] Migrate `AppState.transactions` CRUD to Supabase (respecting RLS / `created_by`). `TransactionsAPI` handles the transactions ↔ transaction_shares split; `AppState.addTransaction/updateTransaction/deleteTransaction` are now optimistic + rollback on failure. Manual `loadTransactionsFromServer()` triggered from the Developer section.
-- [ ] Migrate `AppState.properties` CRUD
-- [ ] Migrate `AppState.rentalPayments` CRUD
-- [ ] Migrate `AppState.cards` CRUD
-- [ ] Migrate household + member management (creates, role checks, member removal preserves history)
-- [x] Optimistic update plumbing with rollback-on-failure — landed for transactions (pattern: snapshot → optimistic mutation → background Task → rollback + `dataError` on throw). Apply same pattern to the remaining resources as each is migrated.
+- [x] Migrate `AppState.transactions` CRUD to Supabase (respecting RLS / `created_by`). `TransactionsAPI` handles the transactions ↔ transaction_shares split; `AppState.addTransaction/updateTransaction/deleteTransaction` are now optimistic + rollback on failure.
+- [x] Migrate `AppState.properties` CRUD — `PropertiesAPI` coordinates `properties` + `mortgage_info` + `lease_info` + `units` (parallel reads, sub-table delete-and-reinsert on update, FK cascade on delete). Date columns encoded as `yyyy-MM-dd` strings.
+- [x] Migrate `AppState.rentalPayments` CRUD — `RentalPaymentsAPI` (fetch/create/delete, no update — matches UI).
+- [x] Migrate `AppState.cards` CRUD — `CardsAPI` (fetch/create/delete, no update — cards are immutable post-creation).
+- [x] Migrate household + member management — `HouseholdsAPI` with `findOrCreate` (used by bootstrap), `updateName`, `removeMember`. **Add-member is disabled** in `HouseholdView` until the Invitations flow lands (in-memory User would FK-violate `public.users.id`).
+- [x] Optimistic update plumbing with rollback-on-failure — applied to every CRUD method across all resources. Pattern: snapshot → optimistic mutation → background Task → rollback + `dataError` on throw.
 
 ### Invitations
 
@@ -118,6 +118,7 @@ _(none — initial schema drafted + Swift models updated to match; ready to appl
 - [x] **2026-05-21** — Data-layer migration **phase 1: transactions only**. Added `Services/` folder with `SupabaseAPI.swift` (`SupabaseAPIError`, date strategies) and `TransactionsAPI.swift` (fetch/create/update/delete with `TransactionRecord` + `TransactionShareRow` DTOs). `AppState.addTransaction/updateTransaction/deleteTransaction` are now optimistic-with-rollback against the server. New `loadTransactionsFromServer()` triggered manually from the Developer section ("Sync from server" row).
 - [x] **2026-05-21** — Auth bootstrap added. First sign-in now (1) upserts the `public.users` row so the `transactions.created_by` FK resolves, (2) finds or creates a default "Home" household + a `household_members` row with `role = 'owner'`, and (3) wipes the in-memory sample data (Maya / Jordan / Home seed UUIDs that never existed on the server). Without this, every insert FK-failed and rolled back — added rows "vanished after a beat."
 - [x] **2026-05-21** — **Transaction round-trip verified end-to-end.** Added a shared transaction in the app → `transactions` + `transaction_shares` row counts went 0 → 1 on the server → `loadTransactionsFromServer()` returned it intact, identical in the UI. Encode / RLS / decode all green.
+- [x] **2026-05-21** — Full data-layer migration shipped: `CardsAPI` + `PropertiesAPI` (coordinates 4 tables — properties / mortgage_info / lease_info / units, dates as `yyyy-MM-dd` strings) + `RentalPaymentsAPI` + `HouseholdsAPI` (extracts the inline bootstrap DTOs and adds rename + remove-member). Every `AppState` CRUD method now optimistic + server-synced with rollback. New `loadAllFromServer()` parallel-fetcher used by both bootstrap and the renamed "Sync all from server" Developer affordance. Add-member is disabled in `HouseholdView` pending the Invitations flow.
 
 ---
 

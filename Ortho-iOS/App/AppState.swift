@@ -260,6 +260,19 @@ final class AppState {
         }
     }
 
+    /// Pull every server-backed collection (transactions, cards, properties
+    /// + housing sub-tables, rental payments) in parallel and replace the
+    /// in-memory copy. Used by bootstrap + the Developer "Sync all from
+    /// server" affordance.
+    func loadAllFromServer() async {
+        await withTaskGroup(of: Void.self) { group in
+            group.addTask { await self.loadTransactionsFromServer() }
+            group.addTask { await self.loadCardsFromServer() }
+            group.addTask { await self.loadPropertiesFromServer() }
+            group.addTask { await self.loadRentalPaymentsFromServer() }
+        }
+    }
+
     var groups: [TransactionGroup] {
         TransactionGroup.group(transactions)
     }
@@ -465,12 +478,45 @@ final class AppState {
 
     // MARK: - Cards
 
+    private var cardsAPI: CardsAPI {
+        CardsAPI(client: supabase)
+    }
+
     func addCard(_ card: Card) {
         cards.append(card)
+        Task {
+            do {
+                try await cardsAPI.create(card)
+            } catch {
+                await MainActor.run {
+                    cards.removeAll { $0.id == card.id }
+                    dataError = error.localizedDescription
+                }
+            }
+        }
     }
 
     func deleteCard(_ card: Card) {
         cards.removeAll { $0.id == card.id }
+        Task {
+            do {
+                try await cardsAPI.delete(id: card.id)
+            } catch {
+                await MainActor.run {
+                    cards.append(card)
+                    dataError = error.localizedDescription
+                }
+            }
+        }
+    }
+
+    func loadCardsFromServer() async {
+        do {
+            let fetched = try await cardsAPI.fetch()
+            await MainActor.run { cards = fetched }
+        } catch {
+            await MainActor.run { dataError = error.localizedDescription }
+        }
     }
 
     // MARK: - Households
@@ -481,15 +527,32 @@ final class AppState {
         return households.first { $0.id == id }
     }
 
-    /// Rename the active household. No-op if no active household.
+    /// Rename the active household — optimistic local mutation, server sync,
+    /// rollback on failure. No-op if no active household.
     func updateHouseholdName(_ name: String) {
         guard let id = currentHouseholdID,
               let idx = households.firstIndex(where: { $0.id == id })
         else { return }
+        let previous = households[idx].name
         households[idx].name = name
+        Task {
+            do {
+                try await householdsAPI.updateName(name, householdID: id)
+            } catch {
+                await MainActor.run {
+                    if let i = households.firstIndex(where: { $0.id == id }) {
+                        households[i].name = previous
+                    }
+                    dataError = error.localizedDescription
+                }
+            }
+        }
     }
 
     /// Append a member to the active household. Used by the Add member flow.
+    /// Note: the surface that called this (`HouseholdView` → `AddUserSheet`)
+    /// is disabled until the Invitations flow lands, so this is currently
+    /// unreachable from the UI. Kept for symmetry with the membership model.
     func addMemberToCurrentHousehold(_ userID: User.ID) {
         guard let id = currentHouseholdID,
               let idx = households.firstIndex(where: { $0.id == id })
@@ -499,15 +562,28 @@ final class AppState {
         }
     }
 
-    /// Remove a member from the active household. The `User` record stays in
-    /// `users` so existing transactions they participate in continue to
-    /// resolve to a real name + palette. Caller is responsible for invariants
-    /// (e.g. don't remove the last member).
+    /// Remove a member from the active household — optimistic + server sync.
+    /// The `User` record stays in `users` so existing transactions they
+    /// participate in continue to resolve to a real name + palette. Caller
+    /// is responsible for invariants (e.g. don't remove the last member).
     func removeMemberFromCurrentHousehold(_ userID: User.ID) {
         guard let id = currentHouseholdID,
               let idx = households.firstIndex(where: { $0.id == id })
         else { return }
+        let previousMembers = households[idx].memberIDs
         households[idx].memberIDs.removeAll { $0 == userID }
+        Task {
+            do {
+                try await householdsAPI.removeMember(userID: userID, from: id)
+            } catch {
+                await MainActor.run {
+                    if let i = households.firstIndex(where: { $0.id == id }) {
+                        households[i].memberIDs = previousMembers
+                    }
+                    dataError = error.localizedDescription
+                }
+            }
+        }
     }
 
     /// Members of the active household, resolved against `users` in the
@@ -520,29 +596,111 @@ final class AppState {
 
     // MARK: - Properties
 
+    private var propertiesAPI: PropertiesAPI {
+        PropertiesAPI(client: supabase)
+    }
+
     func addProperty(_ p: Property) {
         properties.append(p)
+        Task {
+            do {
+                try await propertiesAPI.create(p)
+            } catch {
+                await MainActor.run {
+                    properties.removeAll { $0.id == p.id }
+                    dataError = error.localizedDescription
+                }
+            }
+        }
     }
 
     func updateProperty(_ p: Property) {
         guard let idx = properties.firstIndex(where: { $0.id == p.id }) else { return }
+        let previous = properties[idx]
         properties[idx] = p
+        Task {
+            do {
+                try await propertiesAPI.update(p)
+            } catch {
+                await MainActor.run {
+                    if let i = properties.firstIndex(where: { $0.id == p.id }) {
+                        properties[i] = previous
+                    }
+                    dataError = error.localizedDescription
+                }
+            }
+        }
     }
 
     func deleteProperty(_ p: Property) {
+        // Snapshot for rollback. Local cascade mirrors the server's FK
+        // cascade on `rental_payments.property_id`.
+        let cascadedPayments = rentalPayments.filter { $0.propertyID == p.id }
         properties.removeAll { $0.id == p.id }
-        // Cascade: drop the property's rent-payment history too.
         rentalPayments.removeAll { $0.propertyID == p.id }
+        Task {
+            do {
+                try await propertiesAPI.delete(id: p.id)
+            } catch {
+                await MainActor.run {
+                    properties.append(p)
+                    rentalPayments.append(contentsOf: cascadedPayments)
+                    dataError = error.localizedDescription
+                }
+            }
+        }
+    }
+
+    func loadPropertiesFromServer() async {
+        do {
+            let fetched = try await propertiesAPI.fetch()
+            await MainActor.run { properties = fetched }
+        } catch {
+            await MainActor.run { dataError = error.localizedDescription }
+        }
     }
 
     // MARK: - Rental payments
 
+    private var rentalPaymentsAPI: RentalPaymentsAPI {
+        RentalPaymentsAPI(client: supabase)
+    }
+
     func addRentalPayment(_ payment: RentalPayment) {
         rentalPayments.append(payment)
+        Task {
+            do {
+                try await rentalPaymentsAPI.create(payment)
+            } catch {
+                await MainActor.run {
+                    rentalPayments.removeAll { $0.id == payment.id }
+                    dataError = error.localizedDescription
+                }
+            }
+        }
     }
 
     func deleteRentalPayment(_ payment: RentalPayment) {
         rentalPayments.removeAll { $0.id == payment.id }
+        Task {
+            do {
+                try await rentalPaymentsAPI.delete(id: payment.id)
+            } catch {
+                await MainActor.run {
+                    rentalPayments.append(payment)
+                    dataError = error.localizedDescription
+                }
+            }
+        }
+    }
+
+    func loadRentalPaymentsFromServer() async {
+        do {
+            let fetched = try await rentalPaymentsAPI.fetch()
+            await MainActor.run { rentalPayments = fetched }
+        } catch {
+            await MainActor.run { dataError = error.localizedDescription }
+        }
     }
 
     /// Payments for a given property, newest first.
@@ -706,6 +864,10 @@ final class AppState {
         }
     }
 
+    private var householdsAPI: HouseholdsAPI {
+        HouseholdsAPI(client: supabase)
+    }
+
     private func bootstrapUserSession(authID: UUID, email: String?) async {
         let displayName = email?
             .components(separatedBy: "@").first?
@@ -725,45 +887,9 @@ final class AppState {
                 .upsert(me, onConflict: "id")
                 .execute()
 
-            // 2. Find or create the user's default household.
-            let memberships: [HouseholdMembershipRow] = try await supabase
-                .from("household_members")
-                .select("household_id")
-                .eq("user_id", value: authID)
-                .execute()
-                .value
-
-            let householdID: UUID
-            let householdName: String
-            if let first = memberships.first {
-                householdID = first.householdID
-                let rows: [HouseholdNameRow] = try await supabase
-                    .from("households")
-                    .select("name")
-                    .eq("id", value: householdID)
-                    .execute()
-                    .value
-                householdName = rows.first?.name ?? "Home"
-            } else {
-                householdID = UUID()
-                householdName = "Home"
-                try await supabase
-                    .from("households")
-                    .insert(HouseholdInsertRow(
-                        id: householdID,
-                        ownerID: authID,
-                        name: householdName
-                    ))
-                    .execute()
-                try await supabase
-                    .from("household_members")
-                    .insert(HouseholdMemberInsertRow(
-                        householdID: householdID,
-                        userID: authID,
-                        role: .owner
-                    ))
-                    .execute()
-            }
+            // 2. Find or create the user's default household via HouseholdsAPI.
+            let (householdID, householdName) = try await householdsAPI
+                .findOrCreate(for: authID)
 
             // 3. Replace in-memory sample data with the server's view. The
             // sample UUIDs (`User.mayaSample.id`, `Household.homeSample.id`)
@@ -784,9 +910,8 @@ final class AppState {
                 rentalPayments = []
             }
 
-            // 4. Load live transactions (cards / properties come once their
-            // server CRUD is wired up).
-            await loadTransactionsFromServer()
+            // 4. Load live data from the server.
+            await loadAllFromServer()
         } catch {
             await MainActor.run {
                 dataError = "Bootstrap failed: \(error.localizedDescription)"
@@ -846,39 +971,3 @@ private struct FloatRate: Decodable {
     let rate: Double
 }
 
-// MARK: - Bootstrap DTOs
-
-/// One column of `household_members` — enough to find which household(s)
-/// the signed-in user belongs to.
-private struct HouseholdMembershipRow: Decodable {
-    let householdID: UUID
-    enum CodingKeys: String, CodingKey {
-        case householdID = "household_id"
-    }
-}
-
-private struct HouseholdNameRow: Decodable {
-    let name: String
-}
-
-private struct HouseholdInsertRow: Encodable {
-    let id: UUID
-    let ownerID: UUID
-    let name: String
-    enum CodingKeys: String, CodingKey {
-        case id
-        case ownerID = "owner_id"
-        case name
-    }
-}
-
-private struct HouseholdMemberInsertRow: Encodable {
-    let householdID: UUID
-    let userID: UUID
-    let role: Role
-    enum CodingKeys: String, CodingKey {
-        case householdID = "household_id"
-        case userID = "user_id"
-        case role
-    }
-}

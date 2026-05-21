@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// Filter pill above the activity list. Composes (AND) with the merchant
-/// search filter.
+/// Filter pill above the transactions list. Composes (AND) with the
+/// merchant search filter.
 enum TransactionScopeFilter: String, CaseIterable, Hashable, Identifiable {
     case all, shared, personal
     var id: String { rawValue }
@@ -14,8 +14,8 @@ enum TransactionScopeFilter: String, CaseIterable, Hashable, Identifiable {
     }
 }
 
-/// Day-grouped transactions list — the activity tab. Reads users + transactions
-/// from `AppState` so adds/edits in other tabs reflect here.
+/// Day-grouped transactions list — the Transactions tab. Reads users +
+/// transactions from `AppState` so adds/edits in other tabs reflect here.
 struct TransactionsView: View {
     var density: Density = .comfortable
 
@@ -67,15 +67,26 @@ struct TransactionsView: View {
         return false
     }
 
+    /// True when there's at least one transaction in the store — used to
+    /// decide whether to render the day list or the empty state, and to
+    /// hide the search + scope filter when there's nothing to filter.
+    private var hasAnyTransactions: Bool {
+        !appState.transactions.isEmpty
+    }
+
     var body: some View {
         ScrollView {
-            LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
-                ForEach(filteredGroups) { group in
-                    Section(header: DayHeader(group: group)) {
-                        groupCard(group)
+            if hasAnyTransactions {
+                LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
+                    ForEach(filteredGroups) { group in
+                        Section(header: DayHeader(group: group)) {
+                            groupCard(group)
+                        }
                     }
+                    Color.clear.frame(height: 60)
                 }
-                Color.clear.frame(height: 60)
+            } else {
+                emptyState
             }
         }
         .background(AppTheme.bg)
@@ -129,7 +140,7 @@ struct TransactionsView: View {
     private var titleAndSearch: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .firstTextBaseline) {
-                Text("Activity")
+                Text("Transactions")
                     .font(.system(size: 32, weight: .bold))
                     .tracking(-0.6)
                     .foregroundStyle(AppTheme.text)
@@ -138,19 +149,62 @@ struct TransactionsView: View {
             }
             .padding(.horizontal, 20)
             .padding(.top, 4)
-            .padding(.bottom, 6)
+            .padding(.bottom, hasAnyTransactions ? 6 : 24)
 
-            SearchField(text: $query, placeholder: "Search transactions")
-                .padding(.vertical, 8)
+            // Hide the search field + scope filter when there's nothing to
+            // filter — keeps the empty state visually clean and matches
+            // the chromeless Housing header in its empty branch.
+            if hasAnyTransactions {
+                SearchField(text: $query, placeholder: "Search transactions")
+                    .padding(.vertical, 8)
 
-            scopeFilterPill
-                .padding(.horizontal, 16)
-                .padding(.bottom, 8)
+                scopeFilterPill
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 8)
+            }
         }
         .background(AppTheme.bg)
     }
 
-    /// All | Shared | Personal segmented pill above the activity list.
+    // MARK: - Empty state
+
+    /// Shown when `appState.transactions` is empty. Mirrors `HousingView`'s
+    /// empty-state grammar — muted SF Symbol, headline, supporting copy,
+    /// pill-shaped CTA.
+    private var emptyState: some View {
+        VStack(alignment: .center, spacing: 14) {
+            Image(systemName: "arrow.up.arrow.down")
+                .font(.system(size: 40, weight: .regular))
+                .foregroundStyle(AppTheme.text.opacity(0.36))
+                .padding(.top, 60)
+            Text("No transactions yet")
+                .font(.system(size: 17, weight: .semibold))
+                .foregroundStyle(AppTheme.text)
+            Text("Log an expense or income to see it grouped by day here.")
+                .font(.system(size: 14))
+                .multilineTextAlignment(.center)
+                .foregroundStyle(AppTheme.text.opacity(0.58))
+                .padding(.horizontal, 40)
+                .lineSpacing(2)
+            Button {
+                showingAddTransaction = true
+            } label: {
+                Text("Add transaction")
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(AppTheme.accent)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(
+                        Capsule().fill(AppTheme.text.opacity(0.05))
+                    )
+            }
+            .buttonStyle(.plain)
+            .padding(.top, 4)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    /// All | Shared | Personal segmented pill above the transactions list.
     private var scopeFilterPill: some View {
         HStack(spacing: 4) {
             ForEach(TransactionScopeFilter.allCases) { f in
@@ -181,8 +235,9 @@ struct TransactionsView: View {
         .animation(.easeOut(duration: 0.15), value: scopeFilter)
     }
 
-    /// Circular "+" button next to the Activity title. Same visual treatment
-    /// as `AddUserRowView`'s leading tile so the affordance feels consistent.
+    /// Circular "+" button next to the Transactions title. Same visual
+    /// treatment as `AddUserRowView`'s leading tile so the affordance feels
+    /// consistent.
     private var addButton: some View {
         Button { showingAddTransaction = true } label: {
             ZStack {

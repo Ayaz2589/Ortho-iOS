@@ -5,7 +5,11 @@ import Foundation
 /// household is the renter). Each kind uses a different subset of the
 /// optional fields below.
 enum PropertyKind: String, CaseIterable, Hashable, Codable, Identifiable {
-    case primaryHome, multifamily, rental
+    // Raw values match the Postgres `property_kind` enum so Codable
+    // round-trips cleanly without a CodingKeys override.
+    case primaryHome = "primary_home"
+    case multifamily = "multifamily"
+    case rental      = "rental"
 
     var id: String { rawValue }
 

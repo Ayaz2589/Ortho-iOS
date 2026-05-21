@@ -109,7 +109,7 @@ struct SettingsView: View {
                     .padding(.horizontal, 16)
                     .padding(.bottom, 8)
 
-                    Text("Only visible in DEBUG builds. \"Load demo data\" replaces local users, transactions, cards, and properties with a 6-month sample. \"Sync from server\" replaces local transactions with what Supabase returns for the signed-in user.")
+                    Text("Only visible in DEBUG builds. \"Load demo data\" replaces local users, transactions, cards, and properties with a 6-month sample. \"Sync all from server\" replaces local data (transactions, cards, properties, rental payments) with what Supabase returns for the signed-in user.")
                         .font(.system(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
@@ -206,7 +206,7 @@ struct SettingsView: View {
 
     private var syncFromServerRow: some View {
         Button {
-            Task { await appState.loadTransactionsFromServer() }
+            Task { await appState.loadAllFromServer() }
         } label: {
             HStack(spacing: 14) {
                 ZStack {
@@ -217,11 +217,11 @@ struct SettingsView: View {
                         .foregroundStyle(AppTheme.accent)
                 }
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("Sync from server")
+                    Text("Sync all from server")
                         .font(.system(size: 17, weight: .medium))
                         .tracking(-0.2)
                         .foregroundStyle(AppTheme.text)
-                    Text("Replace local transactions with Supabase data")
+                    Text("Replace local data with Supabase")
                         .font(.system(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.58))
                 }

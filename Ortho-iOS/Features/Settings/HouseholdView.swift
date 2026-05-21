@@ -8,7 +8,6 @@ struct HouseholdView: View {
     @Environment(AppState.self) private var appState
     @Environment(\.dismiss) private var dismiss
 
-    @State private var showingAddUser = false
     @State private var showingRenameHousehold = false
     @State private var pendingHouseholdName: String = ""
 
@@ -25,7 +24,13 @@ struct HouseholdView: View {
                 VStack(spacing: 0) {
                     householdNameRow
                     RowSeparator(density: .comfortable)
-                    ForEach(householdMembers) { u in
+                    // `AddUserRowView` is intentionally not rendered. Adding
+                    // members requires the invitation flow (server-issued
+                    // OTP / QR redeem via `accept_invite`) — building it
+                    // as an in-memory User would FK-violate `public.users.id
+                    // → auth.users.id` the moment one touched a shared
+                    // transaction. Coming with the Invitations work item.
+                    ForEach(Array(householdMembers.enumerated()), id: \.element.id) { idx, u in
                         UserRowView(
                             user: u,
                             detail: detail(for: u),
@@ -34,16 +39,17 @@ struct HouseholdView: View {
                                 ? { appState.removeMemberFromCurrentHousehold(u.id) }
                                 : nil
                         )
-                        RowSeparator(density: .comfortable)
+                        if idx < householdMembers.count - 1 {
+                            RowSeparator(density: .comfortable)
+                        }
                     }
-                    AddUserRowView { showingAddUser = true }
                 }
                 .background(AppTheme.surface)
                 .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                 .padding(.horizontal, 16)
                 .padding(.bottom, 12)
 
-                Text("Members can see all Shared transactions in this household. Personal transactions are visible only to you.")
+                Text("Members can see all Shared transactions in this household. Personal transactions are visible only to you. Inviting new members is coming soon.")
                     .font(.system(size: 13))
                     .foregroundStyle(AppTheme.text.opacity(0.36))
                     .lineSpacing(2)
@@ -78,15 +84,6 @@ struct HouseholdView: View {
             .padding(.top, 4)
             .padding(.bottom, 24)
             .background(AppTheme.bg)
-        }
-        .sheet(isPresented: $showingAddUser) {
-            AddUserSheet { newUser in
-                appState.addUser(newUser)
-                appState.addMemberToCurrentHousehold(newUser.id)
-                showingAddUser = false
-            }
-            .presentationDetents([.large])
-            .presentationBackground(AppTheme.bg)
         }
         .alert("Rename household", isPresented: $showingRenameHousehold) {
             TextField("Household name", text: $pendingHouseholdName)
