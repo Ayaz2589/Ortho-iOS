@@ -22,8 +22,24 @@ struct TransactionsView: View {
     @Environment(AppState.self) private var appState
     @State private var query: String = ""
     @State private var scopeFilter: TransactionScopeFilter = .all
-    @State private var showingAddTransaction = false
+    @State private var addSheetMode: AddSheetMode?
     @State private var selectedTransaction: Transaction?
+
+    /// Drives the AddTransactionSheet via a single `.sheet(item:)` modifier.
+    /// `.fresh` opens a blank form (the "+" button in the title); `.copying`
+    /// opens a form pre-filled from an existing transaction (the swipe-copy
+    /// action). Using one binding for both entry points keeps the sheet
+    /// presentation single-source-of-truth.
+    enum AddSheetMode: Identifiable {
+        case fresh
+        case copying(Transaction)
+        var id: String {
+            switch self {
+            case .fresh: return "fresh"
+            case .copying(let tx): return "copy-\(tx.id.uuidString)"
+            }
+        }
+    }
 
     /// Lazily filters each group's items by both the scope filter and the
     /// merchant search. Drops empty groups so headers never appear orphaned.
@@ -105,11 +121,15 @@ struct TransactionsView: View {
         }
         .background(AppTheme.bg)
         .safeAreaInset(edge: .top, spacing: 0) { titleAndSearch }
-        .sheet(isPresented: $showingAddTransaction) {
-            AddTransactionSheet { tx, keepOpen in
+        .sheet(item: $addSheetMode) { mode in
+            let copying: Transaction? = {
+                if case .copying(let tx) = mode { return tx }
+                return nil
+            }()
+            AddTransactionSheet(copying: copying) { tx, keepOpen in
                 appState.addTransaction(tx)
                 if !keepOpen {
-                    showingAddTransaction = false
+                    addSheetMode = nil
                 }
             }
             .environment(appState)
@@ -129,7 +149,8 @@ struct TransactionsView: View {
         VStack(spacing: 0) {
             ForEach(Array(group.items.enumerated()), id: \.element.id) { idx, tx in
                 SwipeActionRow(
-                    onDelete: { appState.deleteTransaction(tx) }
+                    onDelete: { appState.deleteTransaction(tx) },
+                    onCopy:   { addSheetMode = .copying(tx) }
                 ) {
                     // Include the separator inside the swipe container so
                     // it slides with the row instead of staying behind.
@@ -203,7 +224,7 @@ struct TransactionsView: View {
                 .padding(.horizontal, 40)
                 .lineSpacing(2)
             Button {
-                showingAddTransaction = true
+                addSheetMode = .fresh
             } label: {
                 Text("Add transaction")
                     .font(.system(size: 15, weight: .semibold))
@@ -255,7 +276,7 @@ struct TransactionsView: View {
     /// treatment as `AddUserRowView`'s leading tile so the affordance feels
     /// consistent.
     private var addButton: some View {
-        Button { showingAddTransaction = true } label: {
+        Button { addSheetMode = .fresh } label: {
             ZStack {
                 Circle().fill(AppTheme.text.opacity(0.05))
                     .frame(width: 36, height: 36)

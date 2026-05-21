@@ -12,6 +12,11 @@ struct AddTransactionSheet: View {
     /// transaction and submit replaces it (preserving the id). When nil, the
     /// sheet creates a new transaction.
     let editing: Transaction?
+    /// When non-nil, the sheet is in "create from copy" mode — fields
+    /// pre-fill from this source transaction but submit creates a brand
+    /// new row (no id reuse, date = today). Mutually exclusive with
+    /// `editing`; `editing` wins if both are passed.
+    let copying: Transaction?
     /// `keepOpen == true` when the user chose "Save and add another" so the
     /// parent should NOT dismiss the sheet — we'll reset the form internally
     /// for the next entry. Edit mode ignores the flag (single-tx by nature).
@@ -43,11 +48,16 @@ struct AddTransactionSheet: View {
     @FocusState private var amountFocused: Bool
 
     init(editing: Transaction? = nil,
+         copying: Transaction? = nil,
          onSubmit: @escaping (Transaction, _ keepOpen: Bool) -> Void) {
         self.editing = editing
+        self.copying = copying
         self.onSubmit = onSubmit
 
-        if let tx = editing {
+        // editing wins over copying if both are passed (defensive — not
+        // expected). The prefill source for non-amount fields is the same
+        // shape either way; the only difference is the date.
+        if let tx = editing ?? copying {
             _scope = State(initialValue: tx.householdID == nil ? .personal : .shared)
             _kind = State(initialValue: tx.kind)
             // Amount text is filled in on appear once we can read appState's
@@ -58,7 +68,8 @@ struct AddTransactionSheet: View {
             _category = State(initialValue: tx.category == .income ? .groceries : tx.category)
             _selectedOwners = State(initialValue: tx.ownerIDs)
             _source = State(initialValue: tx.source)
-            _date = State(initialValue: tx.date)
+            // Copy mode uses today; edit mode keeps the original date.
+            _date = State(initialValue: editing != nil ? tx.date : .now)
             // Pre-fill split strings from the resolved (effective) splits so
             // they survive even when the stored `splits` is nil (even-split).
             let resolved = tx.effectiveSplits
@@ -212,8 +223,12 @@ struct AddTransactionSheet: View {
         }
         .background(AppTheme.bg)
         .onAppear {
-            if let tx = editing {
-                // Edit mode: pre-fill amount field in the user's currency.
+            if let tx = editing ?? copying {
+                // Both edit and copy pre-fill the amount field in the user's
+                // currency. Edit also captures `originalAmountText` so an
+                // un-touched amount round-trips through Save without FX
+                // drift; copy leaves it empty since the user is creating a
+                // brand-new row that should always re-encode.
                 let currency = appState.currency
                 let rate = appState.rate(for: currency)
                 let display = Money.toDisplayAmount(cents: tx.amount,
@@ -224,7 +239,7 @@ struct AddTransactionSheet: View {
                     NSDecimalNumber(decimal: display).doubleValue
                 )
                 amountText = formatted
-                originalAmountText = formatted
+                originalAmountText = editing != nil ? formatted : ""
             } else {
                 // Add mode: seed default owner(s) + even split + first card.
                 if scope == .personal {

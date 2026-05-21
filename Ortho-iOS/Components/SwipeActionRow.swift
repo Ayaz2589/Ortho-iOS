@@ -1,19 +1,27 @@
 import SwiftUI
 
-/// iOS-style swipe-to-delete wrapper. Place around any row; horizontal
-/// drags reveal a destructive Delete action on the trailing edge.
-/// Stationary taps fall through to any Button inside `content` (the
-/// `DragGesture` has a `minimumDistance` threshold), so primary tap
-/// behavior is preserved.
+/// iOS-style swipe-action wrapper. Place around any row; horizontal drags
+/// reveal one or two trailing actions. Stationary taps fall through to
+/// any Button inside `content` (the `DragGesture` has a `minimumDistance`
+/// threshold), so primary tap behavior is preserved.
 ///
 /// When the row is open, an invisible tap-to-close overlay sits on top of
 /// the slid content. Tapping anywhere on the content (other than the
-/// revealed Delete button) snaps the swipe closed.
+/// revealed action buttons) snaps the swipe closed.
+///
+/// Layout when open (with both actions): `[ Copy ] [ Delete ]`
+/// Delete is always the rightmost — matching iOS Mail's destructive-most
+/// edge convention. Copy is opt-in via `onCopy`; when nil only the
+/// Delete button shows.
 struct SwipeActionRow<Content: View>: View {
     let onDelete: () -> Void
+    var onCopy: (() -> Void)? = nil
     @ViewBuilder let content: () -> Content
 
-    private let revealWidth: CGFloat = 84
+    private let buttonWidth: CGFloat = 84
+    private var revealWidth: CGFloat {
+        onCopy == nil ? buttonWidth : buttonWidth * 2
+    }
 
     @State private var offset: CGFloat = 0
     /// Position the content has settled at between drags (0 = closed,
@@ -24,21 +32,33 @@ struct SwipeActionRow<Content: View>: View {
 
     var body: some View {
         ZStack(alignment: .trailing) {
-            // Underlying destructive action — covered by `content` until
-            // the user swipes left.
-            Button {
-                triggerDelete()
-            } label: {
-                Text("Delete")
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(.white)
-                    .frame(width: revealWidth)
-                    .frame(maxHeight: .infinity)
-                    .background(AppTheme.destructive)
+            // Underlying action tray — covered by `content` until the user
+            // swipes left. Both actions stretch the row's full height so
+            // tappable areas match the iOS swipe-action pattern.
+            HStack(spacing: 0) {
+                if let onCopy {
+                    Button {
+                        triggerCopy(onCopy)
+                    } label: {
+                        actionLabel(text: "Copy",
+                                    icon: "doc.on.doc",
+                                    background: AppTheme.accent)
+                    }
+                    .buttonStyle(.plain)
+                }
+                Button {
+                    triggerDelete()
+                } label: {
+                    actionLabel(text: "Delete",
+                                icon: "trash",
+                                background: AppTheme.destructive)
+                }
+                .buttonStyle(.plain)
             }
-            .buttonStyle(.plain)
+            .frame(width: revealWidth)
+            .frame(maxHeight: .infinity)
 
-            // Foreground content slides over the button.
+            // Foreground content slides over the buttons.
             content()
                 .background(AppTheme.surface)
                 .offset(x: offset)
@@ -56,6 +76,23 @@ struct SwipeActionRow<Content: View>: View {
         }
     }
 
+    // MARK: - Action labels
+
+    private func actionLabel(text: String,
+                             icon: String,
+                             background: Color) -> some View {
+        VStack(spacing: 4) {
+            Image(systemName: icon)
+                .font(.system(size: 16, weight: .semibold))
+            Text(text)
+                .font(.system(size: 13, weight: .semibold))
+        }
+        .foregroundStyle(.white)
+        .frame(width: buttonWidth)
+        .frame(maxHeight: .infinity)
+        .background(background)
+    }
+
     // MARK: - Behavior
 
     private func triggerDelete() {
@@ -66,6 +103,16 @@ struct SwipeActionRow<Content: View>: View {
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.18) {
             onDelete()
+        }
+    }
+
+    /// Copy is non-destructive — snap closed first, then fire the callback
+    /// so a sheet presented from the action doesn't compete with the swipe
+    /// animation.
+    private func triggerCopy(_ handler: @escaping () -> Void) {
+        closeSwipe()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.18) {
+            handler()
         }
     }
 
