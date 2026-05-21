@@ -42,6 +42,9 @@ enum PropertyKind: String, CaseIterable, Hashable, Codable, Identifiable {
 
 struct Property: Identifiable, Hashable, Codable {
     let id: UUID
+    /// Household that owns/rents this property. All household members can
+    /// read + write — properties are collectively owned, not per-user.
+    var householdID: Household.ID
     var kind: PropertyKind
     var address: String
     /// Optional display nickname. When `nil`, the address is the title.
@@ -57,6 +60,7 @@ struct Property: Identifiable, Hashable, Codable {
     var units: [Unit]
 
     init(id: UUID = UUID(),
+         householdID: Household.ID,
          kind: PropertyKind,
          address: String,
          nickname: String? = nil,
@@ -64,6 +68,7 @@ struct Property: Identifiable, Hashable, Codable {
          lease: LeaseInfo? = nil,
          units: [Unit] = []) {
         self.id = id
+        self.householdID = householdID
         self.kind = kind
         self.address = address
         self.nickname = nickname
@@ -74,6 +79,20 @@ struct Property: Identifiable, Hashable, Codable {
 
     /// The label shown as the row title in the property list / nav header.
     var title: String { nickname ?? address }
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case householdID = "household_id"
+        case kind
+        case address
+        case nickname
+        // The four below are client-side composites — server keeps them in
+        // sibling tables (mortgage_info, lease_info, units). They round-trip
+        // through the JSON cache here for offline reads.
+        case mortgage
+        case lease
+        case units
+    }
 }
 
 extension Property {
@@ -85,6 +104,7 @@ extension Property {
             from: DateComponents(year: 2016, month: 5, day: 18)
         ) ?? Date()
         let primary = Property(
+            householdID: Household.homeSample.id,
             kind: .primaryHome,
             address: "124 Oak Lane",
             mortgage: MortgageInfo(

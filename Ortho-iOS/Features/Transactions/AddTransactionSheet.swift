@@ -1,13 +1,5 @@
 import SwiftUI
 
-/// Sheet-local toggle for Personal vs Shared. Mapped to
-/// `Transaction.householdID` (nil for personal, current household for
-/// shared) on submit.
-enum TransactionScopeMode: String, CaseIterable, Hashable, Identifiable {
-    case shared, personal
-    var id: String { rawValue }
-}
-
 /// Modal sheet for adding a transaction (expense or income).
 ///
 /// Design grammar matches AddUserSheet: Cancel · "New transaction" · Add,
@@ -26,7 +18,7 @@ struct AddTransactionSheet: View {
     @Environment(AppState.self) private var appState
 
     /// Personal vs Shared (household) scope of the transaction being edited.
-    @State private var scope: TransactionScopeMode
+    @State private var scope: TransactionScope
     @State private var kind: TransactionKind
     @State private var amountText: String
     /// Snapshot of `amountText` when the sheet appeared / loaded. If the user
@@ -267,7 +259,7 @@ struct AddTransactionSheet: View {
 
     private var scopeToggle: some View {
         HStack(spacing: 4) {
-            ForEach(TransactionScopeMode.allCases, id: \.self) { s in
+            ForEach(TransactionScope.allCases, id: \.self) { s in
                 Button {
                     scope = s
                 } label: {
@@ -339,11 +331,13 @@ struct AddTransactionSheet: View {
                         category: kind == .income ? .income : category,
                         kind: kind,
                         amount: cents,
+                        scope: scope,
                         ownerIDs: resolvedOwners,
                         splits: resolvedSplits,
                         source: source,
                         date: date,
-                        householdID: resolvedHousehold
+                        householdID: resolvedHousehold,
+                        createdBy: editing?.createdBy ?? appState.currentUserID
                     )
                     onSubmit(tx)
                 }

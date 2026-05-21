@@ -511,8 +511,17 @@ struct AddPropertySheet: View {
             )
         }
 
+        // Edits preserve the original property's household; new properties
+        // attach to the active one. Falls back to the seeded home household
+        // for preview/empty-state safety — the active household should be
+        // set whenever this sheet is reachable.
+        let householdID = editing?.householdID
+            ?? appState.currentHouseholdID
+            ?? Household.homeSample.id
+
         return Property(
             id: editing?.id ?? UUID(),
+            householdID: householdID,
             kind: kind,
             address: address.trimmingCharacters(in: .whitespaces),
             nickname: nickname.isEmpty ? nil : nickname,

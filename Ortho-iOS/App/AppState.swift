@@ -27,6 +27,10 @@ final class AppState {
     var isAuthLoading: Bool = false
     var authError: String?
 
+    /// Surfaces failures from the data layer (server CRUD calls). Set when
+    /// an optimistic write rolled back. UI banner / toast reads this.
+    var dataError: String?
+
     /// Email of the currently-signed-in user, or `nil` when signed out.
     /// Surfaced as a String here so view code doesn't have to import `Auth`
     /// to read it (Swift 6 member-import-visibility — the `User.email`
@@ -185,18 +189,75 @@ final class AppState {
 
     // MARK: - Transactions
 
+    /// Compute-on-demand so we don't have to manage an additional stored
+    /// property's lifetime under `@Observable`. The struct is a thin wrapper
+    /// around `SupabaseClient` — allocation is effectively free.
+    private var transactionsAPI: TransactionsAPI {
+        TransactionsAPI(client: supabase)
+    }
+
+    /// Optimistic insert: append locally first, sync to server in a Task.
+    /// On failure we remove the local row and surface `dataError`.
     func addTransaction(_ tx: Transaction) {
         transactions.append(tx)
+        Task {
+            do {
+                try await transactionsAPI.create(tx)
+            } catch {
+                await MainActor.run {
+                    transactions.removeAll { $0.id == tx.id }
+                    dataError = error.localizedDescription
+                }
+            }
+        }
     }
 
-    /// Replace an existing transaction by id. No-op if the id isn't present.
+    /// Optimistic update: snapshot the old row for rollback, mutate locally,
+    /// sync to server. On failure restore the snapshot.
     func updateTransaction(_ tx: Transaction) {
         guard let idx = transactions.firstIndex(where: { $0.id == tx.id }) else { return }
+        let previous = transactions[idx]
         transactions[idx] = tx
+        Task {
+            do {
+                try await transactionsAPI.update(tx)
+            } catch {
+                await MainActor.run {
+                    if let i = transactions.firstIndex(where: { $0.id == tx.id }) {
+                        transactions[i] = previous
+                    }
+                    dataError = error.localizedDescription
+                }
+            }
+        }
     }
 
+    /// Optimistic delete: remove locally, sync to server. On failure re-add
+    /// the row at the end (loses original position — acceptable for v1).
     func deleteTransaction(_ tx: Transaction) {
         transactions.removeAll { $0.id == tx.id }
+        Task {
+            do {
+                try await transactionsAPI.delete(id: tx.id)
+            } catch {
+                await MainActor.run {
+                    transactions.append(tx)
+                    dataError = error.localizedDescription
+                }
+            }
+        }
+    }
+
+    /// Replace the in-memory transactions array with the server's view.
+    /// Triggered manually from the Developer affordance in Settings for now;
+    /// auto-sync on auth + realtime are later work.
+    func loadTransactionsFromServer() async {
+        do {
+            let fetched = try await transactionsAPI.fetch()
+            await MainActor.run { transactions = fetched }
+        } catch {
+            await MainActor.run { dataError = error.localizedDescription }
+        }
     }
 
     var groups: [TransactionGroup] {
@@ -620,37 +681,119 @@ final class AppState {
         }
     }
 
-    /// Make sure the in-memory `users` array contains a row keyed by the
-    /// signed-in user's `auth.uid()`, add them to the active household,
-    /// and point `currentUserID` at them. Idempotent — safe to call on
-    /// every auth-state emission.
-    ///
-    /// Today the `users` array is in-memory only; this seeds a placeholder
-    /// User from the email's local part. Once we wire the server-backed
-    /// `users` table, this becomes a fetch-or-create against Supabase.
-    private func ensureCurrentUser(authID: UUID, email: String?) {
-        if !users.contains(where: { $0.id == authID }) {
-            let displayName = email?
-                .components(separatedBy: "@").first?
-                .capitalized ?? "Me"
-            let initial = String(displayName.prefix(1)).uppercased()
-            let newUser = User(
-                id: authID,
-                name: displayName,
-                initial: initial,
-                colorKey: "sage"
-            )
-            users.append(newUser)
+    /// One-shot guard so we only run the server bootstrap once per app
+    /// launch per signed-in identity. Auth state events can fire repeatedly
+    /// (e.g. session refresh) — without this we'd thrash the server.
+    @ObservationIgnored
+    private var bootstrappedAuthID: UUID?
 
-            // Add to the active household so existing UI (avatars,
-            // member list, owner chips) picks them up.
-            if let hid = currentHouseholdID,
-               let idx = households.firstIndex(where: { $0.id == hid }),
-               !households[idx].memberIDs.contains(authID) {
-                households[idx].memberIDs.append(authID)
+    /// Make sure `currentUserID` points at the signed-in user, then kick
+    /// off the server bootstrap in the background. Idempotent: subsequent
+    /// emissions for the same auth ID are no-ops.
+    ///
+    /// The bootstrap (1) upserts `public.users` so the `transactions.created_by`
+    /// FK can resolve, (2) finds or creates a default household so
+    /// shared-scope transactions have a valid `household_id`, and (3)
+    /// replaces the in-memory sample data with the server's view (the
+    /// hardcoded sample UUIDs don't match `auth.uid()` and just confuse
+    /// queries / FK constraints).
+    private func ensureCurrentUser(authID: UUID, email: String?) {
+        currentUserID = authID
+        guard bootstrappedAuthID != authID else { return }
+        bootstrappedAuthID = authID
+        Task { [authID, email] in
+            await bootstrapUserSession(authID: authID, email: email)
+        }
+    }
+
+    private func bootstrapUserSession(authID: UUID, email: String?) async {
+        let displayName = email?
+            .components(separatedBy: "@").first?
+            .capitalized ?? "Me"
+        let initial = String(displayName.prefix(1)).uppercased()
+        let me = User(
+            id: authID,
+            name: displayName,
+            initial: initial,
+            colorKey: "sage"
+        )
+
+        do {
+            // 1. Upsert public.users — `transactions.created_by` FK needs this.
+            try await supabase
+                .from("users")
+                .upsert(me, onConflict: "id")
+                .execute()
+
+            // 2. Find or create the user's default household.
+            let memberships: [HouseholdMembershipRow] = try await supabase
+                .from("household_members")
+                .select("household_id")
+                .eq("user_id", value: authID)
+                .execute()
+                .value
+
+            let householdID: UUID
+            let householdName: String
+            if let first = memberships.first {
+                householdID = first.householdID
+                let rows: [HouseholdNameRow] = try await supabase
+                    .from("households")
+                    .select("name")
+                    .eq("id", value: householdID)
+                    .execute()
+                    .value
+                householdName = rows.first?.name ?? "Home"
+            } else {
+                householdID = UUID()
+                householdName = "Home"
+                try await supabase
+                    .from("households")
+                    .insert(HouseholdInsertRow(
+                        id: householdID,
+                        ownerID: authID,
+                        name: householdName
+                    ))
+                    .execute()
+                try await supabase
+                    .from("household_members")
+                    .insert(HouseholdMemberInsertRow(
+                        householdID: householdID,
+                        userID: authID,
+                        role: .owner
+                    ))
+                    .execute()
+            }
+
+            // 3. Replace in-memory sample data with the server's view. The
+            // sample UUIDs (`User.mayaSample.id`, `Household.homeSample.id`)
+            // don't exist on the server — leaving them in place causes FK
+            // failures on every insert/update.
+            let household = Household(
+                id: householdID,
+                name: householdName,
+                memberIDs: [authID]
+            )
+            await MainActor.run {
+                users = [me]
+                households = [household]
+                currentHouseholdID = householdID
+                transactions = []
+                cards = []
+                properties = []
+                rentalPayments = []
+            }
+
+            // 4. Load live transactions (cards / properties come once their
+            // server CRUD is wired up).
+            await loadTransactionsFromServer()
+        } catch {
+            await MainActor.run {
+                dataError = "Bootstrap failed: \(error.localizedDescription)"
+                // Allow a retry on the next auth event (e.g. relaunch).
+                bootstrappedAuthID = nil
             }
         }
-        currentUserID = authID
     }
 
     /// One-shot fetch from floatrates.com + decode + cache. On failure, sets
@@ -701,4 +844,41 @@ final class AppState {
 private struct FloatRate: Decodable {
     let code: String
     let rate: Double
+}
+
+// MARK: - Bootstrap DTOs
+
+/// One column of `household_members` — enough to find which household(s)
+/// the signed-in user belongs to.
+private struct HouseholdMembershipRow: Decodable {
+    let householdID: UUID
+    enum CodingKeys: String, CodingKey {
+        case householdID = "household_id"
+    }
+}
+
+private struct HouseholdNameRow: Decodable {
+    let name: String
+}
+
+private struct HouseholdInsertRow: Encodable {
+    let id: UUID
+    let ownerID: UUID
+    let name: String
+    enum CodingKeys: String, CodingKey {
+        case id
+        case ownerID = "owner_id"
+        case name
+    }
+}
+
+private struct HouseholdMemberInsertRow: Encodable {
+    let householdID: UUID
+    let userID: UUID
+    let role: Role
+    enum CodingKeys: String, CodingKey {
+        case householdID = "household_id"
+        case userID = "user_id"
+        case role
+    }
 }

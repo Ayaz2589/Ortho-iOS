@@ -8,7 +8,7 @@ finish so the history is preserved.
 
 ## In progress
 
-_(none — sign-out + currentUserID landed; auth chapter is complete)_
+_(none — initial schema drafted + Swift models updated to match; ready to apply SQL and start data-layer migration)_
 
 ---
 
@@ -16,28 +16,28 @@ _(none — sign-out + currentUserID landed; auth chapter is complete)_
 
 ### Setup
 
-- [ ] Set up Supabase CLI locally (`supabase login`, `supabase init`, `supabase link --project-ref brujhxmtzfgowimprueo`) — needed when we start writing SQL migrations
-- [ ] Set up Resend SMTP integration in Supabase (replaces built-in email service; sidesteps rate limits during schema/RLS testing)
+- [x] Set up Supabase CLI locally (`supabase login`, `supabase init`, `supabase link --project-ref brujhxmtzfgowimprueo`). CLI installed via direct binary download (CLT was too stale for the brew formula); linked to remote project.
+- [ ] Verify own domain in Resend (later, when we wire household invitations — `onboarding@resend.dev` can only send to your own verified email)
 
 ### Schema (Postgres — see Spec section below)
 
-- [ ] Draft schema: `households`, `household_members`, `pending_invites`, `transactions`, `transaction_shares`, plus the existing housing tables (`properties`, `mortgage_info`, `lease_info`, `units`, `rental_payments`) and `cards`
-- [ ] Define enums: `role` (`owner | member` for v1; `admin` deferred), `kind` (`expense | income`), `scope` (`personal | shared`)
-- [ ] Add CHECK constraints (e.g. `amount_cents >= 0`, `(scope = 'shared') = (household_id IS NOT NULL)`)
-- [ ] Write RLS policies per table (see RLS sketch in Spec)
-- [ ] Write `accept_invite(token)` RPC function (validates `token_hash`, expiry, then inserts `household_members` row + marks invite redeemed)
-- [ ] Run schema SQL against Supabase
+- [x] Draft schema: `households`, `household_members`, `pending_invites`, `transactions`, `transaction_shares`, plus the existing housing tables (`properties`, `mortgage_info`, `lease_info`, `units`, `rental_payments`) and `cards` → `supabase/migrations/20260521120000_initial_schema.sql`
+- [x] Define enums: `role` (`owner | member` for v1; `admin` deferred), `kind` (`expense | income`), `scope` (`personal | shared`), plus `property_kind` and `transaction_category`
+- [x] Add CHECK constraints (`amount_non_negative`, `scope_matches_household`, `lease_dates_ordered`, percent range, non-negative cents on every money column)
+- [x] Write RLS policies per table — security-definer `is_household_member` / `is_household_owner` / `is_property_household_member` helpers break recursion on `household_members`
+- [x] Write `accept_invite(token)` RPC function — sha256 the raw token, lookup unredeemed + unexpired row, idempotent membership insert, mark redeemed
+- [x] Run schema SQL against Supabase — applied via `supabase db push` against project `brujhxmtzfgowimprueo`
 
 ### Swift models
 
-- [ ] Add `HouseholdMember` model (with `role` field)
-- [ ] Add `PendingInvite` model
-- [ ] Add `LocalUser` model (device-only; persisted in JSON cache, never sent to backend)
-- [ ] Rename `Transaction.ownerIDs` semantics: for shared transactions, IDs are `User.ID` (= `auth.uid()`) of Ortho users only. Local-user owners only appear on personal-scope transactions and stay on device.
-- [ ] Add `Transaction.scope` (`personal | shared`) and `Transaction.createdBy: User.ID`
-- [ ] Make `User` Codable (match schema)
-- [ ] Make `Transaction` Codable
-- [ ] Cross-check existing Codable models against schema: `Property`, `Household`, `MortgageInfo`, `LeaseInfo`, `Unit`, `RentalPayment`, `Currency`
+- [x] Add `HouseholdMember` model (with `role` field)
+- [x] Add `PendingInvite` model
+- [x] Add `LocalUser` model (device-only; persisted in JSON cache, never sent to backend)
+- [x] Rename `Transaction.ownerIDs` semantics: for shared transactions, IDs are `User.ID` (= `auth.uid()`) of Ortho users only. Local-user owners only appear on personal-scope transactions and stay on device.
+- [x] Add `Transaction.scope` (`personal | shared`) and `Transaction.createdBy: User.ID`
+- [x] Make `User` Codable (match schema)
+- [x] Make `Transaction` Codable
+- [x] Cross-check existing Codable models against schema. Added `householdID` to `Property` + `Card`; made `Card` Codable. `Household` / `MortgageInfo` / `LeaseInfo` / `Unit` / `RentalPayment` were already Codable and align field-for-field. `Currency` stays as a device-only UI preference (no schema mapping).
 
 ### Auth
 
@@ -50,13 +50,13 @@ _(none — sign-out + currentUserID landed; auth chapter is complete)_
 
 ### Data layer
 
-- [ ] Thin API client wrapper around `supabase-swift`
-- [ ] Migrate `AppState.transactions` CRUD to Supabase (respecting RLS / `created_by`)
+- [x] Thin API client wrapper around `supabase-swift` — new `Services/` folder with `SupabaseAPI.swift` (error types + date strategies) and per-resource API structs
+- [x] Migrate `AppState.transactions` CRUD to Supabase (respecting RLS / `created_by`). `TransactionsAPI` handles the transactions ↔ transaction_shares split; `AppState.addTransaction/updateTransaction/deleteTransaction` are now optimistic + rollback on failure. Manual `loadTransactionsFromServer()` triggered from the Developer section.
 - [ ] Migrate `AppState.properties` CRUD
 - [ ] Migrate `AppState.rentalPayments` CRUD
 - [ ] Migrate `AppState.cards` CRUD
 - [ ] Migrate household + member management (creates, role checks, member removal preserves history)
-- [ ] Optimistic update plumbing with rollback-on-failure
+- [x] Optimistic update plumbing with rollback-on-failure — landed for transactions (pattern: snapshot → optimistic mutation → background Task → rollback + `dataError` on throw). Apply same pattern to the remaining resources as each is migrated.
 
 ### Invitations
 
@@ -110,6 +110,14 @@ _(none — sign-out + currentUserID landed; auth chapter is complete)_
 - [x] **2026-05-21** — Untracked `xcuserdata` via `git rm --cached`. Future scheme reorders won't dirty `git status`.
 - [x] **2026-05-21** — Added "Account" section to `SettingsView` with a Sign out row (shows current email, destructive confirmation alert, calls `appState.signOut()`).
 - [x] **2026-05-21** — `AppState.ensureCurrentUser(authID:email:)` syncs `currentUserID` to `session.user.id` on auth-state change. Creates a User row + adds them to the active household if missing. Email is exposed via `AppState.currentUserEmail` so view code doesn't need to `import Auth`.
+- [x] **2026-05-21** — Configured Resend SMTP in Supabase (`smtp.resend.com:465`, sender `onboarding@resend.dev`). Replaces built-in auth email service — no more per-project rate limits during testing. Test sign-in email landed successfully.
+- [x] **2026-05-21** — Drafted initial Postgres schema at `supabase/migrations/20260521120000_initial_schema.sql` — 12 tables, 5 enums (`role`, `transaction_kind`, `transaction_scope`, `property_kind`, `transaction_category`), CHECK constraints, indexes, `updated_at` trigger, RLS on every table with security-definer membership helpers, `accept_invite(token)` RPC. Not yet applied to Supabase.
+- [x] **2026-05-21** — Swift model updates to match the schema. New: `Role`, `TransactionScope`, `HouseholdMember`, `PendingInvite`, `LocalUser`. Updated: `User` (Codable), `Transaction` (`+scope`, `+createdBy`, Codable, snake_case CodingKeys), `Card` (`+householdID`, Codable), `Property` (`+householdID`). Unified the sheet-local `TransactionScopeMode` enum into the new shared `TransactionScope`. Build verified clean.
+- [x] **2026-05-21** — Supabase CLI installed (direct binary download — Homebrew formula needs newer Command Line Tools than this Mac has) at `/opt/homebrew/bin/supabase` + `supabase-go`. `supabase init` ran in repo root (`config.toml`, `project_id = "Ortho-iOS"`), `supabase login` + `supabase link --project-ref brujhxmtzfgowimprueo` completed.
+- [x] **2026-05-21** — Initial schema applied to remote Supabase via `supabase db push`. All 12 tables, 5 enums, RLS policies, helpers, and `accept_invite` RPC are now live on project `brujhxmtzfgowimprueo`.
+- [x] **2026-05-21** — Data-layer migration **phase 1: transactions only**. Added `Services/` folder with `SupabaseAPI.swift` (`SupabaseAPIError`, date strategies) and `TransactionsAPI.swift` (fetch/create/update/delete with `TransactionRecord` + `TransactionShareRow` DTOs). `AppState.addTransaction/updateTransaction/deleteTransaction` are now optimistic-with-rollback against the server. New `loadTransactionsFromServer()` triggered manually from the Developer section ("Sync from server" row).
+- [x] **2026-05-21** — Auth bootstrap added. First sign-in now (1) upserts the `public.users` row so the `transactions.created_by` FK resolves, (2) finds or creates a default "Home" household + a `household_members` row with `role = 'owner'`, and (3) wipes the in-memory sample data (Maya / Jordan / Home seed UUIDs that never existed on the server). Without this, every insert FK-failed and rolled back — added rows "vanished after a beat."
+- [x] **2026-05-21** — **Transaction round-trip verified end-to-end.** Added a shared transaction in the app → `transactions` + `transaction_shares` row counts went 0 → 1 on the server → `loadTransactionsFromServer()` returned it intact, identical in the UI. Encode / RLS / decode all green.
 
 ---
 

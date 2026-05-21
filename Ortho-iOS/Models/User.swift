@@ -3,7 +3,11 @@ import Foundation
 /// A household member. `colorKey` references a value in `OrthoColorOption.all`
 /// — the same color is used everywhere the user appears (avatar, transaction
 /// row owner tag, charts).
-struct User: Identifiable, Hashable {
+///
+/// `User.id` equals the Supabase `auth.uid()` — a real Ortho user is one
+/// row in `public.users` keyed by their auth UUID (see Identity decision in
+/// `Tasks.md`). Local device-only people use `LocalUser` instead.
+struct User: Identifiable, Hashable, Codable {
     let id: UUID
     var name: String
     var initial: String
@@ -17,6 +21,13 @@ struct User: Identifiable, Hashable {
         self.name = name
         self.initial = initial
         self.colorKey = colorKey
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case initial
+        case colorKey = "color_key"
     }
 }
 

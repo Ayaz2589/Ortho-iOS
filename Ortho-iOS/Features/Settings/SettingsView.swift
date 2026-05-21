@@ -101,13 +101,15 @@ struct SettingsView: View {
 
                     VStack(spacing: 0) {
                         loadDummyDataRow
+                        RowSeparator(density: .comfortable)
+                        syncFromServerRow
                     }
                     .background(AppTheme.surface)
                     .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                     .padding(.horizontal, 16)
                     .padding(.bottom, 8)
 
-                    Text("Only visible in DEBUG builds. Replaces users, transactions, cards, and properties with a 6-month varied sample. Currency and appearance preferences are kept.")
+                    Text("Only visible in DEBUG builds. \"Load demo data\" replaces local users, transactions, cards, and properties with a 6-month sample. \"Sync from server\" replaces local transactions with what Supabase returns for the signed-in user.")
                         .font(.system(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
@@ -186,6 +188,40 @@ struct SettingsView: View {
                         .tracking(-0.2)
                         .foregroundStyle(AppTheme.text)
                     Text("6 months · 3 users · 3 properties")
+                        .font(.system(size: 13))
+                        .foregroundStyle(AppTheme.text.opacity(0.58))
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(AppTheme.text.opacity(0.36))
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .frame(minHeight: 64)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+
+    private var syncFromServerRow: some View {
+        Button {
+            Task { await appState.loadTransactionsFromServer() }
+        } label: {
+            HStack(spacing: 14) {
+                ZStack {
+                    Circle().fill(AppTheme.text.opacity(0.05))
+                        .frame(width: 40, height: 40)
+                    Image(systemName: "arrow.triangle.2.circlepath")
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundStyle(AppTheme.accent)
+                }
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Sync from server")
+                        .font(.system(size: 17, weight: .medium))
+                        .tracking(-0.2)
+                        .foregroundStyle(AppTheme.text)
+                    Text("Replace local transactions with Supabase data")
                         .font(.system(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.58))
                 }

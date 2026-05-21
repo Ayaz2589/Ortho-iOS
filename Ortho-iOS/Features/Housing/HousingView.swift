@@ -203,6 +203,7 @@ struct HousingView: View {
         .environment(AppState(properties: [
             Property.sample[0],
             Property(
+                householdID: Household.homeSample.id,
                 kind: .rental,
                 address: "Apt 4B · 800 Park",
                 lease: LeaseInfo(

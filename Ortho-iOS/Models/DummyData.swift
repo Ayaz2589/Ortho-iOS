@@ -46,12 +46,12 @@ enum DummyData {
         )
 
         let cards: [Card] = [
-            .init(name: "Amex Gold"),
-            .init(name: "Chase Sapphire"),
-            .init(name: "Apple Card"),
-            .init(name: "ACH · Joint"),
-            .init(name: "Chase Freedom"),
-            .init(name: "Citi Double Cash"),
+            .init(householdID: household.id, name: "Amex Gold"),
+            .init(householdID: household.id, name: "Chase Sapphire"),
+            .init(householdID: household.id, name: "Apple Card"),
+            .init(householdID: household.id, name: "ACH · Joint"),
+            .init(householdID: household.id, name: "Chase Freedom"),
+            .init(householdID: household.id, name: "Citi Double Cash"),
         ]
 
         // Primary home — reuse the seeded sample so amortization math
@@ -63,6 +63,7 @@ enum DummyData {
             from: DateComponents(year: 2020, month: 6, day: 1)
         ) ?? Date()
         let multifamily = Property(
+            householdID: household.id,
             kind: .multifamily,
             address: "22 Elm Street",
             nickname: "Elm Street",
@@ -86,6 +87,7 @@ enum DummyData {
         let leaseStart = Calendar.current.date(byAdding: .month, value: -6, to: .now) ?? Date()
         let leaseEnd   = Calendar.current.date(byAdding: .month, value:  6, to: .now) ?? Date()
         let rental = Property(
+            householdID: household.id,
             kind: .rental,
             address: "800 Park Ave Apt 4B",
             nickname: "Park Avenue",
@@ -382,10 +384,12 @@ enum DummyData {
             category: category,
             kind: kind,
             amount: cents,
+            scope: household == nil ? .personal : .shared,
             ownerIDs: Set(ownerIDs),
             source: source,
             date: dateOf(monthsBack: monthsBack, day: day, hour: hour, minute: minute),
-            householdID: household
+            householdID: household,
+            createdBy: ownerIDs.first ?? User.mayaSample.id
         )
     }
 

@@ -5,6 +5,7 @@ import SwiftUI
 struct AddCardSheet: View {
     let onAdd: (Card) -> Void
 
+    @Environment(AppState.self) private var appState
     @Environment(\.dismiss) private var dismiss
     @State private var name: String = ""
     @FocusState private var nameFocused: Bool
@@ -53,7 +54,11 @@ struct AddCardSheet: View {
                     .buttonStyle(.plain)
                 Spacer()
                 Button("Add") {
-                    onAdd(Card(name: name.trimmingCharacters(in: .whitespaces)))
+                    guard let hid = appState.currentHouseholdID else { return }
+                    onAdd(Card(
+                        householdID: hid,
+                        name: name.trimmingCharacters(in: .whitespaces)
+                    ))
                 }
                 .font(.system(size: 17, weight: .semibold))
                 .foregroundStyle(canAdd ? AppTheme.accent : AppTheme.text.opacity(0.36))
@@ -98,6 +103,7 @@ struct AddCardSheet: View {
         .sheet(isPresented: .constant(true)) {
             AddCardSheet { _ in }
                 .presentationBackground(AppTheme.bg)
+                .environment(AppState())
         }
 }
 
@@ -107,6 +113,7 @@ struct AddCardSheet: View {
         .sheet(isPresented: .constant(true)) {
             AddCardSheet { _ in }
                 .presentationBackground(AppTheme.bg)
+                .environment(AppState())
         }
         .preferredColorScheme(.dark)
 }
