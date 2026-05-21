@@ -70,19 +70,19 @@ struct CopyTransactionPickerSheet: View {
     private func groupCard(_ group: TransactionGroup) -> some View {
         VStack(spacing: 0) {
             ForEach(Array(group.items.enumerated()), id: \.element.id) { idx, tx in
-                Button {
-                    onPick(tx)
-                    dismiss()
-                } label: {
-                    TransactionRow(
-                        tx: tx,
-                        display: appState.ownersDisplay(of: tx),
-                        density: .comfortable,
-                        onTap: nil
-                    )
-                    .allowsHitTesting(false)
-                }
-                .buttonStyle(.plain)
+                // `TransactionRow` is itself a Button driven by `onTap` —
+                // hand the pick callback in directly. Wrapping it in
+                // another Button was eating taps because of nested-Button
+                // behavior in SwiftUI.
+                TransactionRow(
+                    tx: tx,
+                    display: appState.ownersDisplay(of: tx),
+                    density: .comfortable,
+                    onTap: {
+                        onPick(tx)
+                        dismiss()
+                    }
+                )
                 if idx < group.items.count - 1 {
                     RowSeparator(density: .comfortable)
                 }
