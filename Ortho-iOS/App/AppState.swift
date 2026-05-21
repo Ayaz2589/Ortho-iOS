@@ -47,6 +47,7 @@ final class AppState {
     var households: [Household]
     var properties: [Property]
     var rentalPayments: [RentalPayment]
+    var budgets: [Budget]
 
     // MARK: - Identity + active household
 
@@ -105,7 +106,8 @@ final class AppState {
          cards: [Card] = Card.sample,
          households: [Household] = [.homeSample],
          properties: [Property] = Property.sample,
-         rentalPayments: [RentalPayment] = []) {
+         rentalPayments: [RentalPayment] = [],
+         budgets: [Budget] = []) {
         self.supabase = SupabaseClient(
             supabaseURL: SupabaseConfig.projectURL,
             supabaseKey: SupabaseConfig.publishableKey
@@ -116,6 +118,7 @@ final class AppState {
         self.households = households
         self.properties = properties
         self.rentalPayments = rentalPayments
+        self.budgets = budgets
 
         // Restore persisted current user; fall back to first user.
         let savedUserID = UserDefaults.standard.string(forKey: Self.currentUserIDKey)
@@ -270,6 +273,7 @@ final class AppState {
             group.addTask { await self.loadCardsFromServer() }
             group.addTask { await self.loadPropertiesFromServer() }
             group.addTask { await self.loadRentalPaymentsFromServer() }
+            group.addTask { await self.loadBudgetsFromServer() }
         }
     }
 
@@ -379,6 +383,20 @@ final class AppState {
             }
         }
         return buckets.keys.sorted().map { buckets[$0] ?? 0 }
+    }
+
+    /// Total expense (USD cents) for one `TransactionCategory` over an
+    /// arbitrary interval. Used by the budget-progress widget and the
+    /// budget-status rule in `InsightEngine`.
+    func categoryExpenseTotal(_ category: TransactionCategory,
+                              in interval: DateInterval) -> Int64 {
+        transactions.reduce(0) { acc, tx in
+            guard tx.kind == .expense,
+                  tx.category == category,
+                  interval.contains(tx.date)
+            else { return acc }
+            return acc + tx.amount
+        }
     }
 
     /// All expense transactions in a given category falling inside the
@@ -703,6 +721,70 @@ final class AppState {
         }
     }
 
+    // MARK: - Budgets
+
+    private var budgetsAPI: BudgetsAPI {
+        BudgetsAPI(client: supabase)
+    }
+
+    /// Optimistic insert-or-update. The DB enforces `UNIQUE (household_id,
+    /// category)`, so editing an existing budget keeps the same `id` and
+    /// just changes `monthlyLimitCents`; a new category creates a fresh row.
+    /// On rollback we restore the prior state by id (insert vs update both
+    /// covered).
+    func addOrUpdateBudget(_ budget: Budget) {
+        let previous = budgets.first { $0.id == budget.id }
+        if let idx = budgets.firstIndex(where: { $0.id == budget.id }) {
+            budgets[idx] = budget
+        } else {
+            budgets.append(budget)
+        }
+        Task {
+            do {
+                try await budgetsAPI.upsert(budget)
+            } catch {
+                await MainActor.run {
+                    if let previous {
+                        if let i = budgets.firstIndex(where: { $0.id == budget.id }) {
+                            budgets[i] = previous
+                        }
+                    } else {
+                        budgets.removeAll { $0.id == budget.id }
+                    }
+                    dataError = error.localizedDescription
+                }
+            }
+        }
+    }
+
+    func deleteBudget(_ budget: Budget) {
+        budgets.removeAll { $0.id == budget.id }
+        Task {
+            do {
+                try await budgetsAPI.delete(id: budget.id)
+            } catch {
+                await MainActor.run {
+                    budgets.append(budget)
+                    dataError = error.localizedDescription
+                }
+            }
+        }
+    }
+
+    func loadBudgetsFromServer() async {
+        do {
+            let fetched = try await budgetsAPI.fetch()
+            await MainActor.run { budgets = fetched }
+        } catch {
+            await MainActor.run { dataError = error.localizedDescription }
+        }
+    }
+
+    /// The current budget for `category`, or `nil` if none has been set.
+    func budget(for category: TransactionCategory) -> Budget? {
+        budgets.first { $0.category == category }
+    }
+
     /// Payments for a given property, newest first.
     func payments(for propertyID: Property.ID) -> [RentalPayment] {
         rentalPayments
@@ -908,6 +990,7 @@ final class AppState {
                 cards = []
                 properties = []
                 rentalPayments = []
+                budgets = []
             }
 
             // 4. Load live data from the server.

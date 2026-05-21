@@ -8,7 +8,7 @@ finish so the history is preserved.
 
 ## In progress
 
-_(none — full data-layer migration done; Transactions / Housing / Settings now round-trip through Supabase)_
+_(none — Budgets + rule-based Insights shipped on `feature/recommendations-and-budgets` branch, awaiting simulator exercise before merge)_
 
 ---
 
@@ -74,6 +74,16 @@ _(none — full data-layer migration done; Transactions / Housing / Settings now
 - [ ] Write cache on every mutation
 - [ ] Persist local users (device-only) in the cache alongside server-synced data
 
+### Recommendations + Budgets
+
+- [x] Per-category monthly budgets (server-backed `public.budgets` table with RLS, `BudgetsAPI`, optimistic AppState CRUD)
+- [x] Budgets management screen (`Features/Budgets/BudgetsView` + `EditBudgetSheet`), pushed from Settings
+- [x] Budget progress widget on Dashboard (`BudgetProgressCard`), hides when no budgets set
+- [x] Rule-based `InsightEngine` — 8 rules: top category, MoM category delta, budget status, cashflow / savings rate, recurring subscriptions, outlier transactions, daily trend, mortgage affordability
+- [x] Dashboard `InsightsCardStack` at the top, severity-tinted `InsightCard`s, hides on empty
+- [ ] Optional LLM narrative layer over the same `[Insight]` output (later, when there's a clear win over templates)
+- [ ] Insight dismissal / snooze persistence (IDs already period-scoped to support this)
+
 ### Later / nice-to-have
 
 - [ ] In-app invitation banner via Realtime subscription (for users already signed in)
@@ -119,6 +129,8 @@ _(none — full data-layer migration done; Transactions / Housing / Settings now
 - [x] **2026-05-21** — Auth bootstrap added. First sign-in now (1) upserts the `public.users` row so the `transactions.created_by` FK resolves, (2) finds or creates a default "Home" household + a `household_members` row with `role = 'owner'`, and (3) wipes the in-memory sample data (Maya / Jordan / Home seed UUIDs that never existed on the server). Without this, every insert FK-failed and rolled back — added rows "vanished after a beat."
 - [x] **2026-05-21** — **Transaction round-trip verified end-to-end.** Added a shared transaction in the app → `transactions` + `transaction_shares` row counts went 0 → 1 on the server → `loadTransactionsFromServer()` returned it intact, identical in the UI. Encode / RLS / decode all green.
 - [x] **2026-05-21** — Full data-layer migration shipped: `CardsAPI` + `PropertiesAPI` (coordinates 4 tables — properties / mortgage_info / lease_info / units, dates as `yyyy-MM-dd` strings) + `RentalPaymentsAPI` + `HouseholdsAPI` (extracts the inline bootstrap DTOs and adds rename + remove-member). Every `AppState` CRUD method now optimistic + server-synced with rollback. New `loadAllFromServer()` parallel-fetcher used by both bootstrap and the renamed "Sync all from server" Developer affordance. Add-member is disabled in `HouseholdView` pending the Invitations flow.
+- [x] **2026-05-21** — Audit + fix of mortgage / multifamily financials: amortization formula verified end-to-end against canonical $530k/6.85%/30yr example. Two correctness bugs fixed: zero-interest mortgages now use flat amortization (was returning 0 monthly payment); `MultifamilyNetBalanceCard` no longer counts vacant units as collected rent (math moved onto `Property` as `occupiedMonthlyRentCents` / `netMonthlyBalanceCents`).
+- [x] **2026-05-21** — **Budgets + rule-based recommendation engine** (on `feature/recommendations-and-budgets`). New `public.budgets` table + `BudgetsAPI`; per-category monthly limits set/edited in `Features/Budgets/BudgetsView`. `Services/InsightEngine.swift` is a pure-functions namespace with 8 rules (top category, MoM category delta, budget status, cashflow/savings rate, recurring subscription detection, outlier transactions, daily trend, mortgage affordability) returning prioritized `Insight` values. Dashboard gets `InsightsCardStack` at the top and `BudgetProgressCard` under the month summary; both hide themselves on empty. Build verified clean; awaiting simulator exercise before merge to `main`.
 
 ---
 
