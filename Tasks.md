@@ -93,6 +93,20 @@ _(none)_
 - [x] Swipe-copy on transaction rows — `SwipeActionRow` reveals a `[Copy] [Delete]` tray; Copy opens AddTransactionSheet via the same `copying:` init path
 - [ ] Same skeleton + empty-state treatment on Dashboard widgets and Housing (currently flicker the empty state during bootstrap; reuse `isLoadingInitialData`)
 
+### Demo mode
+
+- [x] Sandbox `Load demo data` so dummy UUIDs (Maya / Jordan / Alex) can't FK-violate against Supabase. `AppState.isInDemoMode` flag gates every CRUD method's server-sync `Task`; local mutations still apply.
+- [x] `exitDemoMode()` re-runs `bootstrapUserSession` so real `currentUserID` + household + data restore from the server in one tap.
+- [x] `Components/DemoModeBanner` pinned to the top of the tab body via a VStack row in `RootTabView` (avoids nested `safeAreaInset(.top)` overlap with tabs that have their own title insets).
+
+### Sign-in screen
+
+- [x] Card-less redesign matching the onboarding mock — large centered ORTHO wordmark over the screen background, form pinned to the bottom safe area, muted-fill input + button + per-step fine-print footer (Terms/Privacy on email, "Send again" on code).
+- [x] Title typography rebalanced — "Sign in" / "Enter your code" at 24pt bold so they don't outweigh the wider-tracked ORTHO wordmark above.
+- [x] Placeholder text styled via the modern `prompt: Text(...).foregroundStyle(...)` API to override the system-blue tint with neutral 36%-opacity gray.
+- [x] OTP length aligned to the Supabase project — placeholder shows 8 dots, Verify enabled at 8 digits entered.
+- [x] `Components/AmbientRippleBackground` — concentric stroke rings + soft accent-tinted lens-flare halo emanating from inside the first O of "ORTHO". `TimelineView` + `Canvas` for one GPU-friendly pass per frame.
+
 ### Later / nice-to-have
 
 - [ ] In-app invitation banner via Realtime subscription (for users already signed in)
@@ -145,6 +159,9 @@ _(none)_
 - [x] **2026-05-21** — `CopyTransactionPickerSheet` rows were unresponsive — `TransactionRow` is itself a Button and nested-Button hit testing in SwiftUI was eating taps. Fixed by passing the pick callback as `TransactionRow.onTap` directly (matches the main TransactionsView pattern); no more wrapper Button or `.allowsHitTesting` hack.
 - [x] **2026-05-21** — Loading skeleton on the Transactions tab during initial bootstrap. New `isLoadingInitialData` flag on AppState (set/cleared inside `bootstrapUserSession`); `TransactionsView` switches on a `LoadState` enum (`.loading` → `TransactionSkeletonList`, `.empty` → existing empty state, `.populated` → real list). Prevents the misleading "No transactions yet" flash during sign-in.
 - [x] **2026-05-21** — Swipe-copy on transaction rows. `SwipeActionRow` gains an optional `onCopy` closure — when set, the revealed tray doubles in width and shows `[Copy] [Delete]` (Copy accent, Delete destructive, Delete remains rightmost per iOS Mail convention). Add-sheet presentation in `TransactionsView` unified behind an `AddSheetMode` enum (`.fresh` / `.copying(Transaction)`) driving a single `.sheet(item:)` modifier.
+- [x] **2026-05-21** — Sandboxed `Load demo data`. New `AppState.isInDemoMode` flag set by `loadDummyData()` makes every server-syncing CRUD method (14 total — transactions / cards / properties / rental payments / budgets / household rename + member removal) `guard !isInDemoMode else { return }` before its background Task. `exitDemoMode()` clears the flag, resets `bootstrappedAuthID`, re-runs `bootstrapUserSession` so real auth data restores. `Components/DemoModeBanner` in a VStack row above the tab body in `RootTabView` (DEBUG only). Settings copy updated to explain the local-only semantics.
+- [x] **2026-05-21** — Sign-in screen redesign to the card-less mock: large centered ORTHO wordmark over the screen bg, form pinned to the bottom safe area, muted-fill input + button, per-step fine-print footer ("Terms / Privacy" on email, "Didn't receive it? Send again" on code wired to `requestSignInCode`). Title typography rebalanced to 24pt bold so it doesn't outweigh the wider-tracked wordmark. Placeholders styled via `prompt: Text(...).foregroundStyle(...)` to override the system-blue tint. OTP length is 8 across placeholder + Verify enable threshold.
+- [x] **2026-05-21** — `Components/AmbientRippleBackground` added to the sign-in screen. Concentric stroke rings expanding from a configurable origin (UnitPoint + absolute CGSize nudge) over a soft accent-tinted radial-gradient lens-flare halo. `TimelineView` + `Canvas` for one render pass per frame. Origin offset to `(-50, 0)` so ripples emanate from inside the first O of "ORTHO". Both rings and flare share `AppTheme.accent` so the effect reads as warm light from a single source.
 
 ---
 
