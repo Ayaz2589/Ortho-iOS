@@ -91,6 +91,7 @@ _(none)_
 - [x] Multi-add — "Save and add another" capsule below the form preserves scope/kind/source/date/owners and resets merchant/amount/category/splits
 - [x] Copy from recent — picker sheet inside `AddTransactionSheet` (40 most-recent transactions grouped by day) pre-fills every field with a fresh id + today's date
 - [x] Swipe-copy on transaction rows — `SwipeActionRow` reveals a `[Copy] [Delete]` tray; Copy opens AddTransactionSheet via the same `copying:` init path
+- [x] Vertical scroll on the Transactions list (was blocked by `SwipeActionRow`'s drag gesture claiming the touch). Swipe-vs-tap arbitration so swiping a row no longer also fires the drill-in.
 - [ ] Same skeleton + empty-state treatment on Dashboard widgets and Housing (currently flicker the empty state during bootstrap; reuse `isLoadingInitialData`)
 
 ### Demo mode
@@ -105,7 +106,12 @@ _(none)_
 - [x] Title typography rebalanced — "Sign in" / "Enter your code" at 24pt bold so they don't outweigh the wider-tracked ORTHO wordmark above.
 - [x] Placeholder text styled via the modern `prompt: Text(...).foregroundStyle(...)` API to override the system-blue tint with neutral 36%-opacity gray.
 - [x] OTP length aligned to the Supabase project — placeholder shows 8 dots, Verify enabled at 8 digits entered.
-- [x] `Components/AmbientRippleBackground` — concentric stroke rings + soft accent-tinted lens-flare halo emanating from inside the first O of "ORTHO". `TimelineView` + `Canvas` for one GPU-friendly pass per frame.
+- [x] `Components/AmbientRippleBackground` — concentric stroke rings tinted with `AppTheme.accent`, emanating from inside the first O of "ORTHO" via an `originOffset: CGSize(-50, 0)`. `TimelineView` + `Canvas` for one GPU-friendly pass per frame. (Earlier iterations had a lens-flare halo and wave-perturbed rings; both removed for a cleaner read.)
+- [x] Tap-anywhere-outside-input dismisses the keyboard on the sign-in screen (iOS doesn't auto-dismiss outside ScrollView contexts).
+
+### Navigation
+
+- [x] Horizontal swipe between tabs via SwiftUI's page-style `TabView` (`.tabViewStyle(.page(indexDisplayMode: .never))`). `OrthoTabBar` still drives selection via tap; the shared `selection` binding keeps both interactions in sync. Page-swipe gesture defers to child gestures for short drags, so `SwipeActionRow` on transactions still works.
 
 ### Later / nice-to-have
 
@@ -162,6 +168,10 @@ _(none)_
 - [x] **2026-05-21** — Sandboxed `Load demo data`. New `AppState.isInDemoMode` flag set by `loadDummyData()` makes every server-syncing CRUD method (14 total — transactions / cards / properties / rental payments / budgets / household rename + member removal) `guard !isInDemoMode else { return }` before its background Task. `exitDemoMode()` clears the flag, resets `bootstrappedAuthID`, re-runs `bootstrapUserSession` so real auth data restores. `Components/DemoModeBanner` in a VStack row above the tab body in `RootTabView` (DEBUG only). Settings copy updated to explain the local-only semantics.
 - [x] **2026-05-21** — Sign-in screen redesign to the card-less mock: large centered ORTHO wordmark over the screen bg, form pinned to the bottom safe area, muted-fill input + button, per-step fine-print footer ("Terms / Privacy" on email, "Didn't receive it? Send again" on code wired to `requestSignInCode`). Title typography rebalanced to 24pt bold so it doesn't outweigh the wider-tracked wordmark. Placeholders styled via `prompt: Text(...).foregroundStyle(...)` to override the system-blue tint. OTP length is 8 across placeholder + Verify enable threshold.
 - [x] **2026-05-21** — `Components/AmbientRippleBackground` added to the sign-in screen. Concentric stroke rings expanding from a configurable origin (UnitPoint + absolute CGSize nudge) over a soft accent-tinted radial-gradient lens-flare halo. `TimelineView` + `Canvas` for one render pass per frame. Origin offset to `(-50, 0)` so ripples emanate from inside the first O of "ORTHO". Both rings and flare share `AppTheme.accent` so the effect reads as warm light from a single source.
+- [x] **2026-05-22** — Sign-in polish: tap-anywhere-outside dismisses the keyboard (iOS doesn't auto-dismiss outside ScrollView), and the lens-flare halo on `AmbientRippleBackground` was dropped (felt too prominent against the ORTHO wordmark). Rings stay as the sole effect.
+- [x] **2026-05-22** — Transactions list scroll fix + swipe-vs-tap arbitration. `SwipeActionRow`'s drag gesture was claiming all 8pt+ drags via `.gesture(...)`, blocking vertical scroll except in the gaps between rows. Switched to `.simultaneousGesture(...)` and guarded the handler to only mutate offset on horizontally-dominant drags. Separately, swiping a row was firing the underlying drill-in `Button` on touch-up — refactored `TransactionRow` to a plain `HStack` and moved tap handling onto `SwipeActionRow.onTap` via `.onTapGesture` (TapGesture auto-cancels on movement, so swipes can't leak into a tap). `CopyTransactionPickerSheet` updated to wrap with `.onTapGesture` for the same reason.
+- [x] **2026-05-22** — Horizontal swipe between tabs. `RootTabView` swaps the `ZStack` switcher for SwiftUI's page-style `TabView` (`.tabViewStyle(.page(indexDisplayMode: .never))`). The custom `OrthoTabBar` still drives selection via tap; the shared `selection` binding keeps both interactions in sync. Page-swipe gesture defers to child gestures for short drags so `SwipeActionRow` still works on Transactions.
+- [x] **2026-05-22** — Verified on physical iPhone 17 Pro via direct binary install + `xcrun devicectl`. Sign-in / OTP / Transactions / Housing / Settings all functional on-device. Free Apple Dev account profile expires every 7 days — re-build + install when it does.
 
 ---
 
