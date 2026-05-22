@@ -27,6 +27,18 @@
             "state": "translated",
             "value": "%@ / 月"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ / 月"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ / 월"
+          }
         }
       }
     },
@@ -55,6 +67,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "今月の元本＋利息%@に対して収入%@。貸し手は通常28%%未満を目安にします。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本月本金+利息%@对比收入%@。贷款机构通常目标为低于28%%。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이번 달 원금+이자 %@, 수입 %@. 대출 기관은 보통 28%% 미만을 목표로 합니다."
           }
         }
       }
@@ -85,6 +109,18 @@
             "state": "translated",
             "value": "%@、%@、%@ — 通常額の%@。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@于%@在%@消费 — 通常金额的%@。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@에서 %@ — 평소 금액의 %@."
+          }
         }
       }
     },
@@ -113,6 +149,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@の予算"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@预算"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 예산"
           }
         }
       }
@@ -143,6 +191,18 @@
             "state": "translated",
             "value": "%@は先月比%lld%%減"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@较上月下降%lld%%"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@이(가) 지난달 대비 %lld%% 감소"
+          }
         }
       }
     },
@@ -171,6 +231,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@の持ち分"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@权益"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 지분"
           }
         }
       }
@@ -201,6 +273,18 @@
             "state": "translated",
             "value": "過去30日間で%@、その前の30日間で%@。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "过去30天%@，对比之前30天%@。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지난 30일 %@, 이전 30일 %@."
+          }
         }
       }
     },
@@ -229,6 +313,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@が最大のカテゴリです"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@是您的最大类别"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@이(가) 최대 카테고리입니다"
           }
         }
       }
@@ -259,6 +355,18 @@
             "state": "translated",
             "value": "残り%lld日で、%@中%@残っています。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "还剩%lld天，%@中尚余%@。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld일 남았는데, %@ 중 %@ 남음."
+          }
         }
       }
     },
@@ -287,6 +395,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "残り%lld日で、%@中%@がまだ利用可能。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "还剩%lld天，%@中尚有%@可用。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld일 남았는데, %@ 중 %@ 사용 가능."
           }
         }
       }
@@ -317,6 +437,18 @@
             "state": "translated",
             "value": "今月%@ — 総支出の%lld%%。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本月%@ — 总支出的%lld%%。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이번 달 %@ — 총 지출의 %lld%%."
+          }
         }
       }
     },
@@ -346,6 +478,18 @@
             "state": "translated",
             "value": "%@は先月比%lld%%増"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@较上月上涨%lld%%"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@이(가) 지난달 대비 %lld%% 증가"
+          }
         }
       }
     },
@@ -371,6 +515,18 @@
           }
         },
         "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        },
+        "ko": {
           "stringUnit": {
             "state": "translated",
             "value": "%@ · %@"
@@ -452,6 +608,42 @@
               }
             }
           }
+        },
+        "zh-Hans": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld处房产"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld处房产"
+                }
+              }
+            }
+          }
+        },
+        "ko": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "부동산 %lld개"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "부동산 %lld개"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -480,6 +672,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld件設定"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已设置%lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld개 설정됨"
           }
         }
       }
@@ -554,6 +758,42 @@
                 "stringUnit": {
                   "state": "translated",
                   "value": "%lldユニット"
+                }
+              }
+            }
+          }
+        },
+        "zh-Hans": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld个单元"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld个单元"
+                }
+              }
+            }
+          }
+        },
+        "ko": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "유닛 %lld개"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "유닛 %lld개"
                 }
               }
             }
@@ -635,6 +875,42 @@
               }
             }
           }
+        },
+        "zh-Hans": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld次"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld次"
+                }
+              }
+            }
+          }
+        },
+        "ko": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "방문 %lld회"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "방문 %lld회"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -663,6 +939,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "残り%lld年"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "剩余%lld年"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld년 남음"
           }
         }
       }
@@ -693,6 +981,18 @@
             "state": "translated",
             "value": "%lld年"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld年"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld년"
+          }
         }
       }
     },
@@ -721,6 +1021,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "(あなた)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(您)"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(나)"
           }
         }
       }
@@ -751,6 +1063,18 @@
             "state": "translated",
             "value": "(あなた) · %@"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(您) · %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(나) · %@"
+          }
         }
       }
     },
@@ -779,6 +1103,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "+ %lld件"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+ 还有%lld个"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+ %lld개 더"
           }
         }
       }
@@ -809,6 +1145,18 @@
             "state": "translated",
             "value": "アカウント"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "账户"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "계정"
+          }
         }
       }
     },
@@ -837,6 +1185,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "追加"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "추가"
           }
         }
       }
@@ -867,6 +1227,18 @@
             "state": "translated",
             "value": "支払い、残高、賃貸情報を管理するために自宅、賃貸、集合住宅を追加してください。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加主要住宅、出租房或多户住宅以跟踪支付、余额和租赁信息。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "주택, 임대, 다세대 주택을 추가하여 결제, 잔액, 임대 정보를 추적하세요."
+          }
         }
       }
     },
@@ -895,6 +1267,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "少なくとも1件の取引を追加すると、ここから素早く複製できます。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加至少一笔交易，将显示在这里以便快速复制。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최소 한 건의 거래를 추가하면 여기서 빠르게 복제할 수 있습니다."
           }
         }
       }
@@ -925,6 +1309,18 @@
             "state": "translated",
             "value": "カードを追加"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加卡"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카드 추가"
+          }
         }
       }
     },
@@ -953,6 +1349,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "各ユニットの家賃と入居者を追加してください。純残高は総ユニット家賃から住宅ローン返済を引いた額です。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加每个单元的租金和租户。净余额是单元总租金减去按揭还款。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "각 유닛의 임대료와 임차인을 추가하세요. 순잔액은 총 유닛 임대료에서 대출 상환금을 뺀 금액입니다."
           }
         }
       }
@@ -983,6 +1391,18 @@
             "state": "translated",
             "value": "物件を追加"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加房产"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "부동산 추가"
+          }
         }
       }
     },
@@ -1011,6 +1431,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "取引を追加"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加交易"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "거래 추가"
           }
         }
       }
@@ -1041,6 +1473,18 @@
             "state": "translated",
             "value": "ユニットを追加"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加单元"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "유닛 추가"
+          }
         }
       }
     },
@@ -1069,6 +1513,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "ユーザーを追加"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加用户"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "사용자 추가"
           }
         }
       }
@@ -1099,6 +1555,18 @@
             "state": "translated",
             "value": "住所"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "地址"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "주소"
+          }
         }
       }
     },
@@ -1127,6 +1595,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "すべて"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "전체"
           }
         }
       }
@@ -1157,6 +1637,18 @@
             "state": "translated",
             "value": "償却"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "摊销"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "상환"
+          }
         }
       }
     },
@@ -1185,6 +1677,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "金額"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "金额"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "금액"
           }
         }
       }
@@ -1215,6 +1719,18 @@
             "state": "translated",
             "value": "外観"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "外观"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "외관"
+          }
         }
       }
     },
@@ -1243,6 +1759,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@の上限に近づいています"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "接近%@限额"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 한도 접근 중"
           }
         }
       }
@@ -1273,6 +1801,18 @@
             "state": "translated",
             "value": "自動支払い"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动扣款"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "자동 결제"
+          }
         }
       }
     },
@@ -1301,6 +1841,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "毎月1日に自動支払い · %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每月1日自动扣款 · %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "매월 1일 자동 결제 · %@"
           }
         }
       }
@@ -1331,6 +1883,18 @@
             "state": "translated",
             "value": "平均 / 日"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "日均"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일 평균"
+          }
         }
       }
     },
@@ -1359,6 +1923,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "戻る"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "返回"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "뒤로"
           }
         }
       }
@@ -1389,6 +1965,18 @@
             "state": "translated",
             "value": "バングラデシュタカ"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "孟加拉塔卡"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "방글라데시 타카"
+          }
         }
       }
     },
@@ -1417,6 +2005,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "予算"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "预算"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "예산"
           }
         }
       }
@@ -1447,6 +2047,18 @@
             "state": "translated",
             "value": "予算はダッシュボードの支出インサイトを動かします。任意のカテゴリに月次上限を設定すると、進捗と上限近くまたは超過時のアラートが表示されます。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "预算驱动仪表盘上的支出洞察。为任何类别设置月度限额，您将看到进度和接近或超过限额时的提醒。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "예산은 대시보드의 지출 인사이트를 구동합니다. 카테고리에 월별 한도를 설정하면 진행 상황과 한도에 가까워지거나 초과할 때 알림을 받게 됩니다."
+          }
         }
       }
     },
@@ -1475,6 +2087,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "クロージング以降の累計 · %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自成交以来累计 · %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "마감 이후 누적 · %@"
           }
         }
       }
@@ -1505,6 +2129,18 @@
             "state": "translated",
             "value": "続行することで、**利用規約**と**プライバシー**に同意したものとみなします。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "继续即表示您同意我们的**条款**和**隐私政策**。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "계속하면 **약관** 및 **개인정보 처리방침**에 동의하는 것입니다."
+          }
         }
       }
     },
@@ -1533,6 +2169,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "カナダドル"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加元"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "캐나다 달러"
           }
         }
       }
@@ -1563,6 +2211,18 @@
             "state": "translated",
             "value": "キャンセル"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "취소"
+          }
         }
       }
     },
@@ -1591,6 +2251,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "カード"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "卡片"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카드"
           }
         }
       }
@@ -1621,6 +2293,18 @@
             "state": "translated",
             "value": "新しい支出を記録するとき、カードは「支払い方法」メニューに表示されます。既存の取引は元のカード名を保持します。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当您记录新支出时，卡会显示在\"支付方式\"菜单中。现有交易保留原始卡名。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 지출을 기록할 때 카드가 \"결제 수단\" 메뉴에 표시됩니다. 기존 거래는 원래 카드 이름을 유지합니다."
+          }
         }
       }
     },
@@ -1649,6 +2333,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "カテゴリ"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "类别"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리"
           }
         }
       }
@@ -1679,6 +2375,18 @@
             "state": "translated",
             "value": "変更は保存されません"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更改未保存"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "변경 사항이 저장되지 않음"
+          }
         }
       }
     },
@@ -1707,6 +2415,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "中国元"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "人民币"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "중국 위안"
           }
         }
       }
@@ -1737,6 +2457,18 @@
             "state": "translated",
             "value": "検索を閉じる"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭搜索"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "검색 닫기"
+          }
         }
       }
     },
@@ -1765,6 +2497,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "クロージング日"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "成交日期"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "마감일"
           }
         }
       }
@@ -1795,6 +2539,18 @@
             "state": "translated",
             "value": "コーヒー"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "咖啡"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "커피"
+          }
         }
       }
     },
@@ -1823,6 +2579,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "色"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "颜色"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "색상"
           }
         }
       }
@@ -1853,6 +2621,18 @@
             "state": "translated",
             "value": "最近からコピー"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从最近复制"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최근에서 복사"
+          }
         }
       }
     },
@@ -1881,6 +2661,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "通貨"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "货币"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "통화"
           }
         }
       }
@@ -1911,6 +2703,18 @@
             "state": "translated",
             "value": "日次トレンド"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每日趋势"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일별 추이"
+          }
         }
       }
     },
@@ -1939,6 +2743,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "ダーク"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深色"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다크"
           }
         }
       }
@@ -1969,6 +2785,18 @@
             "state": "translated",
             "value": "ダッシュボード"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仪表盘"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "대시보드"
+          }
         }
       }
     },
@@ -1997,6 +2825,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "日付"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "日期"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "날짜"
           }
         }
       }
@@ -2027,6 +2867,18 @@
             "state": "translated",
             "value": "%lld日目 / %lld日"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "第%lld天/共%lld天"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld일 / %lld일"
+          }
         }
       }
     },
@@ -2055,6 +2907,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "削除"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "삭제"
           }
         }
       }
@@ -2085,6 +2949,18 @@
             "state": "translated",
             "value": "%@を削除"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 삭제"
+          }
         }
       }
     },
@@ -2113,6 +2989,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "支払いを削除"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除付款"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "결제 삭제"
           }
         }
       }
@@ -2143,6 +3031,18 @@
             "state": "translated",
             "value": "物件を削除"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除房产"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "부동산 삭제"
+          }
         }
       }
     },
@@ -2171,6 +3071,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "このカードを削除しますか？"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除此卡？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 카드를 삭제하시겠습니까?"
           }
         }
       }
@@ -2201,6 +3113,18 @@
             "state": "translated",
             "value": "この物件を削除しますか？"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除此房产？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 부동산을 삭제하시겠습니까?"
+          }
         }
       }
     },
@@ -2229,6 +3153,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "この取引を削除しますか？"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除此交易？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 거래를 삭제하시겠습니까?"
           }
         }
       }
@@ -2259,6 +3195,18 @@
             "state": "translated",
             "value": "取引を削除"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除交易"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "거래 삭제"
+          }
         }
       }
     },
@@ -2288,6 +3236,18 @@
             "state": "translated",
             "value": "デモモード"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "演示模式"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "데모 모드"
+          }
         }
       }
     },
@@ -2316,6 +3276,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "入金先"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "存入"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "입금 계좌"
           }
         }
       }
@@ -2394,6 +3366,42 @@
               }
             }
           }
+        },
+        "zh-Hans": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "检测到%lld个定期消费"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "检测到%lld个定期消费"
+                }
+              }
+            }
+          }
+        },
+        "ko": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld개의 정기 결제 감지"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld개의 정기 결제 감지"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -2422,6 +3430,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "開発者"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开发者"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "개발자"
           }
         }
       }
@@ -2452,6 +3472,18 @@
             "state": "translated",
             "value": "届きませんでしたか？"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没收到？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "받지 못하셨나요?"
+          }
         }
       }
     },
@@ -2480,6 +3512,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "外食"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "餐饮"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "외식"
           }
         }
       }
@@ -2510,6 +3554,18 @@
             "state": "translated",
             "value": "完了"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完成"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "완료"
+          }
         }
       }
     },
@@ -2538,6 +3594,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld日後に支払い"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld天后到期"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld일 후 마감"
           }
         }
       }
@@ -2568,6 +3636,18 @@
             "state": "translated",
             "value": "本日支払い"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今天到期"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘 마감"
+          }
         }
       }
     },
@@ -2596,6 +3676,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "明日支払い"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "明天到期"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "내일 마감"
           }
         }
       }
@@ -2626,6 +3718,18 @@
             "state": "translated",
             "value": "編集"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "편집"
+          }
         }
       }
     },
@@ -2654,6 +3758,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@を編集"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 편집"
           }
         }
       }
@@ -2684,6 +3800,18 @@
             "state": "translated",
             "value": "取引を編集"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑交易"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "거래 편집"
+          }
         }
       }
     },
@@ -2712,6 +3840,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "デモモードに入りますか？"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "进入演示模式？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "데모 모드로 진입하시겠습니까?"
           }
         }
       }
@@ -2742,6 +3882,18 @@
             "state": "translated",
             "value": "コードを入力"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "输入验证码"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "코드 입력"
+          }
         }
       }
     },
@@ -2770,6 +3922,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "娯楽"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "娱乐"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오락"
           }
         }
       }
@@ -2800,6 +3964,18 @@
             "state": "translated",
             "value": "持ち分"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "权益"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지분"
+          }
         }
       }
     },
@@ -2828,6 +4004,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "築いた持ち分"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已积累权益"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "축적된 지분"
           }
         }
       }
@@ -2858,6 +4046,18 @@
             "state": "translated",
             "value": "ユーロ"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "欧元"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "유로"
+          }
         }
       }
     },
@@ -2886,6 +4086,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "均等"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "均分"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "균등"
           }
         }
       }
@@ -2916,6 +4128,18 @@
             "state": "translated",
             "value": "既存の取引は%@を所有者として保持します。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "现有交易保留%@为所有者。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기존 거래는 %@을(를) 소유자로 유지합니다."
+          }
         }
       }
     },
@@ -2944,6 +4168,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "既存の取引は元のカード名を保持します。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "现有交易保留原始卡名。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기존 거래는 원래 카드 이름을 유지합니다."
           }
         }
       }
@@ -2974,6 +4210,18 @@
             "state": "translated",
             "value": "終了"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "종료"
+          }
         }
       }
     },
@@ -3002,6 +4250,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "支出"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支出"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지출"
           }
         }
       }
@@ -3032,6 +4292,18 @@
             "state": "translated",
             "value": "支出"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支出"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지출"
+          }
         }
       }
     },
@@ -3060,6 +4332,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "固定 · %lld年"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "固定 · %lld年"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "고정 · %lld년"
           }
         }
       }
@@ -3090,6 +4374,18 @@
             "state": "translated",
             "value": "燃料"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "燃油"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "연료"
+          }
         }
       }
     },
@@ -3118,6 +4414,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "食料品"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "食品杂货"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "식료품"
           }
         }
       }
@@ -3148,6 +4456,18 @@
             "state": "translated",
             "value": "健康"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "健康"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "건강"
+          }
         }
       }
     },
@@ -3176,6 +4496,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "世帯"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "家庭"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세대"
           }
         }
       }
@@ -3206,6 +4538,18 @@
             "state": "translated",
             "value": "世帯名"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "家庭名称"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세대 이름"
+          }
         }
       }
     },
@@ -3234,6 +4578,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "住宅"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "住房"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "주거"
           }
         }
       }
@@ -3264,6 +4620,18 @@
             "state": "translated",
             "value": "収入"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "收入"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "수입"
+          }
         }
       }
     },
@@ -3292,6 +4660,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "収入はアクティビティリストで緑色で表示されます。複数の所有者を選択すると、共有収入が全員に割り当てられます。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "收入在活动列表中以鼠尾草绿色显示。选择多个所有者将共享收入归属于所有人。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "수입은 활동 목록에서 세이지 색상으로 표시됩니다. 여러 소유자를 선택하면 공유 수입이 모두에게 귀속됩니다."
           }
         }
       }
@@ -3322,6 +4702,18 @@
             "state": "translated",
             "value": "イニシャルは名前から自動的に設定されます。共同アカウントは+で結んだ2文字のイニシャルになります。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "首字母会从名字自动设置。联名账户使用两个首字母用+连接。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이니셜은 이름에서 자동으로 설정됩니다. 공동 계정은 두 개의 이니셜을 +로 연결합니다."
+          }
         }
       }
     },
@@ -3350,6 +4742,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "利息"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "利息"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이자"
           }
         }
       }
@@ -3380,6 +4784,18 @@
             "state": "translated",
             "value": "金利"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "利率"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "금리"
+          }
         }
       }
     },
@@ -3408,6 +4824,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "日本円"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "日元"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일본 엔"
           }
         }
       }
@@ -3438,6 +4866,18 @@
             "state": "translated",
             "value": "言語"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "语言"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "언어"
+          }
         }
       }
     },
@@ -3466,6 +4906,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "過去12か月"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "过去12个月"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지난 12개월"
           }
         }
       }
@@ -3496,6 +4948,18 @@
             "state": "translated",
             "value": "過去3か月"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "过去3个月"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지난 3개월"
+          }
         }
       }
     },
@@ -3524,6 +4988,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "過去30日間"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "过去30天"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지난 30일"
           }
         }
       }
@@ -3554,6 +5030,18 @@
             "state": "translated",
             "value": "過去6か月"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "过去6个月"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지난 6개월"
+          }
         }
       }
     },
@@ -3582,6 +5070,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "賃貸"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "租约"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "임대"
           }
         }
       }
@@ -3612,6 +5112,18 @@
             "state": "translated",
             "value": "賃貸終了"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "租约结束"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "임대 종료"
+          }
         }
       }
     },
@@ -3640,6 +5152,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "賃貸契約は%lld日後に終了"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "租约将在%lld天后结束"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "임대 종료까지 %lld일"
           }
         }
       }
@@ -3670,6 +5194,18 @@
             "state": "translated",
             "value": "賃貸開始"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "租约开始"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "임대 시작"
+          }
         }
       }
     },
@@ -3698,6 +5234,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "ライト"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "浅色"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "라이트"
           }
         }
       }
@@ -3728,6 +5276,18 @@
             "state": "translated",
             "value": "デモを読み込む"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加载演示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "데모 로드"
+          }
         }
       }
     },
@@ -3756,6 +5316,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "デモデータを読み込む"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加载演示数据"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "데모 데이터 로드"
           }
         }
       }
@@ -3786,6 +5358,18 @@
             "state": "translated",
             "value": "レートを読み込み中…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在加载汇率…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "환율 불러오는 중…"
+          }
         }
       }
     },
@@ -3814,6 +5398,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "取引を読み込み中"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在加载您的交易"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "거래 불러오는 중"
           }
         }
       }
@@ -3844,6 +5440,18 @@
             "state": "translated",
             "value": "支出や収入を記録すると、ここに日付ごとに表示されます。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "记录一笔支出或收入，将按日期分组显示在这里。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지출이나 수입을 기록하면 여기에 날짜별로 표시됩니다."
+          }
         }
       }
     },
@@ -3872,6 +5480,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "支払いを記録"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "记录付款"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "결제 기록"
           }
         }
       }
@@ -3902,6 +5522,18 @@
             "state": "translated",
             "value": "満期"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "到期"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "만기"
+          }
         }
       }
     },
@@ -3930,6 +5562,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "メンバー"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "成员"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "구성원"
           }
         }
       }
@@ -3960,6 +5604,18 @@
             "state": "translated",
             "value": "メンバーはこの世帯のすべての共有取引を見ることができます。個人取引はあなただけが見られます。新メンバーの招待機能は近日公開です。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "成员可以查看此家庭的所有共享交易。个人交易仅您可见。邀请新成员功能即将推出。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "구성원은 이 세대의 모든 공유 거래를 볼 수 있습니다. 개인 거래는 본인만 볼 수 있습니다. 새 구성원 초대 기능은 곧 제공됩니다."
+          }
         }
       }
     },
@@ -3988,6 +5644,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "店舗"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商家"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "상점"
           }
         }
       }
@@ -4018,6 +5686,18 @@
             "state": "translated",
             "value": "月"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "월"
+          }
         }
       }
     },
@@ -4046,6 +5726,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "月々のコスト"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月度成本"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "월 비용"
           }
         }
       }
@@ -4076,6 +5768,18 @@
             "state": "translated",
             "value": "月次上限"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月度限额"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "월별 한도"
+          }
         }
       }
     },
@@ -4104,6 +5808,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "月々の支払い"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月供"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "월 납입금"
           }
         }
       }
@@ -4134,6 +5850,18 @@
             "state": "translated",
             "value": "月々の元本＋利息はローン金額、金利、期間から計算されます。税金と保険はまだ追跡されていません。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月度本金+利息根据贷款金额、利率和期限计算。税费和保险暂未跟踪。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "월 원금+이자는 대출 금액, 금리, 기간에서 계산됩니다. 세금과 보험은 아직 추적되지 않습니다."
+          }
         }
       }
     },
@@ -4162,6 +5890,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "月々の家賃"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月租金"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "월세"
           }
         }
       }
@@ -4192,6 +5932,18 @@
             "state": "translated",
             "value": "住宅ローン"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按揭"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "주택담보대출"
+          }
         }
       }
     },
@@ -4220,6 +5972,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "住宅ローンは収入の%lld%%"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按揭占收入的%lld%%"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "대출이 수입의 %lld%%"
           }
         }
       }
@@ -4250,6 +6014,18 @@
             "state": "translated",
             "value": "住宅ローンは収入の%lld%% — 高い"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按揭占收入的%lld%% — 偏高"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "대출이 수입의 %lld%% — 높음"
+          }
         }
       }
     },
@@ -4278,6 +6054,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "この物件の住宅ローン情報、賃貸詳細、賃貸支払い履歴が削除されます。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此房产的按揭信息、租约详情和租金支付记录将被删除。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 부동산의 대출 정보, 임대 세부 정보 및 임대 결제 내역이 삭제됩니다."
           }
         }
       }
@@ -4308,6 +6096,18 @@
             "state": "translated",
             "value": "住宅ローン返済"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按揭还款"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "주택담보대출 상환금"
+          }
         }
       }
     },
@@ -4336,6 +6136,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "住宅ローン · 集合住宅"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按揭 · 多户住宅"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "대출 · 다세대 주택"
           }
         }
       }
@@ -4366,6 +6178,18 @@
             "state": "translated",
             "value": "住宅ローン · 自宅"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按揭 · 主要住宅"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "대출 · 주거 주택"
+          }
         }
       }
     },
@@ -4394,6 +6218,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "集合住宅"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "多户住宅"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다세대 주택"
           }
         }
       }
@@ -4472,6 +6308,42 @@
               }
             }
           }
+        },
+        "zh-Hans": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "多户住宅 · %lld个单元"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "多户住宅 · %lld个单元"
+                }
+              }
+            }
+          }
+        },
+        "ko": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "다세대 · 유닛 %lld개"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "다세대 · 유닛 %lld개"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -4500,6 +6372,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "名前"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "名称"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이름"
           }
         }
       }
@@ -4530,6 +6414,18 @@
             "state": "translated",
             "value": "今月の純貯蓄%@ — 20%%の目安を大きく上回っています。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本月净储蓄%@ — 远超20%%基准。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이번 달 순저축 %@ — 20%% 기준치를 크게 상회."
+          }
         }
       }
     },
@@ -4558,6 +6454,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "純残高"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "净余额"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "순잔액"
           }
         }
       }
@@ -4588,6 +6496,18 @@
             "state": "translated",
             "value": "純賃貸収入"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "净租金收入"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "순임대 수입"
+          }
         }
       }
     },
@@ -4616,6 +6536,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "新しいカード"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建卡"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 카드"
           }
         }
       }
@@ -4646,6 +6578,18 @@
             "state": "translated",
             "value": "新しい集合住宅"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建多户住宅"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 다세대 주택"
+          }
         }
       }
     },
@@ -4674,6 +6618,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "新しい自宅"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建主要住宅"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 주거 주택"
           }
         }
       }
@@ -4704,6 +6660,18 @@
             "state": "translated",
             "value": "新しい物件"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建房产"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 부동산"
+          }
         }
       }
     },
@@ -4732,6 +6700,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "新しい賃貸"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建出租房"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 임대"
           }
         }
       }
@@ -4762,6 +6742,18 @@
             "state": "translated",
             "value": "新しい取引"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建交易"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 거래"
+          }
         }
       }
     },
@@ -4790,6 +6782,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "新しいユーザー"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建用户"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 사용자"
           }
         }
       }
@@ -4820,6 +6824,18 @@
             "state": "translated",
             "value": "今後12か月"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未来12个月"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "향후 12개월"
+          }
         }
       }
     },
@@ -4848,6 +6864,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "ニックネーム"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "昵称"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "별명"
           }
         }
       }
@@ -4878,6 +6906,18 @@
             "state": "translated",
             "value": "過去30日間の支出はありません。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "过去30天内无支出。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지난 30일간 지출이 없습니다."
+          }
         }
       }
     },
@@ -4906,6 +6946,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "この期間中の支出はまだありません。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此期间内暂无支出。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 기간 내 지출이 없습니다."
           }
         }
       }
@@ -4936,6 +6988,18 @@
             "state": "translated",
             "value": "この期間中の支出はありません。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此期间内无支出。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 기간 내 지출 없음."
+          }
         }
       }
     },
@@ -4964,6 +7028,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "世帯メンバーはまだいません。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂无家庭成员。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세대 구성원이 없습니다."
           }
         }
       }
@@ -4994,6 +7070,18 @@
             "state": "translated",
             "value": "支払いの記録はまだありません。「支払いを記録」をタップして追加してください。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未记录付款。点击\"记录付款\"添加。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아직 결제 기록이 없습니다. \"결제 기록\"을 탭하여 추가하세요."
+          }
         }
       }
     },
@@ -5022,6 +7110,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "物件はまだありません"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂无房产"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "부동산이 없습니다"
           }
         }
       }
@@ -5052,6 +7152,18 @@
             "state": "translated",
             "value": "物件がまだありません。住宅タブから追加してください。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂无房产。请从住房标签添加。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "부동산이 없습니다. 주거 탭에서 추가하세요."
+          }
         }
       }
     },
@@ -5080,6 +7192,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "この期間中の取引はありません。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此期间内无交易。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 기간 내 거래 없음."
           }
         }
       }
@@ -5110,6 +7234,18 @@
             "state": "translated",
             "value": "取引はまだありません"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂无交易"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "거래가 없습니다"
+          }
         }
       }
     },
@@ -5138,6 +7274,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "ユニットがありません — この物件を編集して追加してください。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂无单元 — 编辑此房产以添加。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "유닛이 없습니다 — 이 부동산을 편집하여 추가하세요."
           }
         }
       }
@@ -5168,6 +7316,18 @@
             "state": "translated",
             "value": "未設定"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未设置"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정 없음"
+          }
         }
       }
     },
@@ -5196,6 +7356,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "メモ"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "备注"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "메모"
           }
         }
       }
@@ -5226,6 +7398,18 @@
             "state": "translated",
             "value": "コピーできる項目がありません"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂无可复制内容"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사할 항목이 없습니다"
+          }
         }
       }
     },
@@ -5254,6 +7438,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "任意"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可选"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택 사항"
           }
         }
       }
@@ -5284,6 +7480,18 @@
             "state": "translated",
             "value": "ローン元本"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "原始贷款"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "원금"
+          }
         }
       }
     },
@@ -5312,6 +7520,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "ローン元本 · %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "原始贷款 · %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "원래 대출 · %@"
           }
         }
       }
@@ -5342,6 +7562,18 @@
             "state": "translated",
             "value": "その他"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "其他"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기타"
+          }
         }
       }
     },
@@ -5370,6 +7602,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@で予算超過"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@超出预算"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 예산 초과"
           }
         }
       }
@@ -5400,6 +7644,18 @@
             "state": "translated",
             "value": "オーナー"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有者"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "소유자"
+          }
         }
       }
     },
@@ -5428,6 +7684,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "所有者"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有者"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "소유자"
           }
         }
       }
@@ -5458,6 +7726,18 @@
             "state": "translated",
             "value": "支払い方法"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支付方式"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "결제 수단"
+          }
         }
       }
     },
@@ -5486,6 +7766,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "支払い履歴"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "付款历史"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "결제 내역"
           }
         }
       }
@@ -5516,6 +7808,18 @@
             "state": "translated",
             "value": "所有者別"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按所有者"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "소유자별"
+          }
         }
       }
     },
@@ -5544,6 +7848,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "個人"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "个人"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "개인"
           }
         }
       }
@@ -5574,6 +7890,18 @@
             "state": "translated",
             "value": "個人取引はあなただけが見られます。世帯の共有リストには表示されません。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "个人交易仅您可见。不会出现在家庭的共享列表中。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "개인 거래는 본인만 볼 수 있습니다. 세대의 공유 목록에 표시되지 않습니다."
+          }
         }
       }
     },
@@ -5602,6 +7930,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "自宅"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "主要住宅"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "주거 주택"
           }
         }
       }
@@ -5632,6 +7972,18 @@
             "state": "translated",
             "value": "元本"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本金"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "원금"
+          }
         }
       }
     },
@@ -5660,6 +8012,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "元本残高"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本金余额"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "원금 잔액"
           }
         }
       }
@@ -5690,6 +8054,18 @@
             "state": "translated",
             "value": "購入価格"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "购买价格"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "구매 가격"
+          }
         }
       }
     },
@@ -5718,6 +8094,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "レート利用不可; 概算値を使用中。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "汇率不可用；使用近似值。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "환율 사용 불가; 대략적인 값 사용."
           }
         }
       }
@@ -5748,6 +8136,18 @@
             "state": "translated",
             "value": "レート更新: %@"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "汇率更新于%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "환율 업데이트: %@"
+          }
         }
       }
     },
@@ -5776,6 +8176,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "月次定期: 約%@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每月定期：约%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "월별 정기: 약 %@"
           }
         }
       }
@@ -5806,6 +8218,18 @@
             "state": "translated",
             "value": "削除"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "제거"
+          }
         }
       }
     },
@@ -5834,6 +8258,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@を削除"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 제거"
           }
         }
       }
@@ -5864,6 +8300,18 @@
             "state": "translated",
             "value": "この世帯から%@を削除しますか？"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从此家庭移除%@？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 세대에서 %@을(를) 제거하시겠습니까?"
+          }
         }
       }
     },
@@ -5892,6 +8340,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "予算を削除"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除预算"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "예산 제거"
           }
         }
       }
@@ -5922,6 +8382,18 @@
             "state": "translated",
             "value": "ユニットを削除"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除单元"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "유닛 제거"
+          }
         }
       }
     },
@@ -5950,6 +8422,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "世帯名を変更"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重命名家庭"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세대 이름 변경"
           }
         }
       }
@@ -5980,6 +8464,18 @@
             "state": "translated",
             "value": "家賃"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "房租"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "월세"
+          }
         }
       }
     },
@@ -6008,6 +8504,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "家賃のリマインダーは賃貸開始日の日付を使用します。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "租金提醒使用您租约开始日期的月日。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "임대료 알림은 임대 시작일의 해당 월 일자를 사용합니다."
           }
         }
       }
@@ -6038,6 +8546,18 @@
             "state": "translated",
             "value": "賃貸"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "出租房"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "임대"
+          }
         }
       }
     },
@@ -6066,6 +8586,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "賃貸収入"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "租金收入"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "임대 수입"
           }
         }
       }
@@ -6096,6 +8628,18 @@
             "state": "translated",
             "value": "所有する賃貸ユニット"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "您拥有的出租单元"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "소유한 임대 유닛"
+          }
         }
       }
     },
@@ -6124,6 +8668,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "ローカルデータをSupabaseで置き換える"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用Supabase替换本地数据"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로컬 데이터를 Supabase로 교체"
           }
         }
       }
@@ -6154,6 +8710,18 @@
             "state": "translated",
             "value": "保存"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "저장"
+          }
         }
       }
     },
@@ -6182,6 +8750,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "保存してもう1件追加"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存并添加另一个"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "저장하고 하나 더 추가"
           }
         }
       }
@@ -6212,6 +8792,18 @@
             "state": "translated",
             "value": "収入の%lld%%を貯蓄中"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "储蓄收入的%lld%%"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "수입의 %lld%% 저축 중"
+          }
         }
       }
     },
@@ -6240,6 +8832,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "検索"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜索"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "검색"
           }
         }
       }
@@ -6270,6 +8874,18 @@
             "state": "translated",
             "value": "取引を検索"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜索交易"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "거래 검색"
+          }
         }
       }
     },
@@ -6298,6 +8914,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "敷金"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "押金"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보증금"
           }
         }
       }
@@ -6328,6 +8956,18 @@
             "state": "translated",
             "value": "複数の所有者を選択すると、取引は共有としてマークされます。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择多个所有者会将交易标记为共享。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "여러 소유자를 선택하면 거래가 공유로 표시됩니다."
+          }
         }
       }
     },
@@ -6356,6 +8996,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "再送信"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新发送"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다시 보내기"
           }
         }
       }
@@ -6386,6 +9038,18 @@
             "state": "translated",
             "value": "**%@**に送信しました。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已发送至**%@**。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**%@**(으)로 전송됨."
+          }
         }
       }
     },
@@ -6414,6 +9078,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "設定"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设置"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정"
           }
         }
       }
@@ -6444,6 +9120,18 @@
             "state": "translated",
             "value": "共有"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "共享"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "공유"
+          }
         }
       }
     },
@@ -6472,6 +9160,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "サインイン"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인"
           }
         }
       }
@@ -6502,6 +9202,18 @@
             "state": "translated",
             "value": "サインアウト"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出登录"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그아웃"
+          }
         }
       }
     },
@@ -6530,6 +9242,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Orthoからサインアウトしますか？"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出Ortho？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ortho에서 로그아웃하시겠습니까?"
           }
         }
       }
@@ -6560,6 +9284,18 @@
             "state": "translated",
             "value": "支払元"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "来源"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "출처"
+          }
         }
       }
     },
@@ -6588,6 +9324,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "カテゴリ別支出"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按类别支出"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리별 지출"
           }
         }
       }
@@ -6618,6 +9366,18 @@
             "state": "translated",
             "value": "30日間で支出%lld%%減"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30天内支出下降%lld%%"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30일간 지출 %lld%% 감소"
+          }
         }
       }
     },
@@ -6646,6 +9406,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "支出が収入を超えています"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支出超过收入"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지출이 수입을 초과"
           }
         }
       }
@@ -6676,6 +9448,18 @@
             "state": "translated",
             "value": "%@の支出は毎月1日から記録されます。インサイトはこの上限と実際の支出を比較します。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@的支出从每个日历月的1日开始统计。洞察会将实际支出与此限额比较。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@의 지출은 매월 1일부터 추적됩니다. 인사이트는 실제 지출을 이 한도와 비교합니다."
+          }
         }
       }
     },
@@ -6704,6 +9488,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "30日間で支出%lld%%増"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30天内支出上涨%lld%%"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30일간 지출 %lld%% 증가"
           }
         }
       }
@@ -6734,6 +9530,18 @@
             "state": "translated",
             "value": "分割"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拆分"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "분할"
+          }
         }
       }
     },
@@ -6762,6 +9570,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "サブスク"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "订阅"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "구독"
           }
         }
       }
@@ -6792,6 +9612,18 @@
             "state": "translated",
             "value": "サーバーからすべて同期"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从服务器同步全部"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "서버에서 모두 동기화"
+          }
         }
       }
     },
@@ -6820,6 +9652,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "システム"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "系统"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템"
           }
         }
       }
@@ -6850,6 +9694,18 @@
             "state": "translated",
             "value": "入居者"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "租户"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "임차인"
+          }
         }
       }
     },
@@ -6878,6 +9734,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "期間"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "期限"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기간"
           }
         }
       }
@@ -6908,6 +9776,18 @@
             "state": "translated",
             "value": "アプリは6か月のサンプルデータセット（3ユーザー · 3物件 · 約300取引）を表示します。Supabase上の実データには影響せず、デモモードの変更はローカルにとどまります。上部バナーの「終了」をタップして実データを復元してください。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "应用将显示6个月的示例数据集（3个用户 · 3处房产 · 约300笔交易）。您在Supabase上的真实数据不会受到影响，演示模式下的更改保留在本地。点击顶部横幅中的\"退出\"以恢复您的实时数据。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱은 6개월 샘플 데이터셋(사용자 3명 · 부동산 3개 · 약 300건의 거래)을 표시합니다. Supabase의 실제 데이터는 영향을 받지 않으며 데모 모드의 변경 사항은 로컬에 유지됩니다. 상단 배너의 \"종료\"를 탭하여 실시간 데이터를 복원하세요."
+          }
         }
       }
     },
@@ -6936,6 +9816,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "この操作は取り消せません。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此操作无法撤销。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 작업은 취소할 수 없습니다."
           }
         }
       }
@@ -6966,6 +9858,18 @@
             "state": "translated",
             "value": "今月"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本月"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이번 달"
+          }
         }
       }
     },
@@ -6994,6 +9898,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "新しい支出を記録するとき、この名前が「支払い方法」メニューに表示されます。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当您记录新支出时，此名称将显示在\"支付方式\"菜单中。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 지출을 기록할 때 이 이름이 \"결제 수단\" 메뉴에 표시됩니다."
           }
         }
       }
@@ -7024,6 +9940,18 @@
             "state": "translated",
             "value": "更新または引っ越しを計画する時期です。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "是时候续约或计划搬家了。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "갱신하거나 이사를 계획할 시간입니다."
+          }
         }
       }
     },
@@ -7052,6 +9980,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "今日"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今天"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘"
           }
         }
       }
@@ -7082,6 +10022,18 @@
             "state": "translated",
             "value": "主要店舗"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "热门商家"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "주요 상점"
+          }
         }
       }
     },
@@ -7110,6 +10062,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "合計"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "总计"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "합계"
           }
         }
       }
@@ -7140,6 +10104,18 @@
             "state": "translated",
             "value": "取引"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "交易"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "거래"
+          }
         }
       }
     },
@@ -7168,6 +10144,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "交通"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "交通"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "교통"
           }
         }
       }
@@ -7198,6 +10186,18 @@
             "state": "translated",
             "value": "英ポンド"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "英镑"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "영국 파운드"
+          }
         }
       }
     },
@@ -7226,6 +10226,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "米ドル"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "美元"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "미국 달러"
           }
         }
       }
@@ -7256,6 +10268,18 @@
             "state": "translated",
             "value": "%@は予算内"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@预算充裕"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 예산 여유"
+          }
         }
       }
     },
@@ -7284,6 +10308,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "ユニット名"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "单元名称"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "유닛 이름"
           }
         }
       }
@@ -7314,6 +10350,18 @@
             "state": "translated",
             "value": "ユニットと入居者"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "单元和租户"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "유닛 및 임차인"
+          }
         }
       }
     },
@@ -7342,6 +10390,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@で異常な請求"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@异常消费"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@에서 비정상 결제"
           }
         }
       }
@@ -7372,6 +10432,18 @@
             "state": "translated",
             "value": "レートを更新中…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在更新汇率…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "환율 업데이트 중…"
+          }
         }
       }
     },
@@ -7400,6 +10472,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "別のメールを使う"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用其他邮箱"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다른 이메일 사용"
           }
         }
       }
@@ -7430,6 +10514,18 @@
             "state": "translated",
             "value": "公共料金"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "水电费"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "공과금"
+          }
         }
       }
     },
@@ -7458,6 +10554,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "6桁のコードをメールで送ります。パスワード不要、簡単です。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "我们会通过邮箱发送6位验证码。无需密码，简单便捷。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "6자리 코드를 이메일로 보내드립니다. 비밀번호 없이 간편하게."
           }
         }
       }
@@ -7488,6 +10596,18 @@
             "state": "translated",
             "value": "これはどんな住宅ですか？1つ選んでください — 必要な質問だけお聞きします。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这是哪种住宅？请选择一个 — 我们只会询问相关的问题。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어떤 종류의 주택인가요? 하나 선택하세요 — 적합한 질문만 드립니다."
+          }
         }
       }
     },
@@ -7516,6 +10636,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "昨日"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "昨天"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어제"
           }
         }
       }
@@ -7546,6 +10678,18 @@
             "state": "translated",
             "value": "後で物件設定から種類を変更できますが、一部のフィールドはリセットされます（例: 賃貸日がクロージング日になる）。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "您可以稍后在房产设置中更改类型，但部分字段将重置（例如租约日期变为成交日期）。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나중에 부동산 설정에서 유형을 변경할 수 있지만 일부 필드는 재설정됩니다(예: 임대 날짜가 마감일로 변경됨)."
+          }
         }
       }
     },
@@ -7574,6 +10718,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "住んでいる家を所有"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "您拥有居住的房屋"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "거주하는 집을 소유"
           }
         }
       }
@@ -7604,6 +10760,18 @@
             "state": "translated",
             "value": "自宅を賃貸している"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "您租住房屋"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "집을 임차 중"
+          }
         }
       }
     },
@@ -7632,6 +10800,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "次回Orthoを開くときに再度サインインが必要です。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "您下次打开Ortho时需要重新登录。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다음에 Ortho를 열 때 다시 로그인해야 합니다."
           }
         }
       }
@@ -7662,6 +10842,18 @@
             "state": "translated",
             "value": "今月%@超過: 支出%@に対して収入%@。"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本月超支%@：支出%@对比收入%@。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이번 달 %@ 초과: 지출 %@, 수입 %@."
+          }
         }
       }
     },
@@ -7690,6 +10882,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "残り%lld日で、%@の上限を%@超過しています。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "还剩%lld天，您已超出%@的%@限额%@。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld일 남았는데, %@ 한도를 %@ 초과했습니다."
           }
         }
       }
@@ -7720,6 +10924,18 @@
             "state": "translated",
             "value": "例: オークレーン124"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例如 橡树巷124号"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "예: Oak Lane 124"
+          }
         }
       }
     },
@@ -7748,6 +10964,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "例: 1A"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例如 1A"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "예: 1A"
           }
         }
       }
@@ -7778,6 +11006,18 @@
             "state": "translated",
             "value": "例: Acme Co.の給与"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例如 Acme公司工资"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "예: Acme Co. 급여"
+          }
         }
       }
     },
@@ -7806,6 +11046,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "例: Alex"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例如 Alex"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "예: Alex"
           }
         }
       }
@@ -7836,6 +11088,18 @@
             "state": "translated",
             "value": "例: Chase Freedom"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例如 Chase Freedom"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "예: Chase Freedom"
+          }
         }
       }
     },
@@ -7865,6 +11129,18 @@
             "state": "translated",
             "value": "例: Whole Foods"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例如 Whole Foods"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "예: Whole Foods"
+          }
         }
       }
     },
@@ -7893,6 +11169,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@の · %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@的 · %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@의 · %@"
           }
         }
       }
