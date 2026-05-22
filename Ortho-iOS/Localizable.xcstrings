@@ -15,6 +15,12 @@
             "state": "translated",
             "value": "%@ / mo"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ / mes"
+          }
         }
       }
     },
@@ -31,6 +37,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ P&I vs %@ income this month. Lenders typically target below 28%%."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ capital+interés vs %@ de ingreso este mes. Los prestamistas suelen apuntar a menos del 28%%."
           }
         }
       }
@@ -49,6 +61,12 @@
             "state": "translated",
             "value": "%@ at %@ on %@ — %@ the typical amount."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ en %@ el %@ — %@ del importe habitual."
+          }
         }
       }
     },
@@ -65,6 +83,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ budget"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presupuesto de %@"
           }
         }
       }
@@ -83,6 +107,12 @@
             "state": "translated",
             "value": "%@ down %lld%% vs last month"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ bajó %lld%% vs el mes pasado"
+          }
         }
       }
     },
@@ -99,6 +129,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ equity"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de patrimonio"
           }
         }
       }
@@ -117,6 +153,12 @@
             "state": "translated",
             "value": "%@ in the last 30 days vs %@ the 30 before."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ en los últimos 30 días vs %@ los 30 anteriores."
+          }
         }
       }
     },
@@ -133,6 +175,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ is your top category"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ es tu categoría principal"
           }
         }
       }
@@ -151,6 +199,12 @@
             "state": "translated",
             "value": "%@ left of %@ with %lld days to go."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te quedan %@ de %@ con %lld días por delante."
+          }
         }
       }
     },
@@ -167,6 +221,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ of %@ still available with %lld days left."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de %@ aún disponible con %lld días restantes."
           }
         }
       }
@@ -185,6 +245,12 @@
             "state": "translated",
             "value": "%@ this month — %lld%% of total spend."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ este mes — %lld%% del gasto total."
+          }
         }
       }
     },
@@ -202,6 +268,12 @@
             "state": "translated",
             "value": "%@ up %lld%% vs last month"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ subió %lld%% vs el mes pasado"
+          }
         }
       }
     },
@@ -215,6 +287,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "%@ · %@"
@@ -260,6 +338,24 @@
               }
             }
           }
+        },
+        "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld propiedad"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld propiedades"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -276,6 +372,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld set"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld establecidos"
           }
         }
       }
@@ -314,6 +416,24 @@
                 "stringUnit": {
                   "state": "translated",
                   "value": "%lld ইউনিট"
+                }
+              }
+            }
+          }
+        },
+        "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld unidad"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld unidades"
                 }
               }
             }
@@ -359,6 +479,24 @@
               }
             }
           }
+        },
+        "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld visita"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld visitas"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -375,6 +513,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld years remaining"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld años restantes"
           }
         }
       }
@@ -393,6 +537,12 @@
             "state": "translated",
             "value": "%lld-year"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld años"
+          }
         }
       }
     },
@@ -409,6 +559,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "(you)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(tú)"
           }
         }
       }
@@ -427,6 +583,12 @@
             "state": "translated",
             "value": "(you) · %@"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(tú) · %@"
+          }
         }
       }
     },
@@ -443,6 +605,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "+ %lld more"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+ %lld más"
           }
         }
       }
@@ -461,6 +629,12 @@
             "state": "translated",
             "value": "Account"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuenta"
+          }
         }
       }
     },
@@ -477,6 +651,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Add"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir"
           }
         }
       }
@@ -495,6 +675,12 @@
             "state": "translated",
             "value": "Add a primary home, a rental, or a multifamily property to track payments, balances, and lease info."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añade una vivienda principal, una propiedad en alquiler o una multifamiliar para registrar pagos, saldos e información de arrendamientos."
+          }
         }
       }
     },
@@ -511,6 +697,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Add at least one transaction and it'll show up here for fast duplication."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añade al menos una transacción y aparecerá aquí para duplicarla rápido."
           }
         }
       }
@@ -529,6 +721,12 @@
             "state": "translated",
             "value": "Add card"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir tarjeta"
+          }
         }
       }
     },
@@ -545,6 +743,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Add each unit's rent and tenant. Net balance is total unit rent minus the mortgage payment."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añade el alquiler y el inquilino de cada unidad. El saldo neto es el alquiler total menos el pago de la hipoteca."
           }
         }
       }
@@ -563,6 +767,12 @@
             "state": "translated",
             "value": "Add property"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir propiedad"
+          }
         }
       }
     },
@@ -579,6 +789,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Add transaction"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir transacción"
           }
         }
       }
@@ -597,6 +813,12 @@
             "state": "translated",
             "value": "Add unit"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir unidad"
+          }
         }
       }
     },
@@ -613,6 +835,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Add user"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir usuario"
           }
         }
       }
@@ -631,6 +859,12 @@
             "state": "translated",
             "value": "Address"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dirección"
+          }
         }
       }
     },
@@ -647,6 +881,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "All"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo"
           }
         }
       }
@@ -665,6 +905,12 @@
             "state": "translated",
             "value": "Amortization"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amortización"
+          }
         }
       }
     },
@@ -681,6 +927,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Amount"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importe"
           }
         }
       }
@@ -699,6 +951,12 @@
             "state": "translated",
             "value": "Appearance"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apariencia"
+          }
         }
       }
     },
@@ -715,6 +973,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Approaching %@ limit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acercándote al límite de %@"
           }
         }
       }
@@ -733,6 +997,12 @@
             "state": "translated",
             "value": "Auto-pay"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pago automático"
+          }
         }
       }
     },
@@ -749,6 +1019,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Auto-pays on the 1st · %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pago automático el día 1 · %@"
           }
         }
       }
@@ -767,6 +1043,12 @@
             "state": "translated",
             "value": "Avg / day"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prom. / día"
+          }
         }
       }
     },
@@ -783,6 +1065,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Back"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atrás"
           }
         }
       }
@@ -801,6 +1089,12 @@
             "state": "translated",
             "value": "Bangladeshi Taka"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taka bangladesí"
+          }
         }
       }
     },
@@ -817,6 +1111,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Budgets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presupuestos"
           }
         }
       }
@@ -835,6 +1135,12 @@
             "state": "translated",
             "value": "Budgets drive the spending insights on your dashboard. Set a monthly limit for any category and you'll see progress + alerts when you're close to or over the limit."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los presupuestos impulsan los insights de gasto del panel. Establece un límite mensual para cualquier categoría y verás el progreso y alertas cuando te acerques o lo superes."
+          }
         }
       }
     },
@@ -851,6 +1157,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Built since closing · %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acumulado desde el cierre · %@"
           }
         }
       }
@@ -869,6 +1181,12 @@
             "state": "translated",
             "value": "By continuing you agree to our **Terms** and **Privacy**."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al continuar aceptas nuestros **Términos** y **Privacidad**."
+          }
         }
       }
     },
@@ -885,6 +1203,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Canadian Dollar"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dólar canadiense"
           }
         }
       }
@@ -903,6 +1227,12 @@
             "state": "translated",
             "value": "Cancel"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar"
+          }
         }
       }
     },
@@ -919,6 +1249,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cards"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarjetas"
           }
         }
       }
@@ -937,6 +1273,12 @@
             "state": "translated",
             "value": "Cards appear in the Paid with menu when you log a new expense. Existing transactions keep their original card name."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las tarjetas aparecen en el menú \"Pagado con\" cuando registras un nuevo gasto. Las transacciones existentes mantienen su nombre de tarjeta original."
+          }
         }
       }
     },
@@ -953,6 +1295,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Category"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Categoría"
           }
         }
       }
@@ -971,6 +1319,12 @@
             "state": "translated",
             "value": "Changes aren't saved"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los cambios no se guardan"
+          }
         }
       }
     },
@@ -987,6 +1341,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Chinese Yuan"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yuan chino"
           }
         }
       }
@@ -1005,6 +1365,12 @@
             "state": "translated",
             "value": "Close search"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar búsqueda"
+          }
         }
       }
     },
@@ -1021,6 +1387,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Closing date"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fecha de cierre"
           }
         }
       }
@@ -1039,6 +1411,12 @@
             "state": "translated",
             "value": "Coffee"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Café"
+          }
         }
       }
     },
@@ -1052,6 +1430,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Color"
@@ -1073,6 +1457,12 @@
             "state": "translated",
             "value": "Copy from recent"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar de recientes"
+          }
         }
       }
     },
@@ -1089,6 +1479,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Currency"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moneda"
           }
         }
       }
@@ -1107,6 +1503,12 @@
             "state": "translated",
             "value": "Daily trend"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tendencia diaria"
+          }
         }
       }
     },
@@ -1123,6 +1525,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dark"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oscuro"
           }
         }
       }
@@ -1141,6 +1549,12 @@
             "state": "translated",
             "value": "Dashboard"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel"
+          }
         }
       }
     },
@@ -1157,6 +1571,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Date"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fecha"
           }
         }
       }
@@ -1175,6 +1595,12 @@
             "state": "translated",
             "value": "Day %lld of %lld"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Día %lld de %lld"
+          }
         }
       }
     },
@@ -1191,6 +1617,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Delete"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar"
           }
         }
       }
@@ -1209,6 +1641,12 @@
             "state": "translated",
             "value": "Delete %@"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar %@"
+          }
         }
       }
     },
@@ -1225,6 +1663,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Delete payment"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar pago"
           }
         }
       }
@@ -1243,6 +1687,12 @@
             "state": "translated",
             "value": "Delete property"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar propiedad"
+          }
         }
       }
     },
@@ -1259,6 +1709,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Delete this card?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Eliminar esta tarjeta?"
           }
         }
       }
@@ -1277,6 +1733,12 @@
             "state": "translated",
             "value": "Delete this property?"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Eliminar esta propiedad?"
+          }
         }
       }
     },
@@ -1293,6 +1755,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Delete this transaction?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Eliminar esta transacción?"
           }
         }
       }
@@ -1311,6 +1779,12 @@
             "state": "translated",
             "value": "Delete transaction"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar transacción"
+          }
         }
       }
     },
@@ -1328,6 +1802,12 @@
             "state": "translated",
             "value": "Demo mode"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo demo"
+          }
         }
       }
     },
@@ -1344,6 +1824,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Deposit to"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depositar en"
           }
         }
       }
@@ -1386,6 +1872,24 @@
               }
             }
           }
+        },
+        "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Detectado %lld cargo recurrente"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Detectados %lld cargos recurrentes"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -1402,6 +1906,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Developer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desarrollador"
           }
         }
       }
@@ -1420,6 +1930,12 @@
             "state": "translated",
             "value": "Didn't receive it?"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿No lo recibiste?"
+          }
         }
       }
     },
@@ -1436,6 +1952,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dining"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurantes"
           }
         }
       }
@@ -1454,6 +1976,12 @@
             "state": "translated",
             "value": "Done"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listo"
+          }
         }
       }
     },
@@ -1470,6 +1998,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Due in %lld days"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vence en %lld días"
           }
         }
       }
@@ -1488,6 +2022,12 @@
             "state": "translated",
             "value": "Due today"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vence hoy"
+          }
         }
       }
     },
@@ -1504,6 +2044,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Due tomorrow"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vence mañana"
           }
         }
       }
@@ -1522,6 +2068,12 @@
             "state": "translated",
             "value": "Edit"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar"
+          }
         }
       }
     },
@@ -1538,6 +2090,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Edit %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar %@"
           }
         }
       }
@@ -1556,6 +2114,12 @@
             "state": "translated",
             "value": "Edit transaction"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar transacción"
+          }
         }
       }
     },
@@ -1572,6 +2136,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enter demo mode?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Entrar en modo demo?"
           }
         }
       }
@@ -1590,6 +2160,12 @@
             "state": "translated",
             "value": "Enter your code"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Introduce tu código"
+          }
         }
       }
     },
@@ -1606,6 +2182,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Entertainment"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entretenimiento"
           }
         }
       }
@@ -1624,6 +2206,12 @@
             "state": "translated",
             "value": "Equity"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Patrimonio"
+          }
         }
       }
     },
@@ -1641,6 +2229,12 @@
             "state": "translated",
             "value": "Equity built"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Patrimonio acumulado"
+          }
         }
       }
     },
@@ -1654,6 +2248,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Euro"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Euro"
@@ -1675,6 +2275,12 @@
             "state": "translated",
             "value": "Even"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Igual"
+          }
         }
       }
     },
@@ -1691,6 +2297,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Existing transactions keep %@ as the owner."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las transacciones existentes mantienen a %@ como propietario."
           }
         }
       }
@@ -1709,6 +2321,12 @@
             "state": "translated",
             "value": "Existing transactions keep their original card name."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las transacciones existentes mantienen su nombre de tarjeta original."
+          }
         }
       }
     },
@@ -1725,6 +2343,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Exit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salir"
           }
         }
       }
@@ -1743,6 +2367,12 @@
             "state": "translated",
             "value": "Expense"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gasto"
+          }
         }
       }
     },
@@ -1759,6 +2389,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Expenses"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gastos"
           }
         }
       }
@@ -1777,6 +2413,12 @@
             "state": "translated",
             "value": "Fixed · %lld-year"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fijo · %lld años"
+          }
         }
       }
     },
@@ -1793,6 +2435,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fuel"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combustible"
           }
         }
       }
@@ -1811,6 +2459,12 @@
             "state": "translated",
             "value": "Groceries"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comestibles"
+          }
         }
       }
     },
@@ -1827,6 +2481,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Health"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salud"
           }
         }
       }
@@ -1845,6 +2505,12 @@
             "state": "translated",
             "value": "Household"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hogar"
+          }
         }
       }
     },
@@ -1861,6 +2527,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Household name"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nombre del hogar"
           }
         }
       }
@@ -1879,6 +2551,12 @@
             "state": "translated",
             "value": "Housing"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vivienda"
+          }
         }
       }
     },
@@ -1895,6 +2573,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Income"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ingresos"
           }
         }
       }
@@ -1913,6 +2597,12 @@
             "state": "translated",
             "value": "Income shows in sage on the Activity list. Selecting multiple owners attributes shared income to all of them."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los ingresos se muestran en verde en la lista de actividad. Seleccionar varios propietarios atribuye el ingreso compartido a todos ellos."
+          }
         }
       }
     },
@@ -1929,6 +2619,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Initial is set automatically from the name. Joint accounts get two initials joined with +."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La inicial se establece automáticamente desde el nombre. Las cuentas conjuntas tienen dos iniciales unidas con +."
           }
         }
       }
@@ -1947,6 +2643,12 @@
             "state": "translated",
             "value": "Interest"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interés"
+          }
         }
       }
     },
@@ -1963,6 +2665,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Interest rate"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tasa de interés"
           }
         }
       }
@@ -1981,6 +2689,12 @@
             "state": "translated",
             "value": "Japanese Yen"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yen japonés"
+          }
         }
       }
     },
@@ -1997,6 +2711,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Language"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idioma"
           }
         }
       }
@@ -2015,6 +2735,12 @@
             "state": "translated",
             "value": "Last 12 months"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Últimos 12 meses"
+          }
         }
       }
     },
@@ -2031,6 +2757,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Last 3 months"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Últimos 3 meses"
           }
         }
       }
@@ -2049,6 +2781,12 @@
             "state": "translated",
             "value": "Last 30 days"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Últimos 30 días"
+          }
         }
       }
     },
@@ -2065,6 +2803,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Last 6 months"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Últimos 6 meses"
           }
         }
       }
@@ -2083,6 +2827,12 @@
             "state": "translated",
             "value": "Lease"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contrato"
+          }
         }
       }
     },
@@ -2099,6 +2849,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lease end"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fin del contrato"
           }
         }
       }
@@ -2117,6 +2873,12 @@
             "state": "translated",
             "value": "Lease ends in %lld days"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El contrato finaliza en %lld días"
+          }
         }
       }
     },
@@ -2133,6 +2895,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lease start"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inicio del contrato"
           }
         }
       }
@@ -2151,6 +2919,12 @@
             "state": "translated",
             "value": "Light"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claro"
+          }
         }
       }
     },
@@ -2167,6 +2941,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Load demo"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cargar demo"
           }
         }
       }
@@ -2185,6 +2965,12 @@
             "state": "translated",
             "value": "Load demo data"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cargar datos demo"
+          }
         }
       }
     },
@@ -2201,6 +2987,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Loading rates…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cargando tasas…"
           }
         }
       }
@@ -2219,6 +3011,12 @@
             "state": "translated",
             "value": "Loading your transactions"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cargando tus transacciones"
+          }
         }
       }
     },
@@ -2235,6 +3033,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Log an expense or income to see it grouped by day here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registra un gasto o ingreso para verlo agrupado por día aquí."
           }
         }
       }
@@ -2253,6 +3057,12 @@
             "state": "translated",
             "value": "Log payment"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registrar pago"
+          }
         }
       }
     },
@@ -2269,6 +3079,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Maturity"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vencimiento"
           }
         }
       }
@@ -2287,6 +3103,12 @@
             "state": "translated",
             "value": "Member"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Miembro"
+          }
         }
       }
     },
@@ -2303,6 +3125,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Members can see all Shared transactions in this household. Personal transactions are visible only to you. Inviting new members is coming soon."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los miembros pueden ver todas las transacciones compartidas de este hogar. Las personales solo las ves tú. La invitación de nuevos miembros llegará pronto."
           }
         }
       }
@@ -2321,6 +3149,12 @@
             "state": "translated",
             "value": "Merchant"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comercio"
+          }
         }
       }
     },
@@ -2337,6 +3171,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Month"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes"
           }
         }
       }
@@ -2355,6 +3195,12 @@
             "state": "translated",
             "value": "Monthly cost"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coste mensual"
+          }
         }
       }
     },
@@ -2371,6 +3217,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Monthly limit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Límite mensual"
           }
         }
       }
@@ -2389,6 +3241,12 @@
             "state": "translated",
             "value": "Monthly payment"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pago mensual"
+          }
         }
       }
     },
@@ -2405,6 +3263,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Monthly principal + interest is computed from the loan amount, rate, and term. Taxes and insurance aren't tracked yet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El capital + interés mensual se calcula a partir del importe del préstamo, la tasa y el plazo. Los impuestos y seguros aún no se registran."
           }
         }
       }
@@ -2423,6 +3287,12 @@
             "state": "translated",
             "value": "Monthly rent"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alquiler mensual"
+          }
         }
       }
     },
@@ -2439,6 +3309,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mortgage"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hipoteca"
           }
         }
       }
@@ -2457,6 +3333,12 @@
             "state": "translated",
             "value": "Mortgage at %lld%% of income"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hipoteca al %lld%% del ingreso"
+          }
         }
       }
     },
@@ -2473,6 +3355,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mortgage at %lld%% of income — high"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hipoteca al %lld%% del ingreso — alta"
           }
         }
       }
@@ -2491,6 +3379,12 @@
             "state": "translated",
             "value": "Mortgage info, lease details, and rental payment history for this property will be removed."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se eliminarán la información de la hipoteca, los detalles del contrato y el historial de pagos de esta propiedad."
+          }
         }
       }
     },
@@ -2507,6 +3401,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mortgage payment"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pago de hipoteca"
           }
         }
       }
@@ -2525,6 +3425,12 @@
             "state": "translated",
             "value": "Mortgage · Multifamily"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hipoteca · Multifamiliar"
+          }
         }
       }
     },
@@ -2542,6 +3448,12 @@
             "state": "translated",
             "value": "Mortgage · Primary home"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hipoteca · Vivienda principal"
+          }
         }
       }
     },
@@ -2558,6 +3470,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Multifamily property"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Propiedad multifamiliar"
           }
         }
       }
@@ -2600,6 +3518,24 @@
               }
             }
           }
+        },
+        "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Multifamiliar · %lld unidad"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Multifamiliar · %lld unidades"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -2616,6 +3552,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Name"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nombre"
           }
         }
       }
@@ -2634,6 +3576,12 @@
             "state": "translated",
             "value": "Net %@ saved this month — well above the 20%% benchmark."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neto de %@ ahorrado este mes — muy por encima del 20%% de referencia."
+          }
         }
       }
     },
@@ -2650,6 +3598,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Net balance"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo neto"
           }
         }
       }
@@ -2668,6 +3622,12 @@
             "state": "translated",
             "value": "Net rental income"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ingreso neto de alquiler"
+          }
         }
       }
     },
@@ -2684,6 +3644,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "New card"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nueva tarjeta"
           }
         }
       }
@@ -2702,6 +3668,12 @@
             "state": "translated",
             "value": "New multifamily"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nueva multifamiliar"
+          }
         }
       }
     },
@@ -2718,6 +3690,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "New primary home"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nueva vivienda principal"
           }
         }
       }
@@ -2736,6 +3714,12 @@
             "state": "translated",
             "value": "New property"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nueva propiedad"
+          }
         }
       }
     },
@@ -2752,6 +3736,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "New rental"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nueva en alquiler"
           }
         }
       }
@@ -2770,6 +3760,12 @@
             "state": "translated",
             "value": "New transaction"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nueva transacción"
+          }
         }
       }
     },
@@ -2786,6 +3782,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "New user"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuevo usuario"
           }
         }
       }
@@ -2804,6 +3806,12 @@
             "state": "translated",
             "value": "Next 12 months"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próximos 12 meses"
+          }
         }
       }
     },
@@ -2820,6 +3828,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nickname"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apodo"
           }
         }
       }
@@ -2838,6 +3852,12 @@
             "state": "translated",
             "value": "No expenses in the last 30 days."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin gastos en los últimos 30 días."
+          }
         }
       }
     },
@@ -2854,6 +3874,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No expenses in this period yet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay gastos en este período."
           }
         }
       }
@@ -2872,6 +3898,12 @@
             "state": "translated",
             "value": "No expenses in this period."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin gastos en este período."
+          }
         }
       }
     },
@@ -2888,6 +3920,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No household members yet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay miembros del hogar."
           }
         }
       }
@@ -2906,6 +3944,12 @@
             "state": "translated",
             "value": "No payments logged yet. Tap Log payment to add one."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay pagos registrados. Toca \"Registrar pago\" para añadir uno."
+          }
         }
       }
     },
@@ -2922,6 +3966,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No properties yet"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay propiedades"
           }
         }
       }
@@ -2940,6 +3990,12 @@
             "state": "translated",
             "value": "No properties yet. Add one from the Housing tab."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay propiedades. Añade una desde la pestaña Vivienda."
+          }
         }
       }
     },
@@ -2956,6 +4012,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No transactions in this period."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin transacciones en este período."
           }
         }
       }
@@ -2974,6 +4036,12 @@
             "state": "translated",
             "value": "No transactions yet"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay transacciones"
+          }
         }
       }
     },
@@ -2990,6 +4058,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No units yet — edit this property to add them."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay unidades — edita esta propiedad para añadirlas."
           }
         }
       }
@@ -3008,6 +4082,12 @@
             "state": "translated",
             "value": "None set"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ninguno establecido"
+          }
         }
       }
     },
@@ -3024,6 +4104,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Note"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nota"
           }
         }
       }
@@ -3042,6 +4128,12 @@
             "state": "translated",
             "value": "Nothing to copy yet"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada que copiar aún"
+          }
         }
       }
     },
@@ -3058,6 +4150,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Optional"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opcional"
           }
         }
       }
@@ -3076,6 +4174,12 @@
             "state": "translated",
             "value": "Original loan"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Préstamo original"
+          }
         }
       }
     },
@@ -3092,6 +4196,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Original loan · %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Préstamo original · %@"
           }
         }
       }
@@ -3110,6 +4220,12 @@
             "state": "translated",
             "value": "Other"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otro"
+          }
         }
       }
     },
@@ -3126,6 +4242,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Over budget on %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presupuesto superado en %@"
           }
         }
       }
@@ -3144,6 +4266,12 @@
             "state": "translated",
             "value": "Owner"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Propietario"
+          }
         }
       }
     },
@@ -3160,6 +4288,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Owners"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Propietarios"
           }
         }
       }
@@ -3178,6 +4312,12 @@
             "state": "translated",
             "value": "Paid with"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pagado con"
+          }
         }
       }
     },
@@ -3194,6 +4334,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Payment history"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historial de pagos"
           }
         }
       }
@@ -3212,6 +4358,12 @@
             "state": "translated",
             "value": "Per owner"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por propietario"
+          }
         }
       }
     },
@@ -3225,6 +4377,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personal"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Personal"
@@ -3246,6 +4404,12 @@
             "state": "translated",
             "value": "Personal transactions are visible only to you. They don't appear in the household's shared list."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las transacciones personales solo las ves tú. No aparecen en la lista compartida del hogar."
+          }
         }
       }
     },
@@ -3262,6 +4426,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Primary home"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vivienda principal"
           }
         }
       }
@@ -3280,6 +4450,12 @@
             "state": "translated",
             "value": "Principal"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capital"
+          }
         }
       }
     },
@@ -3296,6 +4472,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Principal balance"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo de capital"
           }
         }
       }
@@ -3314,6 +4496,12 @@
             "state": "translated",
             "value": "Purchase price"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Precio de compra"
+          }
         }
       }
     },
@@ -3330,6 +4518,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rates unavailable; using approximate values."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tasas no disponibles; usando valores aproximados."
           }
         }
       }
@@ -3348,6 +4542,12 @@
             "state": "translated",
             "value": "Rates updated %@"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tasas actualizadas %@"
+          }
         }
       }
     },
@@ -3364,6 +4564,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Recurring monthly: ~%@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recurrente mensual: ~%@"
           }
         }
       }
@@ -3382,6 +4588,12 @@
             "state": "translated",
             "value": "Remove"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar"
+          }
         }
       }
     },
@@ -3398,6 +4610,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Remove %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar %@"
           }
         }
       }
@@ -3416,6 +4634,12 @@
             "state": "translated",
             "value": "Remove %@ from this household?"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Quitar a %@ de este hogar?"
+          }
         }
       }
     },
@@ -3432,6 +4656,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Remove budget"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar presupuesto"
           }
         }
       }
@@ -3450,6 +4680,12 @@
             "state": "translated",
             "value": "Remove unit"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar unidad"
+          }
         }
       }
     },
@@ -3466,6 +4702,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rename household"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renombrar hogar"
           }
         }
       }
@@ -3484,6 +4726,12 @@
             "state": "translated",
             "value": "Rent"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alquiler"
+          }
         }
       }
     },
@@ -3500,6 +4748,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rent reminders use the day of the month from your lease start date."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los recordatorios de alquiler usan el día del mes de la fecha de inicio del contrato."
           }
         }
       }
@@ -3518,6 +4772,12 @@
             "state": "translated",
             "value": "Rental"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En alquiler"
+          }
         }
       }
     },
@@ -3534,6 +4794,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rental income"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ingreso por alquiler"
           }
         }
       }
@@ -3552,6 +4818,12 @@
             "state": "translated",
             "value": "Rental units you own"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unidades en alquiler que posees"
+          }
         }
       }
     },
@@ -3568,6 +4840,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Replace local data with Supabase"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reemplazar datos locales con Supabase"
           }
         }
       }
@@ -3586,6 +4864,12 @@
             "state": "translated",
             "value": "Save"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guardar"
+          }
         }
       }
     },
@@ -3602,6 +4886,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Save and add another"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guardar y añadir otra"
           }
         }
       }
@@ -3620,6 +4910,12 @@
             "state": "translated",
             "value": "Saving %lld%% of income"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ahorrando %lld%% del ingreso"
+          }
         }
       }
     },
@@ -3636,6 +4932,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Search"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar"
           }
         }
       }
@@ -3654,6 +4956,12 @@
             "state": "translated",
             "value": "Search transactions"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar transacciones"
+          }
         }
       }
     },
@@ -3670,6 +4978,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Security deposit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depósito de seguridad"
           }
         }
       }
@@ -3688,6 +5002,12 @@
             "state": "translated",
             "value": "Selecting multiple owners marks the transaction as shared."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seleccionar varios propietarios marca la transacción como compartida."
+          }
         }
       }
     },
@@ -3704,6 +5024,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Send again"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enviar de nuevo"
           }
         }
       }
@@ -3722,6 +5048,12 @@
             "state": "translated",
             "value": "Sent to **%@**."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enviado a **%@**."
+          }
         }
       }
     },
@@ -3738,6 +5070,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Settings"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes"
           }
         }
       }
@@ -3756,6 +5094,12 @@
             "state": "translated",
             "value": "Shared"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compartido"
+          }
         }
       }
     },
@@ -3772,6 +5116,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sign in"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciar sesión"
           }
         }
       }
@@ -3790,6 +5140,12 @@
             "state": "translated",
             "value": "Sign out"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar sesión"
+          }
         }
       }
     },
@@ -3806,6 +5162,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sign out of Ortho?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Cerrar sesión de Ortho?"
           }
         }
       }
@@ -3824,6 +5186,12 @@
             "state": "translated",
             "value": "Source"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuente"
+          }
         }
       }
     },
@@ -3840,6 +5208,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Spend by category"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gasto por categoría"
           }
         }
       }
@@ -3858,6 +5232,12 @@
             "state": "translated",
             "value": "Spending down %lld%% over 30 days"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gasto -%lld%% en 30 días"
+          }
         }
       }
     },
@@ -3874,6 +5254,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Spending exceeds income"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El gasto supera al ingreso"
           }
         }
       }
@@ -3892,6 +5278,12 @@
             "state": "translated",
             "value": "Spending in %@ is tracked from the 1st of each calendar month. Insights compare actual spend against this limit."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El gasto en %@ se registra desde el día 1 de cada mes natural. Los insights comparan el gasto real con este límite."
+          }
         }
       }
     },
@@ -3908,6 +5300,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Spending up %lld%% over 30 days"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gasto +%lld%% en 30 días"
           }
         }
       }
@@ -3926,6 +5324,12 @@
             "state": "translated",
             "value": "Split"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dividir"
+          }
         }
       }
     },
@@ -3942,6 +5346,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Subscriptions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suscripciones"
           }
         }
       }
@@ -3960,6 +5370,12 @@
             "state": "translated",
             "value": "Sync all from server"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sincronizar todo desde el servidor"
+          }
         }
       }
     },
@@ -3976,6 +5392,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "System"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistema"
           }
         }
       }
@@ -3994,6 +5416,12 @@
             "state": "translated",
             "value": "Tenant"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inquilino"
+          }
         }
       }
     },
@@ -4010,6 +5438,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Term"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plazo"
           }
         }
       }
@@ -4028,6 +5462,12 @@
             "state": "translated",
             "value": "The app will show a 6-month sample dataset (3 users · 3 properties · ~300 transactions). Your real data on Supabase isn't touched, and changes you make in demo mode stay local. Tap Exit in the banner at the top to restore your live data."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La app mostrará un conjunto de datos de muestra de 6 meses (3 usuarios · 3 propiedades · ~300 transacciones). Tus datos reales en Supabase no se tocan, y los cambios que hagas en modo demo se quedan en local. Toca \"Salir\" en el banner superior para restaurar tus datos en vivo."
+          }
         }
       }
     },
@@ -4044,6 +5484,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "This can't be undone."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esto no se puede deshacer."
           }
         }
       }
@@ -4062,6 +5508,12 @@
             "state": "translated",
             "value": "This month"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este mes"
+          }
         }
       }
     },
@@ -4078,6 +5530,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "This name will show up in the Paid with menu when you log a new expense."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este nombre aparecerá en el menú \"Pagado con\" cuando registres un nuevo gasto."
           }
         }
       }
@@ -4096,6 +5554,12 @@
             "state": "translated",
             "value": "Time to renew or plan a move."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hora de renovar o planificar una mudanza."
+          }
         }
       }
     },
@@ -4112,6 +5576,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Today"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy"
           }
         }
       }
@@ -4130,6 +5600,12 @@
             "state": "translated",
             "value": "Top merchants"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comercios principales"
+          }
         }
       }
     },
@@ -4143,6 +5619,12 @@
           }
         },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Total"
@@ -4164,6 +5646,12 @@
             "state": "translated",
             "value": "Transactions"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transacciones"
+          }
         }
       }
     },
@@ -4180,6 +5668,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transporte"
           }
         }
       }
@@ -4198,6 +5692,12 @@
             "state": "translated",
             "value": "UK Pound"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Libra esterlina"
+          }
         }
       }
     },
@@ -4214,6 +5714,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "US Dollar"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dólar estadounidense"
           }
         }
       }
@@ -4232,6 +5738,12 @@
             "state": "translated",
             "value": "Under budget on %@"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por debajo del presupuesto en %@"
+          }
         }
       }
     },
@@ -4248,6 +5760,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Unit name"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nombre de unidad"
           }
         }
       }
@@ -4266,6 +5784,12 @@
             "state": "translated",
             "value": "Units & tenants"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unidades e inquilinos"
+          }
         }
       }
     },
@@ -4282,6 +5806,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Unusual %@ charge"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cargo inusual en %@"
           }
         }
       }
@@ -4300,6 +5830,12 @@
             "state": "translated",
             "value": "Updating rates…"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualizando tasas…"
+          }
         }
       }
     },
@@ -4316,6 +5852,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Use a different email"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usar otro correo"
           }
         }
       }
@@ -4334,6 +5876,12 @@
             "state": "translated",
             "value": "Utilities"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servicios"
+          }
         }
       }
     },
@@ -4350,6 +5898,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "We'll email you a 6-digit code. No password, no fuss."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te enviaremos un código de 6 dígitos por correo. Sin contraseñas, sin complicaciones."
           }
         }
       }
@@ -4368,6 +5922,12 @@
             "state": "translated",
             "value": "What kind of home is this? Choose one — we'll ask only the questions that fit."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué tipo de vivienda es esta? Elige una — solo te haremos las preguntas adecuadas."
+          }
         }
       }
     },
@@ -4384,6 +5944,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yesterday"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayer"
           }
         }
       }
@@ -4402,6 +5968,12 @@
             "state": "translated",
             "value": "You can change type later from the property's settings, but a few fields will reset (e.g. lease dates become closing date)."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puedes cambiar el tipo más tarde desde los ajustes de la propiedad, pero algunos campos se reiniciarán (p. ej. las fechas del contrato pasan a fecha de cierre)."
+          }
         }
       }
     },
@@ -4418,6 +5990,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "You own where you live"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eres dueño de donde vives"
           }
         }
       }
@@ -4436,6 +6014,12 @@
             "state": "translated",
             "value": "You rent your home"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alquilas tu vivienda"
+          }
         }
       }
     },
@@ -4452,6 +6036,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "You'll need to sign in again next time you open Ortho."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tendrás que iniciar sesión de nuevo la próxima vez que abras Ortho."
           }
         }
       }
@@ -4470,6 +6060,12 @@
             "state": "translated",
             "value": "You're %@ over this month: %@ out vs %@ in."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estás %@ por encima este mes: %@ de salida vs %@ de entrada."
+          }
         }
       }
     },
@@ -4486,6 +6082,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "You're %@ over your %@ limit with %lld days left."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estás %@ por encima de tu límite de %@ con %lld días restantes."
           }
         }
       }
@@ -4504,6 +6106,12 @@
             "state": "translated",
             "value": "e.g. 124 Oak Lane"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "p. ej. Calle Roble 124"
+          }
         }
       }
     },
@@ -4520,6 +6128,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "e.g. 1A"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "p. ej. 1A"
           }
         }
       }
@@ -4538,6 +6152,12 @@
             "state": "translated",
             "value": "e.g. Acme Co. payroll"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "p. ej. Nómina Acme Co."
+          }
         }
       }
     },
@@ -4554,6 +6174,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "e.g. Alex"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "p. ej. Alex"
           }
         }
       }
@@ -4572,6 +6198,12 @@
             "state": "translated",
             "value": "e.g. Chase Freedom"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "p. ej. Chase Freedom"
+          }
         }
       }
     },
@@ -4589,6 +6221,12 @@
             "state": "translated",
             "value": "e.g. Whole Foods"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "p. ej. Whole Foods"
+          }
         }
       }
     },
@@ -4605,6 +6243,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "of %@ · %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "de %@ · %@"
           }
         }
       }
