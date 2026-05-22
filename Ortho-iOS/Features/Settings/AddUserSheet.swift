@@ -95,8 +95,8 @@ struct AddUserSheet: View {
             .animation(.easeOut(duration: 0.15), value: colorKey)
     }
 
-    private func sectionLabel(_ text: String) -> some View {
-        Text(text)
+    private func sectionLabel(_ key: LocalizedStringKey) -> some View {
+        Text(key)
             .font(.lato(size: 13, weight: .semibold))
             .kerning(0.6)
             .textCase(.uppercase)

@@ -53,19 +53,19 @@ struct MortgageDetailsCard: View {
         VStack(spacing: 0) {
             row(
                 label: "Principal balance",
-                sublabel: "Original loan · \(appState.formatMoney(mortgage.originalLoan))",
+                sublabel: Localizer.tr("Original loan · \(appState.formatMoney(mortgage.originalLoan))"),
                 value: appState.formatMoney(mortgage.currentPrincipalBalanceCents())
             )
             divider
             row(
                 label: "Interest rate",
-                sublabel: "Fixed · \(mortgage.loanTermYears)-year",
+                sublabel: Localizer.tr("Fixed · \(mortgage.loanTermYears)-year"),
                 value: percentString(mortgage.annualInterestRatePercent)
             )
             divider
             row(
                 label: "Maturity",
-                sublabel: "\(mortgage.yearsRemaining()) years remaining",
+                sublabel: Localizer.tr("\(mortgage.yearsRemaining()) years remaining"),
                 value: dateLabel(mortgage.maturityDate)
             )
         }
@@ -73,7 +73,7 @@ struct MortgageDetailsCard: View {
         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 
-    private func row(label: String, sublabel: String, value: String) -> some View {
+    private func row(label: LocalizedStringKey, sublabel: String, value: String) -> some View {
         HStack(alignment: .firstTextBaseline) {
             VStack(alignment: .leading, spacing: 3) {
                 Text(label)
@@ -225,8 +225,8 @@ struct AmortizationCard: View {
             .frame(height: 140)
 
             HStack(spacing: 16) {
-                legend(color: AppTheme.positive, label: "Principal")
-                legend(color: AppTheme.text.opacity(0.18), label: "Interest")
+                legend(color: AppTheme.positive, label: Localizer.tr("Principal"))
+                legend(color: AppTheme.text.opacity(0.18), label: Localizer.tr("Interest"))
                 Spacer()
             }
         }

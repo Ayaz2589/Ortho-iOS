@@ -31,8 +31,8 @@ struct TransactionGroup: Identifiable, Hashable {
         let diff = cal.dateComponents([.day], from: day, to: today).day ?? 0
         let locale = Localizer.currentLocale
         switch diff {
-        case 0: return String(localized: "Today", locale: locale)
-        case 1: return String(localized: "Yesterday", locale: locale)
+        case 0: return Localizer.tr("Today")
+        case 1: return Localizer.tr("Yesterday")
         case 2..<7:
             return DateFormatter.localized(pattern: "EEEE", locale: locale).string(from: day)
         default:

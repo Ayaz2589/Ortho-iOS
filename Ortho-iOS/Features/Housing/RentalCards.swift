@@ -40,9 +40,9 @@ struct RentalMonthlyRentCard: View {
 
     private var nextRentCaption: String {
         let days = lease.daysUntilNextRent()
-        if days == 0 { return "Due today" }
-        if days == 1 { return "Due tomorrow" }
-        return "Due in \(days) days"
+        if days == 0 { return Localizer.tr("Due today") }
+        if days == 1 { return Localizer.tr("Due tomorrow") }
+        return Localizer.tr("Due in \(days) days")
     }
 }
 
@@ -101,7 +101,7 @@ struct LeaseInfoCard: View {
         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 
-    private func row(label: String, value: String) -> some View {
+    private func row(label: LocalizedStringKey, value: String) -> some View {
         HStack {
             Text(label)
                 .font(.lato(size: 15))

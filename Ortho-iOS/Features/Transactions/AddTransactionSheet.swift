@@ -155,7 +155,7 @@ struct AddTransactionSheet: View {
     }
 
     private var merchantLabel: LocalizedStringKey { kind == .income ? "Source" : "Merchant" }
-    private var sourceLabel:   String { kind == .income ? "Deposit to" : "Paid with" }
+    private var sourceLabel:   LocalizedStringKey { kind == .income ? "Deposit to" : "Paid with" }
     private var sources:       [String] { kind == .income ? Self.incomeSources : expenseSources }
 
     var body: some View {

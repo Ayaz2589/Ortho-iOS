@@ -31,6 +31,11 @@ struct TransactionsView: View {
     @State private var scopeFilter: TransactionScopeFilter = .all
     @State private var addSheetMode: AddSheetMode?
     @State private var selectedTransaction: Transaction?
+    /// Tap the search icon in the title row to reveal the search field.
+    /// When false, the field + scope-filter pills are hidden to give the
+    /// transactions list more vertical real estate. Closing also clears
+    /// the active query so the user returns to the full list.
+    @State private var searchActive: Bool = false
 
     /// Drives the AddTransactionSheet via a single `.sheet(item:)` modifier.
     /// `.fresh` opens a blank form (the "+" button in the title); `.copying`
@@ -227,34 +232,74 @@ struct TransactionsView: View {
             .fill(AppTheme.surface)
     }
 
-    // MARK: - Title + search
+    // MARK: - Title + tap-to-reveal search (top-anchored)
 
     private var titleAndSearch: some View {
         VStack(alignment: .leading, spacing: 0) {
-            HStack(alignment: .firstTextBaseline) {
+            HStack(alignment: .firstTextBaseline, spacing: 12) {
                 Text("Transactions")
                     .font(.lato(size: 32, weight: .bold))
                     .tracking(-0.6)
                     .foregroundStyle(AppTheme.text)
                 Spacer()
+                if hasAnyTransactions {
+                    searchButton
+                }
                 addButton
             }
             .padding(.horizontal, 20)
             .padding(.top, 4)
-            .padding(.bottom, hasAnyTransactions ? 6 : 8)
+            .padding(.bottom, hasAnyTransactions && searchActive ? 6 : 8)
 
-            if hasAnyTransactions {
-                SearchField(text: $query, placeholder: "Search transactions")
+            if hasAnyTransactions && searchActive {
+                SearchField(
+                    text: $query,
+                    placeholder: "Search transactions",
+                    autofocusOnAppear: true,
+                    onCancel: {
+                        // Cancel inside the field collapses the whole
+                        // search panel — single Cancel exits the mode.
+                        query = ""
+                        searchActive = false
+                    }
+                )
                     .padding(.vertical, 8)
+                    .transition(.move(edge: .top).combined(with: .opacity))
 
                 scopeFilterPill
                     .padding(.horizontal, 16)
                     .padding(.bottom, 8)
+                    .transition(.move(edge: .top).combined(with: .opacity))
             }
         }
         .background(colorScheme == .dark
                     ? AnyShapeStyle(AppTheme.bg)
                     : AnyShapeStyle(.regularMaterial))
+        .animation(.easeOut(duration: 0.22), value: searchActive)
+    }
+
+    /// Circular search button next to the "+". Tap to reveal the field
+    /// + scope pills; the field auto-focuses on appear (keyboard rises).
+    /// Tap again (icon flips to X) to close + clear.
+    private var searchButton: some View {
+        Button {
+            if searchActive {
+                query = ""
+                searchActive = false
+            } else {
+                searchActive = true
+            }
+        } label: {
+            ZStack {
+                Circle().fill(AppTheme.text.opacity(0.05))
+                    .frame(width: 36, height: 36)
+                Image(systemName: searchActive ? "xmark" : "magnifyingglass")
+                    .font(.lato(size: 15, weight: .semibold))
+                    .foregroundStyle(AppTheme.accent)
+            }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(searchActive ? "Close search" : "Search transactions")
     }
 
     // MARK: - Empty state

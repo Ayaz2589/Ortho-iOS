@@ -61,12 +61,12 @@ struct PropertyCard: View {
     private var subtitle: String {
         switch property.kind {
         case .primaryHome:
-            return "Primary home"
+            return Localizer.tr("Primary home")
         case .multifamily:
             let count = property.units.count
-            return "Multifamily · \(count) unit\(count == 1 ? "" : "s")"
+            return Localizer.tr("Multifamily · \(count) units")
         case .rental:
-            return "Rental"
+            return Localizer.tr("Rental")
         }
     }
 
@@ -81,8 +81,8 @@ struct PropertyCard: View {
 
     private var headlineCaption: String {
         switch property.kind {
-        case .primaryHome, .multifamily: "Monthly payment"
-        case .rental:                    "Monthly rent"
+        case .primaryHome, .multifamily: Localizer.tr("Monthly payment")
+        case .rental:                    Localizer.tr("Monthly rent")
         }
     }
 }

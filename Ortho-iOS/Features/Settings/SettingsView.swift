@@ -326,8 +326,8 @@ struct SettingsView: View {
                 Spacer()
                 HStack(spacing: 6) {
                     Text(appState.budgets.isEmpty
-                         ? "None set"
-                         : "\(appState.budgets.count) set")
+                         ? Localizer.tr("None set")
+                         : Localizer.tr("\(appState.budgets.count) set"))
                         .font(.lato(size: 17, weight: .medium))
                         .tracking(-0.2)
                         .foregroundStyle(AppTheme.text2)
@@ -430,17 +430,19 @@ struct SettingsView: View {
 
     private var ratesCaption: String {
         if appState.ratesIsLoading && appState.fxRates.isEmpty {
-            return "Updating rates…"
+            return Localizer.tr("Updating rates…")
         }
         if let last = appState.ratesLastFetched {
             let f = RelativeDateTimeFormatter()
             f.unitsStyle = .full
-            return "Rates updated \(f.localizedString(for: last, relativeTo: Date()))"
+            f.locale = Localizer.currentLocale
+            let relative = f.localizedString(for: last, relativeTo: Date())
+            return Localizer.tr("Rates updated \(relative)")
         }
         if appState.ratesError != nil {
-            return "Rates unavailable; using approximate values."
+            return Localizer.tr("Rates unavailable; using approximate values.")
         }
-        return "Loading rates…"
+        return Localizer.tr("Loading rates…")
     }
 }
 

@@ -215,7 +215,7 @@ struct TransactionDetailSheet: View {
             .padding(.leading, 16)
     }
 
-    private func staticRow(label: String, value: String) -> some View {
+    private func staticRow(label: LocalizedStringKey, value: String) -> some View {
         HStack(spacing: 12) {
             Text(label)
                 .font(.lato(size: 15))

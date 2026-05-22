@@ -263,6 +263,64 @@
         }
       }
     },
+    "%lld set": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld সেট"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld set"
+          }
+        }
+      }
+    },
+    "%lld units": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld unit"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld units"
+                }
+              }
+            }
+          }
+        },
+        "bn": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld ইউনিট"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld ইউনিট"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "%lld visits": {
       "extractionState": "manual",
       "localizations": {
@@ -300,6 +358,23 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "%lld years remaining": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld বছর বাকি"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld years remaining"
           }
         }
       }
@@ -916,6 +991,23 @@
         }
       }
     },
+    "Close search": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "অনুসন্ধান বন্ধ করুন"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close search"
+          }
+        }
+      }
+    },
     "Closing date": {
       "extractionState": "manual",
       "localizations": {
@@ -1239,6 +1331,23 @@
         }
       }
     },
+    "Deposit to": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "জমা"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deposit to"
+          }
+        }
+      }
+    },
     "Detected %lld recurring charges": {
       "extractionState": "manual",
       "localizations": {
@@ -1344,6 +1453,57 @@
           "stringUnit": {
             "state": "translated",
             "value": "Done"
+          }
+        }
+      }
+    },
+    "Due in %lld days": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld দিনে বকেয়া"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Due in %lld days"
+          }
+        }
+      }
+    },
+    "Due today": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "আজ বকেয়া"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Due today"
+          }
+        }
+      }
+    },
+    "Due tomorrow": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "আগামীকাল বকেয়া"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Due tomorrow"
           }
         }
       }
@@ -1603,6 +1763,23 @@
         }
       }
     },
+    "Fixed · %lld-year": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ফিক্সড · %lld-বছর"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixed · %lld-year"
+          }
+        }
+      }
+    },
     "Fuel": {
       "extractionState": "manual",
       "localizations": {
@@ -1752,6 +1929,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Initial is set automatically from the name. Joint accounts get two initials joined with +."
+          }
+        }
+      }
+    },
+    "Interest": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "সুদ"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interest"
           }
         }
       }
@@ -1994,6 +2188,23 @@
         }
       }
     },
+    "Loading rates…": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "রেট লোড হচ্ছে…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading rates…"
+          }
+        }
+      }
+    },
     "Loading your transactions": {
       "extractionState": "manual",
       "localizations": {
@@ -2041,6 +2252,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Log payment"
+          }
+        }
+      }
+    },
+    "Maturity": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মেয়াদ পূর্তি"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maturity"
           }
         }
       }
@@ -2283,6 +2511,40 @@
         }
       }
     },
+    "Mortgage · Multifamily": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মর্টগেজ · মাল্টিফ্যামিলি"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mortgage · Multifamily"
+          }
+        }
+      }
+    },
+    "Mortgage · Primary home": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মর্টগেজ · প্রধান বাড়ি"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mortgage · Primary home"
+          }
+        }
+      }
+    },
     "Multifamily property": {
       "extractionState": "manual",
       "localizations": {
@@ -2296,6 +2558,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Multifamily property"
+          }
+        }
+      }
+    },
+    "Multifamily · %lld units": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Multifamily · %lld unit"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Multifamily · %lld units"
+                }
+              }
+            }
+          }
+        },
+        "bn": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "মাল্টিফ্যামিলি · %lld ইউনিট"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "মাল্টিফ্যামিলি · %lld ইউনিট"
+                }
+              }
+            }
           }
         }
       }
@@ -2691,6 +2994,23 @@
         }
       }
     },
+    "None set": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "সেট করা হয়নি"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "None set"
+          }
+        }
+      }
+    },
     "Note": {
       "extractionState": "manual",
       "localizations": {
@@ -2755,6 +3075,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Original loan"
+          }
+        }
+      }
+    },
+    "Original loan · %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মূল ঋণ · %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Original loan · %@"
           }
         }
       }
@@ -2929,6 +3266,40 @@
         }
       }
     },
+    "Principal": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মূলধন"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Principal"
+          }
+        }
+      }
+    },
+    "Principal balance": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মূলধন ব্যালেন্স"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Principal balance"
+          }
+        }
+      }
+    },
     "Purchase price": {
       "extractionState": "manual",
       "localizations": {
@@ -2942,6 +3313,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Purchase price"
+          }
+        }
+      }
+    },
+    "Rates unavailable; using approximate values.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "রেট অনুপলব্ধ; আনুমানিক মান ব্যবহার করা হচ্ছে।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rates unavailable; using approximate values."
+          }
+        }
+      }
+    },
+    "Rates updated %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "রেট আপডেট: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rates updated %@"
           }
         }
       }
@@ -3877,6 +4282,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Unusual %@ charge"
+          }
+        }
+      }
+    },
+    "Updating rates…": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "রেট আপডেট হচ্ছে…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Updating rates…"
           }
         }
       }

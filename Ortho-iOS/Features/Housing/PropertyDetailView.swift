@@ -101,9 +101,9 @@ struct PropertyDetailView: View {
 
     private func headerSubtitle(for property: Property) -> String {
         switch property.kind {
-        case .primaryHome: "Mortgage · Primary home"
-        case .multifamily: "Mortgage · Multifamily"
-        case .rental:      "Rental"
+        case .primaryHome: Localizer.tr("Mortgage · Primary home")
+        case .multifamily: Localizer.tr("Mortgage · Multifamily")
+        case .rental:      Localizer.tr("Rental")
         }
     }
 }

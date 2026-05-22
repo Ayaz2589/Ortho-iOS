@@ -27,15 +27,15 @@ struct DashboardView: View {
                 if availableRanges.count > 1 {
                     rangePicker
                 }
-                // Insights live at the top so high-severity items
-                // (over-budget, negative cashflow) are the first thing
-                // the user sees. Stack hides itself when the engine
-                // returns nothing (new accounts with no data yet).
-                InsightsCardStack()
                 MonthSummaryCard(range: range)
-                // Budget progress sits right under the month summary so
-                // the at-a-glance "how am I doing this month" answer is
-                // contiguous. Card hides itself when no budgets are set.
+                // Insights sit just below the month summary so the user
+                // first sees the headline number ("+$X this month"), then
+                // the prescriptive cards (over-budget, savings rate, top
+                // category) explaining what's driving it. Stack hides
+                // itself when the engine returns nothing.
+                InsightsCardStack()
+                // Budget progress sits with the rest of this-month
+                // context. Card hides itself when no budgets are set.
                 BudgetProgressCard()
                 SpendByCategoryCard(range: range)
                 PerOwnerBreakdownCard(range: range)
