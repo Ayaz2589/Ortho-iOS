@@ -182,7 +182,7 @@ struct SettingsView: View {
                 .presentationDetents([.large])
                 .presentationBackground(AppTheme.bg)
             }
-            .alert("Sign out?", isPresented: $showingSignOutConfirm) {
+            .alert("Sign out of Ortho?", isPresented: $showingSignOutConfirm) {
                 Button("Cancel", role: .cancel) { }
                 Button("Sign out", role: .destructive) {
                     Task { await appState.signOut() }
