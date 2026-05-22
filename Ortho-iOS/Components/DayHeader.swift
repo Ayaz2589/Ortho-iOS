@@ -29,6 +29,13 @@ struct DayHeader: View {
         .padding(.horizontal, 24)
         .padding(.top, 14)
         .padding(.bottom, 6)
+        // Force the bg to fill the full section-header row width. Without
+        // the explicit `frame(maxWidth: .infinity)`, the HStack only sizes
+        // to its content width inside List's section-header container, and
+        // the rest of the row stays transparent — making scrolling list
+        // rows visible through the gap when the header pins under the
+        // translucent nav blur.
+        .frame(maxWidth: .infinity)
         .background(AppTheme.bg)
     }
 }
