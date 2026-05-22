@@ -1,6 +1,142 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "%1$@ P&I vs %2$@ income this month. Lenders typically target below 28%%.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এই মাসে %1$@ মূলধন+সুদ বনাম %2$@ আয়। ঋণদাতারা সাধারণত 28%%-এর নিচে রাখার লক্ষ্য রাখেন।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ P&I vs %2$@ income this month. Lenders typically target below 28%%."
+          }
+        }
+      }
+    },
+    "%1$@ at %2$@ on %3$@ — %4$@ the typical amount.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%3$@-এ %2$@-তে %1$@ — সাধারণের %4$@।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ at %2$@ on %3$@ — %4$@ the typical amount."
+          }
+        }
+      }
+    },
+    "%1$@ down %2$lld%% vs last month": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "গত মাসের তুলনায় %1$@ %2$lld%% হ্রাস"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ down %2$lld%% vs last month"
+          }
+        }
+      }
+    },
+    "%1$@ in the last 30 days vs %2$@ the 30 before.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "গত 30 দিনে %1$@, তার আগের 30 দিনে %2$@।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ in the last 30 days vs %2$@ the 30 before."
+          }
+        }
+      }
+    },
+    "%1$@ left of %2$@ with %3$lld days to go.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%3$lld দিন বাকি — %2$@-এর %1$@ অবশিষ্ট।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ left of %2$@ with %3$lld days to go."
+          }
+        }
+      }
+    },
+    "%1$@ of %2$@ still available with %3$lld days left.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%3$lld দিন বাকি — %2$@-এর %1$@ এখনো পাওয়া যাবে।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ of %2$@ still available with %3$lld days left."
+          }
+        }
+      }
+    },
+    "%1$@ this month — %2$lld%% of total spend.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এই মাসে %1$@ — মোট খরচের %2$lld%%।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ this month — %2$lld%% of total spend."
+          }
+        }
+      }
+    },
+    "%1$@ up %2$lld%% vs last month": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "গত মাসের তুলনায় %1$@ %2$lld%% বৃদ্ধি"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ up %2$lld%% vs last month"
+          }
+        }
+      }
+    },
     "%@ / mo": {
       "extractionState": "manual",
       "localizations": {
@@ -52,6 +188,23 @@
         }
       }
     },
+    "%@ is your top category": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ আপনার শীর্ষ ক্যাটেগরি"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ is your top category"
+          }
+        }
+      }
+    },
     "%@ · %@": {
       "extractionState": "manual",
       "localizations": {
@@ -82,6 +235,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld-year"
+          }
+        }
+      }
+    },
+    "+ %lld more": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+ আরো %lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+ %lld more"
           }
         }
       }
@@ -337,6 +507,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Appearance"
+          }
+        }
+      }
+    },
+    "Approaching %@ limit": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ সীমার কাছাকাছি"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Approaching %@ limit"
           }
         }
       }
@@ -915,6 +1102,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Demo mode"
+          }
+        }
+      }
+    },
+    "Detected %lld recurring charges": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Detected %lld recurring charge"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Detected %lld recurring charges"
+                }
+              }
+            }
+          }
+        },
+        "bn": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld টি রিকারিং চার্জ শনাক্ত"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld টি রিকারিং চার্জ শনাক্ত"
+                }
+              }
+            }
           }
         }
       }
@@ -1769,6 +1997,40 @@
         }
       }
     },
+    "Mortgage at %lld%% of income": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মর্টগেজ আয়ের %lld%%"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mortgage at %lld%% of income"
+          }
+        }
+      }
+    },
+    "Mortgage at %lld%% of income — high": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মর্টগেজ আয়ের %lld%% — উচ্চ"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mortgage at %lld%% of income — high"
+          }
+        }
+      }
+    },
     "Mortgage info, lease details, and rental payment history for this property will be removed.": {
       "extractionState": "manual",
       "localizations": {
@@ -1833,6 +2095,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Name"
+          }
+        }
+      }
+    },
+    "Net %@ saved this month — well above the 20%% benchmark.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এই মাসে নেট %@ সঞ্চয় — 20%% মানদণ্ডের অনেক বেশি।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Net %@ saved this month — well above the 20%% benchmark."
           }
         }
       }
@@ -2262,6 +2541,23 @@
         }
       }
     },
+    "Over budget on %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@-এ বাজেট অতিক্রান্ত"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Over budget on %@"
+          }
+        }
+      }
+    },
     "Owner": {
       "extractionState": "manual",
       "localizations": {
@@ -2411,6 +2707,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Purchase price"
+          }
+        }
+      }
+    },
+    "Recurring monthly: ~%@": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মাসিক রিকারিং: ~%@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recurring monthly: ~%@"
           }
         }
       }
@@ -2653,6 +2966,23 @@
         }
       }
     },
+    "Saving %lld%% of income": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "আয়ের %lld%% সঞ্চয়"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saving %lld%% of income"
+          }
+        }
+      }
+    },
     "Search": {
       "extractionState": "manual",
       "localizations": {
@@ -2874,6 +3204,40 @@
         }
       }
     },
+    "Spending down %lld%% over 30 days": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 দিনে খরচ %lld%% হ্রাস"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spending down %lld%% over 30 days"
+          }
+        }
+      }
+    },
+    "Spending exceeds income": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "খরচ আয়কে অতিক্রম করেছে"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spending exceeds income"
+          }
+        }
+      }
+    },
     "Spending in %@ is tracked from the 1st of each calendar month. Insights compare actual spend against this limit.": {
       "extractionState": "manual",
       "localizations": {
@@ -2887,6 +3251,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Spending in %@ is tracked from the 1st of each calendar month. Insights compare actual spend against this limit."
+          }
+        }
+      }
+    },
+    "Spending up %lld%% over 30 days": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 দিনে খরচ %lld%% বৃদ্ধি"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spending up %lld%% over 30 days"
           }
         }
       }
@@ -3197,6 +3578,23 @@
         }
       }
     },
+    "Under budget on %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@-এ বাজেটের নিচে"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Under budget on %@"
+          }
+        }
+      }
+    },
     "Unit name": {
       "extractionState": "manual",
       "localizations": {
@@ -3227,6 +3625,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Units & tenants"
+          }
+        }
+      }
+    },
+    "Unusual %@ charge": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "অস্বাভাবিক %@ চার্জ"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unusual %@ charge"
           }
         }
       }
@@ -3380,6 +3795,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "You'll need to sign in again next time you open Ortho."
+          }
+        }
+      }
+    },
+    "You're %1$@ over this month: %2$@ out vs %3$@ in.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এই মাসে %1$@ বেশি: %3$@ আয়, %2$@ খরচ।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You're %1$@ over this month: %2$@ out vs %3$@ in."
+          }
+        }
+      }
+    },
+    "You're %1$@ over your %2$@ limit with %3$lld days left.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%3$lld দিন বাকি — %2$@ সীমার %1$@ বেশি।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You're %1$@ over your %2$@ limit with %3$lld days left."
           }
         }
       }

@@ -14,6 +14,10 @@ import Foundation
 ///
 /// Insight IDs are deterministic + period-scoped so future dismissal /
 /// snooze can de-dupe across renders without a model change.
+///
+/// All user-visible titles and bodies are resolved via
+/// `String(localized:locale:)` with `Localizer.currentLocale` so insights
+/// switch language live when the in-app picker changes.
 enum InsightEngine {
 
     // MARK: - Public entry point
@@ -93,8 +97,10 @@ enum InsightEngine {
         let share = totalSpend > 0
             ? Int((Double(top.value) / Double(totalSpend) * 100).rounded())
             : 0
-        let title = "\(top.key.rawValue.capitalized) is your top category"
-        let body = "\(formatMoney(top.value)) this month — \(share)% of total spend."
+        let categoryName = top.key.displayName.string
+        let money = formatMoney(top.value)
+        let title = tr("\(categoryName) is your top category")
+        let body = tr("\(money) this month — \(share)% of total spend.")
         return [Insight(
             id: "top-category-\(top.key.rawValue)-\(periodKey)",
             title: title,
@@ -132,9 +138,13 @@ enum InsightEngine {
             let delta = Double(currentTotal - priorTotal) / Double(priorTotal)
             guard abs(delta) >= 0.25 else { continue }
             let pct = Int((abs(delta) * 100).rounded())
-            let direction = delta > 0 ? "up" : "down"
             let severity: InsightSeverity = delta > 0 ? .warning : .positive
-            let title = "\(category.rawValue.capitalized) \(direction) \(pct)% vs last month"
+            let categoryName = category.displayName.string
+            let title = delta > 0
+                ? tr("\(categoryName) up \(pct)% vs last month")
+                : tr("\(categoryName) down \(pct)% vs last month")
+            // Pure composition — no translatable text in the wrapper, just
+            // an arrow + punctuation. Skip the catalog round-trip.
             let body = "\(formatMoney(priorTotal)) → \(formatMoney(currentTotal))."
             out.append(Insight(
                 id: "category-delta-\(category.rawValue)-\(periodKey)",
@@ -179,13 +189,15 @@ enum InsightEngine {
             }
             let fraction = Double(spent) / Double(budget.monthlyLimitCents)
             let category = budget.category
+            let categoryName = category.displayName.string
+            let limitStr = formatMoney(budget.monthlyLimitCents)
 
             if fraction >= 1.0 {
                 let over = spent - budget.monthlyLimitCents
                 out.append(Insight(
                     id: "budget-over-\(category.rawValue)-\(periodKey)",
-                    title: "Over budget on \(category.rawValue.capitalized)",
-                    body: "You're \(formatMoney(over)) over your \(formatMoney(budget.monthlyLimitCents)) limit with \(daysLeft) days left.",
+                    title: tr("Over budget on \(categoryName)"),
+                    body: tr("You're \(formatMoney(over)) over your \(limitStr) limit with \(daysLeft) days left."),
                     severity: .critical,
                     icon: "exclamationmark.triangle.fill",
                     category: category,
@@ -195,20 +207,19 @@ enum InsightEngine {
                 let remaining = budget.monthlyLimitCents - spent
                 out.append(Insight(
                     id: "budget-warning-\(category.rawValue)-\(periodKey)",
-                    title: "Approaching \(category.rawValue.capitalized) limit",
-                    body: "\(formatMoney(remaining)) left of \(formatMoney(budget.monthlyLimitCents)) with \(daysLeft) days to go.",
+                    title: tr("Approaching \(categoryName) limit"),
+                    body: tr("\(formatMoney(remaining)) left of \(limitStr) with \(daysLeft) days to go."),
                     severity: .warning,
                     icon: "gauge.with.dots.needle.67percent",
                     category: category,
                     magnitudeCents: spent
                 ))
             } else if fraction <= 0.5 && monthProgress >= 0.7 {
-                // Comfortably under, late in the month — call it a win.
                 let remaining = budget.monthlyLimitCents - spent
                 out.append(Insight(
                     id: "budget-under-\(category.rawValue)-\(periodKey)",
-                    title: "Under budget on \(category.rawValue.capitalized)",
-                    body: "\(formatMoney(remaining)) of \(formatMoney(budget.monthlyLimitCents)) still available with \(daysLeft) days left.",
+                    title: tr("Under budget on \(categoryName)"),
+                    body: tr("\(formatMoney(remaining)) of \(limitStr) still available with \(daysLeft) days left."),
                     severity: .positive,
                     icon: "checkmark.circle.fill",
                     category: category,
@@ -242,8 +253,8 @@ enum InsightEngine {
             let shortfall = -net
             return [Insight(
                 id: "cashflow-negative-\(periodKey)",
-                title: "Spending exceeds income",
-                body: "You're \(formatMoney(shortfall)) over this month: \(formatMoney(expenses)) out vs \(formatMoney(income)) in.",
+                title: tr("Spending exceeds income"),
+                body: tr("You're \(formatMoney(shortfall)) over this month: \(formatMoney(expenses)) out vs \(formatMoney(income)) in."),
                 severity: .critical,
                 icon: "minus.circle.fill",
                 category: nil,
@@ -256,8 +267,8 @@ enum InsightEngine {
             let pct = Int((savingsRate * 100).rounded())
             return [Insight(
                 id: "savings-rate-strong-\(periodKey)",
-                title: "Saving \(pct)% of income",
-                body: "Net \(formatMoney(net)) saved this month — well above the 20% benchmark.",
+                title: tr("Saving \(pct)% of income"),
+                body: tr("Net \(formatMoney(net)) saved this month — well above the 20% benchmark."),
                 severity: .positive,
                 icon: "leaf.fill",
                 category: nil,
@@ -281,7 +292,6 @@ enum InsightEngine {
         guard let window = calendar.date(byAdding: .month, value: -6, to: referenceDate) else {
             return []
         }
-        // Group by case-folded merchant name so "Spotify" / "spotify" collapse.
         let recent = transactions.filter {
             $0.kind == .expense && $0.date >= window
         }
@@ -298,10 +308,8 @@ enum InsightEngine {
             }
             guard !intervalsDays.isEmpty else { continue }
             let monthlyHits = intervalsDays.filter { (28...35).contains($0) }.count
-            // Need ≥ 80% of intervals to fall in the monthly band.
             guard Double(monthlyHits) / Double(intervalsDays.count) >= 0.8 else { continue }
             let avg = txs.reduce(Int64(0)) { $0 + $1.amount } / Int64(txs.count)
-            // Original-case merchant name for display.
             let displayName = sorted.last?.merchant ?? ""
             detected.append((merchant: displayName, monthly: avg))
             monthlyBurnCents += avg
@@ -309,11 +317,22 @@ enum InsightEngine {
         guard !detected.isEmpty else { return [] }
         detected.sort { $0.monthly > $1.monthly }
         let preview = detected.prefix(3).map { $0.merchant }.joined(separator: ", ")
-        let extra = detected.count > 3 ? " + \(detected.count - 3) more" : ""
+        // "+N more" is locale-sensitive — render it through the catalog.
+        let extra: String
+        if detected.count > 3 {
+            extra = " " + tr("+ \(detected.count - 3) more")
+        } else {
+            extra = ""
+        }
+        // Plural-aware count phrase via String Catalog variations.plural.
+        let countPhrase = tr("Detected \(detected.count) recurring charges")
+        // Pure composition — countPhrase, preview, extra are already
+        // localized strings. The wrapper is just punctuation.
+        let body = "\(countPhrase): \(preview)\(extra)."
         return [Insight(
             id: "subscriptions-monthly-\(periodKey)",
-            title: "Recurring monthly: ~\(formatMoney(monthlyBurnCents))",
-            body: "Detected \(detected.count) recurring \(detected.count == 1 ? "charge" : "charges"): \(preview)\(extra).",
+            title: tr("Recurring monthly: ~\(formatMoney(monthlyBurnCents))"),
+            body: body,
             severity: .info,
             icon: "arrow.triangle.2.circlepath",
             category: nil,
@@ -338,15 +357,12 @@ enum InsightEngine {
         let recent = transactions.filter { $0.kind == .expense && $0.date >= lookback }
         let byCategory = Dictionary(grouping: recent, by: \.category)
 
-        // Median amount per category — need ≥ 5 samples to be meaningful.
         var medians: [TransactionCategory: Int64] = [:]
         for (category, txs) in byCategory where txs.count >= 5 {
             let sorted = txs.map(\.amount).sorted()
             medians[category] = sorted[sorted.count / 2]
         }
 
-        // Find the largest current-month transaction that exceeds 2× its
-        // category median.
         var bestOutlier: (tx: Transaction, multiple: Double)? = nil
         for tx in transactions where tx.kind == .expense && month.contains(tx.date) {
             guard let median = medians[tx.category], median > 0 else { continue }
@@ -357,13 +373,18 @@ enum InsightEngine {
             }
         }
         guard let outlier = bestOutlier else { return [] }
-        let dateString = DateFormatter.localized(pattern: "MMM d", locale: Localizer.currentLocale).string(from: outlier.tx.date)
+        let dateString = DateFormatter
+            .localized(pattern: "MMM d", locale: Localizer.currentLocale)
+            .string(from: outlier.tx.date)
+        // "%.1f×" is a number followed by a locale-independent multiplication
+        // sign — keep it raw, no catalog lookup needed.
         let multipleString = String(format: "%.1f×", outlier.multiple)
         let severity: InsightSeverity = outlier.tx.amount >= 50_000 ? .warning : .info
+        let categoryName = outlier.tx.category.displayName.string
         return [Insight(
             id: "outlier-\(outlier.tx.id.uuidString)-\(periodKey)",
-            title: "Unusual \(outlier.tx.category.rawValue.capitalized) charge",
-            body: "\(formatMoney(outlier.tx.amount)) at \(outlier.tx.merchant) on \(dateString) — \(multipleString) the typical amount.",
+            title: tr("Unusual \(categoryName) charge"),
+            body: tr("\(formatMoney(outlier.tx.amount)) at \(outlier.tx.merchant) on \(dateString) — \(multipleString) the typical amount."),
             severity: severity,
             icon: "sparkle.magnifyingglass",
             category: outlier.tx.category,
@@ -391,16 +412,17 @@ enum InsightEngine {
             if tx.date >= prior30Start && tx.date < recent30Start { prior += tx.amount }
             if tx.date >= recent30Start { recent += tx.amount }
         }
-        guard prior >= 10_000 else { return [] }  // need >= $100 prior to ratio meaningfully
+        guard prior >= 10_000 else { return [] }
         let delta = Double(recent - prior) / Double(prior)
         guard abs(delta) >= 0.20 else { return [] }
         let pct = Int((abs(delta) * 100).rounded())
+        let body = tr("\(formatMoney(recent)) in the last 30 days vs \(formatMoney(prior)) the 30 before.")
 
         if delta > 0 {
             return [Insight(
                 id: "trend-up-\(periodKey)",
-                title: "Spending up \(pct)% over 30 days",
-                body: "\(formatMoney(recent)) in the last 30 days vs \(formatMoney(prior)) the 30 before.",
+                title: tr("Spending up \(pct)% over 30 days"),
+                body: body,
                 severity: .warning,
                 icon: "chart.line.uptrend.xyaxis",
                 category: nil,
@@ -409,8 +431,8 @@ enum InsightEngine {
         } else {
             return [Insight(
                 id: "trend-down-\(periodKey)",
-                title: "Spending down \(pct)% over 30 days",
-                body: "\(formatMoney(recent)) in the last 30 days vs \(formatMoney(prior)) the 30 before.",
+                title: tr("Spending down \(pct)% over 30 days"),
+                body: body,
                 severity: .positive,
                 icon: "chart.line.downtrend.xyaxis",
                 category: nil,
@@ -445,18 +467,18 @@ enum InsightEngine {
         let (severity, title): (InsightSeverity, String)
         if ratio < 0.28 {
             severity = .positive
-            title    = "Mortgage at \(pct)% of income"
+            title    = tr("Mortgage at \(pct)% of income")
         } else if ratio <= 0.35 {
             severity = .info
-            title    = "Mortgage at \(pct)% of income"
+            title    = tr("Mortgage at \(pct)% of income")
         } else {
             severity = .warning
-            title    = "Mortgage at \(pct)% of income — high"
+            title    = tr("Mortgage at \(pct)% of income — high")
         }
         return [Insight(
             id: "mortgage-affordability-\(periodKey)",
             title: title,
-            body: "\(formatMoney(mortgage.monthlyPaymentCents)) P&I vs \(formatMoney(monthlyIncome)) income this month. Lenders typically target below 28%.",
+            body: tr("\(formatMoney(mortgage.monthlyPaymentCents)) P&I vs \(formatMoney(monthlyIncome)) income this month. Lenders typically target below 28%."),
             severity: severity,
             icon: "house.fill",
             category: nil,
@@ -483,16 +505,25 @@ enum InsightEngine {
         return calendar.dateInterval(of: .month, for: priorDate)
     }
 
-    /// Engine-only formatter: USD cents → "$1,234.56". The Dashboard's
-    /// `InsightCard` won't pass through `AppState.formatMoney` because the
-    /// engine is pure / has no environment. Display currency for the body
-    /// stays USD here — fine for v1 since amounts are stored in USD cents
-    /// anyway; can flow through `Money` later if multi-currency rendering
-    /// inside insight bodies becomes a requirement.
+    /// Shorthand for `String(localized:locale:)` using the in-app locale.
+    /// Every insight title/body goes through this so language switches
+    /// affect the engine output live (no view-tree re-init needed; the
+    /// next call to `recommendations(...)` produces fresh localized
+    /// strings).
+    private static func tr(_ value: String.LocalizationValue) -> String {
+        String(localized: value, locale: Localizer.currentLocale)
+    }
+
+    /// Engine-only money formatter: USD cents → "$1,234.56" with
+    /// locale-aware digit grouping. Display currency stays USD here
+    /// (engine has no AppState access) — the locale dimension only
+    /// affects grouping and currency-symbol placement (e.g. EN: "$1,234.56"
+    /// vs BN: "$1,234.56" with Latin digits enforced by the locale).
     private static func formatMoney(_ cents: Int64) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.currencyCode = "USD"
+        formatter.locale = Localizer.currentLocale
         formatter.maximumFractionDigits = 2
         formatter.minimumFractionDigits = 2
         return formatter.string(
