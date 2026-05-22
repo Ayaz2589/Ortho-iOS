@@ -91,7 +91,7 @@ _(none)_
 - [x] Multi-add — "Save and add another" capsule below the form preserves scope/kind/source/date/owners and resets merchant/amount/category/splits
 - [x] Copy from recent — picker sheet inside `AddTransactionSheet` (40 most-recent transactions grouped by day) pre-fills every field with a fresh id + today's date
 - [x] Swipe-copy on transaction rows — `SwipeActionRow` reveals a `[Copy] [Delete]` tray; Copy opens AddTransactionSheet via the same `copying:` init path
-- [x] Vertical scroll on the Transactions list (was blocked by `SwipeActionRow`'s drag gesture claiming the touch). Swipe-vs-tap arbitration so swiping a row no longer also fires the drill-in.
+- [x] Vertical scroll on the Transactions list — final fix is the `List` + `.swipeActions` rewrite (see 2026-05-22 entry). Two earlier attempts at `.simultaneousGesture` + horizontal-dominance guards did not fully release vertical drags to the parent ScrollView.
 - [ ] Same skeleton + empty-state treatment on Dashboard widgets and Housing (currently flicker the empty state during bootstrap; reuse `isLoadingInitialData`)
 
 ### Demo mode
@@ -111,7 +111,7 @@ _(none)_
 
 ### Navigation
 
-- [x] Horizontal swipe between tabs via SwiftUI's page-style `TabView` (`.tabViewStyle(.page(indexDisplayMode: .never))`). `OrthoTabBar` still drives selection via tap; the shared `selection` binding keeps both interactions in sync. Page-swipe gesture defers to child gestures for short drags, so `SwipeActionRow` on transactions still works.
+- [x] Tab switching is driven by the bottom `OrthoTabBar` only. Horizontal page-swipe between tabs was tried (page-style `TabView`) and reverted on 2026-05-22 — the third pan-recognizer in the stack (page-swipe vs. row swipe-actions vs. List vertical scroll) was unarbitrable.
 
 ### Later / nice-to-have
 
@@ -172,6 +172,8 @@ _(none)_
 - [x] **2026-05-22** — Transactions list scroll fix + swipe-vs-tap arbitration. `SwipeActionRow`'s drag gesture was claiming all 8pt+ drags via `.gesture(...)`, blocking vertical scroll except in the gaps between rows. Switched to `.simultaneousGesture(...)` and guarded the handler to only mutate offset on horizontally-dominant drags. Separately, swiping a row was firing the underlying drill-in `Button` on touch-up — refactored `TransactionRow` to a plain `HStack` and moved tap handling onto `SwipeActionRow.onTap` via `.onTapGesture` (TapGesture auto-cancels on movement, so swipes can't leak into a tap). `CopyTransactionPickerSheet` updated to wrap with `.onTapGesture` for the same reason.
 - [x] **2026-05-22** — Horizontal swipe between tabs. `RootTabView` swaps the `ZStack` switcher for SwiftUI's page-style `TabView` (`.tabViewStyle(.page(indexDisplayMode: .never))`). The custom `OrthoTabBar` still drives selection via tap; the shared `selection` binding keeps both interactions in sync. Page-swipe gesture defers to child gestures for short drags so `SwipeActionRow` still works on Transactions.
 - [x] **2026-05-22** — Verified on physical iPhone 17 Pro via direct binary install + `xcrun devicectl`. Sign-in / OTP / Transactions / Housing / Settings all functional on-device. Free Apple Dev account profile expires every 7 days — re-build + install when it does.
+- [x] **2026-05-22** — **Transactions list rewritten on native `List` + `.swipeActions`.** The custom `ScrollView + LazyVStack + SwipeActionRow` stack had a persistent scroll bug: SwiftUI bridges `DragGesture(minimumDistance: 8)` to a `UIPanGestureRecognizer` that claims the touch as soon as the threshold is crossed; the parent `UIScrollView.panGestureRecognizer` defers until ours fails (touch-up), so vertical drags on a row never reached the scroll view. The horizontal-dominance guard only runs *after* the gesture has already won arbitration. Two prior `.simultaneousGesture`-based attempts didn't resolve it. Migrated `TransactionsView` and `CopyTransactionPickerSheet` to native `List(.listStyle(.plain))` with `.scrollContentBackground(.hidden)`, `.swipeActions(edge: .trailing, allowsFullSwipe: true)` for `[Copy][Delete]`, full-swipe-to-delete enabled (Mail.app convention), and per-row `.listRowBackground(UnevenRoundedRectangle(...))` for the rounded `AppTheme.surface` group-card chrome. Section headers via `Section { } header: { DayHeader }` still pin natively. `SwipeActionRow.swift` deleted entirely.
+- [x] **2026-05-22** — Reverted `RootTabView` from page-style `TabView` back to a `ZStack` if-ladder on `selection` with an ease-out cross-fade. Page-swipe between tabs is gone — three competing pan recognizers (page swipe vs. row swipe-actions vs. List vertical scroll) couldn't be cleanly arbitrated by UIKit. Tab switching stays via the bottom `OrthoTabBar` buttons.
 
 ---
 

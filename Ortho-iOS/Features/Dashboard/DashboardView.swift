@@ -56,8 +56,8 @@ struct DashboardView: View {
             }
             .padding(.horizontal, 20)
             .padding(.top, 4)
-            .padding(.bottom, 24)
-            .background(AppTheme.bg)
+            .padding(.bottom, 5)
+            .background(.regularMaterial)
         }
         .onChange(of: availableRanges) { _, newValue in
             // If the active range goes away (e.g. all transactions deleted

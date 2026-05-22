@@ -58,16 +58,10 @@ struct OrthoTabBar: View {
         }
         .padding(.top, 6)
         .padding(.bottom, 4)
-        .background(alignment: .top) {
-            Rectangle()
-                .fill(AppTheme.hairline)
-                .frame(height: 0.5)
-                .frame(maxHeight: .infinity, alignment: .top)
-        }
-        // Frosted-glass blur — scrolling content shows through, faintly
-        // softened. `.ultraThinMaterial` adapts to light/dark on its own,
-        // so no warm-bg overlay is needed underneath.
-        .background(.ultraThinMaterial)
+        // Frosted-glass blur, softened — scrolling content shows through
+        // more clearly than the default material. `.opacity(0.6)` dampens
+        // the material's blur strength so the warm bg reads through.
+        .background(.regularMaterial)
     }
 
     @ViewBuilder
@@ -119,25 +113,36 @@ struct RootTabView: View {
             }
             #endif
 
-            // Page-style TabView gives horizontal-swipe paging between
-            // tabs natively. The custom OrthoTabBar still drives `selection`
-            // via tap; the binding is shared, so both interactions stay
-            // in sync. `.never` index display hides the default dot
-            // indicator — the OrthoTabBar is the canonical selected-state
-            // affordance.
-            TabView(selection: $selection) {
-                DashboardView()    .tag(OrthoTab.dashboard)
-                TransactionsView() .tag(OrthoTab.transactions)
-                HousingView()      .tag(OrthoTab.housing)
-                SettingsView()     .tag(OrthoTab.settings)
+            // ZStack with an if-ladder shows one tab body at a time. A
+            // page-style TabView would give horizontal-swipe paging
+            // between tabs, but that adds a third pan-recognizer to the
+            // stack (page-swipe vs. row swipeActions vs. List vertical
+            // scroll) which UIKit cannot arbitrate without conflict. The
+            // bottom OrthoTabBar is the only tab switcher.
+            ZStack {
+                switch selection {
+                case .dashboard:    DashboardView()
+                case .transactions: TransactionsView()
+                case .housing:      HousingView()
+                case .settings:     SettingsView()
+                }
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .animation(.easeOut(duration: 0.18), value: selection)
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 if !tabBarHidden {
                     OrthoTabBar(selection: $selection)
                         .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
             }
+            // Keep the entire tab container (and therefore the bottom
+            // safeAreaInset's tab bar) anchored to the screen bottom when
+            // the keyboard appears. Without this, SwiftUI expands the bottom
+            // safe area to include the keyboard height and pushes the tab
+            // bar up above the keyboard — covering list rows. Matches the
+            // standard UITabBarController behavior of letting the keyboard
+            // cover the tab bar in place.
+            .ignoresSafeArea(.keyboard, edges: .bottom)
         }
         .background(AppTheme.bg.ignoresSafeArea())
         .animation(.easeOut(duration: 0.22), value: appStateIsInDemoMode)

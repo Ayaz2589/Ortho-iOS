@@ -146,8 +146,8 @@ struct SettingsView: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 4)
-                .padding(.bottom, 24)
-                .background(AppTheme.bg)
+                .padding(.bottom, 5)
+                .background(.regularMaterial)
             }
             .sheet(isPresented: $showingAddCard) {
                 AddCardSheet { newCard in
