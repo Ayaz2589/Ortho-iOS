@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(AppState.self) private var appState
+    @Environment(\.colorScheme) private var colorScheme
     @AppStorage("appearance") private var appearanceRaw: String = AppearanceMode.system.rawValue
     @State private var showingAddCard = false
     @State private var showingSignOutConfirm = false
@@ -147,7 +148,7 @@ struct SettingsView: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 4)
                 .padding(.bottom, 5)
-                .background(.regularMaterial)
+                .background(colorScheme == .dark ? AnyShapeStyle(AppTheme.bg) : AnyShapeStyle(.regularMaterial))
             }
             .sheet(isPresented: $showingAddCard) {
                 AddCardSheet { newCard in

@@ -57,7 +57,7 @@ struct OrthoTabBar: View {
             }
         }
         .padding(.top, 6)
-        .padding(.bottom, 4)
+        .padding(.bottom, 0)
         // Frosted-glass blur, softened — scrolling content shows through
         // more clearly than the default material. `.opacity(0.6)` dampens
         // the material's blur strength so the warm bg reads through.

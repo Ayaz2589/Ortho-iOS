@@ -26,6 +26,7 @@ struct TransactionsView: View {
     var density: Density = .comfortable
 
     @Environment(AppState.self) private var appState
+    @Environment(\.colorScheme) private var colorScheme
     @State private var query: String = ""
     @State private var scopeFilter: TransactionScopeFilter = .all
     @State private var addSheetMode: AddSheetMode?
@@ -251,7 +252,9 @@ struct TransactionsView: View {
                     .padding(.bottom, 8)
             }
         }
-        .background(.regularMaterial)
+        .background(colorScheme == .dark
+                    ? AnyShapeStyle(AppTheme.bg)
+                    : AnyShapeStyle(.regularMaterial))
     }
 
     // MARK: - Empty state

@@ -13,6 +13,7 @@ import SwiftUI
 /// data sees just "This month" and nothing else.
 struct DashboardView: View {
     @Environment(AppState.self) private var appState
+    @Environment(\.colorScheme) private var colorScheme
 
     @State private var range: DashboardRange = .thisMonth
 
@@ -57,7 +58,7 @@ struct DashboardView: View {
             .padding(.horizontal, 20)
             .padding(.top, 4)
             .padding(.bottom, 5)
-            .background(.regularMaterial)
+            .background(colorScheme == .dark ? AnyShapeStyle(AppTheme.bg) : AnyShapeStyle(.regularMaterial))
         }
         .onChange(of: availableRanges) { _, newValue in
             // If the active range goes away (e.g. all transactions deleted

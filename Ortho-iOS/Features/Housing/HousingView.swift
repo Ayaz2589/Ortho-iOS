@@ -10,6 +10,7 @@ import SwiftUI
 /// user can modify the existing property without first navigating away.
 struct HousingView: View {
     @Environment(AppState.self) private var appState
+    @Environment(\.colorScheme) private var colorScheme
 
     @State private var showingTypePicker = false
     @State private var creatingKind: PropertyKind?
@@ -98,7 +99,7 @@ struct HousingView: View {
         .padding(.horizontal, 20)
         .padding(.top, 4)
         .padding(.bottom, 5)
-        .background(.regularMaterial)
+        .background(colorScheme == .dark ? AnyShapeStyle(AppTheme.bg) : AnyShapeStyle(.regularMaterial))
     }
 
     @ViewBuilder
