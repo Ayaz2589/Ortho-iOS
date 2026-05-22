@@ -27,3 +27,17 @@ enum Localizer {
     /// first `.onChange` fires (e.g. very first render after launch).
     static var currentLocale: Locale = .autoupdatingCurrent
 }
+
+extension LocalizedStringResource {
+    /// Resolve to a plain `String` against `Localizer.currentLocale`.
+    /// Use when a `String` is required — `Label(_:systemImage:)`,
+    /// navigation titles, string interpolation slots, `.lowercased()`,
+    /// etc. For `Text` views, pass the resource directly via
+    /// `Text(resource)` — SwiftUI re-resolves via the environment locale
+    /// on language change automatically.
+    var string: String {
+        var resource = self
+        resource.locale = Localizer.currentLocale
+        return String(localized: resource)
+    }
+}

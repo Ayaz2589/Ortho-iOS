@@ -14,7 +14,7 @@ enum DashboardRange: String, CaseIterable, Hashable, Identifiable, Codable {
     var id: String { rawValue }
 
     /// Compact label for the segmented picker — "Month / 3M / 6M / 1Y".
-    var shortLabel: String {
+    var shortLabel: LocalizedStringResource {
         switch self {
         case .thisMonth:    "Month"
         case .last3Months:  "3M"
@@ -24,7 +24,7 @@ enum DashboardRange: String, CaseIterable, Hashable, Identifiable, Codable {
     }
 
     /// Longer label used in widget headers (uppercased at the call site).
-    var longLabel: String {
+    var longLabel: LocalizedStringResource {
         switch self {
         case .thisMonth:    "This month"
         case .last3Months:  "Last 3 months"

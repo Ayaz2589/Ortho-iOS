@@ -44,7 +44,7 @@ struct EditBudgetSheet: View {
                     amountField
                         .padding(.bottom, 16)
 
-                    Text("Spending in \(category.rawValue.capitalized) is tracked from the 1st of each calendar month. Insights compare actual spend against this limit.")
+                    Text("Spending in \(category.displayName.string) is tracked from the 1st of each calendar month. Insights compare actual spend against this limit.")
                         .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
@@ -95,7 +95,7 @@ struct EditBudgetSheet: View {
 
     private var sheetNav: some View {
         ZStack {
-            Text("\(category.rawValue.capitalized) budget")
+            Text("\(category.displayName.string) budget")
                 .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
                 .tracking(-0.3)

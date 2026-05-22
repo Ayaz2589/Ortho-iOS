@@ -95,10 +95,10 @@ struct AddPropertySheet: View {
     private var isEditing: Bool { editing != nil }
     private var navTitle: String {
         switch (isEditing, kind) {
-        case (true, _):                    return "Edit \(kind.displayName.lowercased())"
-        case (false, .primaryHome):        return "New primary home"
-        case (false, .multifamily):        return "New multifamily"
-        case (false, .rental):             return "New rental"
+        case (true, _):                    return String(localized: "Edit \(kind.displayName.string.lowercased())")
+        case (false, .primaryHome):        return String(localized: "New primary home")
+        case (false, .multifamily):        return String(localized: "New multifamily")
+        case (false, .rental):             return String(localized: "New rental")
         }
     }
     private var actionLabel: String { isEditing ? "Save" : "Add" }

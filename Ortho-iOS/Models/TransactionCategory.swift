@@ -6,6 +6,24 @@ enum TransactionCategory: String, CaseIterable, Hashable, Codable, Identifiable 
 
     var id: String { rawValue }
 
+    /// Localized display name. `rawValue` is the wire-format (snake_case
+    /// match to the Postgres `transaction_category` enum) and must never
+    /// be shown in the UI.
+    var displayName: LocalizedStringResource {
+        switch self {
+        case .coffee:    "Coffee"
+        case .groceries: "Groceries"
+        case .dining:    "Dining"
+        case .subs:      "Subscriptions"
+        case .fuel:      "Fuel"
+        case .rent:      "Rent"
+        case .health:    "Health"
+        case .income:    "Income"
+        case .transit:   "Transit"
+        case .utilities: "Utilities"
+        }
+    }
+
     /// SF Symbol used in the category tile.
     var symbol: String {
         switch self {

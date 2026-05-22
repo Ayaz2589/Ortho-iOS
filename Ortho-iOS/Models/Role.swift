@@ -9,4 +9,13 @@ import Foundation
 enum Role: String, Codable, Hashable, CaseIterable {
     case owner
     case member
+
+    /// Localized display name. `rawValue` is the wire-format and must
+    /// never be shown in the UI.
+    var displayName: LocalizedStringResource {
+        switch self {
+        case .owner:  "Owner"
+        case .member: "Member"
+        }
+    }
 }

@@ -7,7 +7,7 @@ enum AppearanceMode: String, CaseIterable, Identifiable, Hashable {
 
     var id: String { rawValue }
 
-    var label: String {
+    var label: LocalizedStringResource {
         switch self {
         case .system: "System"
         case .light:  "Light"

@@ -25,7 +25,7 @@ enum OrthoTab: String, CaseIterable, Hashable, Identifiable {
 
     var id: String { rawValue }
 
-    var title: String {
+    var title: LocalizedStringResource {
         switch self {
         case .dashboard:    "Dashboard"
         case .transactions: "Transactions"

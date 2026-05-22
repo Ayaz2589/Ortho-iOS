@@ -382,9 +382,9 @@ struct SettingsView: View {
                     appState.currency = c
                 } label: {
                     if c == appState.currency {
-                        Label("\(c.displayName) (\(c.code))", systemImage: "checkmark")
+                        Label("\(c.displayName.string) (\(c.code))", systemImage: "checkmark")
                     } else {
-                        Text("\(c.displayName) (\(c.code))")
+                        Text("\(c.displayName.string) (\(c.code))")
                     }
                 }
             }

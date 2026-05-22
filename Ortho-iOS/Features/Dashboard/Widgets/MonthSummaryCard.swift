@@ -16,7 +16,8 @@ struct MonthSummaryCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text(range.longLabel.uppercased())
+                Text(range.longLabel)
+                    .textCase(.uppercase)
                     .font(.lato(size: 13, weight: .semibold))
                     .kerning(0.6)
                     .foregroundStyle(AppTheme.text.opacity(0.58))

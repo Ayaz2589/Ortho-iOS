@@ -5,7 +5,7 @@ import SwiftUI
 enum TransactionScopeFilter: String, CaseIterable, Hashable, Identifiable {
     case all, shared, personal
     var id: String { rawValue }
-    var label: String {
+    var label: LocalizedStringResource {
         switch self {
         case .all:      "All"
         case .shared:   "Shared"

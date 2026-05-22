@@ -13,7 +13,7 @@ enum Currency: String, CaseIterable, Identifiable, Hashable, Codable {
     /// grouping + fraction digits per locale.
     var code: String { rawValue.uppercased() }
 
-    var displayName: String {
+    var displayName: LocalizedStringResource {
         switch self {
         case .usd: "US Dollar"
         case .cad: "Canadian Dollar"
@@ -21,7 +21,7 @@ enum Currency: String, CaseIterable, Identifiable, Hashable, Codable {
         case .eur: "Euro"
         case .jpy: "Japanese Yen"
         case .cny: "Chinese Yuan"
-        case .bdt: "Bengali Taka"
+        case .bdt: "Bangladeshi Taka"
         }
     }
 

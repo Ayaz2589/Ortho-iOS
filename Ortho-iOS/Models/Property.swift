@@ -13,7 +13,7 @@ enum PropertyKind: String, CaseIterable, Hashable, Codable, Identifiable {
 
     var id: String { rawValue }
 
-    var displayName: String {
+    var displayName: LocalizedStringResource {
         switch self {
         case .primaryHome: "Primary home"
         case .multifamily: "Multifamily property"
@@ -21,7 +21,7 @@ enum PropertyKind: String, CaseIterable, Hashable, Codable, Identifiable {
         }
     }
 
-    var subtitle: String {
+    var subtitle: LocalizedStringResource {
         switch self {
         case .primaryHome: "You own where you live"
         case .multifamily: "Rental units you own"

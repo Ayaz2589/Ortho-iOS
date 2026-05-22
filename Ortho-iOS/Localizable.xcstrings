@@ -1,38 +1,333 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@ budget" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "%@ বাজেট" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ budget" } }
+      }
+    },
+    "All" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "সব" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "All" } }
+      }
+    },
+    "Bangladeshi Taka" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "বাংলাদেশি টাকা" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Bangladeshi Taka" } }
+      }
+    },
+    "Canadian Dollar" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "কানাডিয়ান ডলার" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Canadian Dollar" } }
+      }
+    },
+    "Chinese Yuan" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "চীনা ইউয়ান" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Chinese Yuan" } }
+      }
+    },
+    "Coffee" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "কফি" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Coffee" } }
+      }
+    },
+    "Dark" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "গাঢ়" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Dark" } }
+      }
+    },
+    "Dashboard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "ড্যাশবোর্ড" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Dashboard" } }
+      }
+    },
+    "Dining" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "খাবার" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Dining" } }
+      }
+    },
+    "Edit %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "%@ সম্পাদনা করুন" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit %@" } }
+      }
+    },
+    "Euro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "ইউরো" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Euro" } }
+      }
+    },
+    "Fuel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "তেল" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Fuel" } }
+      }
+    },
+    "Groceries" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "মুদি" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Groceries" } }
+      }
+    },
+    "Health" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "স্বাস্থ্য" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Health" } }
+      }
+    },
+    "Housing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "আবাসন" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Housing" } }
+      }
+    },
+    "Income" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "আয়" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Income" } }
+      }
+    },
+    "Japanese Yen" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "জাপানি ইয়েন" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Japanese Yen" } }
+      }
+    },
     "Language" : {
       "extractionState" : "manual",
       "localizations" : {
-        "bn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ভাষা"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Language"
-          }
-        }
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "ভাষা" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Language" } }
+      }
+    },
+    "Last 12 months" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "শেষ 12 মাস" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Last 12 months" } }
+      }
+    },
+    "Last 3 months" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "শেষ 3 মাস" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Last 3 months" } }
+      }
+    },
+    "Last 6 months" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "শেষ 6 মাস" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Last 6 months" } }
+      }
+    },
+    "Light" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "হালকা" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Light" } }
+      }
+    },
+    "Member" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "সদস্য" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Member" } }
+      }
+    },
+    "Month" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "মাস" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Month" } }
+      }
+    },
+    "Multifamily property" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "মাল্টিফ্যামিলি সম্পত্তি" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Multifamily property" } }
+      }
+    },
+    "New multifamily" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "নতুন মাল্টিফ্যামিলি" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New multifamily" } }
+      }
+    },
+    "New primary home" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "নতুন প্রধান বাড়ি" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New primary home" } }
+      }
+    },
+    "New rental" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "নতুন ভাড়া বাসা" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New rental" } }
+      }
+    },
+    "Owner" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "মালিক" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Owner" } }
+      }
+    },
+    "Personal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "ব্যক্তিগত" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Personal" } }
+      }
+    },
+    "Primary home" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "প্রধান বাড়ি" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Primary home" } }
+      }
+    },
+    "Rent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "ভাড়া" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Rent" } }
+      }
+    },
+    "Rental" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "ভাড়া বাসা" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Rental" } }
+      }
+    },
+    "Rental units you own" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "আপনার ভাড়া ইউনিট" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Rental units you own" } }
+      }
+    },
+    "Settings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "সেটিংস" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Settings" } }
+      }
+    },
+    "Shared" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "শেয়ার্ড" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Shared" } }
+      }
+    },
+    "Spending in %@ is tracked from the 1st of each calendar month. Insights compare actual spend against this limit." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "%@-এ খরচ প্রতি মাসের 1 তারিখ থেকে ট্র্যাক করা হয়। ইনসাইট এই সীমার বিপরীতে প্রকৃত খরচ তুলনা করে।" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Spending in %@ is tracked from the 1st of each calendar month. Insights compare actual spend against this limit." } }
+      }
+    },
+    "Subscriptions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "সাবস্ক্রিপশন" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Subscriptions" } }
       }
     },
     "System" : {
       "extractionState" : "manual",
       "localizations" : {
-        "bn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "সিস্টেম"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "System"
-          }
-        }
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "সিস্টেম" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "System" } }
+      }
+    },
+    "This month" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "এই মাস" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This month" } }
+      }
+    },
+    "Transactions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "লেনদেন" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Transactions" } }
+      }
+    },
+    "Transit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "পরিবহন" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Transit" } }
+      }
+    },
+    "UK Pound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "ব্রিটিশ পাউন্ড" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "UK Pound" } }
+      }
+    },
+    "US Dollar" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "মার্কিন ডলার" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "US Dollar" } }
+      }
+    },
+    "Utilities" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "ইউটিলিটি" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Utilities" } }
+      }
+    },
+    "You own where you live" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "আপনি যেখানে থাকেন তার মালিক" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You own where you live" } }
+      }
+    },
+    "You rent your home" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "bn" : { "stringUnit" : { "state" : "translated", "value" : "আপনি বাসা ভাড়া করেন" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You rent your home" } }
       }
     }
   },
