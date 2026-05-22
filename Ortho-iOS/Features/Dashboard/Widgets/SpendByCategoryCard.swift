@@ -230,7 +230,7 @@ private struct LegendEntry: Identifiable {
     }
 
     var label: String {
-        category?.rawValue.capitalized ?? "Other"
+        category?.displayName.string ?? Localizer.tr("Other")
     }
 
     var symbol: String {

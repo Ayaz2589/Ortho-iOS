@@ -69,7 +69,7 @@ struct BudgetProgressCard: View {
                     Image(systemName: row.budget.category.symbol)
                         .font(.lato(size: 12, weight: .medium))
                         .foregroundStyle(row.budget.category.tint)
-                    Text(row.budget.category.rawValue.capitalized)
+                    Text(row.budget.category.displayName.string)
                         .font(.lato(size: 14, weight: .medium))
                         .foregroundStyle(AppTheme.text)
                 }

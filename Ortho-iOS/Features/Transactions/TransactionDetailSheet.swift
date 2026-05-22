@@ -130,7 +130,7 @@ struct TransactionDetailSheet: View {
                     HStack(spacing: 6) {
                         Image(systemName: tx.category.symbol)
                             .font(.lato(size: 13, weight: .semibold))
-                        Text(tx.category.rawValue.capitalized)
+                        Text(tx.category.displayName.string)
                             .font(.lato(size: 17, weight: .medium))
                             .tracking(-0.2)
                     }

@@ -690,13 +690,13 @@ struct AddTransactionSheet: View {
             Spacer()
             Menu {
                 ForEach(TransactionCategory.allCases.filter { $0 != .income }, id: \.self) { c in
-                    Button(c.rawValue.capitalized) { category = c }
+                    Button(c.displayName.string) { category = c }
                 }
             } label: {
                 HStack(spacing: 6) {
                     Image(systemName: category.symbol)
                         .font(.lato(size: 13, weight: .semibold))
-                    Text(category.rawValue.capitalized)
+                    Text(category.displayName.string)
                         .font(.lato(size: 17, weight: .medium))
                         .tracking(-0.2)
                     Image(systemName: "chevron.up.chevron.down")

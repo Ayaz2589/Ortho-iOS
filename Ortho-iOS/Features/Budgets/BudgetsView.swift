@@ -92,7 +92,7 @@ struct BudgetsView: View {
                         .font(.lato(size: 14, weight: .medium))
                         .foregroundStyle(.white)
                 }
-                Text(category.rawValue.capitalized)
+                Text(category.displayName.string)
                     .font(.lato(size: 17, weight: .medium))
                     .tracking(-0.2)
                     .foregroundStyle(AppTheme.text)
