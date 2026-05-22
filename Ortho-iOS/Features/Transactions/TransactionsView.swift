@@ -150,7 +150,8 @@ struct TransactionsView: View {
             ForEach(Array(group.items.enumerated()), id: \.element.id) { idx, tx in
                 SwipeActionRow(
                     onDelete: { appState.deleteTransaction(tx) },
-                    onCopy:   { addSheetMode = .copying(tx) }
+                    onCopy:   { addSheetMode = .copying(tx) },
+                    onTap:    { selectedTransaction = tx }
                 ) {
                     // Include the separator inside the swipe container so
                     // it slides with the row instead of staying behind.
@@ -158,8 +159,7 @@ struct TransactionsView: View {
                         TransactionRow(
                             tx: tx,
                             display: appState.ownersDisplay(of: tx),
-                            density: density,
-                            onTap: { selectedTransaction = tx }
+                            density: density
                         )
                         if idx < group.items.count - 1 {
                             RowSeparator(density: density)

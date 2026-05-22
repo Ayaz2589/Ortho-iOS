@@ -16,6 +16,11 @@ import SwiftUI
 struct SwipeActionRow<Content: View>: View {
     let onDelete: () -> Void
     var onCopy: (() -> Void)? = nil
+    /// Fires on a tap that didn't turn into a swipe. Uses SwiftUI's
+    /// `TapGesture` (via `.onTapGesture`) so the tap auto-cancels if the
+    /// finger moves more than a few points — the trailing tap-up of a
+    /// horizontal swipe won't trigger it.
+    var onTap: (() -> Void)? = nil
     @ViewBuilder let content: () -> Content
 
     private let buttonWidth: CGFloat = 84
@@ -62,17 +67,31 @@ struct SwipeActionRow<Content: View>: View {
             content()
                 .background(AppTheme.surface)
                 .offset(x: offset)
+                .contentShape(Rectangle())
+                // `TapGesture` cancels itself when the finger moves more
+                // than a few points, so a horizontal swipe won't end up
+                // firing onTap as it lifts. Only attach when not open —
+                // when the tray is showing we want taps to close it,
+                // handled by the overlay below.
+                .onTapGesture {
+                    if !isOpen { onTap?() }
+                }
                 .overlay {
-                    // Only attach the tap-to-close gesture while open —
-                    // otherwise stationary taps would be swallowed before
-                    // they could reach the row's own onTap (drill-in).
+                    // Tap-to-close while open. The overlay sits above the
+                    // content so its tap gesture wins, swallowing the tap
+                    // before the row's onTap sees it.
                     if isOpen {
                         Color.clear
                             .contentShape(Rectangle())
                             .onTapGesture { closeSwipe() }
                     }
                 }
-                .gesture(swipeGesture)
+                // `simultaneousGesture` so the swipe doesn't block the
+                // parent ScrollView's vertical scroll. Both gestures
+                // receive the touch — the swipe only mutates `offset`
+                // when the drag is horizontally dominant, so a vertical
+                // drag is a no-op here and the ScrollView handles it.
+                .simultaneousGesture(swipeGesture)
         }
     }
 
@@ -126,11 +145,17 @@ struct SwipeActionRow<Content: View>: View {
     private var swipeGesture: some Gesture {
         DragGesture(minimumDistance: 8, coordinateSpace: .local)
             .onChanged { value in
+                // Only react when the drag is predominantly horizontal —
+                // a vertical-dominant drag belongs to the parent ScrollView,
+                // and running through the swipe logic for it would jerk
+                // the row sideways while the user is scrolling.
+                guard abs(value.translation.width) > abs(value.translation.height) else { return }
                 let total = anchor + value.translation.width
                 // Clamp: only left-swipe (negative), bottomed at revealWidth.
                 offset = min(0, max(-revealWidth, total))
             }
             .onEnded { value in
+                guard abs(value.translation.width) > abs(value.translation.height) else { return }
                 let total = anchor + value.translation.width
                 let target: CGFloat = (total < -revealWidth / 2) ? -revealWidth : 0
                 withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {

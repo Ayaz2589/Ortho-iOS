@@ -119,18 +119,19 @@ struct RootTabView: View {
             }
             #endif
 
-            ZStack {
-                switch selection {
-                case .dashboard:
-                    DashboardView()
-                case .transactions:
-                    TransactionsView()
-                case .housing:
-                    HousingView()
-                case .settings:
-                    SettingsView()
-                }
+            // Page-style TabView gives horizontal-swipe paging between
+            // tabs natively. The custom OrthoTabBar still drives `selection`
+            // via tap; the binding is shared, so both interactions stay
+            // in sync. `.never` index display hides the default dot
+            // indicator — the OrthoTabBar is the canonical selected-state
+            // affordance.
+            TabView(selection: $selection) {
+                DashboardView()    .tag(OrthoTab.dashboard)
+                TransactionsView() .tag(OrthoTab.transactions)
+                HousingView()      .tag(OrthoTab.housing)
+                SettingsView()     .tag(OrthoTab.settings)
             }
+            .tabViewStyle(.page(indexDisplayMode: .never))
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 if !tabBarHidden {
                     OrthoTabBar(selection: $selection)
