@@ -14,8 +14,14 @@ enum TransactionScopeFilter: String, CaseIterable, Hashable, Identifiable {
     }
 }
 
-/// Day-grouped transactions list — the Transactions tab. Reads users +
-/// transactions from `AppState` so adds/edits in other tabs reflect here.
+/// Day-grouped transactions list — the Transactions tab. Built on a native
+/// SwiftUI `List` so vertical scroll and `.swipeActions` are arbitrated by
+/// UIKit. The custom `ScrollView + LazyVStack + SwipeActionRow` stack this
+/// replaced suffered a recurring bug where a `DragGesture` attached inside
+/// the ScrollView would claim touches on row content and block vertical
+/// scroll. Native List delegates to UIKit's swipe-action pan recognizer,
+/// which only claims horizontal-dominant initial movement, so vertical
+/// scroll on a row works correctly.
 struct TransactionsView: View {
     var density: Density = .comfortable
 
@@ -43,11 +49,6 @@ struct TransactionsView: View {
 
     /// Lazily filters each group's items by both the scope filter and the
     /// merchant search. Drops empty groups so headers never appear orphaned.
-    /// Scope-filtering rules (against `appState.currentUserID` and
-    /// `currentHouseholdID`):
-    ///   .all      — current household's shared rows + the current user's personal rows
-    ///   .shared   — only current household's shared rows
-    ///   .personal — only the current user's personal rows
     private var filteredGroups: [TransactionGroup] {
         let q = query.trimmingCharacters(in: .whitespaces).lowercased()
         let groups = appState.groups
@@ -83,18 +84,13 @@ struct TransactionsView: View {
         return false
     }
 
-    /// True when there's at least one transaction in the store — used to
-    /// decide whether to render the day list or the empty state, and to
-    /// hide the search + scope filter when there's nothing to filter.
     private var hasAnyTransactions: Bool {
         !appState.transactions.isEmpty
     }
 
-    /// Three-way render state for the body. `loading` only fires when we
-    /// have nothing yet AND the initial bootstrap is still in flight —
-    /// it prevents the misleading "No transactions yet" empty state from
-    /// flashing during sign-in. Once the fetch lands, we transition to
-    /// either `empty` (real first-run UX) or `populated`.
+    /// Three-way render state. `loading` only fires when we have nothing
+    /// yet AND the initial bootstrap is still in flight — prevents the
+    /// misleading empty state from flashing during sign-in.
     private enum LoadState { case loading, empty, populated }
     private var loadState: LoadState {
         if hasAnyTransactions { return .populated }
@@ -102,21 +98,11 @@ struct TransactionsView: View {
     }
 
     var body: some View {
-        ScrollView {
+        Group {
             switch loadState {
-            case .populated:
-                LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
-                    ForEach(filteredGroups) { group in
-                        Section(header: DayHeader(group: group)) {
-                            groupCard(group)
-                        }
-                    }
-                    Color.clear.frame(height: 60)
-                }
-            case .loading:
-                TransactionSkeletonList()
-            case .empty:
-                emptyState
+            case .populated: populatedList
+            case .loading:   TransactionSkeletonList()
+            case .empty:     emptyState
             }
         }
         .background(AppTheme.bg)
@@ -144,35 +130,103 @@ struct TransactionsView: View {
         }
     }
 
-    @ViewBuilder
-    private func groupCard(_ group: TransactionGroup) -> some View {
-        VStack(spacing: 0) {
-            ForEach(Array(group.items.enumerated()), id: \.element.id) { idx, tx in
-                SwipeActionRow(
-                    onDelete: { appState.deleteTransaction(tx) },
-                    onCopy:   { addSheetMode = .copying(tx) },
-                    onTap:    { selectedTransaction = tx }
-                ) {
-                    // Include the separator inside the swipe container so
-                    // it slides with the row instead of staying behind.
-                    VStack(spacing: 0) {
-                        TransactionRow(
-                            tx: tx,
-                            display: appState.ownersDisplay(of: tx),
-                            density: density
-                        )
-                        if idx < group.items.count - 1 {
-                            RowSeparator(density: density)
-                        }
-                    }
+    // MARK: - Populated list
+
+    private var populatedList: some View {
+        List {
+            ForEach(filteredGroups) { group in
+                Section {
+                    rows(in: group)
+                } header: {
+                    DayHeader(group: group)
                 }
             }
         }
-        .background(AppTheme.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-        .padding(.horizontal, 16)
-        .padding(.bottom, 8)
+        .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .background(AppTheme.bg)
+        .listSectionSpacing(8)
+        .contentMargins(.bottom, 60, for: .scrollContent)
+        .environment(\.defaultMinListRowHeight, 0)
     }
+
+    @ViewBuilder
+    private func rows(in group: TransactionGroup) -> some View {
+        ForEach(Array(group.items.enumerated()), id: \.element.id) { idx, tx in
+            let position = rowPosition(idx: idx, count: group.items.count)
+            let isLast = idx == group.items.count - 1
+            VStack(spacing: 0) {
+                TransactionRow(
+                    tx: tx,
+                    display: appState.ownersDisplay(of: tx),
+                    density: density
+                )
+                if !isLast {
+                    RowSeparator(density: density)
+                }
+            }
+            .contentShape(Rectangle())
+            .listRowBackground(
+                rowCardBackground(position: position)
+                    .padding(.horizontal, 16)
+            )
+            .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+            .listRowSeparator(.hidden)
+            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                Button(role: .destructive) {
+                    withAnimation(.easeOut(duration: 0.2)) {
+                        appState.deleteTransaction(tx)
+                    }
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+                .labelStyle(.iconOnly)
+                Button {
+                    addSheetMode = .copying(tx)
+                } label: {
+                    Label("Copy", systemImage: "doc.on.doc")
+                }
+                .labelStyle(.iconOnly)
+                .tint(AppTheme.accent)
+            }
+            .onTapGesture { selectedTransaction = tx }
+        }
+    }
+
+    // MARK: - Group-card chrome
+
+    /// A row's position within its day section. Drives which corners of the
+    /// `AppTheme.surface` background get rounded so each section reads as
+    /// one continuous rounded card.
+    private enum RowPosition { case single, first, middle, last }
+
+    private func rowPosition(idx: Int, count: Int) -> RowPosition {
+        if count == 1 { return .single }
+        if idx == 0 { return .first }
+        if idx == count - 1 { return .last }
+        return .middle
+    }
+
+    private func cornerRadii(for position: RowPosition) -> RectangleCornerRadii {
+        let r: CGFloat = 14
+        switch position {
+        case .single:
+            return .init(topLeading: r, bottomLeading: r, bottomTrailing: r, topTrailing: r)
+        case .first:
+            return .init(topLeading: r, bottomLeading: 0, bottomTrailing: 0, topTrailing: r)
+        case .last:
+            return .init(topLeading: 0, bottomLeading: r, bottomTrailing: r, topTrailing: 0)
+        case .middle:
+            return .init(topLeading: 0, bottomLeading: 0, bottomTrailing: 0, topTrailing: 0)
+        }
+    }
+
+    private func rowCardBackground(position: RowPosition) -> some View {
+        UnevenRoundedRectangle(cornerRadii: cornerRadii(for: position), style: .continuous)
+            .fill(AppTheme.surface)
+    }
+
+    // MARK: - Title + search
 
     private var titleAndSearch: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -186,11 +240,8 @@ struct TransactionsView: View {
             }
             .padding(.horizontal, 20)
             .padding(.top, 4)
-            .padding(.bottom, hasAnyTransactions ? 6 : 24)
+            .padding(.bottom, hasAnyTransactions ? 6 : 8)
 
-            // Hide the search field + scope filter when there's nothing to
-            // filter — keeps the empty state visually clean and matches
-            // the chromeless Housing header in its empty branch.
             if hasAnyTransactions {
                 SearchField(text: $query, placeholder: "Search transactions")
                     .padding(.vertical, 8)
@@ -200,14 +251,11 @@ struct TransactionsView: View {
                     .padding(.bottom, 8)
             }
         }
-        .background(AppTheme.bg)
+        .background(.regularMaterial)
     }
 
     // MARK: - Empty state
 
-    /// Shown when `appState.transactions` is empty. Mirrors `HousingView`'s
-    /// empty-state grammar — muted SF Symbol, headline, supporting copy,
-    /// pill-shaped CTA.
     private var emptyState: some View {
         VStack(alignment: .center, spacing: 14) {
             Image(systemName: "arrow.up.arrow.down")
@@ -237,8 +285,9 @@ struct TransactionsView: View {
             }
             .buttonStyle(.plain)
             .padding(.top, 4)
+            Spacer(minLength: 0)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     /// All | Shared | Personal segmented pill above the transactions list.
@@ -272,9 +321,7 @@ struct TransactionsView: View {
         .animation(.easeOut(duration: 0.15), value: scopeFilter)
     }
 
-    /// Circular "+" button next to the Transactions title. Same visual
-    /// treatment as `AddUserRowView`'s leading tile so the affordance feels
-    /// consistent.
+    /// Circular "+" button next to the Transactions title.
     private var addButton: some View {
         Button { addSheetMode = .fresh } label: {
             ZStack {

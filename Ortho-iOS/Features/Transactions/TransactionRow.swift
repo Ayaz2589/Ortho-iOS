@@ -5,13 +5,10 @@ import SwiftUI
 /// amount + time on the right. The parent passes a pre-resolved `display`
 /// so the row doesn't need to know about `AppState`.
 ///
-/// Renders as a plain `HStack` (not a `Button`) so callers can attach
-/// their own tap gesture (`.onTapGesture { ... }` or a parent `SwipeActionRow`'s
-/// `onTap` parameter). A nested Button inside `SwipeActionRow`'s swipe
-/// gesture would fire its tap on touch-up even after the user swiped,
-/// triggering the drill-in incorrectly. `TapGesture` on the parent
-/// cancels itself when the finger moves more than a few points, so
-/// swipes no longer leak into a tap.
+/// Renders as a plain `HStack` (not a `Button`) so the parent List row
+/// can attach `.onTapGesture` for the drill-in. A nested `Button` would
+/// claim taps inside a List row's swipe-action arbitration and could
+/// fire its tap on touch-up of a horizontal swipe.
 struct TransactionRow: View {
     let tx: Transaction
     /// `(avatarUser, label)` from `AppState.ownersDisplay(of:)`.
