@@ -26,3 +26,4 @@ Ortho-iOS/App/SupabaseConfig.swift
 *.pem
 *.p8
 *.p12
+build-device/

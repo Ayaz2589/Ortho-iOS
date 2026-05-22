@@ -27,18 +27,14 @@ struct SignInView: View {
         ZStack {
             AppTheme.bg.ignoresSafeArea()
 
-            // Ambient concentric rings + warm lens-flare halo. Both layers
-            // use `AppTheme.accent` so the rings carry a hint of warm
-            // color and read as light radiating from the same source as
-            // the flare. The offset `(-50, 0)` puts the origin inside
-            // the first O of "ORTHO" — at 28pt size with 8pt tracking,
-            // the leading O's center is ~50pt left of the wordmark
-            // center, and absolute points keeps that anchor stable
-            // across screen widths.
+            // Ambient concentric rings tinted with `AppTheme.accent`. The
+            // offset `(-50, 0)` puts the origin inside the first O of
+            // "ORTHO" — at 28pt size with 8pt tracking, the leading O's
+            // center is ~50pt left of the wordmark center, and absolute
+            // points keeps that anchor stable across screen widths.
             AmbientRippleBackground(
                 originOffset: CGSize(width: -50, height: 0),
-                rippleColor:  AppTheme.accent,
-                flareColor:   AppTheme.accent
+                rippleColor:  AppTheme.accent
             )
             .ignoresSafeArea()
 
@@ -61,7 +57,11 @@ struct SignInView: View {
         // Pinning the form to the bottom safe area decouples it from the
         // ORTHO spacer layout — when the keyboard appears, iOS adjusts the
         // inset cleanly and the wordmark above stays in its column rather
-        // than colliding with the form.
+        // than colliding with the form. The inset is intentionally
+        // transparent so the ripple animation continues through the form
+        // area — the field + button each carry their own muted-fill
+        // background already, so the only thing the ripple passes through
+        // is the empty space between them.
         .safeAreaInset(edge: .bottom, spacing: 0) {
             VStack(spacing: 0) {
                 form
@@ -81,8 +81,13 @@ struct SignInView: View {
                     .padding(.top, 14)
                     .padding(.bottom, 8)
             }
-            .background(AppTheme.bg)
         }
+        // Tap anywhere outside the input or button to dismiss the keyboard.
+        // SwiftUI hands taps consumed by TextField / Button to those views
+        // first, so this gesture only fires for the empty background, the
+        // wordmark, and the footer text.
+        .contentShape(Rectangle())
+        .onTapGesture { focused = nil }
         .onAppear { focused = step == .email ? .email : .code }
         .onChange(of: step) { _, newValue in
             focused = newValue == .email ? .email : .code

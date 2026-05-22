@@ -1,12 +1,11 @@
 import SwiftUI
 
 /// Ambient background effect: concentric stroke rings expanding from a
-/// single origin, with a soft lens-flare halo at the origin point. Rings
-/// fade as they grow; flare is a static radial gradient.
+/// single origin and fading as they grow. Decorative only — tap-through,
+/// hidden from VoiceOver.
 ///
 /// Implemented with `TimelineView(.animation)` + `Canvas` so the per-frame
 /// math runs once and renders all rings in a single GPU-friendly pass.
-/// Decorative only — tap-through, hidden from VoiceOver.
 struct AmbientRippleBackground: View {
     /// Where ripples emanate from, as a fraction of the view's size.
     var origin: UnitPoint = UnitPoint(x: 0.5, y: 0.4)
@@ -18,8 +17,6 @@ struct AmbientRippleBackground: View {
     var originOffset: CGSize = .zero
     /// Stroke color of the rings. View applies its own opacity ramp.
     var rippleColor: Color = .black
-    /// Base color of the radial flare halo. View applies its own opacity ramp.
-    var flareColor: Color = .white
 
     // MARK: - Tuning constants
 
@@ -31,10 +28,6 @@ struct AmbientRippleBackground: View {
     private let peakOpacity: Double = 0.18
     /// Stroke width of each ring in points.
     private let lineWidth: CGFloat = 1.25
-    /// Radius of the lens-flare halo in points. Bigger = softer glow.
-    private let flareRadius: CGFloat = 270
-    /// Peak alpha of the flare's center stop.
-    private let flarePeakOpacity: Double = 0.23
 
     var body: some View {
         TimelineView(.animation) { context in
@@ -48,8 +41,6 @@ struct AmbientRippleBackground: View {
                     max(center.x, size.width - center.x),
                     max(center.y, size.height - center.y)
                 )
-
-                drawFlare(in: canvas, center: center)
 
                 for i in 0..<count {
                     let phaseOffset = Double(i) / Double(count)
@@ -74,43 +65,13 @@ struct AmbientRippleBackground: View {
         .allowsHitTesting(false)
         .accessibilityHidden(true)
     }
-
-    // MARK: - Drawing helpers
-
-    /// Lens-flare halo: bright at the origin, fading to clear at
-    /// `flareRadius`. Three-stop gradient gives a non-linear falloff that
-    /// reads as a soft bloom rather than a hard disc.
-    private func drawFlare(in canvas: GraphicsContext, center: CGPoint) {
-        let rect = CGRect(
-            x: center.x - flareRadius,
-            y: center.y - flareRadius,
-            width: flareRadius * 2,
-            height: flareRadius * 2
-        )
-        canvas.fill(
-            Path(ellipseIn: rect),
-            with: .radialGradient(
-                Gradient(stops: [
-                    .init(color: flareColor.opacity(flarePeakOpacity), location: 0),
-                    .init(color: flareColor.opacity(0.02),             location: 0.45),
-                    .init(color: flareColor.opacity(0),                location: 1.0),
-                ]),
-                center: center,
-                startRadius: 0,
-                endRadius: flareRadius
-            )
-        )
-    }
 }
 
 #Preview("Ripple · Light") {
     ZStack {
         AppTheme.bg.ignoresSafeArea()
-        AmbientRippleBackground(
-            rippleColor: AppTheme.accent,
-            flareColor:  AppTheme.accent
-        )
-        .ignoresSafeArea()
+        AmbientRippleBackground(rippleColor: AppTheme.accent)
+            .ignoresSafeArea()
         Text("ORTHO")
             .font(.system(size: 28, weight: .regular))
             .tracking(8)
@@ -121,11 +82,8 @@ struct AmbientRippleBackground: View {
 #Preview("Ripple · Dark") {
     ZStack {
         AppTheme.bg.ignoresSafeArea()
-        AmbientRippleBackground(
-            rippleColor: AppTheme.accent,
-            flareColor:  AppTheme.accent
-        )
-        .ignoresSafeArea()
+        AmbientRippleBackground(rippleColor: AppTheme.accent)
+            .ignoresSafeArea()
         Text("ORTHO")
             .font(.system(size: 28, weight: .regular))
             .tracking(8)
