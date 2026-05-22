@@ -15,17 +15,17 @@ struct AppearanceRowView: View {
                     Circle().fill(AppTheme.text.opacity(0.05))
                         .frame(width: 40, height: 40)
                     Image(systemName: mode.symbol)
-                        .font(.system(size: 16, weight: .medium))
+                        .font(.lato(size: 16, weight: .medium))
                         .foregroundStyle(AppTheme.text2)
                 }
                 Text(mode.label)
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .tracking(-0.2)
                     .foregroundStyle(AppTheme.text)
                 Spacer()
                 if selected {
                     Image(systemName: "checkmark")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.lato(size: 14, weight: .semibold))
                         .foregroundStyle(AppTheme.accent)
                 }
             }

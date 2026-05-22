@@ -45,7 +45,7 @@ struct EditBudgetSheet: View {
                         .padding(.bottom, 16)
 
                     Text("Spending in \(category.rawValue.capitalized) is tracked from the 1st of each calendar month. Insights compare actual spend against this limit.")
-                        .font(.system(size: 13))
+                        .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
                         .padding(.horizontal, 24)
@@ -59,10 +59,10 @@ struct EditBudgetSheet: View {
                         } label: {
                             HStack {
                                 Image(systemName: "minus.circle.fill")
-                                    .font(.system(size: 16, weight: .medium))
+                                    .font(.lato(size: 16, weight: .medium))
                                     .foregroundStyle(AppTheme.destructive)
                                 Text("Remove budget")
-                                    .font(.system(size: 17, weight: .medium))
+                                    .font(.lato(size: 17, weight: .medium))
                                     .foregroundStyle(AppTheme.destructive)
                                 Spacer()
                             }
@@ -96,7 +96,7 @@ struct EditBudgetSheet: View {
     private var sheetNav: some View {
         ZStack {
             Text("\(category.rawValue.capitalized) budget")
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
                 .tracking(-0.3)
 
@@ -105,12 +105,12 @@ struct EditBudgetSheet: View {
                     onDone()
                     dismiss()
                 }
-                .font(.system(size: 17, weight: .medium))
+                .font(.lato(size: 17, weight: .medium))
                 .foregroundStyle(AppTheme.accent)
                 .buttonStyle(.plain)
                 Spacer()
                 Button("Save") { save() }
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(.lato(size: 17, weight: .semibold))
                     .foregroundStyle(canSave ? AppTheme.accent : AppTheme.text.opacity(0.36))
                     .disabled(!canSave)
                     .buttonStyle(.plain)
@@ -125,10 +125,10 @@ struct EditBudgetSheet: View {
     private var amountField: some View {
         HStack(spacing: 4) {
             Text(Money.symbol(for: appState.currency))
-                .font(.system(size: 17, weight: .medium))
+                .font(.lato(size: 17, weight: .medium))
                 .foregroundStyle(AppTheme.text2)
             TextField("0.00", text: $amountText)
-                .font(.system(size: 17, weight: .medium))
+                .font(.lato(size: 17, weight: .medium))
                 .tracking(-0.2)
                 .foregroundStyle(AppTheme.text)
                 .keyboardType(.decimalPad)
@@ -143,7 +143,7 @@ struct EditBudgetSheet: View {
 
     private func sectionLabel(_ text: String) -> some View {
         Text(text)
-            .font(.system(size: 13, weight: .semibold))
+            .font(.lato(size: 13, weight: .semibold))
             .kerning(0.6)
             .textCase(.uppercase)
             .foregroundStyle(AppTheme.text.opacity(0.58))

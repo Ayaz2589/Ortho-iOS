@@ -12,18 +12,18 @@ struct MortgageMonthlyPaymentCard: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Text("Monthly payment")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .kerning(0.6)
                     .textCase(.uppercase)
                     .foregroundStyle(AppTheme.text.opacity(0.58))
                 Spacer()
                 Image(systemName: "house")
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.lato(size: 16, weight: .medium))
                     .foregroundStyle(AppTheme.text2)
             }
 
             Text(appState.formatMoney(mortgage.monthlyPaymentCents))
-                .font(.system(size: 36, weight: .bold))
+                .font(.lato(size: 36, weight: .bold))
                 .tracking(-0.6)
                 .monospacedDigit()
                 .foregroundStyle(AppTheme.text)
@@ -32,7 +32,7 @@ struct MortgageMonthlyPaymentCard: View {
 
             if let source = mortgage.autoPaySource {
                 Text("Auto-pays on the 1st · \(source)")
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text.opacity(0.58))
             }
         }
@@ -77,15 +77,15 @@ struct MortgageDetailsCard: View {
         HStack(alignment: .firstTextBaseline) {
             VStack(alignment: .leading, spacing: 3) {
                 Text(label)
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.lato(size: 15, weight: .medium))
                     .foregroundStyle(AppTheme.text)
                 Text(sublabel)
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundStyle(AppTheme.text3)
             }
             Spacer()
             Text(value)
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .tracking(-0.2)
                 .monospacedDigit()
                 .foregroundStyle(AppTheme.text)
@@ -123,14 +123,14 @@ struct EquityProgressCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Equity")
-                .font(.system(size: 13, weight: .semibold))
+                .font(.lato(size: 13, weight: .semibold))
                 .kerning(0.6)
                 .textCase(.uppercase)
                 .foregroundStyle(AppTheme.text.opacity(0.58))
 
             HStack(alignment: .firstTextBaseline) {
                 Text(appState.formatMoney(mortgage.currentEquityCents()))
-                    .font(.system(size: 28, weight: .bold))
+                    .font(.lato(size: 28, weight: .bold))
                     .tracking(-0.4)
                     .monospacedDigit()
                     .foregroundStyle(AppTheme.text)
@@ -138,7 +138,7 @@ struct EquityProgressCard: View {
                     .minimumScaleFactor(0.6)
                 Spacer()
                 Text("of \(appState.formatMoney(mortgage.purchasePrice)) · \(equityPercentLabel)")
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundStyle(AppTheme.text3)
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
@@ -155,7 +155,7 @@ struct EquityProgressCard: View {
             .padding(.top, 2)
 
             Text("Built since closing · \(closingMonthYear)")
-                .font(.system(size: 13))
+                .font(.lato(size: 13))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
         }
         .padding(20)
@@ -190,13 +190,13 @@ struct AmortizationCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("Amortization")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .kerning(0.6)
                     .textCase(.uppercase)
                     .foregroundStyle(AppTheme.text.opacity(0.58))
                 Spacer()
                 Text("Next 12 months")
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundStyle(AppTheme.text3)
             }
 
@@ -222,7 +222,7 @@ struct AmortizationCard: View {
             .chartXAxis {
                 AxisMarks(values: .automatic(desiredCount: 12)) { _ in
                     AxisValueLabel()
-                        .font(.system(size: 11))
+                        .font(.lato(size: 11))
                         .foregroundStyle(AppTheme.text3)
                 }
             }
@@ -250,7 +250,7 @@ struct AmortizationCard: View {
         HStack(spacing: 6) {
             Circle().fill(color).frame(width: 8, height: 8)
             Text(label)
-                .font(.system(size: 12))
+                .font(.lato(size: 12))
                 .foregroundStyle(AppTheme.text2)
         }
     }

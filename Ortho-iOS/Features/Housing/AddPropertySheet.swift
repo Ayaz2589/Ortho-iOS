@@ -190,7 +190,7 @@ struct AddPropertySheet: View {
                     }
 
                     Text(footerCaption)
-                        .font(.system(size: 13))
+                        .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
                         .padding(.horizontal, 24)
@@ -220,7 +220,7 @@ struct AddPropertySheet: View {
     private var sheetNav: some View {
         ZStack {
             Text(navTitle)
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
                 .tracking(-0.3)
                 .lineLimit(1)
@@ -229,14 +229,14 @@ struct AddPropertySheet: View {
 
             HStack {
                 Button("Cancel") { dismiss() }
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .foregroundStyle(AppTheme.accent)
                     .buttonStyle(.plain)
                 Spacer()
                 Button(actionLabel) {
                     onSubmit(makeProperty())
                 }
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(canSubmit ? AppTheme.accent : AppTheme.text.opacity(0.36))
                 .disabled(!canSubmit)
                 .buttonStyle(.plain)
@@ -267,7 +267,7 @@ struct AddPropertySheet: View {
 
     private func sectionLabel(_ text: String) -> some View {
         Text(text)
-            .font(.system(size: 13, weight: .semibold))
+            .font(.lato(size: 13, weight: .semibold))
             .kerning(0.6)
             .textCase(.uppercase)
             .foregroundStyle(AppTheme.text.opacity(0.58))
@@ -277,11 +277,11 @@ struct AddPropertySheet: View {
     private func textRow(label: String, placeholder: String, text: Binding<String>) -> some View {
         HStack(spacing: 12) {
             Text(label)
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
                 .frame(width: 120, alignment: .leading)
             TextField(placeholder, text: text)
-                .font(.system(size: 17, weight: .medium))
+                .font(.lato(size: 17, weight: .medium))
                 .tracking(-0.2)
                 .foregroundStyle(AppTheme.text)
                 .multilineTextAlignment(.trailing)
@@ -293,15 +293,15 @@ struct AddPropertySheet: View {
     private func currencyRow(label: String, placeholder: String, text: Binding<String>) -> some View {
         HStack(spacing: 12) {
             Text(label)
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
                 .frame(width: 120, alignment: .leading)
             Spacer()
             Text(Money.symbol(for: appState.currency))
-                .font(.system(size: 15, weight: .medium))
+                .font(.lato(size: 15, weight: .medium))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
             TextField(placeholder, text: text)
-                .font(.system(size: 17, weight: .medium))
+                .font(.lato(size: 17, weight: .medium))
                 .tracking(-0.2)
                 .foregroundStyle(AppTheme.text)
                 .keyboardType(.decimalPad)
@@ -314,19 +314,19 @@ struct AddPropertySheet: View {
     private func percentRow(label: String, placeholder: String, text: Binding<String>) -> some View {
         HStack(spacing: 12) {
             Text(label)
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
                 .frame(width: 120, alignment: .leading)
             Spacer()
             TextField(placeholder, text: text)
-                .font(.system(size: 17, weight: .medium))
+                .font(.lato(size: 17, weight: .medium))
                 .tracking(-0.2)
                 .foregroundStyle(AppTheme.text)
                 .keyboardType(.decimalPad)
                 .multilineTextAlignment(.trailing)
                 .frame(width: 80)
             Text("%")
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
         }
         .padding(.horizontal, 16)
@@ -336,7 +336,7 @@ struct AddPropertySheet: View {
     private var termRow: some View {
         HStack(spacing: 12) {
             Text("Term")
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
                 .frame(width: 120, alignment: .leading)
             Spacer()
@@ -347,11 +347,11 @@ struct AddPropertySheet: View {
             } label: {
                 HStack(spacing: 6) {
                     Text("\(loanTermYears)-year")
-                        .font(.system(size: 17, weight: .medium))
+                        .font(.lato(size: 17, weight: .medium))
                         .tracking(-0.2)
                         .foregroundStyle(AppTheme.text)
                     Image(systemName: "chevron.up.chevron.down")
-                        .font(.system(size: 11, weight: .semibold))
+                        .font(.lato(size: 11, weight: .semibold))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                 }
             }
@@ -363,7 +363,7 @@ struct AddPropertySheet: View {
     private func dateRow(label: String, date: Binding<Date>) -> some View {
         HStack(spacing: 12) {
             Text(label)
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
                 .frame(width: 120, alignment: .leading)
             Spacer()
@@ -382,21 +382,21 @@ struct AddPropertySheet: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 12) {
                 Text("Unit name")
-                    .font(.system(size: 15))
+                    .font(.lato(size: 15))
                     .foregroundStyle(AppTheme.text.opacity(0.58))
                     .frame(width: 120, alignment: .leading)
                 TextField("e.g. 1A", text: Binding(
                     get: { units[index].name },
                     set: { units[index].name = $0 }
                 ))
-                .font(.system(size: 17, weight: .medium))
+                .font(.lato(size: 17, weight: .medium))
                 .tracking(-0.2)
                 .multilineTextAlignment(.trailing)
                 Button {
                     units.remove(at: index)
                 } label: {
                     Image(systemName: "minus.circle.fill")
-                        .font(.system(size: 18))
+                        .font(.lato(size: 18))
                         .foregroundStyle(AppTheme.destructive)
                 }
                 .buttonStyle(.plain)
@@ -409,12 +409,12 @@ struct AddPropertySheet: View {
 
             HStack(spacing: 12) {
                 Text("Rent")
-                    .font(.system(size: 15))
+                    .font(.lato(size: 15))
                     .foregroundStyle(AppTheme.text.opacity(0.58))
                     .frame(width: 120, alignment: .leading)
                 Spacer()
                 Text(Money.symbol(for: appState.currency))
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.lato(size: 15, weight: .medium))
                     .foregroundStyle(AppTheme.text.opacity(0.58))
                 TextField("0", text: Binding(
                     get: { Self.formatCents(units[index].monthlyRent) },
@@ -422,7 +422,7 @@ struct AddPropertySheet: View {
                         units[index].monthlyRent = parseToUSDCents(newValue)
                     }
                 ))
-                .font(.system(size: 17, weight: .medium))
+                .font(.lato(size: 17, weight: .medium))
                 .tracking(-0.2)
                 .keyboardType(.decimalPad)
                 .multilineTextAlignment(.trailing)
@@ -434,14 +434,14 @@ struct AddPropertySheet: View {
 
             HStack(spacing: 12) {
                 Text("Tenant")
-                    .font(.system(size: 15))
+                    .font(.lato(size: 15))
                     .foregroundStyle(AppTheme.text.opacity(0.58))
                     .frame(width: 120, alignment: .leading)
                 TextField("Optional", text: Binding(
                     get: { units[index].tenantName ?? "" },
                     set: { units[index].tenantName = $0.isEmpty ? nil : $0 }
                 ))
-                .font(.system(size: 17, weight: .medium))
+                .font(.lato(size: 17, weight: .medium))
                 .tracking(-0.2)
                 .multilineTextAlignment(.trailing)
             }
@@ -459,11 +459,11 @@ struct AddPropertySheet: View {
                     Circle().fill(AppTheme.text.opacity(0.05))
                         .frame(width: 32, height: 32)
                     Image(systemName: "plus")
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.lato(size: 13, weight: .semibold))
                         .foregroundStyle(AppTheme.accent)
                 }
                 Text("Add unit")
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .tracking(-0.2)
                     .foregroundStyle(AppTheme.accent)
                 Spacer()

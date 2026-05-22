@@ -50,7 +50,7 @@ struct DashboardView: View {
         .safeAreaInset(edge: .top, spacing: 0) {
             HStack {
                 Text("Dashboard")
-                    .font(.system(size: 32, weight: .bold))
+                    .font(.lato(size: 32, weight: .bold))
                     .tracking(-0.6)
                     .foregroundStyle(AppTheme.text)
                 Spacer()
@@ -79,7 +79,7 @@ struct DashboardView: View {
                     range = option
                 } label: {
                     Text(option.shortLabel)
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.lato(size: 14, weight: .semibold))
                         .tracking(-0.1)
                         .foregroundStyle(range == option
                                          ? AppTheme.text

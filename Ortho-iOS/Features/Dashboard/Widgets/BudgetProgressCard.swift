@@ -39,13 +39,13 @@ struct BudgetProgressCard: View {
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
                     Text("Budgets")
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.lato(size: 13, weight: .semibold))
                         .kerning(0.6)
                         .textCase(.uppercase)
                         .foregroundStyle(AppTheme.text.opacity(0.58))
                     Spacer()
                     Text("This month")
-                        .font(.system(size: 12))
+                        .font(.lato(size: 12))
                         .foregroundStyle(AppTheme.text3)
                 }
 
@@ -67,15 +67,15 @@ struct BudgetProgressCard: View {
             HStack(alignment: .firstTextBaseline) {
                 HStack(spacing: 8) {
                     Image(systemName: row.budget.category.symbol)
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.lato(size: 12, weight: .medium))
                         .foregroundStyle(row.budget.category.tint)
                     Text(row.budget.category.rawValue.capitalized)
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.lato(size: 14, weight: .medium))
                         .foregroundStyle(AppTheme.text)
                 }
                 Spacer()
                 Text("\(appState.formatMoney(row.spentCents)) / \(appState.formatMoney(row.budget.monthlyLimitCents))")
-                    .font(.system(size: 12, weight: .medium))
+                    .font(.lato(size: 12, weight: .medium))
                     .monospacedDigit()
                     .foregroundStyle(barColor(for: row.fraction))
                     .lineLimit(1)

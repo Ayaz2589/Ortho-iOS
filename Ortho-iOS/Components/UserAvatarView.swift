@@ -13,7 +13,7 @@ struct UserAvatarView: View {
         let palette = user.palette
         let multiGlyph = user.initial.count > 1
         Text(user.initial)
-            .font(.system(size: multiGlyph ? size * 0.30 : size * 0.42,
+            .font(.lato(size: multiGlyph ? size * 0.30 : size * 0.42,
                           weight: .semibold))
             .foregroundStyle(palette.fg)
             .frame(width: size, height: size)

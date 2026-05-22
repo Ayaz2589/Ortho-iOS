@@ -87,7 +87,7 @@ struct PropertyContentView: View {
             HStack {
                 Spacer()
                 Text("Delete property")
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .foregroundStyle(AppTheme.destructive)
                 Spacer()
             }

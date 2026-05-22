@@ -14,20 +14,20 @@ struct DemoModeBanner: View {
     var body: some View {
         HStack(spacing: 10) {
             Image(systemName: "flask.fill")
-                .font(.system(size: 13, weight: .semibold))
+                .font(.lato(size: 13, weight: .semibold))
                 .foregroundStyle(AppTheme.accent)
             VStack(alignment: .leading, spacing: 1) {
                 Text("Demo mode")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .foregroundStyle(AppTheme.text)
                 Text("Changes aren't saved")
-                    .font(.system(size: 11))
+                    .font(.lato(size: 11))
                     .foregroundStyle(AppTheme.text2)
             }
             Spacer()
             Button(action: onExit) {
                 Text("Exit")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .foregroundStyle(AppTheme.accent)
                     .padding(.horizontal, 14)
                     .padding(.vertical, 6)

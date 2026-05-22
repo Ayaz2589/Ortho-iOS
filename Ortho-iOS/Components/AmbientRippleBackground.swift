@@ -73,7 +73,7 @@ struct AmbientRippleBackground: View {
         AmbientRippleBackground(rippleColor: AppTheme.accent)
             .ignoresSafeArea()
         Text("ORTHO")
-            .font(.system(size: 28, weight: .regular))
+            .font(.lato(size: 28, weight: .regular))
             .tracking(8)
             .foregroundStyle(AppTheme.text)
     }
@@ -85,7 +85,7 @@ struct AmbientRippleBackground: View {
         AmbientRippleBackground(rippleColor: AppTheme.accent)
             .ignoresSafeArea()
         Text("ORTHO")
-            .font(.system(size: 28, weight: .regular))
+            .font(.lato(size: 28, weight: .regular))
             .tracking(8)
             .foregroundStyle(AppTheme.text)
     }

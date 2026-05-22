@@ -72,10 +72,10 @@ struct OrthoTabBar: View {
         } label: {
             VStack(spacing: 3) {
                 Image(systemName: tab.symbol)
-                    .font(.system(size: 22, weight: .regular))
+                    .font(.lato(size: 22, weight: .regular))
                     .frame(height: 26)
                 Text(tab.title)
-                    .font(.system(size: 10, weight: .medium))
+                    .font(.lato(size: 10, weight: .medium))
                     .kerning(0.1)
                     .lineLimit(1)
             }

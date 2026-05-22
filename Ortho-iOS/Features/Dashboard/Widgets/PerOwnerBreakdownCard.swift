@@ -32,19 +32,19 @@ struct PerOwnerBreakdownCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("Per owner")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .kerning(0.6)
                     .textCase(.uppercase)
                     .foregroundStyle(AppTheme.text.opacity(0.58))
                 Spacer()
                 Text(range.longLabel)
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundStyle(AppTheme.text3)
             }
 
             if entries.isEmpty {
                 Text("No household members yet.")
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text3)
                     .padding(.vertical, 8)
             } else {
@@ -88,22 +88,22 @@ struct PerOwnerBreakdownCard: View {
         return VStack(alignment: .leading, spacing: 4) {
             HStack(spacing: 8) {
                 Text(entry.user.name)
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.lato(size: 15, weight: .medium))
                     .foregroundStyle(AppTheme.text)
                 if entry.user.id == appState.currentUserID {
                     Text("(you)")
-                        .font(.system(size: 12))
+                        .font(.lato(size: 12))
                         .foregroundStyle(AppTheme.text3)
                 }
                 Spacer()
                 Text(appState.formatMoney(entry.cents))
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.lato(size: 15, weight: .semibold))
                     .monospacedDigit()
                     .foregroundStyle(AppTheme.text)
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
                 Image(systemName: "chevron.down")
-                    .font(.system(size: 11, weight: .semibold))
+                    .font(.lato(size: 11, weight: .semibold))
                     .foregroundStyle(AppTheme.text3)
                     .rotationEffect(.degrees(isExpanded ? 180 : 0))
             }
@@ -131,7 +131,7 @@ struct PerOwnerBreakdownCard: View {
         VStack(spacing: 0) {
             if allShares.isEmpty {
                 Text("No expenses in this period.")
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text3)
                     .padding(.vertical, 8)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -148,7 +148,7 @@ struct PerOwnerBreakdownCard: View {
                 }
                 if remaining > 0 {
                     Text("+\(remaining) more")
-                        .font(.system(size: 12))
+                        .font(.lato(size: 12))
                         .foregroundStyle(AppTheme.text3)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding(.top, 10)
@@ -165,13 +165,13 @@ struct PerOwnerBreakdownCard: View {
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 6) {
                     Text(tx.merchant)
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.lato(size: 14, weight: .medium))
                         .foregroundStyle(AppTheme.text)
                         .lineLimit(1)
                     if tx.ownerIDs.count > 1 {
                         let pct = tx.effectiveSplits[userID] ?? 0
                         Text(percentLabel(pct))
-                            .font(.system(size: 10, weight: .semibold))
+                            .font(.lato(size: 10, weight: .semibold))
                             .foregroundStyle(AppTheme.text.opacity(0.7))
                             .padding(.horizontal, 6)
                             .padding(.vertical, 1)
@@ -179,12 +179,12 @@ struct PerOwnerBreakdownCard: View {
                     }
                 }
                 Text(shortDate(tx.date))
-                    .font(.system(size: 11))
+                    .font(.lato(size: 11))
                     .foregroundStyle(AppTheme.text3)
             }
             Spacer()
             Text(appState.formatMoney(share))
-                .font(.system(size: 14, weight: .semibold))
+                .font(.lato(size: 14, weight: .semibold))
                 .monospacedDigit()
                 .foregroundStyle(AppTheme.text)
                 .lineLimit(1)

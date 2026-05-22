@@ -23,7 +23,7 @@ struct TransactionRow: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(tx.merchant)
-                    .font(.system(size: density.titleSize, weight: .medium))
+                    .font(.lato(size: density.titleSize, weight: .medium))
                     .foregroundStyle(AppTheme.text)
                     .lineLimit(1)
                 meta
@@ -32,7 +32,7 @@ struct TransactionRow: View {
             Spacer(minLength: 8)
 
             Text(appState.formatMoney(tx.amount, leadingPlus: tx.isIncome))
-                .font(.system(size: density.amountSize, weight: .semibold))
+                .font(.lato(size: density.amountSize, weight: .semibold))
                 .monospacedDigit()
                 .foregroundStyle(tx.isIncome ? AppTheme.positive : AppTheme.text)
                 .lineLimit(1)
@@ -51,7 +51,7 @@ struct TransactionRow: View {
                 .frame(width: density.avatar + 4, height: density.avatar + 4)
                 .overlay(
                     Image(systemName: tx.category.symbol)
-                        .font(.system(size: density.avatar * 0.42, weight: .semibold))
+                        .font(.lato(size: density.avatar * 0.42, weight: .semibold))
                         .foregroundStyle(.white)
                 )
             UserAvatarView(
@@ -70,7 +70,7 @@ struct TransactionRow: View {
             Text("·").opacity(0.45)
             Text(tx.source).lineLimit(1)
         }
-        .font(.system(size: density.metaSize))
+        .font(.lato(size: density.metaSize))
         .foregroundStyle(AppTheme.text2)
     }
 

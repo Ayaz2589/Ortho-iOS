@@ -19,17 +19,17 @@ struct InsightCard: View {
                     .fill(insight.severity.tint.opacity(0.12))
                     .frame(width: 36, height: 36)
                 Image(systemName: insight.icon)
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.lato(size: 15, weight: .semibold))
                     .foregroundStyle(insight.severity.tint)
             }
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(insight.title)
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.lato(size: 15, weight: .semibold))
                     .tracking(-0.2)
                     .foregroundStyle(AppTheme.text)
                 Text(insight.body)
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text2)
                     .lineSpacing(2)
                     .fixedSize(horizontal: false, vertical: true)

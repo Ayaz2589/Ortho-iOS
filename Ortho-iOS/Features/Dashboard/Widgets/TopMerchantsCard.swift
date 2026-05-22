@@ -15,19 +15,19 @@ struct TopMerchantsCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("Top merchants")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .kerning(0.6)
                     .textCase(.uppercase)
                     .foregroundStyle(AppTheme.text.opacity(0.58))
                 Spacer()
                 Text(range.longLabel)
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundStyle(AppTheme.text3)
             }
 
             if entries.isEmpty {
                 Text("No expenses in this period yet.")
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text3)
                     .padding(.vertical, 8)
             } else {
@@ -53,16 +53,16 @@ struct TopMerchantsCard: View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 3) {
                 Text(entry.merchant)
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.lato(size: 15, weight: .medium))
                     .foregroundStyle(AppTheme.text)
                     .lineLimit(1)
                 Text("\(entry.count) visit\(entry.count == 1 ? "" : "s")")
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundStyle(AppTheme.text3)
             }
             Spacer()
             Text(appState.formatMoney(entry.cents))
-                .font(.system(size: 15, weight: .semibold))
+                .font(.lato(size: 15, weight: .semibold))
                 .monospacedDigit()
                 .foregroundStyle(AppTheme.text)
                 .lineLimit(1)

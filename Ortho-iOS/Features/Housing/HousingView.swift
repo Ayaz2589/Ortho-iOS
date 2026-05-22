@@ -83,7 +83,7 @@ struct HousingView: View {
         VStack(alignment: .leading, spacing: 4) {
             HStack(alignment: .firstTextBaseline) {
                 Text("Housing")
-                    .font(.system(size: 32, weight: .bold))
+                    .font(.lato(size: 32, weight: .bold))
                     .tracking(-0.6)
                     .foregroundStyle(AppTheme.text)
                 Spacer()
@@ -91,7 +91,7 @@ struct HousingView: View {
             }
             if let p = lonelyProperty {
                 Text("\(p.address) · \(kindLabel(p.kind))")
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text2)
                     .lineLimit(1)
             }
@@ -110,7 +110,7 @@ struct HousingView: View {
                     showingEdit = true
                 } label: {
                     Text("Edit")
-                        .font(.system(size: 15, weight: .semibold))
+                        .font(.lato(size: 15, weight: .semibold))
                         .foregroundStyle(AppTheme.accent)
                 }
                 .buttonStyle(.plain)
@@ -123,7 +123,7 @@ struct HousingView: View {
                     Circle().fill(AppTheme.text.opacity(0.05))
                         .frame(width: 36, height: 36)
                     Image(systemName: "plus")
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.lato(size: 16, weight: .semibold))
                         .foregroundStyle(AppTheme.accent)
                 }
             }
@@ -162,14 +162,14 @@ struct HousingView: View {
     private var emptyState: some View {
         VStack(alignment: .center, spacing: 14) {
             Image(systemName: "house")
-                .font(.system(size: 40, weight: .regular))
+                .font(.lato(size: 40, weight: .regular))
                 .foregroundStyle(AppTheme.text.opacity(0.36))
                 .padding(.top, 60)
             Text("No properties yet")
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
             Text("Add a primary home, a rental, or a multifamily property to track payments, balances, and lease info.")
-                .font(.system(size: 14))
+                .font(.lato(size: 14))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(AppTheme.text.opacity(0.58))
                 .padding(.horizontal, 40)
@@ -178,7 +178,7 @@ struct HousingView: View {
                 showingTypePicker = true
             } label: {
                 Text("Add property")
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.lato(size: 15, weight: .semibold))
                     .foregroundStyle(AppTheme.accent)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)

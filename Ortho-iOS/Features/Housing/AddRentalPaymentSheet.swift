@@ -23,15 +23,15 @@ struct AddRentalPaymentSheet: View {
                     formGroup {
                         HStack(spacing: 12) {
                             Text("Amount")
-                                .font(.system(size: 15))
+                                .font(.lato(size: 15))
                                 .foregroundStyle(AppTheme.text.opacity(0.58))
                                 .frame(width: 96, alignment: .leading)
                             Spacer()
                             Text(Money.symbol(for: appState.currency))
-                                .font(.system(size: 15, weight: .medium))
+                                .font(.lato(size: 15, weight: .medium))
                                 .foregroundStyle(AppTheme.text.opacity(0.58))
                             TextField("0", text: $amountText)
-                                .font(.system(size: 17, weight: .medium))
+                                .font(.lato(size: 17, weight: .medium))
                                 .tracking(-0.2)
                                 .foregroundStyle(AppTheme.text)
                                 .keyboardType(.decimalPad)
@@ -42,7 +42,7 @@ struct AddRentalPaymentSheet: View {
                         divider
                         HStack(spacing: 12) {
                             Text("Date")
-                                .font(.system(size: 15))
+                                .font(.lato(size: 15))
                                 .foregroundStyle(AppTheme.text.opacity(0.58))
                                 .frame(width: 96, alignment: .leading)
                             Spacer()
@@ -56,11 +56,11 @@ struct AddRentalPaymentSheet: View {
                         divider
                         HStack(spacing: 12) {
                             Text("Note")
-                                .font(.system(size: 15))
+                                .font(.lato(size: 15))
                                 .foregroundStyle(AppTheme.text.opacity(0.58))
                                 .frame(width: 96, alignment: .leading)
                             TextField("Optional", text: $note)
-                                .font(.system(size: 17, weight: .medium))
+                                .font(.lato(size: 17, weight: .medium))
                                 .tracking(-0.2)
                                 .foregroundStyle(AppTheme.text)
                                 .multilineTextAlignment(.trailing)
@@ -103,13 +103,13 @@ struct AddRentalPaymentSheet: View {
     private var sheetNav: some View {
         ZStack {
             Text("Log payment")
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
                 .tracking(-0.3)
 
             HStack {
                 Button("Cancel") { dismiss() }
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .foregroundStyle(AppTheme.accent)
                     .buttonStyle(.plain)
                 Spacer()
@@ -125,7 +125,7 @@ struct AddRentalPaymentSheet: View {
                         note: note.isEmpty ? nil : note
                     ))
                 }
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(canAdd ? AppTheme.accent : AppTheme.text.opacity(0.36))
                 .disabled(!canAdd)
                 .buttonStyle(.plain)

@@ -15,7 +15,7 @@ struct PropertyTypePickerSheet: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("What kind of home is this? Choose one — we'll ask only the questions that fit.")
-                        .font(.system(size: 14))
+                        .font(.lato(size: 14))
                         .foregroundStyle(AppTheme.text.opacity(0.58))
                         .lineSpacing(2)
                         .padding(.horizontal, 24)
@@ -29,7 +29,7 @@ struct PropertyTypePickerSheet: View {
                     .padding(.horizontal, 16)
 
                     Text("You can change type later from the property's settings, but a few fields will reset (e.g. lease dates become closing date).")
-                        .font(.system(size: 13))
+                        .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
                         .padding(.horizontal, 24)
@@ -44,13 +44,13 @@ struct PropertyTypePickerSheet: View {
     private var sheetNav: some View {
         ZStack {
             Text("New property")
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
                 .tracking(-0.3)
 
             HStack {
                 Button("Cancel") { dismiss() }
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .foregroundStyle(AppTheme.accent)
                     .buttonStyle(.plain)
                 Spacer()
@@ -71,21 +71,21 @@ struct PropertyTypePickerSheet: View {
                         .fill(AppTheme.text.opacity(0.05))
                         .frame(width: 44, height: 44)
                     Image(systemName: kind.symbol)
-                        .font(.system(size: 19, weight: .medium))
+                        .font(.lato(size: 19, weight: .medium))
                         .foregroundStyle(AppTheme.text2)
                 }
                 VStack(alignment: .leading, spacing: 3) {
                     Text(kind.displayName)
-                        .font(.system(size: 17, weight: .semibold))
+                        .font(.lato(size: 17, weight: .semibold))
                         .tracking(-0.3)
                         .foregroundStyle(AppTheme.text)
                     Text(kind.subtitle)
-                        .font(.system(size: 13))
+                        .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text2)
                 }
                 Spacer()
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .foregroundStyle(AppTheme.text.opacity(0.36))
             }
             .padding(.horizontal, 16)

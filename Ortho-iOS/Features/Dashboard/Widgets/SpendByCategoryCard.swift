@@ -37,19 +37,19 @@ struct SpendByCategoryCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("Spend by category")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .kerning(0.6)
                     .textCase(.uppercase)
                     .foregroundStyle(AppTheme.text.opacity(0.58))
                 Spacer()
                 Text(range.longLabel)
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundStyle(AppTheme.text3)
             }
 
             if entries.isEmpty {
                 Text("No expenses in this period yet.")
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text3)
                     .padding(.vertical, 20)
             } else {
@@ -124,22 +124,22 @@ struct SpendByCategoryCard: View {
                     .fill(entry.color.opacity(0.92))
                     .frame(width: 28, height: 28)
                 Image(systemName: entry.symbol)
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .foregroundStyle(.white)
             }
             Text(entry.label)
-                .font(.system(size: 15, weight: .medium))
+                .font(.lato(size: 15, weight: .medium))
                 .foregroundStyle(AppTheme.text)
             Spacer()
             Text(appState.formatMoney(entry.cents))
-                .font(.system(size: 15, weight: .semibold))
+                .font(.lato(size: 15, weight: .semibold))
                 .monospacedDigit()
                 .foregroundStyle(AppTheme.text)
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
             if showChevron {
                 Image(systemName: "chevron.down")
-                    .font(.system(size: 11, weight: .semibold))
+                    .font(.lato(size: 11, weight: .semibold))
                     .foregroundStyle(AppTheme.text3)
                     .rotationEffect(.degrees(isExpanded ? 180 : 0))
             }
@@ -160,7 +160,7 @@ struct SpendByCategoryCard: View {
         VStack(spacing: 0) {
             if all.isEmpty {
                 Text("No transactions in this period.")
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text3)
                     .padding(.vertical, 8)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -175,7 +175,7 @@ struct SpendByCategoryCard: View {
                 }
                 if remaining > 0 {
                     Text("+\(remaining) more")
-                        .font(.system(size: 12))
+                        .font(.lato(size: 12))
                         .foregroundStyle(AppTheme.text3)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding(.top, 10)
@@ -189,7 +189,7 @@ struct SpendByCategoryCard: View {
         HStack(spacing: 10) {
             VStack(alignment: .leading, spacing: 2) {
                 Text(tx.merchant)
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.lato(size: 14, weight: .medium))
                     .foregroundStyle(AppTheme.text)
                     .lineLimit(1)
                 HStack(spacing: 6) {
@@ -198,12 +198,12 @@ struct SpendByCategoryCard: View {
                     Text(appState.ownersDisplay(of: tx).label)
                         .lineLimit(1)
                 }
-                .font(.system(size: 11))
+                .font(.lato(size: 11))
                 .foregroundStyle(AppTheme.text3)
             }
             Spacer()
             Text(appState.formatMoney(tx.amount))
-                .font(.system(size: 14, weight: .semibold))
+                .font(.lato(size: 14, weight: .semibold))
                 .monospacedDigit()
                 .foregroundStyle(AppTheme.text)
                 .lineLimit(1)

@@ -36,14 +36,14 @@ struct CopyTransactionPickerSheet: View {
     private var sheetNav: some View {
         ZStack {
             Text("Copy from recent")
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
                 .tracking(-0.3)
 
             HStack {
                 Spacer()
                 Button("Cancel") { dismiss() }
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .foregroundStyle(AppTheme.accent)
                     .buttonStyle(.plain)
             }
@@ -137,14 +137,14 @@ struct CopyTransactionPickerSheet: View {
     private var emptyState: some View {
         VStack(alignment: .center, spacing: 14) {
             Image(systemName: "doc.on.doc")
-                .font(.system(size: 40, weight: .regular))
+                .font(.lato(size: 40, weight: .regular))
                 .foregroundStyle(AppTheme.text.opacity(0.36))
                 .padding(.top, 60)
             Text("Nothing to copy yet")
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
             Text("Add at least one transaction and it'll show up here for fast duplication.")
-                .font(.system(size: 14))
+                .font(.lato(size: 14))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(AppTheme.text.opacity(0.58))
                 .padding(.horizontal, 40)

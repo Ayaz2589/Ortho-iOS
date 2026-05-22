@@ -10,18 +10,18 @@ struct RentalMonthlyRentCard: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Text("Monthly rent")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .kerning(0.6)
                     .textCase(.uppercase)
                     .foregroundStyle(AppTheme.text.opacity(0.58))
                 Spacer()
                 Image(systemName: "key")
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.lato(size: 16, weight: .medium))
                     .foregroundStyle(AppTheme.text2)
             }
 
             Text(appState.formatMoney(lease.monthlyRent))
-                .font(.system(size: 36, weight: .bold))
+                .font(.lato(size: 36, weight: .bold))
                 .tracking(-0.6)
                 .monospacedDigit()
                 .foregroundStyle(AppTheme.text)
@@ -29,7 +29,7 @@ struct RentalMonthlyRentCard: View {
                 .minimumScaleFactor(0.5)
 
             Text(nextRentCaption)
-                .font(.system(size: 13))
+                .font(.lato(size: 13))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
         }
         .padding(20)
@@ -56,14 +56,14 @@ struct LeaseRenewalBanner: View {
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: "calendar.badge.exclamationmark")
-                .font(.system(size: 18, weight: .medium))
+                .font(.lato(size: 18, weight: .medium))
                 .foregroundStyle(AppTheme.accent)
             VStack(alignment: .leading, spacing: 2) {
                 Text("Lease ends in \(lease.daysUntilEnd()) days")
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.lato(size: 15, weight: .semibold))
                     .foregroundStyle(AppTheme.text)
                 Text("Time to renew or plan a move.")
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text2)
             }
             Spacer()
@@ -104,11 +104,11 @@ struct LeaseInfoCard: View {
     private func row(label: String, value: String) -> some View {
         HStack {
             Text(label)
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
             Spacer()
             Text(value)
-                .font(.system(size: 17, weight: .medium))
+                .font(.lato(size: 17, weight: .medium))
                 .tracking(-0.2)
                 .monospacedDigit()
                 .foregroundStyle(AppTheme.text)
@@ -149,7 +149,7 @@ struct RentalPaymentsCard: View {
         VStack(spacing: 0) {
             HStack {
                 Text("Payment history")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .kerning(0.6)
                     .textCase(.uppercase)
                     .foregroundStyle(AppTheme.text.opacity(0.58))
@@ -159,9 +159,9 @@ struct RentalPaymentsCard: View {
                 } label: {
                     HStack(spacing: 4) {
                         Image(systemName: "plus")
-                            .font(.system(size: 11, weight: .semibold))
+                            .font(.lato(size: 11, weight: .semibold))
                         Text("Log payment")
-                            .font(.system(size: 13, weight: .semibold))
+                            .font(.lato(size: 13, weight: .semibold))
                     }
                     .foregroundStyle(AppTheme.accent)
                 }
@@ -173,7 +173,7 @@ struct RentalPaymentsCard: View {
 
             if payments.isEmpty {
                 Text("No payments logged yet. Tap Log payment to add one.")
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text3)
                     .padding(.horizontal, 16)
                     .padding(.bottom, 16)
@@ -193,18 +193,18 @@ struct RentalPaymentsCard: View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 3) {
                 Text(dateLabel(payment.date))
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.lato(size: 15, weight: .medium))
                     .foregroundStyle(AppTheme.text)
                 if let note = payment.note, !note.isEmpty {
                     Text(note)
-                        .font(.system(size: 12))
+                        .font(.lato(size: 12))
                         .foregroundStyle(AppTheme.text3)
                         .lineLimit(1)
                 }
             }
             Spacer()
             Text(appState.formatMoney(payment.amount))
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .tracking(-0.2)
                 .monospacedDigit()
                 .foregroundStyle(AppTheme.text)
@@ -214,7 +214,7 @@ struct RentalPaymentsCard: View {
                 appState.deleteRentalPayment(payment)
             } label: {
                 Image(systemName: "minus.circle.fill")
-                    .font(.system(size: 18))
+                    .font(.lato(size: 18))
                     .foregroundStyle(AppTheme.destructive)
             }
             .buttonStyle(.plain)

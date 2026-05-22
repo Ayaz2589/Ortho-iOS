@@ -33,7 +33,7 @@ struct BudgetsView: View {
                 .padding(.bottom, 12)
 
                 Text("Budgets drive the spending insights on your dashboard. Set a monthly limit for any category and you'll see progress + alerts when you're close to or over the limit.")
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text.opacity(0.36))
                     .lineSpacing(2)
                     .padding(.horizontal, 24)
@@ -50,7 +50,7 @@ struct BudgetsView: View {
                         Circle().fill(AppTheme.text.opacity(0.05))
                             .frame(width: 36, height: 36)
                         Image(systemName: "chevron.left")
-                            .font(.system(size: 16, weight: .semibold))
+                            .font(.lato(size: 16, weight: .semibold))
                             .foregroundStyle(AppTheme.accent)
                     }
                 }
@@ -58,7 +58,7 @@ struct BudgetsView: View {
                 .accessibilityLabel("Back")
 
                 Text("Budgets")
-                    .font(.system(size: 32, weight: .bold))
+                    .font(.lato(size: 32, weight: .bold))
                     .tracking(-0.6)
                     .foregroundStyle(AppTheme.text)
                 Spacer()
@@ -89,22 +89,22 @@ struct BudgetsView: View {
                         .fill(category.tint.opacity(0.92))
                         .frame(width: 32, height: 32)
                     Image(systemName: category.symbol)
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.lato(size: 14, weight: .medium))
                         .foregroundStyle(.white)
                 }
                 Text(category.rawValue.capitalized)
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .tracking(-0.2)
                     .foregroundStyle(AppTheme.text)
                 Spacer()
                 HStack(spacing: 6) {
                     Text(budget.map { appState.formatMoney($0.monthlyLimitCents) + " /mo" }
                          ?? "Not set")
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.lato(size: 15, weight: .medium))
                         .tracking(-0.2)
                         .foregroundStyle(budget == nil ? AppTheme.text3 : AppTheme.text2)
                     Image(systemName: "chevron.right")
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.lato(size: 13, weight: .semibold))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                 }
             }

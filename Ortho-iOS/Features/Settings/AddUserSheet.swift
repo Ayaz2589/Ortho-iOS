@@ -38,7 +38,7 @@ struct AddUserSheet: View {
                         .padding(.bottom, 16)
 
                     Text("Initial is set automatically from the name. Joint accounts get two initials joined with +.")
-                        .font(.system(size: 13))
+                        .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
                         .padding(.horizontal, 24)
@@ -55,13 +55,13 @@ struct AddUserSheet: View {
     private var sheetNav: some View {
         ZStack {
             Text("New user")
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
                 .tracking(-0.3)
 
             HStack {
                 Button("Cancel") { dismiss() }
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .foregroundStyle(AppTheme.accent)
                     .buttonStyle(.plain)
                 Spacer()
@@ -72,7 +72,7 @@ struct AddUserSheet: View {
                         colorKey: colorKey
                     ))
                 }
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(canAdd ? AppTheme.accent : AppTheme.text.opacity(0.36))
                 .disabled(!canAdd)
                 .buttonStyle(.plain)
@@ -86,7 +86,7 @@ struct AddUserSheet: View {
 
     private var previewAvatar: some View {
         Text(derivedInitial)
-            .font(.system(size: derivedInitial.count > 1 ? 18 : 26,
+            .font(.lato(size: derivedInitial.count > 1 ? 18 : 26,
                           weight: .semibold))
             .tracking(derivedInitial.count > 1 ? 0 : -0.5)
             .foregroundStyle(color.fg)
@@ -97,7 +97,7 @@ struct AddUserSheet: View {
 
     private func sectionLabel(_ text: String) -> some View {
         Text(text)
-            .font(.system(size: 13, weight: .semibold))
+            .font(.lato(size: 13, weight: .semibold))
             .kerning(0.6)
             .textCase(.uppercase)
             .foregroundStyle(AppTheme.text.opacity(0.58))
@@ -107,7 +107,7 @@ struct AddUserSheet: View {
 
     private var nameField: some View {
         TextField("e.g. Alex", text: $name)
-            .font(.system(size: 17, weight: .medium))
+            .font(.lato(size: 17, weight: .medium))
             .tracking(-0.2)
             .foregroundStyle(AppTheme.text)
             .focused($nameFocused)

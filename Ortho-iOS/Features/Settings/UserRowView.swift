@@ -41,12 +41,12 @@ struct UserRowView: View {
             avatar
             VStack(alignment: .leading, spacing: 3) {
                 Text(user.name)
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .foregroundStyle(AppTheme.text)
                     .tracking(-0.2)
                 if let displayDetail = composedDetail {
                     Text(displayDetail)
-                        .font(.system(size: 13))
+                        .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.58))
                         .tracking(-0.1)
                 }
@@ -60,7 +60,7 @@ struct UserRowView: View {
                     showingRemoveConfirm = true
                 } label: {
                     Image(systemName: "minus.circle.fill")
-                        .font(.system(size: 20, weight: .regular))
+                        .font(.lato(size: 20, weight: .regular))
                         .foregroundStyle(AppTheme.destructive)
                 }
                 .buttonStyle(.plain)
@@ -88,7 +88,7 @@ struct UserRowView: View {
     private var avatar: some View {
         let palette = user.palette
         return Text(user.initial)
-            .font(.system(size: user.initial.count > 1 ? 13 : 17, weight: .semibold))
+            .font(.lato(size: user.initial.count > 1 ? 13 : 17, weight: .semibold))
             .foregroundStyle(palette.fg)
             .frame(width: 40, height: 40)
             .background(Circle().fill(palette.bg))
@@ -107,11 +107,11 @@ struct AddUserRowView: View {
                     Circle().fill(AppTheme.text.opacity(0.05))
                         .frame(width: 40, height: 40)
                     Image(systemName: "plus")
-                        .font(.system(size: 15, weight: .semibold))
+                        .font(.lato(size: 15, weight: .semibold))
                         .foregroundStyle(AppTheme.accent)
                 }
                 Text("Add user")
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .tracking(-0.2)
                     .foregroundStyle(AppTheme.accent)
                 Spacer()
@@ -128,7 +128,7 @@ struct AddUserRowView: View {
 struct ChevronView: View {
     var body: some View {
         Image(systemName: "chevron.right")
-            .font(.system(size: 13, weight: .semibold))
+            .font(.lato(size: 13, weight: .semibold))
             .foregroundStyle(AppTheme.text.opacity(0.36))
     }
 }

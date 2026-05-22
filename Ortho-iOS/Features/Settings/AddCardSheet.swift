@@ -25,7 +25,7 @@ struct AddCardSheet: View {
                         .padding(.bottom, 20)
 
                     Text("This name will show up in the Paid with menu when you log a new expense.")
-                        .font(.system(size: 13))
+                        .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
                         .padding(.horizontal, 24)
@@ -43,13 +43,13 @@ struct AddCardSheet: View {
     private var sheetNav: some View {
         ZStack {
             Text("New card")
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
                 .tracking(-0.3)
 
             HStack {
                 Button("Cancel") { dismiss() }
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .foregroundStyle(AppTheme.accent)
                     .buttonStyle(.plain)
                 Spacer()
@@ -60,7 +60,7 @@ struct AddCardSheet: View {
                         name: name.trimmingCharacters(in: .whitespaces)
                     ))
                 }
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(canAdd ? AppTheme.accent : AppTheme.text.opacity(0.36))
                 .disabled(!canAdd)
                 .buttonStyle(.plain)
@@ -74,7 +74,7 @@ struct AddCardSheet: View {
 
     private func sectionLabel(_ text: String) -> some View {
         Text(text)
-            .font(.system(size: 13, weight: .semibold))
+            .font(.lato(size: 13, weight: .semibold))
             .kerning(0.6)
             .textCase(.uppercase)
             .foregroundStyle(AppTheme.text.opacity(0.58))
@@ -84,7 +84,7 @@ struct AddCardSheet: View {
 
     private var nameField: some View {
         TextField("e.g. Chase Freedom", text: $name)
-            .font(.system(size: 17, weight: .medium))
+            .font(.lato(size: 17, weight: .medium))
             .tracking(-0.2)
             .foregroundStyle(AppTheme.text)
             .focused($nameFocused)

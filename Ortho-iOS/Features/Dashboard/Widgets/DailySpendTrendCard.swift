@@ -33,19 +33,19 @@ struct DailySpendTrendCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("Daily trend")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .kerning(0.6)
                     .textCase(.uppercase)
                     .foregroundStyle(AppTheme.text.opacity(0.58))
                 Spacer()
                 Text("Last 30 days")
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundStyle(AppTheme.text3)
             }
 
             if recent.allSatisfy({ $0 == 0 }) {
                 Text("No expenses in the last 30 days.")
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text3)
                     .padding(.vertical, 20)
             } else {
@@ -98,10 +98,10 @@ struct DailySpendTrendCard: View {
                             tint: Color = AppTheme.text) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             Text(label)
-                .font(.system(size: 12))
+                .font(.lato(size: 12))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
             Text(value)
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .monospacedDigit()
                 .foregroundStyle(tint)
                 .lineLimit(1)

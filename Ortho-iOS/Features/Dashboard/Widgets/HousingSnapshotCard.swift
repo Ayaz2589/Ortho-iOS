@@ -41,13 +41,13 @@ struct HousingSnapshotCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("Housing")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .kerning(0.6)
                     .textCase(.uppercase)
                     .foregroundStyle(AppTheme.text.opacity(0.58))
                 Spacer()
                 Text(propertyCountLabel)
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundStyle(AppTheme.text3)
             }
 
@@ -67,7 +67,7 @@ struct HousingSnapshotCard: View {
 
     private var emptyState: some View {
         Text("No properties yet. Add one from the Housing tab.")
-            .font(.system(size: 13))
+            .font(.lato(size: 13))
             .foregroundStyle(AppTheme.text3)
             .padding(.vertical, 8)
     }
@@ -86,11 +86,11 @@ struct HousingSnapshotCard: View {
             if let netCents = netRentalIncomeCents {
                 HStack {
                     Text("Net rental income")
-                        .font(.system(size: 13))
+                        .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text2)
                     Spacer()
                     Text(signed(netCents))
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.lato(size: 13, weight: .semibold))
                         .monospacedDigit()
                         .foregroundStyle(netCents >= 0 ? AppTheme.positive : AppTheme.destructive)
                 }
@@ -128,22 +128,22 @@ struct HousingSnapshotCard: View {
                     .fill(AppTheme.text.opacity(0.05))
                     .frame(width: 36, height: 36)
                 Image(systemName: p.kind.symbol)
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.lato(size: 16, weight: .medium))
                     .foregroundStyle(AppTheme.text2)
             }
             VStack(alignment: .leading, spacing: 3) {
                 Text(p.title)
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.lato(size: 15, weight: .semibold))
                     .foregroundStyle(AppTheme.text)
                     .lineLimit(1)
                 Text(subtitle(for: p))
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundStyle(AppTheme.text3)
                     .lineLimit(1)
             }
             Spacer()
             Text(appState.formatMoney(headlineCents(for: p)))
-                .font(.system(size: 15, weight: .semibold))
+                .font(.lato(size: 15, weight: .semibold))
                 .monospacedDigit()
                 .foregroundStyle(AppTheme.text)
                 .lineLimit(1)
@@ -155,19 +155,19 @@ struct HousingSnapshotCard: View {
     private var footerSummary: some View {
         HStack(spacing: 8) {
             Text("Total")
-                .font(.system(size: 13))
+                .font(.lato(size: 13))
                 .foregroundStyle(AppTheme.text2)
             Spacer()
             Text("\(appState.formatMoney(monthlyCostCents)) / mo")
-                .font(.system(size: 13, weight: .semibold))
+                .font(.lato(size: 13, weight: .semibold))
                 .monospacedDigit()
                 .foregroundStyle(AppTheme.text)
             if totalEquityCents > 0 {
                 Text("·")
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text3)
                 Text("\(appState.formatMoney(totalEquityCents)) equity")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .monospacedDigit()
                     .foregroundStyle(AppTheme.positive)
             }
@@ -180,10 +180,10 @@ struct HousingSnapshotCard: View {
                             valueTint: Color = .primary) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             Text(label)
-                .font(.system(size: 12))
+                .font(.lato(size: 12))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
             Text(value)
-                .font(.system(size: 22, weight: .bold))
+                .font(.lato(size: 22, weight: .bold))
                 .tracking(-0.4)
                 .monospacedDigit()
                 .foregroundStyle(valueTint == .primary ? AppTheme.text : valueTint)

@@ -50,7 +50,7 @@ struct HouseholdView: View {
                 .padding(.bottom, 12)
 
                 Text("Members can see all Shared transactions in this household. Personal transactions are visible only to you. Inviting new members is coming soon.")
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text.opacity(0.36))
                     .lineSpacing(2)
                     .padding(.horizontal, 24)
@@ -67,7 +67,7 @@ struct HouseholdView: View {
                         Circle().fill(AppTheme.text.opacity(0.05))
                             .frame(width: 36, height: 36)
                         Image(systemName: "chevron.left")
-                            .font(.system(size: 16, weight: .semibold))
+                            .font(.lato(size: 16, weight: .semibold))
                             .foregroundStyle(AppTheme.accent)
                     }
                 }
@@ -75,7 +75,7 @@ struct HouseholdView: View {
                 .accessibilityLabel("Back")
 
                 Text("Household")
-                    .font(.system(size: 32, weight: .bold))
+                    .font(.lato(size: 32, weight: .bold))
                     .tracking(-0.6)
                     .foregroundStyle(AppTheme.text)
                 Spacer()
@@ -108,17 +108,17 @@ struct HouseholdView: View {
         } label: {
             HStack(spacing: 12) {
                 Text("Name")
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .tracking(-0.2)
                     .foregroundStyle(AppTheme.text)
                 Spacer()
                 HStack(spacing: 6) {
                     Text(appState.currentHousehold?.name ?? "Untitled")
-                        .font(.system(size: 17, weight: .medium))
+                        .font(.lato(size: 17, weight: .medium))
                         .tracking(-0.2)
                         .foregroundStyle(AppTheme.text2)
                     Image(systemName: "chevron.right")
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.lato(size: 13, weight: .semibold))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                 }
             }

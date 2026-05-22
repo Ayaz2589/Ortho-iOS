@@ -65,7 +65,7 @@ struct PropertyDetailView: View {
                     Circle().fill(AppTheme.text.opacity(0.05))
                         .frame(width: 36, height: 36)
                     Image(systemName: "chevron.left")
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.lato(size: 16, weight: .semibold))
                         .foregroundStyle(AppTheme.accent)
                 }
             }
@@ -74,13 +74,13 @@ struct PropertyDetailView: View {
 
             VStack(alignment: .leading, spacing: 0) {
                 Text(property.title)
-                    .font(.system(size: 28, weight: .bold))
+                    .font(.lato(size: 28, weight: .bold))
                     .tracking(-0.6)
                     .foregroundStyle(AppTheme.text)
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
                 Text(headerSubtitle(for: property))
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text2)
             }
             Spacer()
@@ -88,7 +88,7 @@ struct PropertyDetailView: View {
                 showingEdit = true
             } label: {
                 Text("Edit")
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.lato(size: 15, weight: .semibold))
                     .foregroundStyle(AppTheme.accent)
             }
             .buttonStyle(.plain)

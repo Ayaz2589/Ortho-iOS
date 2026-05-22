@@ -201,7 +201,7 @@ struct AddTransactionSheet: View {
                     }
 
                     Text(footerCaption)
-                        .font(.system(size: 13))
+                        .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
                         .padding(.horizontal, 24)
@@ -303,9 +303,9 @@ struct AddTransactionSheet: View {
             } label: {
                 HStack(spacing: 8) {
                     Image(systemName: "doc.on.doc")
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.lato(size: 13, weight: .semibold))
                     Text("Copy from recent")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.lato(size: 14, weight: .semibold))
                 }
                 .foregroundStyle(AppTheme.accent)
                 .padding(.horizontal, 16)
@@ -332,9 +332,9 @@ struct AddTransactionSheet: View {
             } label: {
                 HStack(spacing: 8) {
                     Image(systemName: "plus")
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.lato(size: 13, weight: .semibold))
                     Text("Save and add another")
-                        .font(.system(size: 15, weight: .semibold))
+                        .font(.lato(size: 15, weight: .semibold))
                 }
                 .foregroundStyle(canAdd ? AppTheme.accent : AppTheme.text.opacity(0.36))
                 .padding(.horizontal, 20)
@@ -366,7 +366,7 @@ struct AddTransactionSheet: View {
                     scope = s
                 } label: {
                     Text(s == .shared ? "Shared" : "Personal")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.lato(size: 14, weight: .semibold))
                         .tracking(-0.1)
                         .foregroundStyle(scope == s ? AppTheme.text : AppTheme.text.opacity(0.58))
                         .frame(maxWidth: .infinity)
@@ -395,20 +395,20 @@ struct AddTransactionSheet: View {
     private var sheetNav: some View {
         ZStack {
             Text(navTitle)
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
                 .tracking(-0.3)
 
             HStack {
                 Button("Cancel") { dismiss() }
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .foregroundStyle(AppTheme.accent)
                     .buttonStyle(.plain)
                 Spacer()
                 Button(actionLabel) {
                     submit(keepOpen: false)
                 }
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(canAdd ? AppTheme.accent : AppTheme.text.opacity(0.36))
                 .disabled(!canAdd)
                 .buttonStyle(.plain)
@@ -554,7 +554,7 @@ struct AddTransactionSheet: View {
         HStack(alignment: .firstTextBaseline, spacing: 4) {
             Spacer()
             Text(Money.symbol(for: appState.currency))
-                .font(.system(size: 32, weight: .semibold))
+                .font(.lato(size: 32, weight: .semibold))
                 .foregroundStyle(amountText.isEmpty
                                  ? AppTheme.text.opacity(0.36)
                                  : (kind == .income ? AppTheme.positive : AppTheme.text))
@@ -563,7 +563,7 @@ struct AddTransactionSheet: View {
                 .minimumScaleFactor(0.6)
 
             TextField(appState.currency.fractionDigits == 0 ? "0" : "0.00", text: $amountText)
-                .font(.system(size: 40, weight: .semibold))
+                .font(.lato(size: 40, weight: .semibold))
                 .tracking(-0.6)
                 .monospacedDigit()
                 .foregroundStyle(kind == .income ? AppTheme.positive : AppTheme.text)
@@ -588,7 +588,7 @@ struct AddTransactionSheet: View {
                     kind = k
                 } label: {
                     Text(k == .income ? "Income" : "Expense")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.lato(size: 14, weight: .semibold))
                         .tracking(-0.1)
                         .foregroundStyle(kind == k ? AppTheme.text : AppTheme.text.opacity(0.58))
                         .frame(maxWidth: .infinity)
@@ -632,11 +632,11 @@ struct AddTransactionSheet: View {
     private func textRow(label: String, placeholder: String, text: Binding<String>) -> some View {
         HStack(spacing: 12) {
             Text(label)
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
                 .frame(width: 96, alignment: .leading)
             TextField(placeholder, text: text)
-                .font(.system(size: 17, weight: .medium))
+                .font(.lato(size: 17, weight: .medium))
                 .tracking(-0.2)
                 .foregroundStyle(AppTheme.text)
                 .multilineTextAlignment(.trailing)
@@ -651,7 +651,7 @@ struct AddTransactionSheet: View {
     private var ownerRow: some View {
         HStack(alignment: .top, spacing: 12) {
             Text("Owners")
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
                 .frame(width: 96, alignment: .leading)
                 .padding(.top, 8)
@@ -684,7 +684,7 @@ struct AddTransactionSheet: View {
     private var categoryRow: some View {
         HStack(spacing: 12) {
             Text("Category")
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
                 .frame(width: 96, alignment: .leading)
             Spacer()
@@ -695,12 +695,12 @@ struct AddTransactionSheet: View {
             } label: {
                 HStack(spacing: 6) {
                     Image(systemName: category.symbol)
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.lato(size: 13, weight: .semibold))
                     Text(category.rawValue.capitalized)
-                        .font(.system(size: 17, weight: .medium))
+                        .font(.lato(size: 17, weight: .medium))
                         .tracking(-0.2)
                     Image(systemName: "chevron.up.chevron.down")
-                        .font(.system(size: 11, weight: .semibold))
+                        .font(.lato(size: 11, weight: .semibold))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                 }
                 .foregroundStyle(AppTheme.text)
@@ -713,7 +713,7 @@ struct AddTransactionSheet: View {
     private var sourceRow: some View {
         HStack(spacing: 12) {
             Text(sourceLabel)
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
                 .frame(width: 96, alignment: .leading)
             Spacer()
@@ -724,10 +724,10 @@ struct AddTransactionSheet: View {
             } label: {
                 HStack(spacing: 6) {
                     Text(source)
-                        .font(.system(size: 17, weight: .medium))
+                        .font(.lato(size: 17, weight: .medium))
                         .tracking(-0.2)
                     Image(systemName: "chevron.up.chevron.down")
-                        .font(.system(size: 11, weight: .semibold))
+                        .font(.lato(size: 11, weight: .semibold))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                 }
                 .foregroundStyle(AppTheme.text)
@@ -740,7 +740,7 @@ struct AddTransactionSheet: View {
     private var dateRow: some View {
         HStack(spacing: 12) {
             Text("Date")
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
                 .frame(width: 96, alignment: .leading)
             Spacer()
@@ -762,13 +762,13 @@ struct AddTransactionSheet: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text("Split")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .kerning(0.6)
                     .textCase(.uppercase)
                     .foregroundStyle(AppTheme.text.opacity(0.58))
                 Spacer()
                 Button("Even", action: resetSplitsToEven)
-                    .font(.system(size: 13, weight: .medium))
+                    .font(.lato(size: 13, weight: .medium))
                     .foregroundStyle(AppTheme.accent)
                     .buttonStyle(.plain)
             }
@@ -795,19 +795,19 @@ struct AddTransactionSheet: View {
         HStack(spacing: 12) {
             UserAvatarView(user: u, size: 24)
             Text(u.name)
-                .font(.system(size: 17, weight: .medium))
+                .font(.lato(size: 17, weight: .medium))
                 .tracking(-0.2)
                 .foregroundStyle(AppTheme.text)
             Spacer()
             TextField("0", text: splitBinding(for: u.id))
-                .font(.system(size: 17, weight: .medium))
+                .font(.lato(size: 17, weight: .medium))
                 .monospacedDigit()
                 .multilineTextAlignment(.trailing)
                 .keyboardType(.decimalPad)
                 .frame(width: 64)
                 .foregroundStyle(AppTheme.text)
             Text("%")
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
         }
         .padding(.horizontal, 16)
@@ -831,15 +831,15 @@ struct AddTransactionSheet: View {
     private var splitTotalRow: some View {
         HStack(spacing: 12) {
             Text("Total")
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
             Spacer()
             Text(formatPercent(splitTotal))
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .monospacedDigit()
                 .foregroundStyle(splitIsValid ? AppTheme.positive : AppTheme.text.opacity(0.58))
             Text("%")
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
         }
         .padding(.horizontal, 16)
@@ -944,7 +944,7 @@ private struct OwnerChipView: View {
             HStack(spacing: 6) {
                 UserAvatarView(user: user, size: 22)
                 Text(user.name)
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.lato(size: 14, weight: .medium))
                     .tracking(-0.1)
                     .foregroundStyle(AppTheme.text)
             }

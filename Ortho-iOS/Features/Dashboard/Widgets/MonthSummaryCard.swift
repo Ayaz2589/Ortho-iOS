@@ -17,17 +17,17 @@ struct MonthSummaryCard: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text(range.longLabel.uppercased())
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .kerning(0.6)
                     .foregroundStyle(AppTheme.text.opacity(0.58))
                 Spacer()
                 Text(rightCaption)
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundStyle(AppTheme.text3)
             }
 
             Text(netDisplay)
-                .font(.system(size: 36, weight: .bold))
+                .font(.lato(size: 36, weight: .bold))
                 .tracking(-0.6)
                 .monospacedDigit()
                 .foregroundStyle(net >= 0 ? AppTheme.positive : AppTheme.text)
@@ -66,10 +66,10 @@ struct MonthSummaryCard: View {
     private func statColumn(label: String, amount: String, tint: Color) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(label)
-                .font(.system(size: 12))
+                .font(.lato(size: 12))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
             Text(amount)
-                .font(.system(size: 15, weight: .semibold))
+                .font(.lato(size: 15, weight: .semibold))
                 .monospacedDigit()
                 .foregroundStyle(tint)
                 .lineLimit(1)

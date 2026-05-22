@@ -233,7 +233,7 @@ struct TransactionsView: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .firstTextBaseline) {
                 Text("Transactions")
-                    .font(.system(size: 32, weight: .bold))
+                    .font(.lato(size: 32, weight: .bold))
                     .tracking(-0.6)
                     .foregroundStyle(AppTheme.text)
                 Spacer()
@@ -262,14 +262,14 @@ struct TransactionsView: View {
     private var emptyState: some View {
         VStack(alignment: .center, spacing: 14) {
             Image(systemName: "arrow.up.arrow.down")
-                .font(.system(size: 40, weight: .regular))
+                .font(.lato(size: 40, weight: .regular))
                 .foregroundStyle(AppTheme.text.opacity(0.36))
                 .padding(.top, 60)
             Text("No transactions yet")
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
             Text("Log an expense or income to see it grouped by day here.")
-                .font(.system(size: 14))
+                .font(.lato(size: 14))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(AppTheme.text.opacity(0.58))
                 .padding(.horizontal, 40)
@@ -278,7 +278,7 @@ struct TransactionsView: View {
                 addSheetMode = .fresh
             } label: {
                 Text("Add transaction")
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.lato(size: 15, weight: .semibold))
                     .foregroundStyle(AppTheme.accent)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
@@ -301,7 +301,7 @@ struct TransactionsView: View {
                     scopeFilter = f
                 } label: {
                     Text(f.label)
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.lato(size: 13, weight: .semibold))
                         .tracking(-0.1)
                         .foregroundStyle(scopeFilter == f ? AppTheme.text : AppTheme.text.opacity(0.58))
                         .frame(maxWidth: .infinity)
@@ -331,7 +331,7 @@ struct TransactionsView: View {
                 Circle().fill(AppTheme.text.opacity(0.05))
                     .frame(width: 36, height: 36)
                 Image(systemName: "plus")
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.lato(size: 16, weight: .semibold))
                     .foregroundStyle(AppTheme.accent)
             }
         }

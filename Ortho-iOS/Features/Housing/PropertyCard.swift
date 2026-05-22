@@ -14,12 +14,12 @@ struct PropertyCard: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(property.title)
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(.lato(size: 17, weight: .semibold))
                     .tracking(-0.3)
                     .foregroundStyle(AppTheme.text)
                     .lineLimit(1)
                 Text(subtitle)
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text2)
                     .lineLimit(1)
             }
@@ -28,14 +28,14 @@ struct PropertyCard: View {
 
             VStack(alignment: .trailing, spacing: 4) {
                 Text(headlineAmount)
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(.lato(size: 17, weight: .semibold))
                     .tracking(-0.3)
                     .monospacedDigit()
                     .foregroundStyle(AppTheme.text)
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
                 Text(headlineCaption)
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundStyle(AppTheme.text3)
                     .lineLimit(1)
             }
@@ -53,7 +53,7 @@ struct PropertyCard: View {
                 .fill(AppTheme.text.opacity(0.05))
                 .frame(width: 44, height: 44)
             Image(systemName: property.kind.symbol)
-                .font(.system(size: 19, weight: .medium))
+                .font(.lato(size: 19, weight: .medium))
                 .foregroundStyle(AppTheme.text2)
         }
     }

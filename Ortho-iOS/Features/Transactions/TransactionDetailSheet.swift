@@ -75,18 +75,18 @@ struct TransactionDetailSheet: View {
     private func sheetNav(for tx: Transaction) -> some View {
         ZStack {
             Text(navTitle(for: tx))
-                .font(.system(size: 17, weight: .semibold))
+                .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
                 .tracking(-0.3)
 
             HStack {
                 Button("Done") { dismiss() }
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .foregroundStyle(AppTheme.accent)
                     .buttonStyle(.plain)
                 Spacer()
                 Button("Edit") { editing = tx }
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(.lato(size: 17, weight: .semibold))
                     .foregroundStyle(AppTheme.accent)
                     .buttonStyle(.plain)
             }
@@ -102,7 +102,7 @@ struct TransactionDetailSheet: View {
         HStack(alignment: .firstTextBaseline, spacing: 0) {
             Spacer()
             Text(appState.formatMoney(tx.amount, leadingPlus: tx.isIncome))
-                .font(.system(size: 40, weight: .semibold))
+                .font(.lato(size: 40, weight: .semibold))
                 .tracking(-0.6)
                 .monospacedDigit()
                 .foregroundStyle(tx.isIncome ? AppTheme.positive : AppTheme.text)
@@ -123,15 +123,15 @@ struct TransactionDetailSheet: View {
                 divider
                 HStack(spacing: 12) {
                     Text("Category")
-                        .font(.system(size: 15))
+                        .font(.lato(size: 15))
                         .foregroundStyle(AppTheme.text.opacity(0.58))
                         .frame(width: 96, alignment: .leading)
                     Spacer()
                     HStack(spacing: 6) {
                         Image(systemName: tx.category.symbol)
-                            .font(.system(size: 13, weight: .semibold))
+                            .font(.lato(size: 13, weight: .semibold))
                         Text(tx.category.rawValue.capitalized)
-                            .font(.system(size: 17, weight: .medium))
+                            .font(.lato(size: 17, weight: .medium))
                             .tracking(-0.2)
                     }
                     .foregroundStyle(AppTheme.text)
@@ -150,13 +150,13 @@ struct TransactionDetailSheet: View {
                 HStack(spacing: 12) {
                     UserAvatarView(user: u, size: 28)
                     Text(u.name)
-                        .font(.system(size: 17, weight: .medium))
+                        .font(.lato(size: 17, weight: .medium))
                         .tracking(-0.2)
                         .foregroundStyle(AppTheme.text)
                     Spacer()
                     if owners.count > 1 {
                         Text("\(formatPercent(splits[u.id] ?? 0))%")
-                            .font(.system(size: 17, weight: .medium))
+                            .font(.lato(size: 17, weight: .medium))
                             .monospacedDigit()
                             .foregroundStyle(AppTheme.text.opacity(0.58))
                     }
@@ -186,7 +186,7 @@ struct TransactionDetailSheet: View {
             HStack {
                 Spacer()
                 Text("Delete transaction")
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .foregroundStyle(AppTheme.destructive)
                 Spacer()
             }
@@ -218,12 +218,12 @@ struct TransactionDetailSheet: View {
     private func staticRow(label: String, value: String) -> some View {
         HStack(spacing: 12) {
             Text(label)
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .foregroundStyle(AppTheme.text.opacity(0.58))
                 .frame(width: 96, alignment: .leading)
             Spacer()
             Text(value)
-                .font(.system(size: 17, weight: .medium))
+                .font(.lato(size: 17, weight: .medium))
                 .tracking(-0.2)
                 .foregroundStyle(AppTheme.text)
                 .multilineTextAlignment(.trailing)

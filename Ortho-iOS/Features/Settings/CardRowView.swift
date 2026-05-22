@@ -16,11 +16,11 @@ struct CardRowView: View {
                 Circle().fill(AppTheme.text.opacity(0.05))
                     .frame(width: 40, height: 40)
                 Image(systemName: "creditcard")
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.lato(size: 16, weight: .medium))
                     .foregroundStyle(AppTheme.text2)
             }
             Text(card.name)
-                .font(.system(size: 17, weight: .medium))
+                .font(.lato(size: 17, weight: .medium))
                 .tracking(-0.2)
                 .foregroundStyle(AppTheme.text)
             Spacer()
@@ -28,7 +28,7 @@ struct CardRowView: View {
                 showingDeleteConfirm = true
             } label: {
                 Image(systemName: "minus.circle.fill")
-                    .font(.system(size: 20, weight: .regular))
+                    .font(.lato(size: 20, weight: .regular))
                     .foregroundStyle(AppTheme.destructive)
             }
             .buttonStyle(.plain)
@@ -57,11 +57,11 @@ struct AddCardRowView: View {
                     Circle().fill(AppTheme.text.opacity(0.05))
                         .frame(width: 40, height: 40)
                     Image(systemName: "plus")
-                        .font(.system(size: 15, weight: .semibold))
+                        .font(.lato(size: 15, weight: .semibold))
                         .foregroundStyle(AppTheme.accent)
                 }
                 Text("Add card")
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .tracking(-0.2)
                     .foregroundStyle(AppTheme.accent)
                 Spacer()

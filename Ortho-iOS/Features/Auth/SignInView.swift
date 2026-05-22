@@ -46,7 +46,7 @@ struct SignInView: View {
             VStack(spacing: 0) {
                 Spacer()
                 Text("ORTHO")
-                    .font(.system(size: 28, weight: .regular))
+                    .font(.lato(size: 28, weight: .regular))
                     .tracking(8)
                     .foregroundStyle(AppTheme.text)
                 Spacer()
@@ -69,7 +69,7 @@ struct SignInView: View {
 
                 if let error = appState.authError {
                     Text(error)
-                        .font(.system(size: 13))
+                        .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.destructive)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 24)
@@ -110,11 +110,11 @@ struct SignInView: View {
     private var emailStep: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Sign in")
-                .font(.system(size: 24, weight: .bold))
+                .font(.lato(size: 24, weight: .bold))
                 .tracking(-0.3)
                 .foregroundStyle(AppTheme.text)
             Text("We'll email you a 6-digit code. No password, no fuss.")
-                .font(.system(size: 14))
+                .font(.lato(size: 14))
                 .foregroundStyle(AppTheme.text2)
                 .lineSpacing(2)
                 .fixedSize(horizontal: false, vertical: true)
@@ -131,7 +131,7 @@ struct SignInView: View {
             .textContentType(.emailAddress)
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
-            .font(.system(size: 16))
+            .font(.lato(size: 16))
             .multilineTextAlignment(.center)
             .foregroundStyle(AppTheme.text)
             .padding(.vertical, 16)
@@ -153,11 +153,11 @@ struct SignInView: View {
     private var codeStep: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Enter your code")
-                .font(.system(size: 24, weight: .bold))
+                .font(.lato(size: 24, weight: .bold))
                 .tracking(-0.3)
                 .foregroundStyle(AppTheme.text)
             Text("Sent to **\(appState.pendingSignInEmail ?? "")**.")
-                .font(.system(size: 14))
+                .font(.lato(size: 14))
                 .foregroundStyle(AppTheme.text2)
         }
         .padding(.bottom, 4)
@@ -170,6 +170,9 @@ struct SignInView: View {
         )
             .keyboardType(.numberPad)
             .textContentType(.oneTimeCode)
+            // OTP input keeps the system monospaced font — Lato isn't a
+            // monospaced family and digit positions matter for visual
+            // verification of the 8-digit code.
             .font(.system(size: 22, weight: .semibold, design: .monospaced))
             .tracking(6)
             .multilineTextAlignment(.center)
@@ -193,7 +196,7 @@ struct SignInView: View {
             appState.resetSignInFlow()
             code = ""
         }
-        .font(.system(size: 14, weight: .medium))
+        .font(.lato(size: 14, weight: .medium))
         .foregroundStyle(AppTheme.text)
         .frame(maxWidth: .infinity)
         .padding(.top, 4)
@@ -209,21 +212,21 @@ struct SignInView: View {
             // inline copy via Markdown. Swap to `Link`s when the
             // marketing pages exist.
             Text("By continuing you agree to our **Terms** and **Privacy**.")
-                .font(.system(size: 12))
+                .font(.lato(size: 12))
                 .foregroundStyle(AppTheme.text3)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
         case .code:
             HStack(spacing: 4) {
                 Text("Didn't receive it?")
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundStyle(AppTheme.text3)
                 Button("Send again") {
                     if let pending = appState.pendingSignInEmail {
                         Task { await appState.requestSignInCode(email: pending) }
                     }
                 }
-                .font(.system(size: 12, weight: .semibold))
+                .font(.lato(size: 12, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
                 .disabled(appState.isAuthLoading)
             }
@@ -251,7 +254,7 @@ struct SignInView: View {
                         .tint(AppTheme.text)
                 } else {
                     Text(title)
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.lato(size: 16, weight: .semibold))
                         .foregroundStyle(disabled
                                          ? AppTheme.text.opacity(0.36)
                                          : AppTheme.text)

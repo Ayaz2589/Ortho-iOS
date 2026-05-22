@@ -55,7 +55,7 @@ struct SettingsView: View {
                     .padding(.bottom, 12)
 
                     Text("Cards appear in the Paid with menu when you log a new expense. Existing transactions keep their original card name.")
-                        .font(.system(size: 13))
+                        .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
                         .padding(.horizontal, 24)
@@ -72,7 +72,7 @@ struct SettingsView: View {
                     .padding(.bottom, 8)
 
                     Text(ratesCaption)
-                        .font(.system(size: 13))
+                        .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
                         .padding(.horizontal, 24)
@@ -121,7 +121,7 @@ struct SettingsView: View {
                     .padding(.bottom, 8)
 
                     Text("Only visible in DEBUG builds. \"Load demo data\" enters demo mode — the app shows a 6-month sample dataset, and every change you make stays local (nothing syncs to Supabase). A banner appears at the top with an Exit button that restores your real data. \"Sync all from server\" replaces local transactions, cards, properties, and rental payments with what Supabase returns.")
-                        .font(.system(size: 13))
+                        .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
                         .padding(.horizontal, 24)
@@ -140,7 +140,7 @@ struct SettingsView: View {
             .safeAreaInset(edge: .top, spacing: 0) {
                 HStack {
                     Text("Settings")
-                        .font(.system(size: 32, weight: .bold))
+                        .font(.lato(size: 32, weight: .bold))
                         .tracking(-0.6)
                         .foregroundStyle(AppTheme.text)
                     Spacer()
@@ -190,21 +190,21 @@ struct SettingsView: View {
                     Circle().fill(AppTheme.text.opacity(0.05))
                         .frame(width: 40, height: 40)
                     Image(systemName: "tray.and.arrow.down")
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.lato(size: 15, weight: .medium))
                         .foregroundStyle(AppTheme.accent)
                 }
                 VStack(alignment: .leading, spacing: 3) {
                     Text("Load demo data")
-                        .font(.system(size: 17, weight: .medium))
+                        .font(.lato(size: 17, weight: .medium))
                         .tracking(-0.2)
                         .foregroundStyle(AppTheme.text)
                     Text("6 months · 3 users · 3 properties")
-                        .font(.system(size: 13))
+                        .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.58))
                 }
                 Spacer()
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .foregroundStyle(AppTheme.text.opacity(0.36))
             }
             .padding(.horizontal, 16)
@@ -224,21 +224,21 @@ struct SettingsView: View {
                     Circle().fill(AppTheme.text.opacity(0.05))
                         .frame(width: 40, height: 40)
                     Image(systemName: "arrow.triangle.2.circlepath")
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.lato(size: 15, weight: .medium))
                         .foregroundStyle(AppTheme.accent)
                 }
                 VStack(alignment: .leading, spacing: 3) {
                     Text("Sync all from server")
-                        .font(.system(size: 17, weight: .medium))
+                        .font(.lato(size: 17, weight: .medium))
                         .tracking(-0.2)
                         .foregroundStyle(AppTheme.text)
                     Text("Replace local data with Supabase")
-                        .font(.system(size: 13))
+                        .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.58))
                 }
                 Spacer()
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.lato(size: 13, weight: .semibold))
                     .foregroundStyle(AppTheme.text.opacity(0.36))
             }
             .padding(.horizontal, 16)
@@ -261,17 +261,17 @@ struct SettingsView: View {
                     Circle().fill(AppTheme.text.opacity(0.05))
                         .frame(width: 40, height: 40)
                     Image(systemName: "rectangle.portrait.and.arrow.right")
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.lato(size: 15, weight: .medium))
                         .foregroundStyle(AppTheme.destructive)
                 }
                 VStack(alignment: .leading, spacing: 3) {
                     Text("Sign out")
-                        .font(.system(size: 17, weight: .medium))
+                        .font(.lato(size: 17, weight: .medium))
                         .tracking(-0.2)
                         .foregroundStyle(AppTheme.text)
                     if let email = appState.currentUserEmail {
                         Text(email)
-                            .font(.system(size: 13))
+                            .font(.lato(size: 13))
                             .foregroundStyle(AppTheme.text.opacity(0.58))
                             .lineLimit(1)
                             .truncationMode(.middle)
@@ -296,7 +296,7 @@ struct SettingsView: View {
         } label: {
             HStack(spacing: 12) {
                 Text("Budgets")
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .tracking(-0.2)
                     .foregroundStyle(AppTheme.text)
                 Spacer()
@@ -304,11 +304,11 @@ struct SettingsView: View {
                     Text(appState.budgets.isEmpty
                          ? "None set"
                          : "\(appState.budgets.count) set")
-                        .font(.system(size: 17, weight: .medium))
+                        .font(.lato(size: 17, weight: .medium))
                         .tracking(-0.2)
                         .foregroundStyle(AppTheme.text2)
                     Image(systemName: "chevron.right")
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.lato(size: 13, weight: .semibold))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                 }
             }
@@ -329,17 +329,17 @@ struct SettingsView: View {
         } label: {
             HStack(spacing: 12) {
                 Text("Household")
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .tracking(-0.2)
                     .foregroundStyle(AppTheme.text)
                 Spacer()
                 HStack(spacing: 6) {
                     Text(appState.currentHousehold?.name ?? "Untitled")
-                        .font(.system(size: 17, weight: .medium))
+                        .font(.lato(size: 17, weight: .medium))
                         .tracking(-0.2)
                         .foregroundStyle(AppTheme.text2)
                     Image(systemName: "chevron.right")
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.lato(size: 13, weight: .semibold))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                 }
             }
@@ -367,17 +367,17 @@ struct SettingsView: View {
         } label: {
             HStack(spacing: 12) {
                 Text("Currency")
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.lato(size: 17, weight: .medium))
                     .tracking(-0.2)
                     .foregroundStyle(AppTheme.text)
                 Spacer()
                 HStack(spacing: 6) {
                     Text(appState.currency.displayName)
-                        .font(.system(size: 17, weight: .medium))
+                        .font(.lato(size: 17, weight: .medium))
                         .tracking(-0.2)
                         .foregroundStyle(AppTheme.text2)
                     Image(systemName: "chevron.up.chevron.down")
-                        .font(.system(size: 11, weight: .semibold))
+                        .font(.lato(size: 11, weight: .semibold))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                 }
             }
@@ -392,7 +392,7 @@ struct SettingsView: View {
 
     private func sectionLabel(_ text: String) -> some View {
         Text(text)
-            .font(.system(size: 13, weight: .semibold))
+            .font(.lato(size: 13, weight: .semibold))
             .kerning(0.6)
             .textCase(.uppercase)
             .foregroundStyle(AppTheme.text.opacity(0.58))

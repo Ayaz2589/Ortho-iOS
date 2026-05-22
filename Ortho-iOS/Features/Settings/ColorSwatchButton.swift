@@ -14,7 +14,7 @@ struct ColorSwatchButton: View {
                 Circle().fill(option.bg)
                 if selected {
                     Image(systemName: "checkmark")
-                        .font(.system(size: 12, weight: .bold))
+                        .font(.lato(size: 12, weight: .bold))
                         .foregroundStyle(option.fg)
                 }
             }

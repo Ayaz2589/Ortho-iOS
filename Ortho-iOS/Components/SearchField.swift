@@ -10,11 +10,11 @@ struct SearchField: View {
     var body: some View {
         HStack(spacing: 8) {
             Image(systemName: "magnifyingglass")
-                .font(.system(size: 14, weight: .medium))
+                .font(.lato(size: 14, weight: .medium))
                 .foregroundStyle(focused ? AppTheme.accent : AppTheme.text2)
 
             TextField(placeholder, text: $text)
-                .font(.system(size: 15))
+                .font(.lato(size: 15))
                 .focused($focused)
                 .submitLabel(.search)
                 .tint(AppTheme.accent)
@@ -33,7 +33,7 @@ struct SearchField: View {
                     text = ""
                     focused = false
                 }
-                .font(.system(size: 15, weight: .medium))
+                .font(.lato(size: 15, weight: .medium))
                 .foregroundStyle(AppTheme.accent)
                 .buttonStyle(.plain)
                 .transition(.move(edge: .trailing).combined(with: .opacity))
