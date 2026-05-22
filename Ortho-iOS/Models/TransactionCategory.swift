@@ -38,7 +38,7 @@ enum TransactionCategory: String, CaseIterable, Hashable, Codable, Identifiable 
         case .income:        "arrow.down.to.line"
         case .transit:       "tram.fill"
         case .utilities:     "bolt.fill"
-        case .entertainment: "popcorn.fill"
+        case .entertainment: "theatermasks.fill"
         }
     }
 
