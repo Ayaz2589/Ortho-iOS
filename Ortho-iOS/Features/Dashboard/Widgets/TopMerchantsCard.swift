@@ -56,7 +56,7 @@ struct TopMerchantsCard: View {
                     .font(.lato(size: 15, weight: .medium))
                     .foregroundStyle(AppTheme.text)
                     .lineLimit(1)
-                Text("\(entry.count) visit\(entry.count == 1 ? "" : "s")")
+                Text(Localizer.tr("\(entry.count) visits"))
                     .font(.lato(size: 12))
                     .foregroundStyle(AppTheme.text3)
             }

@@ -176,7 +176,7 @@ struct HousingSnapshotCard: View {
 
     // MARK: - Helpers
 
-    private func statColumn(label: String, value: String,
+    private func statColumn(label: LocalizedStringKey, value: String,
                             valueTint: Color = .primary) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             Text(label)
@@ -193,7 +193,8 @@ struct HousingSnapshotCard: View {
     }
 
     private var propertyCountLabel: String {
-        "\(propertyCount) propert\(propertyCount == 1 ? "y" : "ies")"
+        // Plural-aware via String Catalog variations.plural.
+        Localizer.tr("\(propertyCount) properties")
     }
 
     private func headlineCents(for p: Property) -> Int64 {

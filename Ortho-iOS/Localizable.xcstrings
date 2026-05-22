@@ -1,142 +1,6 @@
 {
   "sourceLanguage": "en",
   "strings": {
-    "%1$@ P&I vs %2$@ income this month. Lenders typically target below 28%%.": {
-      "extractionState": "manual",
-      "localizations": {
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "এই মাসে %1$@ মূলধন+সুদ বনাম %2$@ আয়। ঋণদাতারা সাধারণত 28%%-এর নিচে রাখার লক্ষ্য রাখেন।"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ P&I vs %2$@ income this month. Lenders typically target below 28%%."
-          }
-        }
-      }
-    },
-    "%1$@ at %2$@ on %3$@ — %4$@ the typical amount.": {
-      "extractionState": "manual",
-      "localizations": {
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%3$@-এ %2$@-তে %1$@ — সাধারণের %4$@।"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ at %2$@ on %3$@ — %4$@ the typical amount."
-          }
-        }
-      }
-    },
-    "%1$@ down %2$lld%% vs last month": {
-      "extractionState": "manual",
-      "localizations": {
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "গত মাসের তুলনায় %1$@ %2$lld%% হ্রাস"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ down %2$lld%% vs last month"
-          }
-        }
-      }
-    },
-    "%1$@ in the last 30 days vs %2$@ the 30 before.": {
-      "extractionState": "manual",
-      "localizations": {
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "গত 30 দিনে %1$@, তার আগের 30 দিনে %2$@।"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ in the last 30 days vs %2$@ the 30 before."
-          }
-        }
-      }
-    },
-    "%1$@ left of %2$@ with %3$lld days to go.": {
-      "extractionState": "manual",
-      "localizations": {
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%3$lld দিন বাকি — %2$@-এর %1$@ অবশিষ্ট।"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ left of %2$@ with %3$lld days to go."
-          }
-        }
-      }
-    },
-    "%1$@ of %2$@ still available with %3$lld days left.": {
-      "extractionState": "manual",
-      "localizations": {
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%3$lld দিন বাকি — %2$@-এর %1$@ এখনো পাওয়া যাবে।"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ of %2$@ still available with %3$lld days left."
-          }
-        }
-      }
-    },
-    "%1$@ this month — %2$lld%% of total spend.": {
-      "extractionState": "manual",
-      "localizations": {
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "এই মাসে %1$@ — মোট খরচের %2$lld%%।"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ this month — %2$lld%% of total spend."
-          }
-        }
-      }
-    },
-    "%1$@ up %2$lld%% vs last month": {
-      "extractionState": "manual",
-      "localizations": {
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "গত মাসের তুলনায় %1$@ %2$lld%% বৃদ্ধি"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ up %2$lld%% vs last month"
-          }
-        }
-      }
-    },
     "%@ / mo": {
       "extractionState": "manual",
       "localizations": {
@@ -150,6 +14,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ / mo"
+          }
+        }
+      }
+    },
+    "%@ P&I vs %@ income this month. Lenders typically target below 28%%.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এই মাসে %1$@ মূলধন+সুদ বনাম %2$@ আয়। ঋণদাতারা সাধারণত 28%%-এর নিচে রাখার লক্ষ্য রাখেন।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ P&I vs %@ income this month. Lenders typically target below 28%%."
+          }
+        }
+      }
+    },
+    "%@ at %@ on %@ — %@ the typical amount.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%3$@-এ %2$@-তে %1$@ — সাধারণের %4$@।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ at %@ on %@ — %@ the typical amount."
           }
         }
       }
@@ -171,6 +69,23 @@
         }
       }
     },
+    "%@ down %lld%% vs last month": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "গত মাসের তুলনায় %1$@ %2$lld%% হ্রাস"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ down %lld%% vs last month"
+          }
+        }
+      }
+    },
     "%@ equity": {
       "extractionState": "manual",
       "localizations": {
@@ -184,6 +99,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ equity"
+          }
+        }
+      }
+    },
+    "%@ in the last 30 days vs %@ the 30 before.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "গত 30 দিনে %1$@, তার আগের 30 দিনে %2$@।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ in the last 30 days vs %@ the 30 before."
           }
         }
       }
@@ -205,6 +137,74 @@
         }
       }
     },
+    "%@ left of %@ with %lld days to go.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%3$lld দিন বাকি — %2$@-এর %1$@ অবশিষ্ট।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ left of %@ with %lld days to go."
+          }
+        }
+      }
+    },
+    "%@ of %@ still available with %lld days left.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%3$lld দিন বাকি — %2$@-এর %1$@ এখনো পাওয়া যাবে।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of %@ still available with %lld days left."
+          }
+        }
+      }
+    },
+    "%@ this month — %lld%% of total spend.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এই মাসে %1$@ — মোট খরচের %2$lld%%।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ this month — %lld%% of total spend."
+          }
+        }
+      }
+    },
+    "%@ up %lld%% vs last month": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "গত মাসের তুলনায় %1$@ %2$lld%% বৃদ্ধি"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ up %lld%% vs last month"
+          }
+        }
+      }
+    },
     "%@ · %@": {
       "extractionState": "manual",
       "localizations": {
@@ -222,6 +222,88 @@
         }
       }
     },
+    "%lld properties": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld property"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld properties"
+                }
+              }
+            }
+          }
+        },
+        "bn": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld সম্পত্তি"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld সম্পত্তি"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld visits": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld visit"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld visits"
+                }
+              }
+            }
+          }
+        },
+        "bn": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld ভিজিট"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld ভিজিট"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "%lld-year": {
       "extractionState": "manual",
       "localizations": {
@@ -235,6 +317,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld-year"
+          }
+        }
+      }
+    },
+    "(you)": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(আপনি)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(you)"
+          }
+        }
+      }
+    },
+    "(you) · %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(আপনি) · %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(you) · %@"
           }
         }
       }
@@ -558,6 +674,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Auto-pays on the 1st · %@"
+          }
+        }
+      }
+    },
+    "Avg / day": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "গড় / দিন"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avg / day"
           }
         }
       }
@@ -1317,6 +1450,23 @@
         }
       }
     },
+    "Equity built": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "তৈরি ইক্যুইটি"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Equity built"
+          }
+        }
+      }
+    },
     "Euro": {
       "extractionState": "manual",
       "localizations": {
@@ -1398,6 +1548,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Exit"
+          }
+        }
+      }
+    },
+    "Expense": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "খরচ"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expense"
+          }
+        }
+      }
+    },
+    "Expenses": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "খরচ"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expenses"
           }
         }
       }
@@ -1908,6 +2092,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Month"
+          }
+        }
+      }
+    },
+    "Monthly cost": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মাসিক খরচ"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monthly cost"
           }
         }
       }
@@ -3799,7 +4000,7 @@
         }
       }
     },
-    "You're %1$@ over this month: %2$@ out vs %3$@ in.": {
+    "You're %@ over this month: %@ out vs %@ in.": {
       "extractionState": "manual",
       "localizations": {
         "bn": {
@@ -3811,12 +4012,12 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "You're %1$@ over this month: %2$@ out vs %3$@ in."
+            "value": "You're %@ over this month: %@ out vs %@ in."
           }
         }
       }
     },
-    "You're %1$@ over your %2$@ limit with %3$lld days left.": {
+    "You're %@ over your %@ limit with %lld days left.": {
       "extractionState": "manual",
       "localizations": {
         "bn": {
@@ -3828,7 +4029,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "You're %1$@ over your %2$@ limit with %3$lld days left."
+            "value": "You're %@ over your %@ limit with %lld days left."
           }
         }
       }

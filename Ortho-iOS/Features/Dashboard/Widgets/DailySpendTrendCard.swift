@@ -94,7 +94,7 @@ struct DailySpendTrendCard: View {
         .chartYAxis(.hidden)
     }
 
-    private func statColumn(label: String, value: String,
+    private func statColumn(label: LocalizedStringKey, value: String,
                             tint: Color = AppTheme.text) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             Text(label)

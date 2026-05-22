@@ -505,13 +505,13 @@ enum InsightEngine {
         return calendar.dateInterval(of: .month, for: priorDate)
     }
 
-    /// Shorthand for `String(localized:locale:)` using the in-app locale.
-    /// Every insight title/body goes through this so language switches
-    /// affect the engine output live (no view-tree re-init needed; the
-    /// next call to `recommendations(...)` produces fresh localized
-    /// strings).
+    /// Shorthand for catalog lookup against the in-app language. Goes
+    /// through `Localizer.tr` which targets the right `lproj` bundle —
+    /// `String(localized:locale:)` alone wouldn't (its `locale:` only
+    /// affects formatter style in interpolation slots, not which
+    /// language file is consulted).
     private static func tr(_ value: String.LocalizationValue) -> String {
-        String(localized: value, locale: Localizer.currentLocale)
+        Localizer.tr(value)
     }
 
     /// Engine-only money formatter: USD cents → "$1,234.56" with

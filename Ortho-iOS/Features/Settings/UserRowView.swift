@@ -79,8 +79,8 @@ struct UserRowView: View {
     /// when this row is the current user.
     private var composedDetail: String? {
         switch (isCurrentUser, detail) {
-        case (true, let .some(d)) where !d.isEmpty: return "(you) · \(d)"
-        case (true, _):                              return "(you)"
+        case (true, let .some(d)) where !d.isEmpty: return Localizer.tr("(you) · \(d)")
+        case (true, _):                              return Localizer.tr("(you)")
         case (false, let d):                         return d
         }
     }

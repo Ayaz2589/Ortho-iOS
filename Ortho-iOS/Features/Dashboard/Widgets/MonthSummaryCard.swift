@@ -64,7 +64,7 @@ struct MonthSummaryCard: View {
         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 
-    private func statColumn(label: String, amount: String, tint: Color) -> some View {
+    private func statColumn(label: LocalizedStringKey, amount: String, tint: Color) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(label)
                 .font(.lato(size: 12))
@@ -92,7 +92,7 @@ struct MonthSummaryCard: View {
             let cal = Calendar.current
             let day = cal.component(.day, from: .now)
             let range = cal.range(of: .day, in: .month, for: .now)?.count ?? 30
-            return "Day \(day) of \(range)"
+            return Localizer.tr("Day \(day) of \(range)")
         case .last3Months, .last6Months, .last12Months:
             let f = DateFormatter.localized(pattern: "MMM d", locale: Localizer.currentLocale)
             let endDate = Calendar.current.date(byAdding: .day, value: -1, to: interval.end) ?? interval.end

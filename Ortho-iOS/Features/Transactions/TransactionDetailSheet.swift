@@ -250,7 +250,7 @@ struct TransactionDetailSheet: View {
 
     /// Nav title that surfaces the scope ("Personal expense", "Expense · Home").
     private func navTitle(for tx: Transaction) -> String {
-        let kindLabel = tx.kind == .income ? "Income" : "Expense"
+        let kindLabel = Localizer.tr(tx.kind == .income ? "Income" : "Expense")
         if tx.householdID == nil {
             return "Personal \(kindLabel.lowercased())"
         }
