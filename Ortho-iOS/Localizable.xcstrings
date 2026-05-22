@@ -1320,7 +1320,7 @@
         "bn": {
           "stringUnit": {
             "state": "translated",
-            "value": "খাবার"
+            "value": "রেস্তোরাঁ"
           }
         },
         "en": {
@@ -1429,6 +1429,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enter your code"
+          }
+        }
+      }
+    },
+    "Entertainment": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "বিনোদন"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entertainment"
           }
         }
       }
@@ -1592,7 +1609,7 @@
         "bn": {
           "stringUnit": {
             "state": "translated",
-            "value": "তেল"
+            "value": "জ্বালানি"
           }
         },
         "en": {
