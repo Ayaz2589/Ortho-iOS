@@ -17,7 +17,7 @@ import SwiftUI
 /// Latin digits for clarity. Month and day names still come from the
 /// `bn_BD` locale (e.g. "মে" instead of "May").
 enum AppLanguage: String, CaseIterable, Identifiable, Hashable {
-    case system, en, bn, es
+    case system, en, bn, es, ja
 
     var id: String { rawValue }
 
@@ -26,13 +26,14 @@ enum AppLanguage: String, CaseIterable, Identifiable, Hashable {
     /// `Text(verbatim:)` to opt OUT of bundle lookup (self-naming
     /// convention — "English" must stay "English" in every UI language).
     /// `.system` goes through the catalog so it reads "System" in EN,
-    /// "সিস্টেম" in BN, "Sistema" in ES.
+    /// "সিস্টেম" in BN, "Sistema" in ES, "システム" in JA.
     var labelText: Text {
         switch self {
         case .system: Text("System")               // LocalizedStringKey → catalog lookup
         case .en:     Text(verbatim: "English")    // raw, no lookup
         case .bn:     Text(verbatim: "বাংলা")       // raw, no lookup
         case .es:     Text(verbatim: "Español")    // raw, no lookup
+        case .ja:     Text(verbatim: "日本語")      // raw, no lookup
         }
     }
 
@@ -43,20 +44,22 @@ enum AppLanguage: String, CaseIterable, Identifiable, Hashable {
         case .en:     "character.bubble"
         case .bn:     "character.bubble"
         case .es:     "character.bubble"
+        case .ja:     "character.bubble"
         }
     }
 
     /// `nil` means "follow the OS"; non-nil forces a specific locale.
     /// Bangla uses `@numbers=latn` to clamp digits to 0-9 (financial-
-    /// app convention). Spanish uses `es_ES` (Spain); regional variants
-    /// like `es_MX` / `es_AR` can be added later if number/date
-    /// formatting differences become a requirement.
+    /// app convention). Spanish uses `es_ES` (Spain). Japanese uses
+    /// `ja_JP` — Japanese has no morphological plural so one/other
+    /// catalog variants are identical.
     var locale: Locale? {
         switch self {
         case .system: nil
         case .en:     Locale(identifier: "en_US")
         case .bn:     Locale(identifier: "bn_BD@numbers=latn")
         case .es:     Locale(identifier: "es_ES")
+        case .ja:     Locale(identifier: "ja_JP")
         }
     }
 }

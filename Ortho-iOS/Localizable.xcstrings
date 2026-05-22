@@ -21,6 +21,12 @@
             "state": "translated",
             "value": "%@ / mes"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ / 月"
+          }
         }
       }
     },
@@ -43,6 +49,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ capital+interés vs %@ de ingreso este mes. Los prestamistas suelen apuntar a menos del 28%%."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今月の元本＋利息%@に対して収入%@。貸し手は通常28%%未満を目安にします。"
           }
         }
       }
@@ -67,6 +79,12 @@
             "state": "translated",
             "value": "%@ en %@ el %@ — %@ del importe habitual."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@、%@、%@ — 通常額の%@。"
+          }
         }
       }
     },
@@ -89,6 +107,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Presupuesto de %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@の予算"
           }
         }
       }
@@ -113,6 +137,12 @@
             "state": "translated",
             "value": "%@ bajó %lld%% vs el mes pasado"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@は先月比%lld%%減"
+          }
         }
       }
     },
@@ -135,6 +165,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ de patrimonio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@の持ち分"
           }
         }
       }
@@ -159,6 +195,12 @@
             "state": "translated",
             "value": "%@ en los últimos 30 días vs %@ los 30 anteriores."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "過去30日間で%@、その前の30日間で%@。"
+          }
         }
       }
     },
@@ -181,6 +223,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ es tu categoría principal"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@が最大のカテゴリです"
           }
         }
       }
@@ -205,6 +253,12 @@
             "state": "translated",
             "value": "Te quedan %@ de %@ con %lld días por delante."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "残り%lld日で、%@中%@残っています。"
+          }
         }
       }
     },
@@ -227,6 +281,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ de %@ aún disponible con %lld días restantes."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "残り%lld日で、%@中%@がまだ利用可能。"
           }
         }
       }
@@ -251,6 +311,12 @@
             "state": "translated",
             "value": "%@ este mes — %lld%% del gasto total."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今月%@ — 総支出の%lld%%。"
+          }
         }
       }
     },
@@ -274,6 +340,12 @@
             "state": "translated",
             "value": "%@ subió %lld%% vs el mes pasado"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@は先月比%lld%%増"
+          }
         }
       }
     },
@@ -293,6 +365,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        },
+        "ja": {
           "stringUnit": {
             "state": "translated",
             "value": "%@ · %@"
@@ -356,6 +434,24 @@
               }
             }
           }
+        },
+        "ja": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld件の物件"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld件の物件"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -378,6 +474,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld establecidos"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld件設定"
           }
         }
       }
@@ -434,6 +536,24 @@
                 "stringUnit": {
                   "state": "translated",
                   "value": "%lld unidades"
+                }
+              }
+            }
+          }
+        },
+        "ja": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lldユニット"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lldユニット"
                 }
               }
             }
@@ -497,6 +617,24 @@
               }
             }
           }
+        },
+        "ja": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld回の利用"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld回の利用"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -519,6 +657,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld años restantes"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "残り%lld年"
           }
         }
       }
@@ -543,6 +687,12 @@
             "state": "translated",
             "value": "%lld años"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld年"
+          }
         }
       }
     },
@@ -565,6 +715,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "(tú)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(あなた)"
           }
         }
       }
@@ -589,6 +745,12 @@
             "state": "translated",
             "value": "(tú) · %@"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(あなた) · %@"
+          }
         }
       }
     },
@@ -611,6 +773,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "+ %lld más"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+ %lld件"
           }
         }
       }
@@ -635,6 +803,12 @@
             "state": "translated",
             "value": "Cuenta"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アカウント"
+          }
         }
       }
     },
@@ -657,6 +831,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Añadir"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追加"
           }
         }
       }
@@ -681,6 +861,12 @@
             "state": "translated",
             "value": "Añade una vivienda principal, una propiedad en alquiler o una multifamiliar para registrar pagos, saldos e información de arrendamientos."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支払い、残高、賃貸情報を管理するために自宅、賃貸、集合住宅を追加してください。"
+          }
         }
       }
     },
@@ -703,6 +889,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Añade al menos una transacción y aparecerá aquí para duplicarla rápido."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "少なくとも1件の取引を追加すると、ここから素早く複製できます。"
           }
         }
       }
@@ -727,6 +919,12 @@
             "state": "translated",
             "value": "Añadir tarjeta"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カードを追加"
+          }
         }
       }
     },
@@ -749,6 +947,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Añade el alquiler y el inquilino de cada unidad. El saldo neto es el alquiler total menos el pago de la hipoteca."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "各ユニットの家賃と入居者を追加してください。純残高は総ユニット家賃から住宅ローン返済を引いた額です。"
           }
         }
       }
@@ -773,6 +977,12 @@
             "state": "translated",
             "value": "Añadir propiedad"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "物件を追加"
+          }
         }
       }
     },
@@ -795,6 +1005,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Añadir transacción"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取引を追加"
           }
         }
       }
@@ -819,6 +1035,12 @@
             "state": "translated",
             "value": "Añadir unidad"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ユニットを追加"
+          }
         }
       }
     },
@@ -841,6 +1063,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Añadir usuario"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ユーザーを追加"
           }
         }
       }
@@ -865,6 +1093,12 @@
             "state": "translated",
             "value": "Dirección"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "住所"
+          }
         }
       }
     },
@@ -887,6 +1121,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべて"
           }
         }
       }
@@ -911,6 +1151,12 @@
             "state": "translated",
             "value": "Amortización"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "償却"
+          }
         }
       }
     },
@@ -933,6 +1179,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importe"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "金額"
           }
         }
       }
@@ -957,6 +1209,12 @@
             "state": "translated",
             "value": "Apariencia"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "外観"
+          }
         }
       }
     },
@@ -979,6 +1237,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Acercándote al límite de %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@の上限に近づいています"
           }
         }
       }
@@ -1003,6 +1267,12 @@
             "state": "translated",
             "value": "Pago automático"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動支払い"
+          }
         }
       }
     },
@@ -1025,6 +1295,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pago automático el día 1 · %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "毎月1日に自動支払い · %@"
           }
         }
       }
@@ -1049,6 +1325,12 @@
             "state": "translated",
             "value": "Prom. / día"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "平均 / 日"
+          }
         }
       }
     },
@@ -1071,6 +1353,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Atrás"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "戻る"
           }
         }
       }
@@ -1095,6 +1383,12 @@
             "state": "translated",
             "value": "Taka bangladesí"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バングラデシュタカ"
+          }
         }
       }
     },
@@ -1117,6 +1411,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Presupuestos"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "予算"
           }
         }
       }
@@ -1141,6 +1441,12 @@
             "state": "translated",
             "value": "Los presupuestos impulsan los insights de gasto del panel. Establece un límite mensual para cualquier categoría y verás el progreso y alertas cuando te acerques o lo superes."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "予算はダッシュボードの支出インサイトを動かします。任意のカテゴリに月次上限を設定すると、進捗と上限近くまたは超過時のアラートが表示されます。"
+          }
         }
       }
     },
@@ -1163,6 +1469,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Acumulado desde el cierre · %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クロージング以降の累計 · %@"
           }
         }
       }
@@ -1187,6 +1499,12 @@
             "state": "translated",
             "value": "Al continuar aceptas nuestros **Términos** y **Privacidad**."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "続行することで、**利用規約**と**プライバシー**に同意したものとみなします。"
+          }
         }
       }
     },
@@ -1209,6 +1527,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dólar canadiense"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カナダドル"
           }
         }
       }
@@ -1233,6 +1557,12 @@
             "state": "translated",
             "value": "Cancelar"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キャンセル"
+          }
         }
       }
     },
@@ -1255,6 +1585,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tarjetas"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カード"
           }
         }
       }
@@ -1279,6 +1615,12 @@
             "state": "translated",
             "value": "Las tarjetas aparecen en el menú \"Pagado con\" cuando registras un nuevo gasto. Las transacciones existentes mantienen su nombre de tarjeta original."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しい支出を記録するとき、カードは「支払い方法」メニューに表示されます。既存の取引は元のカード名を保持します。"
+          }
         }
       }
     },
@@ -1301,6 +1643,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Categoría"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリ"
           }
         }
       }
@@ -1325,6 +1673,12 @@
             "state": "translated",
             "value": "Los cambios no se guardan"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変更は保存されません"
+          }
         }
       }
     },
@@ -1347,6 +1701,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yuan chino"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "中国元"
           }
         }
       }
@@ -1371,6 +1731,12 @@
             "state": "translated",
             "value": "Cerrar búsqueda"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "検索を閉じる"
+          }
         }
       }
     },
@@ -1393,6 +1759,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fecha de cierre"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クロージング日"
           }
         }
       }
@@ -1417,6 +1789,12 @@
             "state": "translated",
             "value": "Café"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コーヒー"
+          }
         }
       }
     },
@@ -1439,6 +1817,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Color"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "色"
           }
         }
       }
@@ -1463,6 +1847,12 @@
             "state": "translated",
             "value": "Copiar de recientes"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最近からコピー"
+          }
         }
       }
     },
@@ -1485,6 +1875,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Moneda"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通貨"
           }
         }
       }
@@ -1509,6 +1905,12 @@
             "state": "translated",
             "value": "Tendencia diaria"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "日次トレンド"
+          }
         }
       }
     },
@@ -1531,6 +1933,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Oscuro"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ダーク"
           }
         }
       }
@@ -1555,6 +1963,12 @@
             "state": "translated",
             "value": "Panel"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ダッシュボード"
+          }
         }
       }
     },
@@ -1577,6 +1991,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fecha"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "日付"
           }
         }
       }
@@ -1601,6 +2021,12 @@
             "state": "translated",
             "value": "Día %lld de %lld"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld日目 / %lld日"
+          }
         }
       }
     },
@@ -1623,6 +2049,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Eliminar"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "削除"
           }
         }
       }
@@ -1647,6 +2079,12 @@
             "state": "translated",
             "value": "Eliminar %@"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@を削除"
+          }
         }
       }
     },
@@ -1669,6 +2107,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Eliminar pago"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支払いを削除"
           }
         }
       }
@@ -1693,6 +2137,12 @@
             "state": "translated",
             "value": "Eliminar propiedad"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "物件を削除"
+          }
         }
       }
     },
@@ -1715,6 +2165,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "¿Eliminar esta tarjeta?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このカードを削除しますか？"
           }
         }
       }
@@ -1739,6 +2195,12 @@
             "state": "translated",
             "value": "¿Eliminar esta propiedad?"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この物件を削除しますか？"
+          }
         }
       }
     },
@@ -1761,6 +2223,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "¿Eliminar esta transacción?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この取引を削除しますか？"
           }
         }
       }
@@ -1785,6 +2253,12 @@
             "state": "translated",
             "value": "Eliminar transacción"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取引を削除"
+          }
         }
       }
     },
@@ -1808,6 +2282,12 @@
             "state": "translated",
             "value": "Modo demo"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "デモモード"
+          }
         }
       }
     },
@@ -1830,6 +2310,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Depositar en"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "入金先"
           }
         }
       }
@@ -1890,6 +2376,24 @@
               }
             }
           }
+        },
+        "ja": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld件の定期請求を検出"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld件の定期請求を検出"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -1912,6 +2416,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Desarrollador"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開発者"
           }
         }
       }
@@ -1936,6 +2446,12 @@
             "state": "translated",
             "value": "¿No lo recibiste?"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "届きませんでしたか？"
+          }
         }
       }
     },
@@ -1958,6 +2474,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Restaurantes"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "外食"
           }
         }
       }
@@ -1982,6 +2504,12 @@
             "state": "translated",
             "value": "Listo"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了"
+          }
         }
       }
     },
@@ -2004,6 +2532,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vence en %lld días"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld日後に支払い"
           }
         }
       }
@@ -2028,6 +2562,12 @@
             "state": "translated",
             "value": "Vence hoy"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本日支払い"
+          }
         }
       }
     },
@@ -2050,6 +2590,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vence mañana"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "明日支払い"
           }
         }
       }
@@ -2074,6 +2620,12 @@
             "state": "translated",
             "value": "Editar"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "編集"
+          }
         }
       }
     },
@@ -2096,6 +2648,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Editar %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@を編集"
           }
         }
       }
@@ -2120,6 +2678,12 @@
             "state": "translated",
             "value": "Editar transacción"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取引を編集"
+          }
         }
       }
     },
@@ -2142,6 +2706,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "¿Entrar en modo demo?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "デモモードに入りますか？"
           }
         }
       }
@@ -2166,6 +2736,12 @@
             "state": "translated",
             "value": "Introduce tu código"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コードを入力"
+          }
         }
       }
     },
@@ -2188,6 +2764,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Entretenimiento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "娯楽"
           }
         }
       }
@@ -2212,6 +2794,12 @@
             "state": "translated",
             "value": "Patrimonio"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "持ち分"
+          }
         }
       }
     },
@@ -2234,6 +2822,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Patrimonio acumulado"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "築いた持ち分"
           }
         }
       }
@@ -2258,6 +2852,12 @@
             "state": "translated",
             "value": "Euro"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ユーロ"
+          }
         }
       }
     },
@@ -2280,6 +2880,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Igual"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "均等"
           }
         }
       }
@@ -2304,6 +2910,12 @@
             "state": "translated",
             "value": "Las transacciones existentes mantienen a %@ como propietario."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "既存の取引は%@を所有者として保持します。"
+          }
         }
       }
     },
@@ -2326,6 +2938,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Las transacciones existentes mantienen su nombre de tarjeta original."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "既存の取引は元のカード名を保持します。"
           }
         }
       }
@@ -2350,6 +2968,12 @@
             "state": "translated",
             "value": "Salir"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "終了"
+          }
         }
       }
     },
@@ -2372,6 +2996,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gasto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支出"
           }
         }
       }
@@ -2396,6 +3026,12 @@
             "state": "translated",
             "value": "Gastos"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支出"
+          }
         }
       }
     },
@@ -2418,6 +3054,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fijo · %lld años"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "固定 · %lld年"
           }
         }
       }
@@ -2442,6 +3084,12 @@
             "state": "translated",
             "value": "Combustible"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "燃料"
+          }
         }
       }
     },
@@ -2464,6 +3112,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Comestibles"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "食料品"
           }
         }
       }
@@ -2488,6 +3142,12 @@
             "state": "translated",
             "value": "Salud"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "健康"
+          }
         }
       }
     },
@@ -2510,6 +3170,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hogar"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "世帯"
           }
         }
       }
@@ -2534,6 +3200,12 @@
             "state": "translated",
             "value": "Nombre del hogar"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "世帯名"
+          }
         }
       }
     },
@@ -2556,6 +3228,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vivienda"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "住宅"
           }
         }
       }
@@ -2580,6 +3258,12 @@
             "state": "translated",
             "value": "Ingresos"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "収入"
+          }
         }
       }
     },
@@ -2602,6 +3286,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Los ingresos se muestran en verde en la lista de actividad. Seleccionar varios propietarios atribuye el ingreso compartido a todos ellos."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "収入はアクティビティリストで緑色で表示されます。複数の所有者を選択すると、共有収入が全員に割り当てられます。"
           }
         }
       }
@@ -2626,6 +3316,12 @@
             "state": "translated",
             "value": "La inicial se establece automáticamente desde el nombre. Las cuentas conjuntas tienen dos iniciales unidas con +."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "イニシャルは名前から自動的に設定されます。共同アカウントは+で結んだ2文字のイニシャルになります。"
+          }
         }
       }
     },
@@ -2648,6 +3344,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Interés"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "利息"
           }
         }
       }
@@ -2672,6 +3374,12 @@
             "state": "translated",
             "value": "Tasa de interés"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "金利"
+          }
         }
       }
     },
@@ -2694,6 +3402,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yen japonés"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "日本円"
           }
         }
       }
@@ -2718,6 +3432,12 @@
             "state": "translated",
             "value": "Idioma"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "言語"
+          }
         }
       }
     },
@@ -2740,6 +3460,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Últimos 12 meses"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "過去12か月"
           }
         }
       }
@@ -2764,6 +3490,12 @@
             "state": "translated",
             "value": "Últimos 3 meses"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "過去3か月"
+          }
         }
       }
     },
@@ -2786,6 +3518,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Últimos 30 días"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "過去30日間"
           }
         }
       }
@@ -2810,6 +3548,12 @@
             "state": "translated",
             "value": "Últimos 6 meses"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "過去6か月"
+          }
         }
       }
     },
@@ -2832,6 +3576,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Contrato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "賃貸"
           }
         }
       }
@@ -2856,6 +3606,12 @@
             "state": "translated",
             "value": "Fin del contrato"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "賃貸終了"
+          }
         }
       }
     },
@@ -2878,6 +3634,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "El contrato finaliza en %lld días"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "賃貸契約は%lld日後に終了"
           }
         }
       }
@@ -2902,6 +3664,12 @@
             "state": "translated",
             "value": "Inicio del contrato"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "賃貸開始"
+          }
         }
       }
     },
@@ -2924,6 +3692,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Claro"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ライト"
           }
         }
       }
@@ -2948,6 +3722,12 @@
             "state": "translated",
             "value": "Cargar demo"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "デモを読み込む"
+          }
         }
       }
     },
@@ -2970,6 +3750,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cargar datos demo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "デモデータを読み込む"
           }
         }
       }
@@ -2994,6 +3780,12 @@
             "state": "translated",
             "value": "Cargando tasas…"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レートを読み込み中…"
+          }
         }
       }
     },
@@ -3016,6 +3808,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cargando tus transacciones"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取引を読み込み中"
           }
         }
       }
@@ -3040,6 +3838,12 @@
             "state": "translated",
             "value": "Registra un gasto o ingreso para verlo agrupado por día aquí."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支出や収入を記録すると、ここに日付ごとに表示されます。"
+          }
         }
       }
     },
@@ -3062,6 +3866,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Registrar pago"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支払いを記録"
           }
         }
       }
@@ -3086,6 +3896,12 @@
             "state": "translated",
             "value": "Vencimiento"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "満期"
+          }
         }
       }
     },
@@ -3108,6 +3924,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Miembro"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メンバー"
           }
         }
       }
@@ -3132,6 +3954,12 @@
             "state": "translated",
             "value": "Los miembros pueden ver todas las transacciones compartidas de este hogar. Las personales solo las ves tú. La invitación de nuevos miembros llegará pronto."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メンバーはこの世帯のすべての共有取引を見ることができます。個人取引はあなただけが見られます。新メンバーの招待機能は近日公開です。"
+          }
         }
       }
     },
@@ -3154,6 +3982,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Comercio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "店舗"
           }
         }
       }
@@ -3178,6 +4012,12 @@
             "state": "translated",
             "value": "Mes"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月"
+          }
         }
       }
     },
@@ -3200,6 +4040,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Coste mensual"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月々のコスト"
           }
         }
       }
@@ -3224,6 +4070,12 @@
             "state": "translated",
             "value": "Límite mensual"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月次上限"
+          }
         }
       }
     },
@@ -3246,6 +4098,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pago mensual"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月々の支払い"
           }
         }
       }
@@ -3270,6 +4128,12 @@
             "state": "translated",
             "value": "El capital + interés mensual se calcula a partir del importe del préstamo, la tasa y el plazo. Los impuestos y seguros aún no se registran."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月々の元本＋利息はローン金額、金利、期間から計算されます。税金と保険はまだ追跡されていません。"
+          }
         }
       }
     },
@@ -3292,6 +4156,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alquiler mensual"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月々の家賃"
           }
         }
       }
@@ -3316,6 +4186,12 @@
             "state": "translated",
             "value": "Hipoteca"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "住宅ローン"
+          }
         }
       }
     },
@@ -3338,6 +4214,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hipoteca al %lld%% del ingreso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "住宅ローンは収入の%lld%%"
           }
         }
       }
@@ -3362,6 +4244,12 @@
             "state": "translated",
             "value": "Hipoteca al %lld%% del ingreso — alta"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "住宅ローンは収入の%lld%% — 高い"
+          }
         }
       }
     },
@@ -3384,6 +4272,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Se eliminarán la información de la hipoteca, los detalles del contrato y el historial de pagos de esta propiedad."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この物件の住宅ローン情報、賃貸詳細、賃貸支払い履歴が削除されます。"
           }
         }
       }
@@ -3408,6 +4302,12 @@
             "state": "translated",
             "value": "Pago de hipoteca"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "住宅ローン返済"
+          }
         }
       }
     },
@@ -3430,6 +4330,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hipoteca · Multifamiliar"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "住宅ローン · 集合住宅"
           }
         }
       }
@@ -3454,6 +4360,12 @@
             "state": "translated",
             "value": "Hipoteca · Vivienda principal"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "住宅ローン · 自宅"
+          }
         }
       }
     },
@@ -3476,6 +4388,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Propiedad multifamiliar"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "集合住宅"
           }
         }
       }
@@ -3536,6 +4454,24 @@
               }
             }
           }
+        },
+        "ja": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "集合住宅 · %lldユニット"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "集合住宅 · %lldユニット"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -3558,6 +4494,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nombre"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "名前"
           }
         }
       }
@@ -3582,6 +4524,12 @@
             "state": "translated",
             "value": "Neto de %@ ahorrado este mes — muy por encima del 20%% de referencia."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今月の純貯蓄%@ — 20%%の目安を大きく上回っています。"
+          }
         }
       }
     },
@@ -3604,6 +4552,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Saldo neto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "純残高"
           }
         }
       }
@@ -3628,6 +4582,12 @@
             "state": "translated",
             "value": "Ingreso neto de alquiler"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "純賃貸収入"
+          }
         }
       }
     },
@@ -3650,6 +4610,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nueva tarjeta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいカード"
           }
         }
       }
@@ -3674,6 +4640,12 @@
             "state": "translated",
             "value": "Nueva multifamiliar"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しい集合住宅"
+          }
         }
       }
     },
@@ -3696,6 +4668,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nueva vivienda principal"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しい自宅"
           }
         }
       }
@@ -3720,6 +4698,12 @@
             "state": "translated",
             "value": "Nueva propiedad"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しい物件"
+          }
         }
       }
     },
@@ -3742,6 +4726,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nueva en alquiler"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しい賃貸"
           }
         }
       }
@@ -3766,6 +4756,12 @@
             "state": "translated",
             "value": "Nueva transacción"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しい取引"
+          }
         }
       }
     },
@@ -3788,6 +4784,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nuevo usuario"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいユーザー"
           }
         }
       }
@@ -3812,6 +4814,12 @@
             "state": "translated",
             "value": "Próximos 12 meses"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今後12か月"
+          }
         }
       }
     },
@@ -3834,6 +4842,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apodo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ニックネーム"
           }
         }
       }
@@ -3858,6 +4872,12 @@
             "state": "translated",
             "value": "Sin gastos en los últimos 30 días."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "過去30日間の支出はありません。"
+          }
         }
       }
     },
@@ -3880,6 +4900,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aún no hay gastos en este período."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この期間中の支出はまだありません。"
           }
         }
       }
@@ -3904,6 +4930,12 @@
             "state": "translated",
             "value": "Sin gastos en este período."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この期間中の支出はありません。"
+          }
         }
       }
     },
@@ -3926,6 +4958,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aún no hay miembros del hogar."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "世帯メンバーはまだいません。"
           }
         }
       }
@@ -3950,6 +4988,12 @@
             "state": "translated",
             "value": "Aún no hay pagos registrados. Toca \"Registrar pago\" para añadir uno."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支払いの記録はまだありません。「支払いを記録」をタップして追加してください。"
+          }
         }
       }
     },
@@ -3972,6 +5016,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aún no hay propiedades"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "物件はまだありません"
           }
         }
       }
@@ -3996,6 +5046,12 @@
             "state": "translated",
             "value": "Aún no hay propiedades. Añade una desde la pestaña Vivienda."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "物件がまだありません。住宅タブから追加してください。"
+          }
         }
       }
     },
@@ -4018,6 +5074,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sin transacciones en este período."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この期間中の取引はありません。"
           }
         }
       }
@@ -4042,6 +5104,12 @@
             "state": "translated",
             "value": "Aún no hay transacciones"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取引はまだありません"
+          }
         }
       }
     },
@@ -4064,6 +5132,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aún no hay unidades — edita esta propiedad para añadirlas."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ユニットがありません — この物件を編集して追加してください。"
           }
         }
       }
@@ -4088,6 +5162,12 @@
             "state": "translated",
             "value": "Ninguno establecido"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未設定"
+          }
         }
       }
     },
@@ -4110,6 +5190,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nota"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メモ"
           }
         }
       }
@@ -4134,6 +5220,12 @@
             "state": "translated",
             "value": "Nada que copiar aún"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピーできる項目がありません"
+          }
         }
       }
     },
@@ -4156,6 +5248,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Opcional"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任意"
           }
         }
       }
@@ -4180,6 +5278,12 @@
             "state": "translated",
             "value": "Préstamo original"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ローン元本"
+          }
         }
       }
     },
@@ -4202,6 +5306,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Préstamo original · %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ローン元本 · %@"
           }
         }
       }
@@ -4226,6 +5336,12 @@
             "state": "translated",
             "value": "Otro"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "その他"
+          }
         }
       }
     },
@@ -4248,6 +5364,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Presupuesto superado en %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@で予算超過"
           }
         }
       }
@@ -4272,6 +5394,12 @@
             "state": "translated",
             "value": "Propietario"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オーナー"
+          }
         }
       }
     },
@@ -4294,6 +5422,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Propietarios"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有者"
           }
         }
       }
@@ -4318,6 +5452,12 @@
             "state": "translated",
             "value": "Pagado con"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支払い方法"
+          }
         }
       }
     },
@@ -4340,6 +5480,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Historial de pagos"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支払い履歴"
           }
         }
       }
@@ -4364,6 +5510,12 @@
             "state": "translated",
             "value": "Por propietario"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有者別"
+          }
         }
       }
     },
@@ -4386,6 +5538,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Personal"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "個人"
           }
         }
       }
@@ -4410,6 +5568,12 @@
             "state": "translated",
             "value": "Las transacciones personales solo las ves tú. No aparecen en la lista compartida del hogar."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "個人取引はあなただけが見られます。世帯の共有リストには表示されません。"
+          }
         }
       }
     },
@@ -4432,6 +5596,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vivienda principal"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自宅"
           }
         }
       }
@@ -4456,6 +5626,12 @@
             "state": "translated",
             "value": "Capital"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "元本"
+          }
         }
       }
     },
@@ -4478,6 +5654,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Saldo de capital"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "元本残高"
           }
         }
       }
@@ -4502,6 +5684,12 @@
             "state": "translated",
             "value": "Precio de compra"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "購入価格"
+          }
         }
       }
     },
@@ -4524,6 +5712,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tasas no disponibles; usando valores aproximados."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レート利用不可; 概算値を使用中。"
           }
         }
       }
@@ -4548,6 +5742,12 @@
             "state": "translated",
             "value": "Tasas actualizadas %@"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レート更新: %@"
+          }
         }
       }
     },
@@ -4570,6 +5770,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Recurrente mensual: ~%@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月次定期: 約%@"
           }
         }
       }
@@ -4594,6 +5800,12 @@
             "state": "translated",
             "value": "Quitar"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "削除"
+          }
         }
       }
     },
@@ -4616,6 +5828,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quitar %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@を削除"
           }
         }
       }
@@ -4640,6 +5858,12 @@
             "state": "translated",
             "value": "¿Quitar a %@ de este hogar?"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この世帯から%@を削除しますか？"
+          }
         }
       }
     },
@@ -4662,6 +5886,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quitar presupuesto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "予算を削除"
           }
         }
       }
@@ -4686,6 +5916,12 @@
             "state": "translated",
             "value": "Quitar unidad"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ユニットを削除"
+          }
         }
       }
     },
@@ -4708,6 +5944,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Renombrar hogar"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "世帯名を変更"
           }
         }
       }
@@ -4732,6 +5974,12 @@
             "state": "translated",
             "value": "Alquiler"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "家賃"
+          }
         }
       }
     },
@@ -4754,6 +6002,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Los recordatorios de alquiler usan el día del mes de la fecha de inicio del contrato."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "家賃のリマインダーは賃貸開始日の日付を使用します。"
           }
         }
       }
@@ -4778,6 +6032,12 @@
             "state": "translated",
             "value": "En alquiler"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "賃貸"
+          }
         }
       }
     },
@@ -4800,6 +6060,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ingreso por alquiler"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "賃貸収入"
           }
         }
       }
@@ -4824,6 +6090,12 @@
             "state": "translated",
             "value": "Unidades en alquiler que posees"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有する賃貸ユニット"
+          }
         }
       }
     },
@@ -4846,6 +6118,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Reemplazar datos locales con Supabase"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ローカルデータをSupabaseで置き換える"
           }
         }
       }
@@ -4870,6 +6148,12 @@
             "state": "translated",
             "value": "Guardar"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存"
+          }
         }
       }
     },
@@ -4892,6 +6176,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Guardar y añadir otra"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存してもう1件追加"
           }
         }
       }
@@ -4916,6 +6206,12 @@
             "state": "translated",
             "value": "Ahorrando %lld%% del ingreso"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "収入の%lld%%を貯蓄中"
+          }
         }
       }
     },
@@ -4938,6 +6234,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Buscar"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "検索"
           }
         }
       }
@@ -4962,6 +6264,12 @@
             "state": "translated",
             "value": "Buscar transacciones"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取引を検索"
+          }
         }
       }
     },
@@ -4984,6 +6292,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Depósito de seguridad"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "敷金"
           }
         }
       }
@@ -5008,6 +6322,12 @@
             "state": "translated",
             "value": "Seleccionar varios propietarios marca la transacción como compartida."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "複数の所有者を選択すると、取引は共有としてマークされます。"
+          }
         }
       }
     },
@@ -5030,6 +6350,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enviar de nuevo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "再送信"
           }
         }
       }
@@ -5054,6 +6380,12 @@
             "state": "translated",
             "value": "Enviado a **%@**."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**%@**に送信しました。"
+          }
         }
       }
     },
@@ -5076,6 +6408,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ajustes"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定"
           }
         }
       }
@@ -5100,6 +6438,12 @@
             "state": "translated",
             "value": "Compartido"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "共有"
+          }
         }
       }
     },
@@ -5122,6 +6466,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Iniciar sesión"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サインイン"
           }
         }
       }
@@ -5146,6 +6496,12 @@
             "state": "translated",
             "value": "Cerrar sesión"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サインアウト"
+          }
         }
       }
     },
@@ -5168,6 +6524,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "¿Cerrar sesión de Ortho?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orthoからサインアウトしますか？"
           }
         }
       }
@@ -5192,6 +6554,12 @@
             "state": "translated",
             "value": "Fuente"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支払元"
+          }
         }
       }
     },
@@ -5214,6 +6582,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gasto por categoría"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カテゴリ別支出"
           }
         }
       }
@@ -5238,6 +6612,12 @@
             "state": "translated",
             "value": "Gasto -%lld%% en 30 días"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30日間で支出%lld%%減"
+          }
         }
       }
     },
@@ -5260,6 +6640,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "El gasto supera al ingreso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支出が収入を超えています"
           }
         }
       }
@@ -5284,6 +6670,12 @@
             "state": "translated",
             "value": "El gasto en %@ se registra desde el día 1 de cada mes natural. Los insights comparan el gasto real con este límite."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@の支出は毎月1日から記録されます。インサイトはこの上限と実際の支出を比較します。"
+          }
         }
       }
     },
@@ -5306,6 +6698,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gasto +%lld%% en 30 días"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30日間で支出%lld%%増"
           }
         }
       }
@@ -5330,6 +6728,12 @@
             "state": "translated",
             "value": "Dividir"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分割"
+          }
         }
       }
     },
@@ -5352,6 +6756,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suscripciones"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サブスク"
           }
         }
       }
@@ -5376,6 +6786,12 @@
             "state": "translated",
             "value": "Sincronizar todo desde el servidor"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サーバーからすべて同期"
+          }
         }
       }
     },
@@ -5398,6 +6814,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sistema"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システム"
           }
         }
       }
@@ -5422,6 +6844,12 @@
             "state": "translated",
             "value": "Inquilino"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "入居者"
+          }
         }
       }
     },
@@ -5444,6 +6872,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Plazo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "期間"
           }
         }
       }
@@ -5468,6 +6902,12 @@
             "state": "translated",
             "value": "La app mostrará un conjunto de datos de muestra de 6 meses (3 usuarios · 3 propiedades · ~300 transacciones). Tus datos reales en Supabase no se tocan, y los cambios que hagas en modo demo se quedan en local. Toca \"Salir\" en el banner superior para restaurar tus datos en vivo."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリは6か月のサンプルデータセット（3ユーザー · 3物件 · 約300取引）を表示します。Supabase上の実データには影響せず、デモモードの変更はローカルにとどまります。上部バナーの「終了」をタップして実データを復元してください。"
+          }
         }
       }
     },
@@ -5490,6 +6930,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esto no se puede deshacer."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この操作は取り消せません。"
           }
         }
       }
@@ -5514,6 +6960,12 @@
             "state": "translated",
             "value": "Este mes"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今月"
+          }
         }
       }
     },
@@ -5536,6 +6988,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Este nombre aparecerá en el menú \"Pagado con\" cuando registres un nuevo gasto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しい支出を記録するとき、この名前が「支払い方法」メニューに表示されます。"
           }
         }
       }
@@ -5560,6 +7018,12 @@
             "state": "translated",
             "value": "Hora de renovar o planificar una mudanza."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更新または引っ越しを計画する時期です。"
+          }
         }
       }
     },
@@ -5582,6 +7046,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hoy"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日"
           }
         }
       }
@@ -5606,6 +7076,12 @@
             "state": "translated",
             "value": "Comercios principales"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "主要店舗"
+          }
         }
       }
     },
@@ -5628,6 +7104,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Total"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "合計"
           }
         }
       }
@@ -5652,6 +7134,12 @@
             "state": "translated",
             "value": "Transacciones"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取引"
+          }
         }
       }
     },
@@ -5674,6 +7162,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transporte"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "交通"
           }
         }
       }
@@ -5698,6 +7192,12 @@
             "state": "translated",
             "value": "Libra esterlina"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "英ポンド"
+          }
         }
       }
     },
@@ -5720,6 +7220,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dólar estadounidense"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "米ドル"
           }
         }
       }
@@ -5744,6 +7250,12 @@
             "state": "translated",
             "value": "Por debajo del presupuesto en %@"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@は予算内"
+          }
         }
       }
     },
@@ -5766,6 +7278,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nombre de unidad"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ユニット名"
           }
         }
       }
@@ -5790,6 +7308,12 @@
             "state": "translated",
             "value": "Unidades e inquilinos"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ユニットと入居者"
+          }
         }
       }
     },
@@ -5812,6 +7336,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cargo inusual en %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@で異常な請求"
           }
         }
       }
@@ -5836,6 +7366,12 @@
             "state": "translated",
             "value": "Actualizando tasas…"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レートを更新中…"
+          }
         }
       }
     },
@@ -5858,6 +7394,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Usar otro correo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "別のメールを使う"
           }
         }
       }
@@ -5882,6 +7424,12 @@
             "state": "translated",
             "value": "Servicios"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "公共料金"
+          }
         }
       }
     },
@@ -5904,6 +7452,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Te enviaremos un código de 6 dígitos por correo. Sin contraseñas, sin complicaciones."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "6桁のコードをメールで送ります。パスワード不要、簡単です。"
           }
         }
       }
@@ -5928,6 +7482,12 @@
             "state": "translated",
             "value": "¿Qué tipo de vivienda es esta? Elige una — solo te haremos las preguntas adecuadas."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "これはどんな住宅ですか？1つ選んでください — 必要な質問だけお聞きします。"
+          }
         }
       }
     },
@@ -5950,6 +7510,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ayer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "昨日"
           }
         }
       }
@@ -5974,6 +7540,12 @@
             "state": "translated",
             "value": "Puedes cambiar el tipo más tarde desde los ajustes de la propiedad, pero algunos campos se reiniciarán (p. ej. las fechas del contrato pasan a fecha de cierre)."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "後で物件設定から種類を変更できますが、一部のフィールドはリセットされます（例: 賃貸日がクロージング日になる）。"
+          }
         }
       }
     },
@@ -5996,6 +7568,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Eres dueño de donde vives"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "住んでいる家を所有"
           }
         }
       }
@@ -6020,6 +7598,12 @@
             "state": "translated",
             "value": "Alquilas tu vivienda"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自宅を賃貸している"
+          }
         }
       }
     },
@@ -6042,6 +7626,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tendrás que iniciar sesión de nuevo la próxima vez que abras Ortho."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "次回Orthoを開くときに再度サインインが必要です。"
           }
         }
       }
@@ -6066,6 +7656,12 @@
             "state": "translated",
             "value": "Estás %@ por encima este mes: %@ de salida vs %@ de entrada."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今月%@超過: 支出%@に対して収入%@。"
+          }
         }
       }
     },
@@ -6088,6 +7684,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Estás %@ por encima de tu límite de %@ con %lld días restantes."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "残り%lld日で、%@の上限を%@超過しています。"
           }
         }
       }
@@ -6112,6 +7714,12 @@
             "state": "translated",
             "value": "p. ej. Calle Roble 124"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例: オークレーン124"
+          }
         }
       }
     },
@@ -6134,6 +7742,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "p. ej. 1A"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例: 1A"
           }
         }
       }
@@ -6158,6 +7772,12 @@
             "state": "translated",
             "value": "p. ej. Nómina Acme Co."
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例: Acme Co.の給与"
+          }
         }
       }
     },
@@ -6180,6 +7800,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "p. ej. Alex"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例: Alex"
           }
         }
       }
@@ -6204,6 +7830,12 @@
             "state": "translated",
             "value": "p. ej. Chase Freedom"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例: Chase Freedom"
+          }
         }
       }
     },
@@ -6227,6 +7859,12 @@
             "state": "translated",
             "value": "p. ej. Whole Foods"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例: Whole Foods"
+          }
         }
       }
     },
@@ -6249,6 +7887,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "de %@ · %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@の · %@"
           }
         }
       }
