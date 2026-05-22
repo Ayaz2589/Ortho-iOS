@@ -4,6 +4,7 @@ struct SettingsView: View {
     @Environment(AppState.self) private var appState
     @Environment(\.colorScheme) private var colorScheme
     @AppStorage("appearance") private var appearanceRaw: String = AppearanceMode.system.rawValue
+    @AppStorage("language") private var languageRaw: String = AppLanguage.system.rawValue
     @State private var showingAddCard = false
     @State private var showingSignOutConfirm = false
     #if DEBUG
@@ -12,6 +13,10 @@ struct SettingsView: View {
 
     private var appearance: AppearanceMode {
         AppearanceMode(rawValue: appearanceRaw) ?? .system
+    }
+
+    private var language: AppLanguage {
+        AppLanguage(rawValue: languageRaw) ?? .system
     }
 
     var body: some View {
@@ -77,6 +82,25 @@ struct SettingsView: View {
                         .lineSpacing(2)
                         .padding(.horizontal, 24)
                         .padding(.bottom, 24)
+
+                    sectionLabel("Language")
+
+                    VStack(spacing: 0) {
+                        ForEach(Array(AppLanguage.allCases.enumerated()), id: \.element.id) { idx, lang in
+                            LanguageRowView(
+                                language: lang,
+                                selected: language == lang,
+                                onTap: { languageRaw = lang.rawValue }
+                            )
+                            if idx < AppLanguage.allCases.count - 1 {
+                                RowSeparator(density: .comfortable)
+                            }
+                        }
+                    }
+                    .background(AppTheme.surface)
+                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 24)
 
                     sectionLabel("Appearance")
 
@@ -390,8 +414,12 @@ struct SettingsView: View {
 
     // MARK: - Helpers
 
-    private func sectionLabel(_ text: String) -> some View {
-        Text(text)
+    private func sectionLabel(_ key: LocalizedStringKey) -> some View {
+        // `LocalizedStringKey` (not `String`) so SwiftUI's bundle lookup
+        // resolves against the active locale; raw `String` would bypass
+        // localization entirely. Existing call sites pass string
+        // literals which Swift coerces to `LocalizedStringKey`.
+        Text(key)
             .font(.lato(size: 13, weight: .semibold))
             .kerning(0.6)
             .textCase(.uppercase)
