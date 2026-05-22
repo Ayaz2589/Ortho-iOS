@@ -93,15 +93,15 @@ struct AddPropertySheet: View {
     }
 
     private var isEditing: Bool { editing != nil }
-    private var navTitle: String {
+    private var navTitle: LocalizedStringKey {
         switch (isEditing, kind) {
-        case (true, _):                    return String(localized: "Edit \(kind.displayName.string.lowercased())")
-        case (false, .primaryHome):        return String(localized: "New primary home")
-        case (false, .multifamily):        return String(localized: "New multifamily")
-        case (false, .rental):             return String(localized: "New rental")
+        case (true, _):                    return "Edit \(kind.displayName.string.lowercased())"
+        case (false, .primaryHome):        return "New primary home"
+        case (false, .multifamily):        return "New multifamily"
+        case (false, .rental):             return "New rental"
         }
     }
-    private var actionLabel: String { isEditing ? "Save" : "Add" }
+    private var actionLabel: LocalizedStringKey { isEditing ? "Save" : "Add" }
 
     private var canSubmit: Bool {
         guard !address.trimmingCharacters(in: .whitespaces).isEmpty else { return false }
@@ -204,7 +204,7 @@ struct AddPropertySheet: View {
         .background(AppTheme.bg)
     }
 
-    private var footerCaption: String {
+    private var footerCaption: LocalizedStringKey {
         switch kind {
         case .primaryHome:
             return "Monthly principal + interest is computed from the loan amount, rate, and term. Taxes and insurance aren't tracked yet."
@@ -274,7 +274,7 @@ struct AddPropertySheet: View {
             .padding(.horizontal, 24)
     }
 
-    private func textRow(label: String, placeholder: String, text: Binding<String>) -> some View {
+    private func textRow(label: LocalizedStringKey, placeholder: LocalizedStringKey, text: Binding<String>) -> some View {
         HStack(spacing: 12) {
             Text(label)
                 .font(.lato(size: 15))
@@ -290,7 +290,7 @@ struct AddPropertySheet: View {
         .frame(minHeight: 52)
     }
 
-    private func currencyRow(label: String, placeholder: String, text: Binding<String>) -> some View {
+    private func currencyRow(label: LocalizedStringKey, placeholder: LocalizedStringKey, text: Binding<String>) -> some View {
         HStack(spacing: 12) {
             Text(label)
                 .font(.lato(size: 15))
@@ -311,7 +311,7 @@ struct AddPropertySheet: View {
         .frame(minHeight: 52)
     }
 
-    private func percentRow(label: String, placeholder: String, text: Binding<String>) -> some View {
+    private func percentRow(label: LocalizedStringKey, placeholder: LocalizedStringKey, text: Binding<String>) -> some View {
         HStack(spacing: 12) {
             Text(label)
                 .font(.lato(size: 15))
@@ -360,7 +360,7 @@ struct AddPropertySheet: View {
         .frame(minHeight: 52)
     }
 
-    private func dateRow(label: String, date: Binding<Date>) -> some View {
+    private func dateRow(label: LocalizedStringKey, date: Binding<Date>) -> some View {
         HStack(spacing: 12) {
             Text(label)
                 .font(.lato(size: 15))

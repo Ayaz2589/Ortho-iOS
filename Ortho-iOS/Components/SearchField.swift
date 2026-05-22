@@ -4,7 +4,7 @@ import SwiftUI
 /// inline Cancel that resigns focus. Used in the activity list header.
 struct SearchField: View {
     @Binding var text: String
-    var placeholder: String = "Search"
+    var placeholder: LocalizedStringKey = "Search"
     @FocusState private var focused: Bool
 
     var body: some View {

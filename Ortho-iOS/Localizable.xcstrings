@@ -171,6 +171,23 @@
         }
       }
     },
+    "Add each unit's rent and tenant. Net balance is total unit rent minus the mortgage payment.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "প্রতি ইউনিটের ভাড়া ও ভাড়াটে যোগ করুন। নেট ব্যালেন্স হল মোট ইউনিট ভাড়া বিয়োগ মর্টগেজ পেমেন্ট।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add each unit's rent and tenant. Net balance is total unit rent minus the mortgage payment."
+          }
+        }
+      }
+    },
     "Add property": {
       "extractionState": "manual",
       "localizations": {
@@ -239,6 +256,23 @@
         }
       }
     },
+    "Address": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ঠিকানা"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Address"
+          }
+        }
+      }
+    },
     "All": {
       "extractionState": "manual",
       "localizations": {
@@ -303,6 +337,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Appearance"
+          }
+        }
+      }
+    },
+    "Auto-pay": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "অটো-পে"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auto-pay"
           }
         }
       }
@@ -541,6 +592,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Chinese Yuan"
+          }
+        }
+      }
+    },
+    "Closing date": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ক্লোজিং তারিখ"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Closing date"
           }
         }
       }
@@ -936,6 +1004,23 @@
         }
       }
     },
+    "Edit transaction": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "লেনদেন সম্পাদনা"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit transaction"
+          }
+        }
+      }
+    },
     "Enter demo mode?": {
       "extractionState": "manual",
       "localizations": {
@@ -1191,6 +1276,23 @@
         }
       }
     },
+    "Income shows in sage on the Activity list. Selecting multiple owners attributes shared income to all of them.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "আয় কার্যকলাপ তালিকায় সাজ রঙে দেখায়। একাধিক মালিক নির্বাচন করলে শেয়ার্ড আয় তাদের সবার মধ্যে বরাদ্দ হয়।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Income shows in sage on the Activity list. Selecting multiple owners attributes shared income to all of them."
+          }
+        }
+      }
+    },
     "Initial is set automatically from the name. Joint accounts get two initials joined with +.": {
       "extractionState": "manual",
       "localizations": {
@@ -1204,6 +1306,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Initial is set automatically from the name. Joint accounts get two initials joined with +."
+          }
+        }
+      }
+    },
+    "Interest rate": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "সুদের হার"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interest rate"
           }
         }
       }
@@ -1327,6 +1446,23 @@
         }
       }
     },
+    "Lease end": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "লিজ শেষ"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lease end"
+          }
+        }
+      }
+    },
     "Lease ends in %lld days": {
       "extractionState": "manual",
       "localizations": {
@@ -1340,6 +1476,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lease ends in %lld days"
+          }
+        }
+      }
+    },
+    "Lease start": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "লিজ শুরু"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lease start"
           }
         }
       }
@@ -1480,6 +1633,23 @@
         }
       }
     },
+    "Merchant": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "বিক্রেতা"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merchant"
+          }
+        }
+      }
+    },
     "Month": {
       "extractionState": "manual",
       "localizations": {
@@ -1527,6 +1697,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Monthly payment"
+          }
+        }
+      }
+    },
+    "Monthly principal + interest is computed from the loan amount, rate, and term. Taxes and insurance aren't tracked yet.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মাসিক মূলধন + সুদ ঋণের পরিমাণ, হার ও মেয়াদ থেকে গণনা করা হয়। কর ও বীমা এখনো ট্র্যাক করা হয় না।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monthly principal + interest is computed from the loan amount, rate, and term. Taxes and insurance aren't tracked yet."
           }
         }
       }
@@ -1752,6 +1939,23 @@
         }
       }
     },
+    "New transaction": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "নতুন লেনদেন"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New transaction"
+          }
+        }
+      }
+    },
     "New user": {
       "extractionState": "manual",
       "localizations": {
@@ -1782,6 +1986,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Next 12 months"
+          }
+        }
+      }
+    },
+    "Nickname": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ডাকনাম"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nickname"
           }
         }
       }
@@ -2007,6 +2228,23 @@
         }
       }
     },
+    "Original loan": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মূল ঋণ"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Original loan"
+          }
+        }
+      }
+    },
     "Owner": {
       "extractionState": "manual",
       "localizations": {
@@ -2037,6 +2275,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Owners"
+          }
+        }
+      }
+    },
+    "Paid with": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "যা দিয়ে পরিশোধ"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paid with"
           }
         }
       }
@@ -2092,6 +2347,23 @@
         }
       }
     },
+    "Personal transactions are visible only to you. They don't appear in the household's shared list.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ব্যক্তিগত লেনদেন শুধু আপনি দেখতে পারেন। এগুলো পরিবারের শেয়ার্ড তালিকায় দেখা যায় না।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personal transactions are visible only to you. They don't appear in the household's shared list."
+          }
+        }
+      }
+    },
     "Primary home": {
       "extractionState": "manual",
       "localizations": {
@@ -2105,6 +2377,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Primary home"
+          }
+        }
+      }
+    },
+    "Purchase price": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ক্রয় মূল্য"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchase price"
           }
         }
       }
@@ -2228,6 +2517,23 @@
         }
       }
     },
+    "Rent reminders use the day of the month from your lease start date.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ভাড়ার অনুস্মারক আপনার লিজ শুরুর তারিখের মাসের দিন ব্যবহার করে।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rent reminders use the day of the month from your lease start date."
+          }
+        }
+      }
+    },
     "Rental": {
       "extractionState": "manual",
       "localizations": {
@@ -2326,6 +2632,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "Save and add another"
+          }
+        }
+      }
+    },
+    "Search": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "অনুসন্ধান"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search"
+          }
+        }
+      }
+    },
+    "Search transactions": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "লেনদেন অনুসন্ধান"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search transactions"
+          }
+        }
+      }
+    },
+    "Security deposit": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "নিরাপত্তা জামানত"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Security deposit"
+          }
+        }
+      }
+    },
+    "Selecting multiple owners marks the transaction as shared.": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "একাধিক মালিক নির্বাচন করলে লেনদেন শেয়ার্ড হিসেবে চিহ্নিত হয়।"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selecting multiple owners marks the transaction as shared."
           }
         }
       }
@@ -2445,6 +2819,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sign out of Ortho?"
+          }
+        }
+      }
+    },
+    "Source": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "উৎস"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Source"
           }
         }
       }
@@ -2942,6 +3333,23 @@
         }
       }
     },
+    "e.g. 124 Oak Lane": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "যেমন 124 Oak Lane"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "e.g. 124 Oak Lane"
+          }
+        }
+      }
+    },
     "e.g. 1A": {
       "extractionState": "manual",
       "localizations": {
@@ -2955,6 +3363,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "e.g. 1A"
+          }
+        }
+      }
+    },
+    "e.g. Acme Co. payroll": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "যেমন Acme Co. বেতন"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "e.g. Acme Co. payroll"
           }
         }
       }
@@ -2989,6 +3414,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "e.g. Chase Freedom"
+          }
+        }
+      }
+    },
+    "e.g. Whole Foods": {
+      "extractionState": "manual",
+      "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "যেমন Whole Foods"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "e.g. Whole Foods"
           }
         }
       }

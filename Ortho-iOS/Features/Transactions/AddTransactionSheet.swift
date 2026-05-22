@@ -93,8 +93,8 @@ struct AddTransactionSheet: View {
     }
 
     private var isEditing: Bool { editing != nil }
-    private var navTitle: String { isEditing ? "Edit transaction" : "New transaction" }
-    private var actionLabel: String { isEditing ? "Save" : "Add" }
+    private var navTitle: LocalizedStringKey { isEditing ? "Edit transaction" : "New transaction" }
+    private var actionLabel: LocalizedStringKey { isEditing ? "Save" : "Add" }
 
     /// 0.5% tolerance so display rounding (e.g. 33.33 + 33.33 + 33.34 = 100)
     /// doesn't block submission.
@@ -154,7 +154,7 @@ struct AddTransactionSheet: View {
         return abs <= Self.splitTolerance
     }
 
-    private var merchantLabel: String { kind == .income ? "Source" : "Merchant" }
+    private var merchantLabel: LocalizedStringKey { kind == .income ? "Source" : "Merchant" }
     private var sourceLabel:   String { kind == .income ? "Deposit to" : "Paid with" }
     private var sources:       [String] { kind == .income ? Self.incomeSources : expenseSources }
 
@@ -350,7 +350,7 @@ struct AddTransactionSheet: View {
         }
     }
 
-    private var footerCaption: String {
+    private var footerCaption: LocalizedStringKey {
         if scope == .personal {
             return "Personal transactions are visible only to you. They don't appear in the household's shared list."
         }
@@ -629,7 +629,7 @@ struct AddTransactionSheet: View {
             .padding(.leading, 16)
     }
 
-    private func textRow(label: String, placeholder: String, text: Binding<String>) -> some View {
+    private func textRow(label: LocalizedStringKey, placeholder: LocalizedStringKey, text: Binding<String>) -> some View {
         HStack(spacing: 12) {
             Text(label)
                 .font(.lato(size: 15))
