@@ -108,9 +108,7 @@ struct MortgageDetailsCard: View {
     }
 
     private func dateLabel(_ date: Date) -> String {
-        let f = DateFormatter()
-        f.dateFormat = "MMM d, yyyy"
-        return f.string(from: date)
+        DateFormatter.localized(pattern: "MMM d, yyyy", locale: Localizer.currentLocale).string(from: date)
     }
 }
 
@@ -169,9 +167,7 @@ struct EquityProgressCard: View {
     }
 
     private var closingMonthYear: String {
-        let f = DateFormatter()
-        f.dateFormat = "MMM yyyy"
-        return f.string(from: mortgage.closingDate)
+        DateFormatter.localized(pattern: "MMM yyyy", locale: Localizer.currentLocale).string(from: mortgage.closingDate)
     }
 }
 
@@ -241,9 +237,8 @@ struct AmortizationCard: View {
     }
 
     private func monthInitial(_ d: Date) -> String {
-        let f = DateFormatter()
-        f.dateFormat = "LLLLL"   // narrow month — "J", "F", "M"
-        return f.string(from: d)
+        // Narrow month — "J", "F", "M" in EN; "জা", "ফে" in BN.
+        DateFormatter.localized(pattern: "LLLLL", locale: Localizer.currentLocale).string(from: d)
     }
 
     private func legend(color: Color, label: String) -> some View {

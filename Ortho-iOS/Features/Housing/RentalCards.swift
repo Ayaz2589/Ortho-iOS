@@ -127,9 +127,7 @@ struct LeaseInfoCard: View {
     }
 
     private func dateLabel(_ d: Date) -> String {
-        let f = DateFormatter()
-        f.dateFormat = "MMM d, yyyy"
-        return f.string(from: d)
+        DateFormatter.localized(pattern: "MMM d, yyyy", locale: Localizer.currentLocale).string(from: d)
     }
 }
 
@@ -233,8 +231,6 @@ struct RentalPaymentsCard: View {
     }
 
     private func dateLabel(_ d: Date) -> String {
-        let f = DateFormatter()
-        f.dateFormat = "MMM d, yyyy"
-        return f.string(from: d)
+        DateFormatter.localized(pattern: "MMM d, yyyy", locale: Localizer.currentLocale).string(from: d)
     }
 }

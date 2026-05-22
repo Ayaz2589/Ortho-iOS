@@ -22,31 +22,29 @@ struct TransactionGroup: Identifiable, Hashable {
     }
 
     /// "Today" / "Yesterday" / weekday name (e.g. "Thursday") for recent days;
-    /// "May 17" if outside the relative window.
+    /// "May 17" if outside the relative window. All strings localized via
+    /// `Localizer.currentLocale` — pinned to the in-app language override
+    /// rather than the OS locale.
     var dayLabel: String {
         let cal = Calendar.current
         let today = cal.startOfDay(for: Date())
         let diff = cal.dateComponents([.day], from: day, to: today).day ?? 0
+        let locale = Localizer.currentLocale
         switch diff {
-        case 0: return "Today"
-        case 1: return "Yesterday"
+        case 0: return String(localized: "Today", locale: locale)
+        case 1: return String(localized: "Yesterday", locale: locale)
         case 2..<7:
-            let f = DateFormatter()
-            f.dateFormat = "EEEE"
-            return f.string(from: day)
+            return DateFormatter.localized(pattern: "EEEE", locale: locale).string(from: day)
         default:
-            return Self.shortMonthDay.string(from: day)
+            return DateFormatter.localized(pattern: "MMM d", locale: locale).string(from: day)
         }
     }
 
     /// Short form, e.g. "May 17". Always rendered next to `dayLabel`.
-    var dateLabel: String { Self.shortMonthDay.string(from: day) }
-
-    private static let shortMonthDay: DateFormatter = {
-        let f = DateFormatter()
-        f.dateFormat = "MMM d"
-        return f
-    }()
+    /// Locale-aware via `Localizer.currentLocale`.
+    var dateLabel: String {
+        DateFormatter.localized(pattern: "MMM d", locale: Localizer.currentLocale).string(from: day)
+    }
 
     /// Groups + sorts descending by day; items within a day sorted descending
     /// by exact time.

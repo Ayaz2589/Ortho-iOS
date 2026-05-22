@@ -238,12 +238,15 @@ struct TransactionDetailSheet: View {
         return String(format: "%.2f", ns.doubleValue)
     }
 
-    private static let dateFormatter: DateFormatter = {
+    /// Locale-aware medium-style date formatter. Built fresh on access
+    /// so it picks up `Localizer.currentLocale` after a language change.
+    private static var dateFormatter: DateFormatter {
         let f = DateFormatter()
         f.dateStyle = .medium
         f.timeStyle = .none
+        f.locale = Localizer.currentLocale
         return f
-    }()
+    }
 
     /// Nav title that surfaces the scope ("Personal expense", "Expense · Home").
     private func navTitle(for tx: Transaction) -> String {

@@ -357,11 +357,7 @@ enum InsightEngine {
             }
         }
         guard let outlier = bestOutlier else { return [] }
-        let dateString: String = {
-            let f = DateFormatter()
-            f.dateFormat = "MMM d"
-            return f.string(from: outlier.tx.date)
-        }()
+        let dateString = DateFormatter.localized(pattern: "MMM d", locale: Localizer.currentLocale).string(from: outlier.tx.date)
         let multipleString = String(format: "%.1f×", outlier.multiple)
         let severity: InsightSeverity = outlier.tx.amount >= 50_000 ? .warning : .info
         return [Insight(

@@ -60,19 +60,25 @@ enum Money {
         return usdDollars * rate
     }
 
-    /// Cached formatter per currency. NumberFormatter is expensive to
-    /// construct — keep one alive per code so rapid re-renders stay cheap.
-    private static var formatters: [Currency: NumberFormatter] = [:]
+    /// Cached formatter per (currency, locale). NumberFormatter is
+    /// expensive to construct — keep one alive per pair so rapid
+    /// re-renders stay cheap. The locale dimension is required because a
+    /// language switch (en→bn) must yield a fresh formatter so digit
+    /// grouping and currency symbol placement update; otherwise we'd
+    /// keep returning the EN-formatted version forever.
+    private static var formatters: [String: NumberFormatter] = [:]
 
     private static func formatter(for currency: Currency) -> NumberFormatter {
-        if let f = formatters[currency] { return f }
+        let locale = Localizer.currentLocale
+        let key = "\(currency.code)|\(locale.identifier)"
+        if let f = formatters[key] { return f }
         let f = NumberFormatter()
         f.numberStyle = .currency
         f.currencyCode = currency.code
-        f.locale = Locale.current
+        f.locale = locale
         f.minimumFractionDigits = currency.fractionDigits
         f.maximumFractionDigits = currency.fractionDigits
-        formatters[currency] = f
+        formatters[key] = f
         return f
     }
 }

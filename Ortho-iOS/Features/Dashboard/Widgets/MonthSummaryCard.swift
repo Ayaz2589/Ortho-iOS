@@ -94,8 +94,7 @@ struct MonthSummaryCard: View {
             let range = cal.range(of: .day, in: .month, for: .now)?.count ?? 30
             return "Day \(day) of \(range)"
         case .last3Months, .last6Months, .last12Months:
-            let f = DateFormatter()
-            f.dateFormat = "MMM d"
+            let f = DateFormatter.localized(pattern: "MMM d", locale: Localizer.currentLocale)
             let endDate = Calendar.current.date(byAdding: .day, value: -1, to: interval.end) ?? interval.end
             return "\(f.string(from: interval.start)) – \(f.string(from: endDate))"
         }
