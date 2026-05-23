@@ -27,3 +27,8 @@ Ortho-iOS/App/SupabaseConfig.swift
 *.p8
 *.p12
 build-device/
+
+# Personal financial data consumed by the DEBUG-only LegacyImporter
+# (see Ortho-iOS/Services/LegacyImporter.swift). The bundled JSON
+# carries real transactions and must never leave the device.
+Ortho-iOS/Resources/legacy-import.json

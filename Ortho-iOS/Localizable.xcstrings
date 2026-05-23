@@ -5414,6 +5414,88 @@
         }
       }
     },
+    "Local": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Local"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "স্থানীয়"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Local"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ローカル"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本地"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로컬"
+          }
+        }
+      }
+    },
+    "Local users stay on this device. Use them to split personal expenses with people who don't have Ortho.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Local users stay on this device. Use them to split personal expenses with people who don't have Ortho."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "স্থানীয় ব্যবহারকারী এই ডিভাইসেই থাকে। যাদের অর্থো নেই তাদের সাথে ব্যক্তিগত খরচ ভাগ করতে এদের ব্যবহার করুন।"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los usuarios locales se quedan en este dispositivo. Úsalos para dividir gastos personales con personas que no tienen Ortho."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ローカルユーザーはこのデバイスに保存されます。Orthoを使っていない人と個人の支出を分担するために使用します。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本地用户仅保留在此设备上。用于与没有Ortho的人分摊个人开支。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로컬 사용자는 이 기기에만 저장됩니다. Ortho를 사용하지 않는 사람과 개인 지출을 분담할 때 사용하세요."
+          }
+        }
+      }
+    },
     "Log an expense or income to see it grouped by day here.": {
       "extractionState": "manual",
       "localizations": {
@@ -5615,6 +5697,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "구성원은 이 세대의 모든 공유 거래를 볼 수 있습니다. 개인 거래는 본인만 볼 수 있습니다. 새 구성원 초대 기능은 곧 제공됩니다."
+          }
+        }
+      }
+    },
+    "Members can see all Shared transactions in this household. Personal transactions are visible only to you. Local users stay on this device.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Members can see all Shared transactions in this household. Personal transactions are visible only to you. Local users stay on this device."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "সদস্যরা এই পরিবারের সব শেয়ার্ড লেনদেন দেখতে পারে। ব্যক্তিগত লেনদেন শুধু আপনি দেখতে পারেন। স্থানীয় ব্যবহারকারী এই ডিভাইসেই থাকে।"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los miembros pueden ver todas las transacciones compartidas de este hogar. Las personales solo las ves tú. Los usuarios locales se quedan en este dispositivo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メンバーはこの世帯のすべての共有取引を見ることができます。個人取引はあなただけが見られます。ローカルユーザーはこのデバイスに保存されます。"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "成员可以查看此家庭的所有共享交易。个人交易仅您可见。本地用户仅保留在此设备上。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "구성원은 이 세대의 모든 공유 거래를 볼 수 있습니다. 개인 거래는 본인만 볼 수 있습니다. 로컬 사용자는 이 기기에만 저장됩니다."
           }
         }
       }
@@ -6548,6 +6671,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "새 카드"
+          }
+        }
+      }
+    },
+    "New local user": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New local user"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "নতুন স্থানীয় ব্যবহারকারী"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuevo usuario local"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいローカルユーザー"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建本地用户"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 로컬 사용자"
           }
         }
       }

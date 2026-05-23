@@ -69,10 +69,14 @@ struct TransactionsView: View {
     }
 
     private func inScope(_ tx: Transaction) -> Bool {
-        let myID = appState.currentUserID
         let householdID = appState.currentHouseholdID
         let isShared = tx.householdID != nil && tx.householdID == householdID
-        let isMine = tx.householdID == nil && tx.ownerIDs == [myID]
+        // A transaction is "personal" when it isn't tied to any
+        // household — regardless of how many co-owners (including
+        // local users) it has. The previous check required
+        // `ownerIDs == [myID]` exactly, which silently hid any
+        // personal transaction that included a local user.
+        let isMine = tx.householdID == nil
         switch scopeFilter {
         case .all:      return isShared || isMine
         case .shared:   return isShared

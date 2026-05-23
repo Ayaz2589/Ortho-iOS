@@ -1,9 +1,14 @@
 import SwiftUI
 
-/// Modal sheet for adding a household member. Initial is auto-derived from
-/// the name. Color picker uses only `OrthoColorOption.all`.
+/// Modal sheet for adding a **local** user — a device-only person the
+/// primary user can split personal expenses with (partner, roommate,
+/// family member without an Ortho account). Emits a `LocalUser` —
+/// never written to Supabase. See `LocalUser` for the invariant that
+/// local users can only participate in personal-scope transactions.
+/// Initial is auto-derived from the name; color picker uses only
+/// `OrthoColorOption.all`.
 struct AddUserSheet: View {
-    let onAdd: (User) -> Void
+    let onAdd: (LocalUser) -> Void
 
     @Environment(\.dismiss) private var dismiss
 
@@ -42,6 +47,14 @@ struct AddUserSheet: View {
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
                         .padding(.horizontal, 24)
+                        .padding(.bottom, 8)
+                        .frame(maxWidth: 320, alignment: .leading)
+
+                    Text("Local users stay on this device. Use them to split personal expenses with people who don't have Ortho.")
+                        .font(.lato(size: 13))
+                        .foregroundStyle(AppTheme.text.opacity(0.36))
+                        .lineSpacing(2)
+                        .padding(.horizontal, 24)
                         .padding(.bottom, 24)
                         .frame(maxWidth: 320, alignment: .leading)
                 }
@@ -54,7 +67,7 @@ struct AddUserSheet: View {
 
     private var sheetNav: some View {
         ZStack {
-            Text("New user")
+            Text("New local user")
                 .font(.lato(size: 17, weight: .semibold))
                 .foregroundStyle(AppTheme.text)
                 .tracking(-0.3)
@@ -66,7 +79,7 @@ struct AddUserSheet: View {
                     .buttonStyle(.plain)
                 Spacer()
                 Button("Add") {
-                    onAdd(User(
+                    onAdd(LocalUser(
                         name: name.trimmingCharacters(in: .whitespaces),
                         initial: derivedInitial,
                         colorKey: colorKey

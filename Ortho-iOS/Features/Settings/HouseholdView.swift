@@ -10,8 +10,10 @@ struct HouseholdView: View {
 
     @State private var showingRenameHousehold = false
     @State private var pendingHouseholdName: String = ""
+    @State private var showingAddLocalUser = false
 
     private var householdMembers: [User] { appState.householdMembers }
+    private var localUsers: [LocalUser] { appState.localUsers }
 
     /// Whether a member is removable: not yourself, and not the last member.
     private func canRemove(_ u: User) -> Bool {
@@ -24,12 +26,14 @@ struct HouseholdView: View {
                 VStack(spacing: 0) {
                     householdNameRow
                     RowSeparator(density: .comfortable)
-                    // `AddUserRowView` is intentionally not rendered. Adding
-                    // members requires the invitation flow (server-issued
-                    // OTP / QR redeem via `accept_invite`) — building it
-                    // as an in-memory User would FK-violate `public.users.id
-                    // → auth.users.id` the moment one touched a shared
-                    // transaction. Coming with the Invitations work item.
+                    // Real household members — Supabase users bound by
+                    // `Household.memberIDs`. Adding to this list still
+                    // requires the invitation flow (server-issued OTP /
+                    // QR redeem via `accept_invite`) since the row
+                    // FK-references `public.users.id → auth.users.id`.
+                    // Local users (below) are a separate, device-only
+                    // collection for splitting personal expenses with
+                    // people who don't have Ortho.
                     ForEach(Array(householdMembers.enumerated()), id: \.element.id) { idx, u in
                         UserRowView(
                             user: u,
@@ -43,19 +47,48 @@ struct HouseholdView: View {
                             RowSeparator(density: .comfortable)
                         }
                     }
+
+                    // Local users — same visual treatment as members but
+                    // tagged "Local" in the detail line. Removable
+                    // without confirmation since they hold no transaction
+                    // FKs server-side.
+                    if !localUsers.isEmpty {
+                        RowSeparator(density: .comfortable)
+                        ForEach(Array(localUsers.enumerated()), id: \.element.id) { idx, lu in
+                            UserRowView(
+                                user: lu.asUser,
+                                detail: localDetail(for: lu),
+                                onRemove: { appState.removeLocalUser(lu.id) }
+                            )
+                            if idx < localUsers.count - 1 {
+                                RowSeparator(density: .comfortable)
+                            }
+                        }
+                    }
+
+                    RowSeparator(density: .comfortable)
+                    AddUserRowView { showingAddLocalUser = true }
                 }
                 .background(AppTheme.surface)
                 .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                 .padding(.horizontal, 16)
                 .padding(.bottom, 12)
 
-                Text("Members can see all Shared transactions in this household. Personal transactions are visible only to you. Inviting new members is coming soon.")
+                Text("Members can see all Shared transactions in this household. Personal transactions are visible only to you. Local users stay on this device.")
                     .font(.lato(size: 13))
                     .foregroundStyle(AppTheme.text.opacity(0.36))
                     .lineSpacing(2)
                     .padding(.horizontal, 24)
                     .padding(.bottom, 24)
             }
+        }
+        .sheet(isPresented: $showingAddLocalUser) {
+            AddUserSheet { newLocalUser in
+                appState.addLocalUser(newLocalUser)
+                showingAddLocalUser = false
+            }
+            .presentationDetents([.large])
+            .presentationBackground(AppTheme.bg)
         }
         .background(AppTheme.bg)
         .toolbar(.hidden, for: .navigationBar)
@@ -97,6 +130,13 @@ struct HouseholdView: View {
 
     private func detail(for u: User) -> String {
         "\(appState.formatMoney(appState.monthlySpent(by: u.id))) this month"
+    }
+
+    /// Local users get a "Local" tag instead of a money rollup — they
+    /// don't accrue monthly totals (transactions stay device-only and
+    /// participate only in personal-scope splits).
+    private func localDetail(for u: LocalUser) -> String {
+        Localizer.tr("Local")
     }
 
     // MARK: - Rows

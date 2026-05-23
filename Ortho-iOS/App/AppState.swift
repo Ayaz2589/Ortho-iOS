@@ -64,6 +64,16 @@ final class AppState {
     var rentalPayments: [RentalPayment]
     var budgets: [Budget]
 
+    /// Device-only people the user can split personal expenses with —
+    /// e.g. a partner, roommate, or family member without an Ortho
+    /// account. Persisted to `UserDefaults` (JSON) and never written
+    /// to Supabase. See `LocalUser` for the invariant that local users
+    /// can only participate in personal-scope transactions.
+    var localUsers: [LocalUser] = [] {
+        didSet { persistLocalUsers() }
+    }
+    private static let localUsersKey = "localUsers"
+
     // MARK: - Identity + active household
 
     /// Which user is "me" on this device. Persisted so the choice survives
@@ -165,6 +175,10 @@ final class AppState {
         if fetchedAt > 0 {
             self.ratesLastFetched = Date(timeIntervalSince1970: fetchedAt)
         }
+
+        // Restore persisted local users (last — has a `didSet` that touches
+        // `self`, which the compiler only allows once init is complete).
+        loadLocalUsers()
     }
 
     // MARK: - User helpers
@@ -172,11 +186,51 @@ final class AppState {
     /// Resolve a user id; returns `User.placeholder` when no longer present
     /// (e.g. user was deleted after the transaction was logged).
     func user(_ id: User.ID) -> User {
-        users.first { $0.id == id } ?? .placeholder
+        // Lookup order: Supabase users first (the common case), then
+        // local users via the rendering shim (`LocalUser.asUser`).
+        // Personal-scope transactions can have LocalUser owner IDs;
+        // without this fallback they'd render as the placeholder.
+        if let u = users.first(where: { $0.id == id }) { return u }
+        if let lu = localUsers.first(where: { $0.id == id }) { return lu.asUser }
+        return .placeholder
     }
 
     func addUser(_ user: User) {
         users.append(user)
+    }
+
+    /// Owners selectable in a personal-scope transaction's picker: the
+    /// current Supabase user plus every local user on this device.
+    var personalParticipants: [User] {
+        var out: [User] = []
+        if let me = users.first(where: { $0.id == currentUserID }) { out.append(me) }
+        out.append(contentsOf: localUsers.map { $0.asUser })
+        return out
+    }
+
+    // MARK: - Local users (device-only, never synced)
+
+    func addLocalUser(_ u: LocalUser) {
+        localUsers.append(u)
+    }
+
+    func removeLocalUser(_ id: LocalUser.ID) {
+        localUsers.removeAll { $0.id == id }
+    }
+
+    private func persistLocalUsers() {
+        guard let data = try? JSONEncoder().encode(localUsers) else { return }
+        UserDefaults.standard.set(data, forKey: Self.localUsersKey)
+    }
+
+    private func loadLocalUsers() {
+        guard let data = UserDefaults.standard.data(forKey: Self.localUsersKey),
+              let decoded = try? JSONDecoder().decode([LocalUser].self, from: data)
+        else { return }
+        // Assign directly — `didSet` re-encodes which is wasteful on launch,
+        // but it's a small array so the cost is negligible. Could short-
+        // circuit if it becomes hot.
+        localUsers = decoded
     }
 
     func resolveOwners(of tx: Transaction) -> [User] {

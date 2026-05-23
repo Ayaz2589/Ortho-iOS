@@ -32,4 +32,13 @@ struct LocalUser: Identifiable, Hashable, Codable {
 
 extension LocalUser {
     var palette: OrthoColorOption { OrthoColorOption.find(colorKey) }
+
+    /// Shim that lets `UserRowView` (which takes a `User`) render a
+    /// LocalUser without the View being aware of the distinction. The
+    /// resulting User exists ONLY for rendering — it's never persisted
+    /// or sent to Supabase, and `User.placeholder` style FK lookups
+    /// won't find it.
+    var asUser: User {
+        User(id: id, name: name, initial: initial, colorKey: colorKey)
+    }
 }

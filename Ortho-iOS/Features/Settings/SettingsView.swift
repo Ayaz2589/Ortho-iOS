@@ -9,6 +9,9 @@ struct SettingsView: View {
     @State private var showingSignOutConfirm = false
     #if DEBUG
     @State private var showingLoadDummyConfirm = false
+    @State private var showingLegacyImportConfirm = false
+    @State private var legacyImportRunning = false
+    @State private var legacyImportResult: String?
     #endif
 
     private var appearance: AppearanceMode {
@@ -138,13 +141,15 @@ struct SettingsView: View {
                         loadDummyDataRow
                         RowSeparator(density: .comfortable)
                         syncFromServerRow
+                        RowSeparator(density: .comfortable)
+                        legacyImportRow
                     }
                     .background(AppTheme.surface)
                     .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                     .padding(.horizontal, 16)
                     .padding(.bottom, 8)
 
-                    Text("Only visible in DEBUG builds. \"Load demo data\" enters demo mode — the app shows a 6-month sample dataset, and every change you make stays local (nothing syncs to Supabase). A banner appears at the top with an Exit button that restores your real data. \"Sync all from server\" replaces local transactions, cards, properties, and rental payments with what Supabase returns.")
+                    Text("Only visible in DEBUG builds. \"Load demo data\" enters demo mode — the app shows a 6-month sample dataset, and every change you make stays local (nothing syncs to Supabase). A banner appears at the top with an Exit button that restores your real data. \"Sync all from server\" replaces local transactions, cards, properties, and rental payments with what Supabase returns. \"Import legacy JSON\" runs a one-shot seed against Supabase from a bundled file — use the dry-run option first.")
                         .font(.lato(size: 13))
                         .foregroundStyle(AppTheme.text.opacity(0.36))
                         .lineSpacing(2)
@@ -200,6 +205,28 @@ struct SettingsView: View {
             } message: {
                 Text("The app will show a 6-month sample dataset (3 users · 3 properties · ~300 transactions). Your real data on Supabase isn't touched, and changes you make in demo mode stay local. Tap Exit in the banner at the top to restore your live data.")
             }
+            .confirmationDialog("Import legacy JSON?",
+                                isPresented: $showingLegacyImportConfirm,
+                                titleVisibility: .visible) {
+                Button("Dry run (no writes)") {
+                    runLegacyImport(dryRun: true)
+                }
+                Button("Import for real", role: .destructive) {
+                    runLegacyImport(dryRun: false)
+                }
+                Button("Cancel", role: .cancel) { }
+            } message: {
+                Text("Reads Resources/legacy-import.json and inserts the contents into your live Supabase household. \"Dry run\" computes counts without writing. Only run \"Import for real\" once.")
+            }
+            .alert("Legacy import result",
+                   isPresented: Binding(
+                    get: { legacyImportResult != nil },
+                    set: { if !$0 { legacyImportResult = nil } }
+                   )) {
+                Button("OK", role: .cancel) { legacyImportResult = nil }
+            } message: {
+                Text(legacyImportResult ?? "")
+            }
             #endif
         }
     }
@@ -237,6 +264,76 @@ struct SettingsView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+    }
+
+    private var legacyImportRow: some View {
+        Button {
+            showingLegacyImportConfirm = true
+        } label: {
+            HStack(spacing: 14) {
+                ZStack {
+                    Circle().fill(AppTheme.text.opacity(0.05))
+                        .frame(width: 40, height: 40)
+                    if legacyImportRunning {
+                        ProgressView()
+                            .controlSize(.small)
+                    } else {
+                        Image(systemName: "square.and.arrow.down.on.square")
+                            .font(.lato(size: 15, weight: .medium))
+                            .foregroundStyle(AppTheme.accent)
+                    }
+                }
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Import legacy JSON")
+                        .font(.lato(size: 17, weight: .medium))
+                        .tracking(-0.2)
+                        .foregroundStyle(AppTheme.text)
+                    Text(legacyImportRunning
+                         ? "Importing… don't close the app"
+                         : "One-shot seed from bundled JSON")
+                        .font(.lato(size: 13))
+                        .foregroundStyle(AppTheme.text.opacity(0.58))
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.lato(size: 13, weight: .semibold))
+                    .foregroundStyle(AppTheme.text.opacity(0.36))
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .frame(minHeight: 64)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .disabled(legacyImportRunning)
+    }
+
+    private func runLegacyImport(dryRun: Bool) {
+        legacyImportRunning = true
+        Task {
+            do {
+                let report = try await LegacyImporter.run(appState: appState, dryRun: dryRun)
+                let label = dryRun ? "Dry run" : "Imported"
+                var lines = [
+                    "\(label): \(report.expensesImported) expenses, \(report.incomeImported) income, \(report.cardsCreated) cards.",
+                ]
+                if !report.skipped.isEmpty {
+                    lines.append("Skipped \(report.skipped.count) rows. First 3:")
+                    for skip in report.skipped.prefix(3) {
+                        lines.append("• \(skip.rowID): \(skip.reason)")
+                    }
+                }
+                await MainActor.run {
+                    legacyImportRunning = false
+                    legacyImportResult = lines.joined(separator: "\n")
+                }
+            } catch {
+                await MainActor.run {
+                    legacyImportRunning = false
+                    legacyImportResult = "Failed: \(error.localizedDescription)"
+                }
+            }
+        }
     }
 
     private var syncFromServerRow: some View {
